@@ -1,3 +1,8 @@
+@php
+    $prefix=Request::route()->getPrefix();
+    //$route=Route::current()->getName();
+@endphp
+
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
@@ -46,6 +51,10 @@
                             <a href="#Dashboard" class="has-arrow"><i class="icon-home"></i> <span>Dashboard</span></a>
                             <ul>
                                 <li class="{{ Request::segment(2) === 'ecommerce' ? 'active' : null }}"><a href="{{route('dashboard.ecommerce')}}">eCommerce</a></li>
+                                <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
+                                <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
+                                <li class="{{ Request::segment(4) === 'slider' ? 'active' : null }}"><a href="{{route('slider.view')}}">Slider</a></li>
+
                             </ul>
                         </li>
                     </ul>
