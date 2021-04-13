@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Controllers\Backend\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,8 +42,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//
-
 Route::prefix('brand')->group(function () {
     Route::get('/view','Backend\BrandController@view')->name('brand.view');
     Route::get('/add','Backend\BrandController@add')->name('brand.add');
@@ -69,3 +68,15 @@ Route::prefix('slider')->group(function(){
     Route::post('/update/{id}','Backend\SliderController@update')->name('slider.update');
     Route::get('/delete/{id}','Backend\SliderController@delete')->name('slider.delete');
 });
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('users', 'Backend\UserController@index')->name('users.index');
+    // if we create users in dashboard
+    Route::get('users/create', 'Backend\UserController@create')->name('users.create');
+    Route::post('users', 'Backend\UserController@post')->name('users.post');
+    Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
+    Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
+    Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+});
+
