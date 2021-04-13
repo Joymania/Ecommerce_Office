@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Controllers\Backend\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,15 @@ Route::get('pages/profile1', 'PagesController@profile1')->name('pages.profile1')
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// ----------------- Rakibul ------------------------------------------------
+Route::prefix('admin')->group(function () {
+    Route::get('users', 'Backend\UserController@index')->name('users.index');
+    // if we create users in dashboard
+    Route::get('users/create', 'Backend\UserController@create')->name('users.create');
+    Route::post('users', 'Backend\UserController@post')->name('users.post');
+    Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
+    Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
+    Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+});
+// --------------------------------------------------------------------------
