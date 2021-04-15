@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/jvectormap/jquery-jvectormap-2.0.3.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/vendor/morrisjs/morris.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/products.css') }}">
 
         @if (Request::segment(2) === 'analytical' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/chartist/css/chartist.min.css') }}">
@@ -229,6 +230,7 @@
                 <div class="container-fluid">
                     <div class="block-header">
                         <div class="row">
+                       
                             <div class="col-lg-5 col-md-8 col-sm-12">
                                 <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> @yield('title')</h2>
                                 <ul class="breadcrumb">
@@ -457,7 +459,7 @@
             <script src="{{ asset('assets/vendor/bootstrap-markdown/bootstrap-markdown.js') }}"></script>
         @endif
 
-        @if (Request::segment(2) === 'jquery-datatable' )
+        @if (Request::segment(2) == 'users' )
             <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>

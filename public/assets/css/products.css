@@ -1,0 +1,19 @@
+.editBtn {
+    border: 1px solid blue;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.editLink{
+    float: left;
+    margin-right: 2px;
+}
+
+.deleteBtn{
+    border: 1px solid red;
+    background: #ffffff;
+    cursor: pointer;
+    float: left;
+}
+
+
