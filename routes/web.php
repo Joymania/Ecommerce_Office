@@ -50,7 +50,7 @@ Route::prefix('products')->group(function () {
     Route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
     Route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
     Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
-    route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
+    Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
 });
 
 Route::prefix('/tags')->group(function (){
