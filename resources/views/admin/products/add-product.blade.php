@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="col">
                                                 <label for="single-selection">Select Brand Name</label>
-                                                <select id="single-selection" name="brand-name" class="multiselect multiselect-custom form-control">
+                                                <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
                                                     <option value="cheese">Cheese</option>
                                                     <option value="tomatoes">Tomatoes</option>
                                                     <option value="mozarella">Mozzarella</option>
@@ -52,8 +52,8 @@
 
                                         <div class="form-row">
                                             <div class="col">
-                                                <label>Single Selection</label>
-                                                <select id="single-selection" name="single_selection" class="multiselect multiselect-custom form-control">
+                                                <label for="single-selection">Select Category</label>
+                                                <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
                                                     <option value="cheese">Cheese</option>
                                                     <option value="tomatoes">Tomatoes</option>
                                                     <option value="mozarella">Mozzarella</option>
@@ -63,14 +63,27 @@
                                                 </select>
                                             </div>
                                             <div class="col">
-                                                <label for="multiselect-size1">Select Sizes</label>
-                                                <select id="multiselect-size1" name="sizes" class="multiselect multiselect-custom form-control" multiple="multiple">
-                                                    <option value="cheese">XL</option>
-                                                    <option value="tomatoes">L</option>
-                                                    <option value="mozarella">S</option>
+                                                <label for="single-selection">Select Tag</label>
+                                                <select id="single-selection" name="tag_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="cheese">Cheese</option>
+                                                    <option value="tomatoes">Tomatoes</option>
+                                                    <option value="mozarella">Mozzarella</option>
+                                                    <option value="mushrooms">Mushrooms</option>
+                                                    <option value="pepperoni">Pepperoni</option>
+                                                    <option value="onions">Onions</option>
                                                 </select>
                                             </div>
+                                        </div>
 
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label for="short_desc">Short Description</label>
+                                                <input type="text" id="short_desc" name="short_desc" class="form-control" placeholder="Product Short Description">
+                                            </div>
+
+                                            <div class="col">
+
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
