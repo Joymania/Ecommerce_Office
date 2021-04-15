@@ -18,12 +18,13 @@ class UserController extends Controller
 
         // if admin show users
         $users = User::paginate(10);
-        return view('backend.user.index')->with(['users' => $users]);
+        return view('admin.users.index')->with(['users' => $users]);
     }
 
+    // return create view
     public function create()
     {
-        return view('backend.user.create');
+        return view('admin.users.create');
     }
 
     // wil be used for user registration
@@ -43,7 +44,7 @@ class UserController extends Controller
                                     'email' => $validator->errors()->get('email'),
                                     'password' => $validator->errors()->get('password')]];
             
-            return view('backend.user.store')->with(['error' => $erorr]);
+            return view('admin.users.create')->with(['error' => $erorr]);
         }
 
         $user = new User();
@@ -52,21 +53,34 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         // $user->role = $request-> role;
+
+        // if there is file in image field
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+
+            $file->move(public_path('public/uploads'), $filename);
+
+            // save filename to database
+            $user->image = $filename;
+        }
+
         $user->save();
 
-        return view('backend.user.store')->with(['success_msg' => 'Created successfully']);
+        return view('admin.users.create')->with(['success_msg' => 'Created successfully']);
     }
-
+// ------------------------------------------------------------------------------------------
     public function edit()
     {
-        return view('backend.user.edit');
+        return view('admin.users.edit');
     }
 
     public function show($id)
     {
         $user = User::findOrFail($id);
 
-        return view('backend.user.edit')->with(['user' => $user]);
+        return view('admin.users.edit')->with(['user' => $user]);
     }
     
     //  to edit user
@@ -92,7 +106,7 @@ class UserController extends Controller
                                     'email' => $validator->errors()->get('email'),
                                     'password' => $validator->errors()->get('password')]];
             
-            return view('backend.user.edit')->with(['error' => $erorr]);
+            return view('admin.users.edit')->with(['error' => $erorr]);
         }
 
         //  insert data ........
@@ -106,15 +120,43 @@ class UserController extends Controller
         if($request->has('role') && !empty($request->role)) {
             $user->role = $request->password;
         }
+
+        //  if there is image
+        if($request->hasFile('image')) {
+
+            // remove image
+            $this->removeImage($user);
+
+            $file = $request->file('image');
+
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+
+            $file->move(public_path('public/uploads'), $filename);
+
+            $user->image = $filename;
+        }
+
         $user->save();
 
-        return view('backend.user.edit')->with(['success_msg' => 'Updated successfully']);
+        return view('admin.users.edit')->with(['success_msg' => 'Updated successfully']);
 
     }
 
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
-        return view('backend.user.index')->with(['success_msg' => 'Deleted successfully']);
+        $user = User::findOrFail($id);
+        
+        // remove image
+        $this->removeImage($user);
+        $user->delete();
+        
+        return redirect()->route('users.index')->with("success", 'Deleted successfully');
+    }
+    
+    private function removeImage($user)
+    {
+        if($user->image != "" && \File::exists('public/uploads/' . $user->image)) {
+            @unlink(public_path('public/uploads/' . $user->image));
+        }
     }
 }
