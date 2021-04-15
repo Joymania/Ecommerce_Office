@@ -41,34 +41,34 @@ Route::get('pages/profile1', 'Backend\PagesController@profile1')->name('pages.pr
 
 /*Products Routes*/
 Route::prefix('products')->group(function () {
-    route::get('/list','Backend\ProductsController@index')->name('products.list');
-    route::get('/create','Backend\ProductsController@create')->name('products.create');
+    Route::get('/list','Backend\ProductsController@index')->name('products.list');
+    Route::get('/create','Backend\ProductsController@create')->name('products.create');
 
     //Size CRUD Routes
-    route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
-    route::get('/size/create','Backend\SizeController@createSize')->name('products.size.create');
-    route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
-    route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
-    route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
-    route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
+    Route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
+    Route::get('/size/create','Backend\SizeController@createSize')->name('products.size.create');
+    Route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
+    Route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
+    Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
+    Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
 });
 
 Route::prefix('/tags')->group(function (){
-    route::get('/list','Backend\TagsController@index')->name('tags.list');
-    route::get('/create','Backend\TagsController@create')->name('tags.create');
-    route::post('/create','Backend\TagsController@store')->name('tags.store');
-    route::get('/{tag}/edit', 'Backend\TagsController@edit')->name('tags.edit');
-    route::patch('/{tag}/update', 'Backend\TagsController@update')->name('tags.update');
-    route::delete('/{tag}/delete', 'Backend\TagsController@destroy')->name('tags.delete');
+    Route::get('/list','Backend\TagsController@index')->name('tags.list');
+    Route::get('/create','Backend\TagsController@create')->name('tags.create');
+    Route::post('/create','Backend\TagsController@store')->name('tags.store');
+    Route::get('/{tag}/edit', 'Backend\TagsController@edit')->name('tags.edit');
+    Route::patch('/{tag}/update', 'Backend\TagsController@update')->name('tags.update');
+    Route::delete('/{tag}/delete', 'Backend\TagsController@destroy')->name('tags.delete');
 });
 
 Route::prefix('/categories')->group(function (){
-    route::get('/list','Backend\CategoriesController@index')->name('categories.list');
-    route::get('/create','Backend\CategoriesController@create')->name('categories.create');
-    route::post('/create','Backend\CategoriesController@store')->name('categories.store');
-    route::get('/{category}/edit','Backend\CategoriesController@edit')->name('categories.edit');
-    route::patch('/{category}/update','Backend\CategoriesController@update')->name('categories.update');
-    route::delete('/{category}/delete','Backend\CategoriesController@destroy')->name('categories.delete');
+    Route::get('/list','Backend\CategoriesController@index')->name('categories.list');
+    Route::get('/create','Backend\CategoriesController@create')->name('categories.create');
+    Route::post('/create','Backend\CategoriesController@store')->name('categories.store');
+    Route::get('/{category}/edit','Backend\CategoriesController@edit')->name('categories.edit');
+    Route::patch('/{category}/update','Backend\CategoriesController@update')->name('categories.update');
+    Route::delete('/{category}/delete','Backend\CategoriesController@destroy')->name('categories.delete');
 });
 
 
