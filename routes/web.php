@@ -62,15 +62,6 @@ Route::prefix('/tags')->group(function (){
     Route::delete('/{tag}/delete', 'Backend\TagsController@destroy')->name('tags.delete');
 });
 
-Route::prefix('/categories')->group(function (){
-    Route::get('/list','Backend\CategoriesController@index')->name('categories.list');
-    Route::get('/create','Backend\CategoriesController@create')->name('categories.create');
-    Route::post('/create','Backend\CategoriesController@store')->name('categories.store');
-    Route::get('/{category}/edit','Backend\CategoriesController@edit')->name('categories.edit');
-    Route::patch('/{category}/update','Backend\CategoriesController@update')->name('categories.update');
-    Route::delete('/{category}/delete','Backend\CategoriesController@destroy')->name('categories.delete');
-});
-
 
 //Admin Routing Ends
 
