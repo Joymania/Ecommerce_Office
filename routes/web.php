@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend;
 
-use App\Controllers\Backend\UserController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -92,10 +90,9 @@ Route::prefix('slider')->group(function(){
 Route::prefix('admin')->group(function () {
     Route::get('users', 'Backend\UserController@index')->name('users.index');
     // if we create users in dashboard
-    Route::get('users/create', 'Backend\UserController@create')->name('users.create');
-    Route::post('users', 'Backend\UserController@post')->name('users.post');
-    Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
-    Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
-    Route::delete('users/{id}/delete', 'Backend\UserController@destroy')->name('users.destroy');
+    Route::get('users/create', 'Backend\UserController@create')->name('users.add');
+    Route::post('users', 'Backend\UserController@store')->name('users.store');
+    Route::get('users/{user}/edit', 'Backend\UserController@edit')->name('users.edit');
+    Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
+    Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
 });
-
