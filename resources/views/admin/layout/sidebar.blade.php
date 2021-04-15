@@ -45,6 +45,8 @@
                         <li class="{{ Request::segment(1) === 'dashboard' ? 'active' : null }}">
                             <a href="#Dashboard" class="has-arrow"><i class="icon-home"></i> <span>Dashboard</span></a>
                             <ul>
+                                <li class=""><a href="{{route('products.list')}}">Products List</a></li>
+                                <li class=""><a href="{{route('products.sizes')}}">Size List</a></li>
                                 <li class="{{ Request::segment(2) === 'ecommerce' ? 'active' : null }}"><a href="{{route('dashboard.ecommerce')}}">eCommerce</a></li>
                             </ul>
                         </li>
