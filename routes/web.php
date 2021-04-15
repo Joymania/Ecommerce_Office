@@ -114,6 +114,6 @@ Route::prefix('admin')->group(function () {
     Route::post('users', 'Backend\UserController@post')->name('users.post');
     Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
     Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
-    Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+    Route::delete('users/{id}/delete', 'Backend\UserController@destroy')->name('users.destroy');
 });
 
