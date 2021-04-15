@@ -44,7 +44,7 @@
 
                             <a href="{{ route('slider.delete',$slider->id) }}">
                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                            data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
+                                    data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button></a>
 
                         </td>
                     </tr>
