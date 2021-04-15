@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/jvectormap/jquery-jvectormap-2.0.3.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/vendor/morrisjs/morris.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/products.css') }}">
 
         @if (Request::segment(2) === 'analytical' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/chartist/css/chartist.min.css') }}">
@@ -143,9 +144,8 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-markdown/bootstrap-markdown.min.css') }}"/>
         @endif
 
-        @if (Request::segment(2) === 'users' )
-            <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}"/>
+        @if (Request::segment(2) === 'jquery-datatable' )
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jqueryhttps://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css.dataTables.min.css">
             <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}"/>
             <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}"/>
         @endif
@@ -467,7 +467,8 @@
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
-            <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
+            {{--  <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>  --}}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         @endif
 
         @if (Request::segment(2) === 'editable' )
