@@ -41,6 +41,36 @@ Route::get('pages/profile1', 'Backend\PagesController@profile1')->name('pages.pr
 
 /*Products Routes*/
 Route::prefix('products')->group(function () {
+
+    Route::get('/list','Backend\ProductsController@index')->name('products.list');
+    Route::get('/create','Backend\ProductsController@create')->name('products.create');
+
+    //Size CRUD Routes
+    Route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
+    Route::get('/size/create','Backend\SizeController@createSize')->name('products.size.create');
+    Route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
+    Route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
+    Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
+    Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
+});
+
+Route::prefix('/tags')->group(function (){
+    Route::get('/list','Backend\TagsController@index')->name('tags.list');
+    Route::get('/create','Backend\TagsController@create')->name('tags.create');
+    Route::post('/create','Backend\TagsController@store')->name('tags.store');
+    Route::get('/{tag}/edit', 'Backend\TagsController@edit')->name('tags.edit');
+    Route::patch('/{tag}/update', 'Backend\TagsController@update')->name('tags.update');
+    Route::delete('/{tag}/delete', 'Backend\TagsController@destroy')->name('tags.delete');
+});
+
+Route::prefix('/categories')->group(function (){
+    Route::get('/list','Backend\CategoriesController@index')->name('categories.list');
+    Route::get('/create','Backend\CategoriesController@create')->name('categories.create');
+    Route::post('/create','Backend\CategoriesController@store')->name('categories.store');
+    Route::get('/{category}/edit','Backend\CategoriesController@edit')->name('categories.edit');
+    Route::patch('/{category}/update','Backend\CategoriesController@update')->name('categories.update');
+    Route::delete('/{category}/delete','Backend\CategoriesController@destroy')->name('categories.delete');
+=======
     route::get('/list','Backend\ProductsController@index')->name('products.list');
     route::get('/create','Backend\ProductsController@create')->name('products.create');
 
@@ -107,6 +137,11 @@ Route::prefix('slider')->group(function(){
     Route::get('/delete/{id}','Backend\SliderController@delete')->name('slider.delete');
 });
 
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('users', 'Backend\UserController@index')->name('users.index');
+
 Route::prefix('slider')->group(function(){
     Route::get('/view','Backend\SliderController@view')->name('slider.view');
     Route::get('/add','Backend\SliderController@add')->name('slider.add');
@@ -132,8 +167,10 @@ Route::prefix('admin')->group(function () {
     Route::post('users', 'Backend\UserController@post')->name('users.post');
     Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
     Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
-    Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+
+    Route::delete('users/{id}/delete', 'Backend\UserController@destroy')->name('users.destroy');
 });
 
-
+    Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+});
 

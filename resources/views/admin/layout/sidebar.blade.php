@@ -62,6 +62,7 @@
                                 <li class=""><a href="{{route('categories.list')}}">Categories</a></li>
                                 <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
 
+
                             </ul>
                         </li>
                     </ul>
