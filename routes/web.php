@@ -89,16 +89,6 @@ Route::prefix('color')->group(function () {
     Route::get('/delete/{id}','Backend\ColorController@delete')->name('color.delete');
 });
 
-Route::prefix('slider')->group(function(){
-    Route::get('/view','Backend\SliderController@view')->name('slider.view');
-    Route::get('/add','Backend\SliderController@add')->name('slider.add');
-    Route::post('/store','Backend\SliderController@store')->name('slider.store');
-    Route::get('/edit/{id}','Backend\SliderController@edit')->name('slider.edit');
-    Route::post('/update/{id}','Backend\SliderController@update')->name('slider.update');
-    Route::get('/delete/{id}','Backend\SliderController@delete')->name('slider.delete');
-});
-
-
 
 Route::prefix('admin')->group(function () {
     Route::get('users', 'Backend\UserController@index')->name('users.index');
