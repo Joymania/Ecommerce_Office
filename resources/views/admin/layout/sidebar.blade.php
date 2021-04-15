@@ -56,6 +56,8 @@
                                 <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
                                 <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
                                 <li class="{{ Request::segment(4) === 'slider' ? 'active' : null }}"><a href="{{route('slider.view')}}">Slider</a></li>
+                                <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
+                                <li class=""><a href="{{route('categories.list')}}">Categories</a></li>
 
                             </ul>
                         </li>
