@@ -26,4 +26,8 @@ class product extends Model
     {
         $this->belongsTo(brand::class, 'brand_id', 'id');
     }
+    public function tag()
+    {
+        $this->belongsTo(tag::class, 'tag_id','id');
+    }
 }
