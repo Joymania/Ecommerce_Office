@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {
+
+    public function productSizeList()
+    {
+        $sizes = size::all();
+        return view('admin.products.products-sizes',compact('sizes'));
+    }
+
     public function createSize()
     {
         return view('admin.products.add-product-size');
