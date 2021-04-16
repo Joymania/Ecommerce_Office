@@ -39,35 +39,7 @@
                                             </div>
                                             <div class="col">
                                                 <label for="single-selection">Select Brand Name</label>
-                                                <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
-                                                    @foreach($brands as $row)
-                                                        <option value="{{$row->name}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <label for="single-selection">Select Category</label>
-                                                <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
-                                                   @foreach($categories as $row)
-                                                    <option value="{{$row->name}}">{{$row->name}}</option>
-                                                   @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Tag</label>
-                                                <select id="single-selection" name="tag_id" class="multiselect multiselect-custom form-control">
-                                                    @foreach($tags as $row)
-                                                        <option value="{{$row->name}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Colors</label>
-                                                <label>Default</label>
-                                                <select id="multiselect1" name="multiselect1[]" class="multiselect" multiple="multiple">
+                                                <select id="single-selection" name="brand-name" class="multiselect multiselect-custom form-control">
                                                     <option value="cheese">Cheese</option>
                                                     <option value="tomatoes">Tomatoes</option>
                                                     <option value="mozarella">Mozzarella</option>
@@ -80,28 +52,26 @@
 
                                         <div class="form-row">
                                             <div class="col">
-                                                <label for="short_desc">Short Description</label>
-                                                <input type="text" id="short_desc" name="short_desc" class="form-control" placeholder="Product Short Description">
+                                                <label>Single Selection</label>
+                                                <select id="single-selection" name="single_selection" class="multiselect multiselect-custom form-control">
+                                                    <option value="cheese">Cheese</option>
+                                                    <option value="tomatoes">Tomatoes</option>
+                                                    <option value="mozarella">Mozzarella</option>
+                                                    <option value="mushrooms">Mushrooms</option>
+                                                    <option value="pepperoni">Pepperoni</option>
+                                                    <option value="onions">Onions</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-md-10">
-                                                <label for="longDesc">Long Description</label>
-                                                <textarea  style="height: 70%" class="form-control" name="long_desc" id="longDesc" cols="30" rows="10"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
                                             <div class="col">
-                                                <label for="image">Upload Image</label>
-                                                <input type="file" id="image" class="form-control" name="image">
+                                                <label for="multiselect-size1">Select Sizes</label>
+                                                <select id="multiselect-size1" name="sizes" class="multiselect multiselect-custom form-control" multiple="multiple">
+                                                    <option value="cheese">XL</option>
+                                                    <option value="tomatoes">L</option>
+                                                    <option value="mozarella">S</option>
+                                                </select>
                                             </div>
 
-                                            <div class="col">
-                                                <label for="stock">Stock</label>
-                                                <input type="text" id="stock" class="form-control" name="stock">
-                                            </div>
                                         </div>
-                                        <button class="btn btn-success mt-3" type="submit">Add Product</button>
                                     </form>
                                 </div>
                             </div>

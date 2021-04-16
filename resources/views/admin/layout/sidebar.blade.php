@@ -59,10 +59,8 @@
                                 <li class="{{ Request::segment(4) === 'slider' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
 
                                 <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
-                               
+                                <li class=""><a href="{{route('categories.list')}}">Categories</a></li>
                                 <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
-
-
 
                             </ul>
                         </li>

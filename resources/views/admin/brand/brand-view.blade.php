@@ -10,7 +10,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
-                <h2>Brand List of Main</h2>
+                <h2>Brand List</h2>
             </div>
             <div class="body">
                 {{--  <button id="addToTable" class="btn btn-primary m-b-15" type="button">
