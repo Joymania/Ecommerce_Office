@@ -18,7 +18,7 @@ use App\Controllers\Backend\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/front','Frontend\FrontendController@index');
 //Admin Routing Starts
 Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
