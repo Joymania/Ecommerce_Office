@@ -10,20 +10,23 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
-                <h2>Users</h2>                       
+                <h3>Users</h3>                     
             </div>
-            @if(session()->has('success'))
+            @if(session()->has('success_msg'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ session()->get('success') }}</strong>
+                                    <strong>{{ session()->get('success_msg') }}</strong>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
             @endif
+            
             <div class="body">
-                <button id="addToTable" class="btn btn-primary m-b-15" type="button">
-                    <i class="icon wb-plus" aria-hidden="true"></i> Add User
-                </button>
+                <a href="{{ route('users.add') }}">
+                    <button id="addToTable" class="btn btn-primary m-b-15" type="button">
+                        <i class="icon wb-plus" aria-hidden="true"></i> Add User
+                    </button>
+                </a>
 
                 <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
@@ -66,13 +69,9 @@
                                 <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
 
-                                <form method='post' action="{{route('users.destroy',$user->id)}}">
-                                    @csrf 
-                                    @method('DELETE')
-                                    <button  type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                    data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button>
-
-                                </form>
+                                <a href="{{ route('users.delete',$user->id) }}">
+                                <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
+                                data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
                             </td>
                         </tr>  
                     @endforeach
