@@ -22,7 +22,7 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <div class="hm6-hero-slider-img slider-animated-1">
-                                                <img class="animated" src="{{ asset('upload/Slider_images/'.$slider->image) }}" alt="">
+                                                <img class="animated" src="{{ asset('upload/Slider_images/'.$slider->image) }}" width="848px" height="570px" alt="">
                                             </div>
                                         </div>
                                     </div>
