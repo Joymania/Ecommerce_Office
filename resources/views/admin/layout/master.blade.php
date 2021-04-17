@@ -459,7 +459,7 @@
             <script src="{{ asset('assets/vendor/bootstrap-markdown/bootstrap-markdown.js') }}"></script>
         @endif
 
-        @if (Request::segment(2) == 'users' )
+        @if (Request::segment(2) === 'jquery-datatable' )
             <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
