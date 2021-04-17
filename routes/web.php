@@ -16,7 +16,7 @@ use App\Http\Controllers\Backend;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/front','Frontend\FrontendController@index');
 //Admin Routing Starts
 Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
@@ -39,18 +39,27 @@ Route::get('pages/profile1', 'Backend\PagesController@profile1')->name('pages.pr
 
 /*Products Routes*/
 Route::prefix('products')->group(function () {
-    route::get('/list','Backend\ProductsController@index')->name('products.list');
-    route::get('/create','Backend\ProductsController@create')->name('products.create');
+
+    Route::get('/list','Backend\ProductsController@index')->name('products.list');
+    Route::get('/create','Backend\ProductsController@create')->name('products.create');
 
     //Size CRUD Routes
-    route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
-    route::get('/size/create','Backend\SizeController@createSize')->name('products.size.create');
-    route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
-    route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
-    route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
-    route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
+    Route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
+    Route::get('/size/create','Backend\SizeController@createSize')->name('products.size.create');
+    Route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
+    Route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
+    Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
+    Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
 });
 
+Route::prefix('/tags')->group(function (){
+    Route::get('/list','Backend\TagsController@index')->name('tags.list');
+    Route::get('/create','Backend\TagsController@create')->name('tags.create');
+    Route::post('/create','Backend\TagsController@store')->name('tags.store');
+    Route::get('/{tag}/edit', 'Backend\TagsController@edit')->name('tags.edit');
+    Route::patch('/{tag}/update', 'Backend\TagsController@update')->name('tags.update');
+    Route::delete('/{tag}/delete', 'Backend\TagsController@destroy')->name('tags.delete');
+});
 
 //Admin Routing Ends
 
@@ -58,6 +67,7 @@ Route::prefix('products')->group(function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::prefix('brand')->group(function () {
     Route::get('/view','Backend\BrandController@view')->name('brand.view');
@@ -77,6 +87,10 @@ Route::prefix('color')->group(function () {
     Route::get('/delete/{id}','Backend\ColorController@delete')->name('color.delete');
 });
 
+
+Route::prefix('admin')->group(function () {
+    Route::get('users', 'Backend\UserController@index')->name('users.index');
+
 Route::prefix('slider')->group(function(){
     Route::get('/view','Backend\SliderController@view')->name('slider.view');
     Route::get('/add','Backend\SliderController@add')->name('slider.add');
@@ -86,9 +100,19 @@ Route::prefix('slider')->group(function(){
     Route::get('/delete/{id}','Backend\SliderController@delete')->name('slider.delete');
 });
 
+Route::prefix('contact')->group(function(){
+    Route::get('/view','Backend\ContactController@view')->name('contact.view');
+    Route::get('/add','Backend\ContactController@add')->name('contact.add');
+    Route::post('/store','Backend\ContactController@store')->name('contact.store');
+    Route::get('/edit/{id}','Backend\ContactController@edit')->name('contact.edit');
+    Route::post('/update/{id}','Backend\ContactController@update')->name('contact.update');
+    Route::get('/delete/{id}','Backend\ContactController@delete')->name('contact.delete');
+});
+
 
 Route::prefix('admin')->group(function () {
     Route::get('users', 'Backend\UserController@index')->name('users.index');
+
     // if we create users in dashboard
     Route::get('users/create', 'Backend\UserController@create')->name('users.add');
     Route::post('users', 'Backend\UserController@store')->name('users.store');
@@ -96,3 +120,15 @@ Route::prefix('admin')->group(function () {
     Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
     Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
 });
+
+    //Route::get('users/create', 'Backend\UserController@create')->name('users.create');
+    //Route::post('users', 'Backend\UserController@post')->name('users.post');
+    Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
+    //Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
+
+    //Route::delete('users/{id}/delete', 'Backend\UserController@destroy')->name('users.destroy');
+});
+
+    //Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+});
+
