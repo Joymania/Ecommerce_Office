@@ -16,13 +16,13 @@
                                                 <h1 class="animated font-dec">{{ $slider->short_title }}</h1>
                                                 <p class="animated width-inc"> {{ $slider->long_title }}</p>
                                                 <div class="btn-style-1">
-                                                    <a class="animated btn-1-padding-1 btn-1-bg-purple" href="product-details.html">Explore Now</a>
+                                                    <a class="animated btn-1-padding-1 btn-1-bg-purple" href="product-details.html">Explore</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <div class="hm6-hero-slider-img slider-animated-1">
-                                                <img class="animated" src="{{ asset('upload/Slider_images/'.$slider->image) }}" width="848px" height="570px" alt="">
+                                                <img class="animated" alt="" src="{{ asset('upload/Slider_images/'.$slider->image) }}" width="848px" height="570px" alt="">
                                             </div>
                                         </div>
                                     </div>
