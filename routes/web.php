@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend;
 
-use App\Controllers\Backend\UserController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +16,7 @@ use App\Controllers\Backend\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/front','Frontend\FrontendController@index');
 //Admin Routing Starts
 Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
@@ -118,14 +116,23 @@ Route::prefix('contact')->group(function(){
 
 Route::prefix('admin')->group(function () {
     Route::get('users', 'Backend\UserController@index')->name('users.index');
-    Route::get('users/create', 'Backend\UserController@create')->name('users.create');
-    Route::post('users', 'Backend\UserController@post')->name('users.post');
-    Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
-    Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
 
-    Route::delete('users/{id}/delete', 'Backend\UserController@destroy')->name('users.destroy');
+    // if we create users in dashboard
+    Route::get('users/create', 'Backend\UserController@create')->name('users.add');
+    Route::post('users', 'Backend\UserController@store')->name('users.store');
+    Route::get('users/{user}/edit', 'Backend\UserController@edit')->name('users.edit');
+    Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
+    Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
 });
 
-    Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+    //Route::get('users/create', 'Backend\UserController@create')->name('users.create');
+    //Route::post('users', 'Backend\UserController@post')->name('users.post');
+    Route::get('users/{id}', 'Backend\UserController@show')->name('users.show');
+    //Route::put('users/{id}/edit', 'Backend\UserController@edit')->name('users.edit');
+
+    //Route::delete('users/{id}/delete', 'Backend\UserController@destroy')->name('users.destroy');
+});
+
+    //Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
 });
 

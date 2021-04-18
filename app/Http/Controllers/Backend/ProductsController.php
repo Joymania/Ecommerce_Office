@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Model\brand;
-use App\Model\category;
-use App\Model\color;
 use App\Model\product;
 use App\Model\size;
-use App\Model\tag;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -21,6 +17,7 @@ class ProductsController extends Controller
 
     public function create()
     {
+
         $categories = category::all();
         $brands = brand::all();
         $tags = tag::all();

@@ -27,6 +27,7 @@ class product extends Model
     {
         return $this->belongsTo(brand::class, 'brand_id', 'id');
     }
+
     public function tag()
     {
         return $this->belongsTo(tag::class, 'tag_id','id');
@@ -46,4 +47,5 @@ class product extends Model
     {
         return $this->belongsToMany(size::class, 'product_sizes')->withTimestamps();
     }
+
 }
