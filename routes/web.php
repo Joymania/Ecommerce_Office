@@ -20,6 +20,14 @@ Route::get('/front','Frontend\FrontendController@index');
 //Admin Routing Starts
 Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
+//Shopping-Cart
+Route::post('add-to-cart','Frontned\CartController@addtoCart')->name('insert.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::post('destroy-cart','Frontned\CartController@destroyCart')->name('destroy.cart');
+Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
+
 /*Dashboard*/
 Route::get('dashboard/ecommerce', 'Backend\DashboardController@ecommerce')->name('dashboard.ecommerce');
 
@@ -78,6 +86,17 @@ Route::prefix('brand')->group(function () {
     Route::get('/delete/{id}','Backend\BrandController@delete')->name('brand.delete');
 });
 
+
+Route::prefix('cupon')->group(function () {
+    Route::get('/view','Backend\CuponController@view')->name('cupon.view');
+    Route::get('/add','Backend\CuponController@add')->name('cupon.add');
+    Route::post('/store','Backend\CuponController@store')->name('cupon.store');
+    Route::get('/edit/{id}','Backend\CuponController@edit')->name('cupon.edit');
+    Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
+    Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
+});
+
+
 Route::prefix('color')->group(function () {
     Route::get('/view','Backend\ColorController@view')->name('color.view');
     Route::get('/add','Backend\ColorController@add')->name('color.add');
@@ -130,5 +149,5 @@ Route::prefix('admin')->group(function () {
 });
 
     //Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
-});
+
 

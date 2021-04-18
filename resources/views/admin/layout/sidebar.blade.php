@@ -60,6 +60,7 @@
 
                                 <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
                                 <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
+                                <li class=""><a href="{{route('cupon.view')}}">Cupon</a></li>
 
                             </ul>
                         </li>
