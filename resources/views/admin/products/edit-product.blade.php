@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
-@section('title', 'Add Product')
-@section('parentPageTitle', 'Products')
+@section('title', 'Edit Product')
+@section('parentPageTitle', 'Products List')
 
 
 @section('content')
@@ -10,7 +10,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card planned_task">
                 <div class="header">
-                    <h2>Add Product</h2>
+                    <h2>Edit Product</h2>
                     <ul class="header-dropdown">
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -27,8 +27,9 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="body">
-                                    <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('product.update')}}" method="post" enctype="multipart/form-data">
                                         @csrf
+                                        @method('PATCH')
                                         <div class="form-row">
                                             <div class="col">
                                                 <label for="productName">Product Name</label>
@@ -61,9 +62,9 @@
                                             <div class="col">
                                                 <label for="single-selection">Select Category</label>
                                                 <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
-                                                   @foreach($categories as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                                   @endforeach
+                                                    @foreach($categories as $row)
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('category_id')
                                                 <span style="color: red">Category Name is required</span>
@@ -82,17 +83,10 @@
                                             </div>
                                             <div class="col">
                                                 <label for="single-selection">Select Colors</label>
+                                                <label>Default</label>
                                                 <select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">
                                                     @foreach($colors as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Sizes</label>
-                                                <select id="single-selection" name="size_id" class="form-control multiselect multiselect-custom">
-                                                    @foreach($sizes as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
