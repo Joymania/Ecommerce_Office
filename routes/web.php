@@ -130,5 +130,5 @@ Route::prefix('admin')->group(function () {
 });
 
     //Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
-});
+// });
 
