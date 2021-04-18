@@ -15,15 +15,37 @@ class product extends Model
         'price',
         'short_desc',
         'long_desc',
-        'image'
+        'image',
+        'stock'
     ];
 
     public function category()
     {
-        $this->belongsTo(category::class, 'category_id','id');
+        return $this->belongsTo(category::class, 'category_id','id');
     }
     public function brand()
     {
-        $this->belongsTo(brand::class, 'brand_id', 'id');
+        return $this->belongsTo(brand::class, 'brand_id', 'id');
     }
+
+    public function tag()
+    {
+        return $this->belongsTo(tag::class, 'tag_id','id');
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany(color::class, 'product_colors')->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(review::class, 'review_id', 'id');
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(size::class, 'product_sizes')->withTimestamps();
+    }
+
 }
