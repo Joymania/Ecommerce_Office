@@ -6,15 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class category extends Model
 {
-    protected $fillable = ['name', 'created_by', 'updated_by'];
+    protected $fillable = [
+		'name',
+    'createdBy',
+    'updatedBy',
+    ];
 
-    public function products()
+    public function sub_category()
     {
-        $this->hasMany(product::class, 'category_id', 'id');
+      return $this->hasMany(sub_category::class); 
     }
 
-    public function subCategories()
-    {
-        $this->hasMany(sub_category::class, 'category_id','id');
-    }
+    public function delete() {
+      $this->sub_category()->delete();
+      return parent::delete();
+  }
+
+
+
+    public $timestamps = false;
 }

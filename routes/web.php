@@ -16,7 +16,14 @@ use App\Http\Controllers\Backend;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/front','Frontend\FrontendController@index');
+// product page sortig by subcategory
+Route::get('/fronts/{id}','Frontend\FrontendController@productByCat')->name('productByCat');
+// contact
+Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
+
+
 //Admin Routing Starts
 Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
@@ -130,5 +137,35 @@ Route::prefix('admin')->group(function () {
 });
 
     //Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+// });
+
+
+Route::prefix('category')->group(function(){
+    Route::get('category', 'Backend\CategoriesController@category')->name('category.view');
+    Route::get('insertCategory', 'Backend\CategoriesController@insertCategory')->name('category.add');
+    Route::post('insertcat','Backend\CategoriesController@insertcat')->name('category.store');
+    Route::get('editCategory/{eid}', 'Backend\CategoriesController@editCategory')->name('category.edit');
+    Route::post('updateCategory','Backend\CategoriesController@updateCategory')->name('category.update');
+    Route::get('deleteCategory/{did}','Backend\CategoriesController@deleteCategory')->name('category.delete');
 });
+
+Route::prefix('subCategory')->group(function(){
+    Route::get('subCategory','Backend\subCategoryController@subCategory')->name('subCategory.view');
+    Route::get('insertSubCategory', 'Backend\subCategoryController@insertSubCategory')->name('subCategory.add');
+    Route::post('insertSubcat', 'Backend\subCategoryController@insertSubcat')->name('subCategory.store');
+    Route::get('editSubCategory/{id}', 'Backend\subCategoryController@editSubCategory')->name('subCategory.edit');
+    Route::post('updateSubCategory','Backend\subCategoryController@updateSubCategory')->name('subCategory.update');
+    Route::get('deleteSubCategory/{did}','Backend\subCategoryController@deleteSubCategory')->name('subCategory.delete');
+});
+
+Route::prefix('logo')->group(function(){
+    Route::get('logo', 'Backend\LogoController@logo')->name('logo.view');
+    Route::get('insertLogo', 'Backend\LogoController@insertLogo')->name('logo.add');
+    Route::post('insertlog', 'Backend\LogoController@insertlog')->name('logo.store');
+    Route::get('editLogo/{id}', 'Backend\LogoController@editLogo')->name('logo.edit');
+    Route::post('updateLogo','Backend\LogoController@updateLogo')->name('logo.update');
+    Route::get('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
+});
+
+
 

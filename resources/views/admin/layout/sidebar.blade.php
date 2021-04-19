@@ -61,6 +61,10 @@
                                 <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
                                 <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
 
+                                <li class="{{ Request::segment(4) === 'category' ? 'active' : null }}"><a href="{{route('category.view')}}">Category</a></li>
+                                <li class="{{ Request::segment(4) === 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
+                                <li class="{{ Request::segment(4) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
+
                             </ul>
                         </li>
                     </ul>

@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="contact-info-2-content contact-info-2-content-purple">
                                     <p>Got a question? Call us 24/7</p>
-                                    <h3 class="purple">(365) 8635 56-24-02 </h3>
+                                    <h3 class="purple">{{$contacts->mobile_no}}</h3>
                                 </div>
                             </div>
                             <div class="single-contact-info-2">
@@ -64,7 +64,7 @@
                                     <i class="icon-cursor icons"></i>
                                 </div>
                                 <div class="contact-info-2-content">
-                                    <p>268 Orchard St, Mahattan, 12005, CA, United State</p>
+                                    <p>{{$contacts->address}}</p>
                                 </div>
                             </div>
                             <div class="single-contact-info-2">
@@ -72,16 +72,16 @@
                                     <i class="icon-envelope-open "></i>
                                 </div>
                                 <div class="contact-info-2-content">
-                                    <p>contact@norda.com</p>
+                                    <p>{{$contacts->email}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="social-style-1 social-style-1-font-inc social-style-1-mrg-2">
-                            <a href="#"><i class="icon-social-twitter"></i></a>
-                            <a href="#"><i class="icon-social-facebook"></i></a>
-                            <a href="#"><i class="icon-social-instagram"></i></a>
-                            <a href="#"><i class="icon-social-youtube"></i></a>
-                            <a href="#"><i class="icon-social-pinterest"></i></a>
+                            <a href="{{$contacts->twitter}}"><i class="icon-social-twitter"></i></a>
+                            <a href="{{$contacts->facebook}}"><i class="icon-social-facebook"></i></a>
+                            <a href="{{$contacts->instagram}}"><i class="icon-social-instagram"></i></a>
+                            <a href="{{$contacts->youtube}}"><i class="icon-social-youtube"></i></a>
+                            <a href="{{$contacts->pioneer}}"><i class="icon-social-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
@@ -230,28 +230,30 @@
 <!-- All JS is here
 ============================================ -->
 
-<script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-<script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
-<script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
-<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="assets/js/plugins/slick.js"></script>
-<script src="assets/js/plugins/jquery.syotimer.min.js"></script>
-<script src="assets/js/plugins/jquery.instagramfeed.min.js"></script>
-<script src="assets/js/plugins/jquery.nice-select.min.js"></script>
-<script src="assets/js/plugins/wow.js"></script>
-<script src="assets/js/plugins/jquery-ui-touch-punch.js"></script>
-<script src="assets/js/plugins/jquery-ui.js"></script>
-<script src="assets/js/plugins/magnific-popup.js"></script>
-<script src="assets/js/plugins/sticky-sidebar.js"></script>
-<script src="assets/js/plugins/easyzoom.js"></script>
-<script src="assets/js/plugins/scrollup.js"></script>
-<script src="assets/js/plugins/ajax-mail.js"></script>
+<script src="{{""}}/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="{{""}}/assets/js/vendor/jquery-3.5.1.min.js"></script>
+<script src="{{""}}/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+<script src="{{""}}/assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="{{""}}/assets/js/plugins/slick.js"></script>
+<script src="{{""}}/assets/js/plugins/jquery.syotimer.min.js"></script>
+<script src="{{""}}/assets/js/plugins/jquery.instagramfeed.min.js"></script>
+<script src="{{""}}/assets/js/plugins/jquery.nice-select.min.js"></script>
+<script src="{{""}}/assets/js/plugins/wow.js"></script>
+<script src="{{""}}/assets/js/plugins/jquery-ui-touch-punch.js"></script>
+<script src="{{""}}/assets/js/plugins/jquery-ui.js"></script>
+<script src="{{""}}/assets/js/plugins/magnific-popup.js"></script>
+<script src="{{""}}/assets/js/plugins/sticky-sidebar.js"></script>
+<script src="{{""}}/assets/js/plugins/easyzoom.js"></script>
+<script src="{{""}}/assets/js/plugins/scrollup.js"></script>
+<script src="{{""}}/assets/js/plugins/ajax-mail.js"></script>
 
 <!-- Use the minified version files listed below for better performance and remove the files listed above
 <script src="assets/js/vendor/vendor.min.js"></script>
 <script src="assets/js/plugins/plugins.min.js"></script>  -->
 <!-- Main JS -->
-<script src="assets/js/main.js"></script>
+<script src="{{""}}/assets/js/main.js"></script>
+
+
 
 </body>
 
