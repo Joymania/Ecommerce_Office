@@ -47,4 +47,5 @@ class product extends Model
     {
         return $this->belongsToMany(size::class, 'product_sizes')->withTimestamps();
     }
+
 }

@@ -28,6 +28,14 @@ Route::prefix('/front')->group(function (){
 //Admin Routing Starts
 Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
+//Shopping-Cart
+Route::post('add-to-cart','Frontned\CartController@addtoCart')->name('insert.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::post('destroy-cart','Frontned\CartController@destroyCart')->name('destroy.cart');
+Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
+
 /*Dashboard*/
 Route::get('dashboard/ecommerce', 'Backend\DashboardController@ecommerce')->name('dashboard.ecommerce');
 
@@ -90,6 +98,17 @@ Route::prefix('brand')->group(function () {
     Route::get('/delete/{id}','Backend\BrandController@delete')->name('brand.delete');
 });
 
+
+Route::prefix('cupon')->group(function () {
+    Route::get('/view','Backend\CuponController@view')->name('cupon.view');
+    Route::get('/add','Backend\CuponController@add')->name('cupon.add');
+    Route::post('/store','Backend\CuponController@store')->name('cupon.store');
+    Route::get('/edit/{id}','Backend\CuponController@edit')->name('cupon.edit');
+    Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
+    Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
+});
+
+
 Route::prefix('color')->group(function () {
     Route::get('/view','Backend\ColorController@view')->name('color.view');
     Route::get('/add','Backend\ColorController@add')->name('color.add');
@@ -103,35 +122,35 @@ Route::prefix('color')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('users', 'Backend\UserController@index')->name('users.index');
 
-Route::prefix('slider')->group(function(){
-    Route::get('/view','Backend\SliderController@view')->name('slider.view');
-    Route::get('/add','Backend\SliderController@add')->name('slider.add');
-    Route::post('/store','Backend\SliderController@store')->name('slider.store');
-    Route::get('/edit/{id}','Backend\SliderController@edit')->name('slider.edit');
-    Route::post('/update/{id}','Backend\SliderController@update')->name('slider.update');
-    Route::get('/delete/{id}','Backend\SliderController@delete')->name('slider.delete');
-});
+    Route::prefix('slider')->group(function () {
+        Route::get('/view', 'Backend\SliderController@view')->name('slider.view');
+        Route::get('/add', 'Backend\SliderController@add')->name('slider.add');
+        Route::post('/store', 'Backend\SliderController@store')->name('slider.store');
+        Route::get('/edit/{id}', 'Backend\SliderController@edit')->name('slider.edit');
+        Route::post('/update/{id}', 'Backend\SliderController@update')->name('slider.update');
+        Route::get('/delete/{id}', 'Backend\SliderController@delete')->name('slider.delete');
+    });
 
-Route::prefix('contact')->group(function(){
-    Route::get('/view','Backend\ContactController@view')->name('contact.view');
-    Route::get('/add','Backend\ContactController@add')->name('contact.add');
-    Route::post('/store','Backend\ContactController@store')->name('contact.store');
-    Route::get('/edit/{id}','Backend\ContactController@edit')->name('contact.edit');
-    Route::post('/update/{id}','Backend\ContactController@update')->name('contact.update');
-    Route::get('/delete/{id}','Backend\ContactController@delete')->name('contact.delete');
-});
+    Route::prefix('contact')->group(function () {
+        Route::get('/view', 'Backend\ContactController@view')->name('contact.view');
+        Route::get('/add', 'Backend\ContactController@add')->name('contact.add');
+        Route::post('/store', 'Backend\ContactController@store')->name('contact.store');
+        Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('contact.edit');
+        Route::post('/update/{id}', 'Backend\ContactController@update')->name('contact.update');
+        Route::get('/delete/{id}', 'Backend\ContactController@delete')->name('contact.delete');
+    });
 
 
-Route::prefix('admin')->group(function () {
-    Route::get('users', 'Backend\UserController@index')->name('users.index');
 
-    // if we create users in dashboard
-    Route::get('users/create', 'Backend\UserController@create')->name('users.add');
-    Route::post('users', 'Backend\UserController@store')->name('users.store');
-    Route::get('users/{user}/edit', 'Backend\UserController@edit')->name('users.edit');
-    Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
-    Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
-});
+        Route::get('users', 'Backend\UserController@index')->name('users.index');
+
+        // if we create users in dashboard
+        Route::get('users/create', 'Backend\UserController@create')->name('users.add');
+        Route::post('users', 'Backend\UserController@store')->name('users.store');
+        Route::get('users/{user}/edit', 'Backend\UserController@edit')->name('users.edit');
+        Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
+        Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
+    });
 
     //Route::get('users/create', 'Backend\UserController@create')->name('users.create');
     //Route::post('users', 'Backend\UserController@post')->name('users.post');
@@ -141,5 +160,4 @@ Route::prefix('admin')->group(function () {
     //Route::delete('users/{id}/delete', 'Backend\UserController@destroy')->name('users.destroy');
 
     //Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
-});
 
