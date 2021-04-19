@@ -36,6 +36,10 @@ Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('de
 Route::post('destroy-cart','Frontned\CartController@destroyCart')->name('destroy.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
+
+//Checkout
+Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+
 /*Dashboard*/
 // Route::get('dashboard/ecommerce', 'Backend\DashboardController@ecommerce')->name('dashboard.ecommerce');
 
