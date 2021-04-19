@@ -151,7 +151,7 @@
                                                     <li><a href="compare.html">compare </a></li>
                                                     <li><a href="contact.html">contact us </a></li>
                                                     <li><a href="order-tracking.html">order tracking</a></li>
-                                                    <li><a href="login-register.html">login / register </a></li>
+                                                    <li><a href="{{route('login')}}">login / register </a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="blog.html">BLOG <span class="bg-green">NEW</span></a>
@@ -169,18 +169,39 @@
                             </div>
                             <div class="col-xl-3 col-lg-3">
                                 <div class="header-action header-action-flex">
-                                    <div class="same-style-2 same-style-2-font-inc">
-                                        <a href="login-register.html"><i class="icon-user"></i></a>
-                                    </div>
-                                    <div class="same-style-2 same-style-2-font-inc">
-                                        <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
-                                    </div>
-                                    <div class="same-style-2 same-style-2-font-inc header-cart">
-                                        <a class="cart-active" href="#">
-                                            <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
-                                            <span class="cart-amount">$2,435.30</span>
-                                        </a>
-                                    </div>
+                                    @guest
+                                        <div class="same-style-2 same-style-2-font-inc">
+                                            <a href="{{route('login')}}"><i class="icon-user"></i></a>
+                                        </div>                                       
+                                        <div class="same-style-2 same-style-2-font-inc">
+                                            <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
+                                        </div>
+                                        <div class="same-style-2 same-style-2-font-inc header-cart">
+                                            <a class="cart-active" href="#">
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
+                                                <span class="cart-amount">$2,435.30</span>
+                                            </a>
+                                        </div>
+                                    @else   
+                                        <div class="same-style-2 same-style-2-font-inc">
+                                            <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
+                                        </div>
+                                        <div class="same-style-2 same-style-2-font-inc header-cart">
+                                            <a class="cart-active" href="#">
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
+                                                <span class="cart-amount">$2,435.30</span>
+                                            </a>
+                                        </div> 
+                                        <div class="same-style-2 same-style-2-font-inc">
+                                            <a href="{{route('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                     <i class="icon-logout"></i>
+                                            </a>
+                                        </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                        </form>
+                                    @endguest     
                                 </div>
                             </div>
                         </div>
@@ -362,7 +383,7 @@
                         <div class="col-7">
                             <div class="header-action header-action-flex">
                                 <div class="same-style-2 same-style-2-font-inc">
-                                    <a href="login-register.html"><i class="icon-user"></i></a>
+                                    <a href="{{route('login')}}"><i class="icon-user"></i></a>
                                 </div>
                                 <div class="same-style-2 same-style-2-font-inc">
                                     <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
@@ -491,7 +512,7 @@
                                         <li><a href="compare.html">compare </a></li>
                                         <li><a href="contact.html">contact us </a></li>
                                         <li><a href="order-tracking.html">order tracking</a></li>
-                                        <li><a href="login-register.html">login / register </a></li>
+                                        <li><a href="{{route('login')}}">login / register </a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children "><a href="#">Blog</a>

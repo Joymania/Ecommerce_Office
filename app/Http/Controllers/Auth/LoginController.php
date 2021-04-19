@@ -28,7 +28,7 @@ class LoginController extends Controller
      */
     // protected $redirectTo = '/';
     // redirect to home, because '/' has no logout method still
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

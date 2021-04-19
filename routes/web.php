@@ -16,6 +16,8 @@ use GuzzleHttp\Middleware;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+
 Route::get('/front','Frontend\FrontendController@index');
 //Admin Routing Starts
 // Route::get('/', function () { return redirect('dashboard/ecommerce'); });
@@ -127,18 +129,13 @@ Route::prefix('contact')->group(function(){
 });
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('users', 'Backend\UserController@index')->name('users.index');
     Route::post('users', 'Backend\UserController@store')->name('users.store');
     Route::get('users/{user}/edit', 'Backend\UserController@edit')->name('users.edit');
     Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
     Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
-});
-// // Website base url
-// Route::get('/', function () { return view('website.website-index'); });
 
-// Route::prefix('admin')->middleware('auth:admin')->group(function () {
-Route::prefix('admin')->group(function () {
     Route::get('admins', 'Backend\AdminController@index')->name('admin.index');
     Route::get('admins/create', 'Backend\AdminController@create')->name('admin.create');
     Route::post('admins', 'Backend\AdminController@store')->name('admin.store');
@@ -155,5 +152,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login','Auth\AdminLoginController@login');
 });
-
-Auth::routes();
+Route::get('/','Frontend\FrontendController@index');
