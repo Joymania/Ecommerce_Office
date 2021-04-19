@@ -35,11 +35,11 @@
 
                                 <a href="{{ route('color.edit',$color->id) }}">
                                 <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
-                                data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
+                                         data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></button></a>
 
                                 <a href="{{ route('color.delete',$color->id) }}">
                                 <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
+                                        data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button></a>
 
                             </td>
                         </tr>
