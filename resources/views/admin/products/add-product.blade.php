@@ -49,7 +49,7 @@
                                                 <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
                                                     @foreach($brands as $row)
                                                         <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach                                          
+                                                    @endforeach
                                                 </select>
                                                 @error('brand_id')
                                                 <span style="color: red">Brand Name is required</span>
@@ -131,6 +131,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <button class="btn btn-primary mt-3" type="submit">Add Product</button>
                                     </form>
                                 </div>
                             </div>

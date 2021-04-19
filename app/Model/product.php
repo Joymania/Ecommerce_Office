@@ -40,7 +40,7 @@ class product extends Model
 
     public function reviews()
     {
-        return $this->hasMany(review::class, 'review_id', 'id');
+        return $this->hasMany(review::class, 'product_id', 'id');
     }
 
     public function sizes()

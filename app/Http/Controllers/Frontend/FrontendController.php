@@ -12,6 +12,9 @@ class FrontendController extends Controller
 {
     public function index(){
         $data['sliders']=DB::table('products')->orderBy('created_at','desc')->take(2)->get();
-        return view('Frontend.layouts.home',$data);
+        $products = product::all();
+        return view('Frontend.layouts.home',$data,compact('products'));
     }
+
+
 }

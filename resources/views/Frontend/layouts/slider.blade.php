@@ -13,8 +13,8 @@
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <div class="hero-slider-content-1 slider-animated-1 hero-slider-content-1-padding1">
                                                 <h4 class="animated font-dec">New Arrivals</h4>
-                                                <h1 class="animated font-dec">{{ $slider->short_title }}</h1>
-                                                <p class="animated width-inc"> {{ $slider->long_title }}</p>
+                                                <h1 class="animated font-dec">{{ $slider->short_desc }}</h1>
+                                                <p class="animated width-inc"> {{ $slider->long_desc }}</p>
                                                 <div class="btn-style-1">
                                                     <a class="animated btn-1-padding-1 btn-1-bg-purple" href="product-details.html">Explore</a>
                                                 </div>
@@ -41,7 +41,7 @@
                             <div class="col-lg-12 col-md-6">
                                 <div class="banner-wrap mb-30">
                                     <div class="banner-img banner-img-zoom">
-                                        <a href="product-details.html"><img src="assets/images/banner/banner-14.jpg" alt=""></a>
+                                        <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-14.jpg" alt=""></a>
                                     </div>
                                     <div class="banner-content-13">
                                         <span>20x absorbs</span>
@@ -62,7 +62,7 @@
                             <div class="col-lg-12 col-md-6">
                                 <div class="banner-wrap mb-30">
                                     <div class="banner-img banner-img-zoom">
-                                        <a href="product-details.html"><img src="assets/images/banner/banner-15.jpg" alt=""></a>
+                                        <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-15.jpg" alt=""></a>
                                     </div>
                                     <div class="banner-content-14">
                                         <span>ZHnio</span>

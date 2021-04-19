@@ -1,10 +1,10 @@
 /*-----------------------------------------------------------------------------------
-    
+
     Template Name: Norda - Minimal eCommerce HTML Template
     Version: 1.0
-    
+
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
     1. Template default CSS
@@ -34,7 +34,7 @@
     25. Contect us style
     26. Blog details style
     27. Order tracking style
-    
+
 -----------------------------------------------------------------------------------*/
 /*----------------------------------------*/
 /*  1. Template default CSS
@@ -162,7 +162,7 @@ ul {
   padding: 0;
 }
 
-/*-- 
+/*--
     - Common Classes
 -----------------------------------------*/
 .fix {
@@ -1487,7 +1487,7 @@ ul {
 }
 
 /***************************
-    Page section padding 
+    Page section padding
 ****************************/
 .ptb-0 {
   padding: 0;
@@ -1602,7 +1602,7 @@ ul {
 }
 
 /***************************
-    Page section margin 
+    Page section margin
 ****************************/
 .mtb-0 {
   margin: 0;
@@ -1676,7 +1676,7 @@ ul {
   margin: 290px 0;
 }
 
-/*-- 
+/*--
     - Input Placeholder
 -----------------------------------------*/
 input:-moz-placeholder,
@@ -1855,8 +1855,8 @@ textarea:focus {
   }
 }
 
-/*-- 
-    Scroll Up 
+/*--
+    Scroll Up
 -----------------------------------------*/
 #scrollUp {
   width: 40px;
@@ -16566,6 +16566,38 @@ textarea:focus {
 
 .pro-details-color-content ul li a.white {
   background-color: #fff;
+}
+
+.pro-details-color-content ul li a.black {
+  background-color: black;
+}
+
+.pro-details-color-content ul li a.red {
+  background-color: red;
+}
+
+.pro-details-color-content ul li a.purple {
+  background-color: purple;
+}
+
+.pro-details-color-content ul li a.orange {
+  background-color: orange;
+}
+
+.pro-details-color-content ul li a.yellow {
+  background-color: yellow;
+}
+
+.pro-details-color-content ul li a.blue {
+  background-color: blue;
+}
+
+.pro-details-color-content ul li a.skyblue {
+  background-color: skyblue;
+}
+
+.pro-details-color-content ul li a.gray {
+  background-color: gray;
 }
 
 .pro-details-color-content ul li a.azalea {

@@ -9,24 +9,24 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" src="{{""}}/assets/images/favicon.png">
 
     <!-- All CSS is here
 	============================================ -->
 
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/signericafat.css">
-    <link rel="stylesheet" href="assets/css/vendor/cerebrisans.css">
-    <link rel="stylesheet" href="assets/css/vendor/simple-line-icons.css">
-    <link rel="stylesheet" href="assets/css/vendor/elegant.css">
-    <link rel="stylesheet" href="assets/css/vendor/linear-icon.css">
-    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
-    <link rel="stylesheet" href="assets/css/plugins/easyzoom.css">
-    <link rel="stylesheet" href="assets/css/plugins/slick.css">
-    <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/plugins/jquery-ui.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/vendor/signericafat.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/vendor/cerebrisans.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/vendor/simple-line-icons.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/vendor/elegant.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/vendor/linear-icon.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/plugins/easyzoom.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/plugins/slick.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/plugins/animate.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/plugins/jquery-ui.css">
+    <link rel="stylesheet" href="{{""}}/assets/css/style.css">
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
@@ -85,7 +85,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/images/logo/logo.png" alt="logo"></a>
+                                    <a href="index.html"><img src="{{""}}/assets/images/logo/logo.png" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7">
@@ -135,7 +135,7 @@
                                                                 </ul>
                                                             </li>
                                                             <li>
-                                                                <a href="shop.html"><img src="assets/images/banner/banner-12.png" alt=""></a>
+                                                                <a href="shop.html"><img src="{{""}}/assets/images/banner/banner-12.png" alt=""></a>
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -225,7 +225,7 @@
                                                             </ul>
                                                         </div>
                                                         <div class="single-category-menu">
-                                                            <a href="product-details.html"><img src="assets/images/menu/menu-categori-1.png" alt=""></a>
+                                                            <a href="product-details.html"><img src="{{""}}/assets/images/menu/menu-categori-1.png" alt=""></a>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -281,7 +281,7 @@
                                                             </ul>
                                                         </div>
                                                         <div class="single-category-menu">
-                                                            <a href="#"><img src="assets/images/menu/menu-categori-1.png" alt=""></a>
+                                                            <a href="#"><img src="{{""}}/assets/images/menu/menu-categori-1.png" alt=""></a>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -355,7 +355,7 @@
                         <div class="col-5">
                             <div class="mobile-logo">
                                 <a href="index.html">
-                                    <img alt="" src="assets/images/logo/logo.png">
+                                    <img alt="" src="{{""}}/assets/images/logo/logo.png">
                                 </a>
                             </div>
                         </div>
@@ -390,7 +390,7 @@
                     <ul>
                         <li class="single-product-cart">
                             <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
+                                <a href="#"><img src="{{""}}/assets/images/cart/cart-1.jpg" alt=""></a>
                             </div>
                             <div class="cart-title">
                                 <h4><a href="#">Simple Black T-Shirt</a></h4>
@@ -402,7 +402,7 @@
                         </li>
                         <li class="single-product-cart">
                             <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
+                                <a href="#"><img src="{{""}}/assets/images/cart/cart-2.jpg" alt=""></a>
                             </div>
                             <div class="cart-title">
                                 <h4><a href="#">Norda Backpack</a></h4>

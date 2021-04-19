@@ -11,12 +11,20 @@ use GuzzleHttp\Middleware;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
+
+/*Front end routing Starts*/
 Route::get('/front','Frontend\FrontendController@index');
+Route::prefix('/front')->group(function (){
+    Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+});
+
+
+/*Front end routing ends*/
+
+
+
+
 //Admin Routing Starts
 // Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
@@ -108,23 +116,29 @@ Route::prefix('color')->group(function () {
 });
 
 
-Route::prefix('slider')->group(function(){
-    Route::get('/view','Backend\SliderController@view')->name('slider.view');
-    Route::get('/add','Backend\SliderController@add')->name('slider.add');
-    Route::post('/store','Backend\SliderController@store')->name('slider.store');
-    Route::get('/edit/{id}','Backend\SliderController@edit')->name('slider.edit');
-    Route::post('/update/{id}','Backend\SliderController@update')->name('slider.update');
-    Route::get('/delete/{id}','Backend\SliderController@delete')->name('slider.delete');
-});
 
-Route::prefix('contact')->group(function(){
-    Route::get('/view','Backend\ContactController@view')->name('contact.view');
-    Route::get('/add','Backend\ContactController@add')->name('contact.add');
-    Route::post('/store','Backend\ContactController@store')->name('contact.store');
-    Route::get('/edit/{id}','Backend\ContactController@edit')->name('contact.edit');
-    Route::post('/update/{id}','Backend\ContactController@update')->name('contact.update');
-    Route::get('/delete/{id}','Backend\ContactController@delete')->name('contact.delete');
-});
+Route::prefix('admin')->group(function () {
+    Route::get('users', 'Backend\UserController@index')->name('users.index');
+
+    Route::prefix('slider')->group(function () {
+        Route::get('/view', 'Backend\SliderController@view')->name('slider.view');
+        Route::get('/add', 'Backend\SliderController@add')->name('slider.add');
+        Route::post('/store', 'Backend\SliderController@store')->name('slider.store');
+        Route::get('/edit/{id}', 'Backend\SliderController@edit')->name('slider.edit');
+        Route::post('/update/{id}', 'Backend\SliderController@update')->name('slider.update');
+        Route::get('/delete/{id}', 'Backend\SliderController@delete')->name('slider.delete');
+    });
+
+    Route::prefix('contact')->group(function () {
+        Route::get('/view', 'Backend\ContactController@view')->name('contact.view');
+        Route::get('/add', 'Backend\ContactController@add')->name('contact.add');
+        Route::post('/store', 'Backend\ContactController@store')->name('contact.store');
+        Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('contact.edit');
+        Route::post('/update/{id}', 'Backend\ContactController@update')->name('contact.update');
+        Route::get('/delete/{id}', 'Backend\ContactController@delete')->name('contact.delete');
+    });
+
+    });
 
 
 Route::prefix('admin')->group(function () {
@@ -145,15 +159,14 @@ Route::prefix('admin')->group(function () {
     Route::get('admins/{admin}/edit', 'Backend\AdminController@edit')->name('admin.edit');
     Route::put('admins/{admin}/update', 'Backend\AdminController@update')->name('admin.update');
     Route::get('admins/{admin}/delete', 'Backend\AdminController@destroy')->name('admin.delete');
-    
+
     Route::get('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('dashboard', 'Backend\DashboardController@ecommerce')->name('admin.dashboard');
 });
-
 // admin routes without Authentication
 Route::prefix('admin')->group(function () {
     Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login','Auth\AdminLoginController@login');
 });
 
-Auth::routes();  
+Auth::routes();
