@@ -49,11 +49,7 @@
                                                 <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
                                                     @foreach($brands as $row)
                                                         <option value="{{$row->id}}">{{$row->name}}</option>
-<<<<<<< HEAD
                                                     @endforeach
-=======
-                                                    @endforeach                                          
->>>>>>> origin
                                                 </select>
                                                 @error('brand_id')
                                                 <span style="color: red">Brand Name is required</span>

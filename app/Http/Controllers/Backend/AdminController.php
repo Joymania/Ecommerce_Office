@@ -1,0 +1,170 @@
+<?php
+namespace App\Http\Controllers\Backend;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Model\Admin;
+use Illuminate\Support\Facades\Validator;
+
+class AdminController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin');
+    // }
+    /**
+     * show dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $admins = Admin::paginate(10);
+        return view('admin.admins.admin-index')->with(['admins' => $admins]);
+    }
+
+    // return create view
+    public function create()
+    {
+        return view('admin.admins.admin-create');
+    }
+
+    // wil be used for admin registration
+    public function store(Request $request, Admin $admins)
+    {
+        $validator = Validator::make($request->all(), [
+        'name' => 'required|max:100',
+        'email' => 'required|email|unique:admins',
+        'password' => 'required|min:6|confirmed',
+        'role' => 'max: 20',
+        'status' => '',
+        'image' => '',
+        'gender' => 'required|max:10',
+        'address' => 'max:100'
+        ]);
+
+        if($validator->fails()){         
+            $erorrs = ['message' => 'Validation error!',
+                       'errors' => ['name' => $validator->errors()->get('name'),
+                                    'email' => $validator->errors()->get('email'),
+                                    'password' => $validator->errors()->get('password'),
+                                    'role' => $validator->errors()->get('role'),
+                                    'gender' => $validator->errors()->get('gender'),
+                                    'address' => $validator->errors()->get('address')                    
+                                    ]
+                    ];     
+            return redirect()->route('admin.create')->withInput()->with(['errors' => $erorrs]);
+        }
+
+        $admin = new Admin();
+
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = bcrypt($request->password);
+        $admin->role = $request-> role;
+        $admin->gender = $request-> gender;
+        $admin->address = $request-> address;
+
+        // if there is file in image field
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+
+            $file->move(public_path('upload/admins'), $filename);
+
+            // save filename to database
+            $admin->image = $filename;
+        }
+
+        $admin->save();
+
+        return redirect()->route('admin.create')->with(['success_msg' => 'Created successfully']);
+    }
+
+    // ------------------------------------------------------------------------------------------
+    public function edit(Admin $admin)
+    {
+        return view('admin.admins.admin-edit', compact('admin'));
+    }
+  
+    //  to update admin
+    public function update(Request $request, Admin $admin)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
+            // if requested email and admin email same, no validation applied
+            'email' => ($request->email != $admin->email ? 'required|email|unique:admins,email,':''),
+            // if the password field is blank, no validation applied
+            'password' => ($request->password!=''?'min:6|confirmed':''),
+            'role' => 'max: 20',
+            'status' => '',
+            'image' => '',
+            'gender' => 'required|max:10',
+            'address' => 'max:100'
+        ]);
+
+        //  if validation fails
+        if($validator->fails()){
+            $erorrs = ['message' => 'Validation error!',
+                       'errors' => ['name' => $validator->errors()->get('name'),
+                                    'email' => $validator->errors()->get('email'),
+                                    'password' => $validator->errors()->get('password'),
+                                    'role' => $validator->errors()->get('role'),
+                                    'gender' => $validator->errors()->get('gender'),
+                                    'address' => $validator->errors()->get('address')                    
+                                    ]
+                    ];     
+            return redirect()->route('admin.edit', $admin->id)->withInput()->with(['errors' => $erorrs]);
+        }
+
+        //  insert data ........
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->role = $request-> role;
+        $admin->gender = $request-> gender;
+        $admin->address = $request-> address;
+
+        // if there is password & not blank then insert password
+        if($request->has('password') && !empty($request->password)) {
+            $admin->password = bcrypt($request->password);
+        }
+
+        //  if there is image
+        if($request->hasFile('image')) {
+            // remove image
+            $this->removeImage($admin);
+            $file = $request->file('image');
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('upload/admins'), $filename);
+            $admin->image = $filename;
+        }
+
+        $admin->save();
+
+        session()->flash('success_msg' , 'Updated successfully');
+        return back();
+    }
+
+    
+    public function destroy(Admin $admin)
+    {
+        // remove image
+        $this->removeImage($admin);
+        $admin->delete();
+        
+        return redirect()->route('admin.index')->with("success_msg", 'Deleted successfully');
+    }
+    
+    private function removeImage($admin)
+    {
+        if($admin->image != "" && \File::exists('upload/admins/' . $admin->image)) {
+            @unlink(public_path('upload/admins/' . $admin->image));
+        }
+    }
+}
