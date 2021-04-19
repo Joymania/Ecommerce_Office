@@ -131,7 +131,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <button class="btn btn-success mt-3" type="submit">Add Product</button>
+                                        <button class="btn btn-primary mt-3" type="submit">Add Product</button>
                                     </form>
                                 </div>
                             </div>

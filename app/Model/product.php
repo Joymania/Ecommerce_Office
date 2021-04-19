@@ -27,6 +27,7 @@ class product extends Model
     {
         return $this->belongsTo(brand::class, 'brand_id', 'id');
     }
+
     public function tag()
     {
         return $this->belongsTo(tag::class, 'tag_id','id');
@@ -39,7 +40,7 @@ class product extends Model
 
     public function reviews()
     {
-        return $this->hasMany(review::class, 'review_id', 'id');
+        return $this->hasMany(review::class, 'product_id', 'id');
     }
 
     public function sizes()

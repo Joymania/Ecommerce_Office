@@ -28,23 +28,30 @@ class UserController extends Controller
     }
 
     // wil be used for user registration
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-
         $validator = Validator::make($request->all(), [
         'name' => 'required|max:100',
         'email' => 'required|email|unique:users',
-        'password' => 'required|min:6'
+        'password' => 'required|min:6|confirmed',
+        'role' => 'max: 20',
+        'status' => '',
+        'image' => '',
+        'gender' => 'required|max:10',
+        'address' => 'max:100'
         ]);
 
-        if($validator->fails()){
-           
-            $erorr = [ 'message' => 'Validation error!',
-                        'errors' => ['name' => $validator->errors()->get('name'),
+        if($validator->fails()){         
+            $erorrs = ['message' => 'Validation error!',
+                       'errors' => ['name' => $validator->errors()->get('name'),
                                     'email' => $validator->errors()->get('email'),
-                                    'password' => $validator->errors()->get('password')]];
-            
-            return view('admin.users.create')->with(['error' => $erorr]);
+                                    'password' => $validator->errors()->get('password'),
+                                    'role' => $validator->errors()->get('role'),
+                                    'gender' => $validator->errors()->get('gender'),
+                                    'address' => $validator->errors()->get('address')                    
+                                    ]
+                    ];     
+            return redirect()->route('users.add')->withInput()->with(['errors' => $erorrs]);
         }
 
         $user = new User();
@@ -52,7 +59,9 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        // $user->role = $request-> role;
+        $user->role = $request-> role;
+        $user->gender = $request-> gender;
+        $user->address = $request-> address;
 
         // if there is file in image field
         if($request->hasFile('image')) {
@@ -60,7 +69,7 @@ class UserController extends Controller
 
             $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
 
-            $file->move(public_path('public/uploads'), $filename);
+            $file->move(public_path('upload/users'), $filename);
 
             // save filename to database
             $user->image = $filename;
@@ -68,58 +77,61 @@ class UserController extends Controller
 
         $user->save();
 
-        return view('admin.users.create')->with(['success_msg' => 'Created successfully']);
+        return back()->with(['success_msg' => 'Created successfully']);
     }
 // ------------------------------------------------------------------------------------------
-    public function edit()
+    public function edit(User $user)
     {
-        return view('admin.users.edit');
+        return view('admin.users.edit', compact('user'));
     }
 
-    public function show($id)
-    {
-        $user = User::findOrFail($id);
-
-        return view('admin.users.edit')->with(['user' => $user]);
-    }
+    // public function show(User $user)
+    // {
+    //     return view('admin.users.edit', compact('user'));
+    // }
     
-    //  to edit user
-    public function update(Request $request, $id)
+    //  to update user
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:100',
-
             // if requested email and user email same, no validation applied
             'email' => ($request->email != $user->email ? 'required|email|unique:users,email,':''),
             // if the password field is blank, no validation applied
-            'password' => ($request->password!=''?'min:6':''),
-            // 'role' => 'required|max: 20'
+            'password' => ($request->password!=''?'min:6|confirmed':''),
+            'role' => 'max: 20',
+            'status' => '',
+            'image' => '',
+            'gender' => 'required|max:10',
+            'address' => 'max:100'
         ]);
 
         //  if validation fails
         if($validator->fails()){
-           
-            $erorr = [ 'message' => 'Validation error!',
-                        'errors' => ['name' => $validator->errors()->get('name'),
+            $erorrs = ['message' => 'Validation error!',
+                       'errors' => ['name' => $validator->errors()->get('name'),
                                     'email' => $validator->errors()->get('email'),
-                                    'password' => $validator->errors()->get('password')]];
-            
-            return view('admin.users.edit')->with(['error' => $erorr]);
+                                    'password' => $validator->errors()->get('password'),
+                                    'role' => $validator->errors()->get('role'),
+                                    'gender' => $validator->errors()->get('gender'),
+                                    'address' => $validator->errors()->get('address')                    
+                                    ]
+                    ];     
+            return redirect()->route('users.edit', $user->id)->withInput()->with(['errors' => $erorrs]);
         }
 
         //  insert data ........
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request-> role;
+        $user->gender = $request-> gender;
+        $user->address = $request-> address;
+
         // if there is password & not blank then insert password
         if($request->has('password') && !empty($request->password)) {
             $user->password = bcrypt($request->password);
         }
-        // if request has role then update role
-        if($request->has('role') && !empty($request->role)) {
-            $user->role = $request->password;
-        }
+
 
         //  if there is image
         if($request->hasFile('image')) {
@@ -131,32 +143,32 @@ class UserController extends Controller
 
             $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
 
-            $file->move(public_path('public/uploads'), $filename);
+            $file->move(public_path('upload/users'), $filename);
 
             $user->image = $filename;
         }
 
         $user->save();
 
-        return view('admin.users.edit')->with(['success_msg' => 'Updated successfully']);
+        session()->flash('success_msg' , 'Updated successfully');
+
+        return back();
 
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
-        
         // remove image
         $this->removeImage($user);
         $user->delete();
         
-        return redirect()->route('users.index')->with("success", 'Deleted successfully');
+        return redirect()->route('users.index')->with("success_msg", 'Deleted successfully');
     }
     
     private function removeImage($user)
     {
-        if($user->image != "" && \File::exists('public/uploads/' . $user->image)) {
-            @unlink(public_path('public/uploads/' . $user->image));
+        if($user->image != "" && \File::exists('upload/users/' . $user->image)) {
+            @unlink(public_path('upload/users/' . $user->image));
         }
     }
 }

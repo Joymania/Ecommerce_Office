@@ -21,6 +21,7 @@ class ProductsController extends Controller
 
     public function create()
     {
+
         $categories = category::all();
         $brands = brand::all();
         $tags = tag::all();
