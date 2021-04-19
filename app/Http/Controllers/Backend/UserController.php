@@ -11,12 +11,6 @@ class UserController extends Controller
 {
     public function index()
     {
-        // //  if not admin show error
-        // if(!auth()->user()->role == "admin"){
-        //     return view('user.error')->with(['error_msg' => ""]);
-        // }
-
-        // if admin show users
         $users = User::paginate(10);
         return view('admin.users.index')->with(['users' => $users]);
     }

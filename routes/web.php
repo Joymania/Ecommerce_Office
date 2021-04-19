@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend;
-
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +18,10 @@ use App\Http\Controllers\Backend;
 */
 
 //Admin Routing Starts
-Route::get('/', function () { return redirect('dashboard/ecommerce'); });
+// Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
 /*Dashboard*/
-Route::get('dashboard/ecommerce', 'Backend\DashboardController@ecommerce')->name('dashboard.ecommerce');
+// Route::get('dashboard/ecommerce', 'Backend\DashboardController@ecommerce')->name('dashboard.ecommerce');
 
 /* Authentication */
 Route::get('authentication', function () { return redirect('authentication/login'); });
@@ -53,9 +53,6 @@ Route::prefix('products')->group(function () {
 
 
 //Admin Routing Ends
-
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -89,10 +86,31 @@ Route::prefix('slider')->group(function(){
 
 Route::prefix('admin')->group(function () {
     Route::get('users', 'Backend\UserController@index')->name('users.index');
-    // if we create users in dashboard
-    Route::get('users/create', 'Backend\UserController@create')->name('users.add');
     Route::post('users', 'Backend\UserController@store')->name('users.store');
     Route::get('users/{user}/edit', 'Backend\UserController@edit')->name('users.edit');
     Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
     Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
 });
+// Website base url
+Route::get('/', function () { return view('website.website-index'); });
+
+// Route::prefix('admin')->middleware('auth:admin')->group(function () {
+Route::prefix('admin')->group(function () {
+    Route::get('admins', 'Backend\AdminController@index')->name('admin.index');
+    Route::get('admins/create', 'Backend\AdminController@create')->name('admin.create');
+    Route::post('admins', 'Backend\AdminController@store')->name('admin.store');
+    Route::get('admins/{admin}/edit', 'Backend\AdminController@edit')->name('admin.edit');
+    Route::put('admins/{admin}/update', 'Backend\AdminController@update')->name('admin.update');
+    Route::get('admins/{admin}/delete', 'Backend\AdminController@destroy')->name('admin.delete');
+    
+    Route::get('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('dashboard', 'Backend\DashboardController@ecommerce')->name('admin.dashboard');
+});
+
+// admin routes without Authentication
+Route::prefix('admin')->group(function () {
+    Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login','Auth\AdminLoginController@login');
+});
+
+Auth::routes();
