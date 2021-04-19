@@ -134,8 +134,8 @@ Route::prefix('admin')->group(function () {
     Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
     Route::get('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
 });
-// Website base url
-Route::get('/', function () { return view('website.website-index'); });
+// // Website base url
+// Route::get('/', function () { return view('website.website-index'); });
 
 // Route::prefix('admin')->middleware('auth:admin')->group(function () {
 Route::prefix('admin')->group(function () {
@@ -156,4 +156,4 @@ Route::prefix('admin')->group(function () {
     Route::post('/login','Auth\AdminLoginController@login');
 });
 
-Auth::routes();  
+Auth::routes();
