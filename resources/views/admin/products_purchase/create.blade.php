@@ -77,6 +77,7 @@
                                                         <th>Name</th>
                                                         <th>Code</th>
                                                         <th>Quantity</th>
+                                                        <th class="recieved-product-qty">Received</th>
                                                         <th>Net Unit Cost</th>
                                                         <th>Discount</th>
                                                         <th>Tax</th>
@@ -88,7 +89,7 @@
                                                     <tr>
                                                         <th colspan="2">Total</th>
                                                         <th colspan="2" id="total-qty">0</th>
-                                                        
+                                                        <th class="recieved-product-qty"></th>
                                                         <th id="total-discount">0.00</th>
                                                         <th id="total-tax">0.00</th>
                                                         <th id="total">0.00</th>
@@ -99,7 +100,8 @@
                                                     <tr>
                                                         <td>Shirt</td>
                                                         <td>ABC123</td>
-                                                        <td>123</td>
+                                                        <td><input type="number" class="form-control qty" name="qty[]" value="1" step="any" required=""></td>
+                                                        <td class="recieved-product-qty"><input type="number" class="form-control qty" name="qty[]" value="1" step="any" required=""></td>
                                                         <td>5000</td>
                                                         <td>50</td>
                                                         <td>no</td>
