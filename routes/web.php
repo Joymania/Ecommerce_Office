@@ -50,6 +50,13 @@ Route::prefix('products')->group(function () {
     Route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
     Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
     Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
+
+});
+
+/*Product Purchases Routes*/
+Route::name('purchase.')->prefix('purchases')->group(function () {
+    // Product Purchase
+    Route::get('/create','Backend\ProductPurchaseController@create')->name('add');
 });
 
 Route::prefix('/tags')->group(function (){

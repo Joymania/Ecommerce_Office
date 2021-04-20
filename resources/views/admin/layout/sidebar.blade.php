@@ -63,6 +63,13 @@
 
                             </ul>
                         </li>
+                        <li class="{{ Request::segment(1) === 'purchases' ? 'active' : null }}">
+                            <a href="#Dashboard" class="has-arrow"><i class="icon-book-open"></i> <span>Purchase</span></a>
+                            <ul>
+                                <li class=""><a href="{{route('purchase.add')}}">Add Purchase</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>
