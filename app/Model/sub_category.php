@@ -1,15 +1,21 @@
 <?php
-
+ 
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class sub_category extends Model
 {
-    protected $fillable = ['category_id','sub_category_name'];
+    protected $fillable = [
+		'sub_category_name',
+        'category_id',
+    ]; 
+
 
     public function category()
     {
-        $this->belongsTo(category::class, 'category_id', 'id');
+        return $this->belongsTo(category::class); 
     }
+
+    public $timestamps = false;
 }

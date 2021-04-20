@@ -17,6 +17,9 @@ use GuzzleHttp\Middleware;
 Route::get('/front','Frontend\FrontendController@index');
 Route::prefix('/front')->group(function (){
     Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+    Route::get('/fronts/{id}','Frontend\FrontendController@productByCat')->name('productByCat');
+    // contact
+    Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 });
 
 
@@ -167,10 +170,46 @@ Route::prefix('admin')->group(function () {
     Route::get('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('dashboard', 'Backend\DashboardController@ecommerce')->name('admin.dashboard');
 });
-// admin routes without Authentication
-Route::prefix('admin')->group(function () {
-    Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    Route::post('/login','Auth\AdminLoginController@login');
+
+
+    //Route::delete('users/{id}', 'Backend\UserController@destrooy')->name('users.destroy');
+// });
+
+
+Route::prefix('category')->group(function(){
+    Route::get('category', 'Backend\CategoriesController@category')->name('category.view');
+    Route::get('insertCategory', 'Backend\CategoriesController@insertCategory')->name('category.add');
+    Route::post('insertcat','Backend\CategoriesController@insertcat')->name('category.store');
+    Route::get('editCategory/{eid}', 'Backend\CategoriesController@editCategory')->name('category.edit');
+    Route::post('updateCategory','Backend\CategoriesController@updateCategory')->name('category.update');
+    Route::get('deleteCategory/{did}','Backend\CategoriesController@deleteCategory')->name('category.delete');
 });
 
-Auth::routes();
+Route::prefix('subCategory')->group(function(){
+    Route::get('subCategory','Backend\subCategoryController@subCategory')->name('subCategory.view');
+    Route::get('insertSubCategory', 'Backend\subCategoryController@insertSubCategory')->name('subCategory.add');
+    Route::post('insertSubcat', 'Backend\subCategoryController@insertSubcat')->name('subCategory.store');
+    Route::get('editSubCategory/{id}', 'Backend\subCategoryController@editSubCategory')->name('subCategory.edit');
+    Route::post('updateSubCategory','Backend\subCategoryController@updateSubCategory')->name('subCategory.update');
+    Route::get('deleteSubCategory/{did}','Backend\subCategoryController@deleteSubCategory')->name('subCategory.delete');
+});
+
+Route::prefix('logo')->group(function(){
+    Route::get('logo', 'Backend\LogoController@logo')->name('logo.view');
+    Route::get('insertLogo', 'Backend\LogoController@insertLogo')->name('logo.add');
+    Route::post('insertlog', 'Backend\LogoController@insertlog')->name('logo.store');
+    Route::get('editLogo/{id}', 'Backend\LogoController@editLogo')->name('logo.edit');
+    Route::post('updateLogo','Backend\LogoController@updateLogo')->name('logo.update');
+    Route::get('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
+});
+
+
+
+// admin routes without Authentication
+// Route::prefix('admin')->group(function () {
+//     Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
+//     Route::post('/login','Auth\AdminLoginController@login');
+// });
+
+// Auth::routes();
+
