@@ -22,12 +22,6 @@
             @endif
             
             <div class="body">
-                <a href="{{ route('users.add') }}">
-                    <button id="addToTable" class="btn btn-primary m-b-15" type="button">
-                        <i class="icon wb-plus" aria-hidden="true"></i> Add User
-                    </button>
-                </a>
-
                 <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
                     <thead>
@@ -35,9 +29,9 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Role</th>
                             <th>Status</th>
                             <th>Gender</th>
+                            <th>Address</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -47,13 +41,12 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Role</th>
                             <th>Status</th>
                             <th>Gender</th>
+                            <th>Address</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
-
 
                     <tbody>
                     @foreach ($users as $user)
@@ -61,11 +54,10 @@
                             <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{$user->role}}</td>
                             <td>{{$user->status}}</td>
                             <td>{{$user->gender}}</td>
+                            <td>{{$user->Address}}</td>
                             <td class="actions">
-            
                                 <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
 

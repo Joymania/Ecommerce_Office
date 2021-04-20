@@ -14,6 +14,7 @@ class category extends Model
 
     public function sub_category()
     {
+
       return $this->hasMany(sub_category::class); 
     }
 
@@ -25,4 +26,10 @@ class category extends Model
 
 
     public $timestamps = false;
+
+    return $this->hasMany(product::class, 'category_id', 'id');
+
+  }
+  
+
 }

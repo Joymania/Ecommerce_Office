@@ -20,11 +20,12 @@
                     </div>
                 </div>
                 <div class="product-slider-active-3 nav-style-3">
+                    @foreach($products as $product)
                     <div class="product-plr-1">
                         <div class="single-product-wrap">
                             <div class="product-img product-img-zoom mb-15">
-                                <a href="product-details.html">
-                                    <img src="assets/images/product/product-41.jpg" alt="">
+                                <a href="{{route('product.details',$product->id)}}">
+                                    <img style="width: 212px; height: 262px;" src="{{"/upload/products_images/$product->image"}}" alt="Product Image">
                                 </a>
                                 <span class="pro-badge left bg-red">-40%</span>
                                 <div class="product-action-2 tooltip-style-2">
@@ -35,9 +36,9 @@
                             </div>
                             <div class="product-content-wrap-3">
                                 <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">baby</a>
+                                    <a class="purple" href="shop.html">{{$product->category->name}}</a>
                                 </div>
-                                <h3><a class="purple" href="product-details.html">Advantage Baby Milk</a></h3>
+                                <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
                                     <div class="product-rating-4">
                                         <i class="icon_star"></i>
@@ -49,15 +50,15 @@
                                     <span>(4)</span>
                                 </div>
                                 <div class="product-price-4">
-                                    <span class="new-price">$38.50 </span>
+                                    <span class="new-price">{{$product->price}} Tk. </span>
                                     <span class="old-price">$42.85</span>
                                 </div>
                             </div>
                             <div class="product-content-wrap-3 product-content-position-2">
                                 <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">baby</a>
+                                    <a class="purple" href="shop.html">{{$product->category->name}}</a>
                                 </div>
-                                <h3><a class="purple" href="product-details.html">Advantage Baby Milk</a></h3>
+                                <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
                                     <div class="product-rating-4">
                                         <i class="icon_star"></i>
@@ -69,7 +70,7 @@
                                     <span>(4)</span>
                                 </div>
                                 <div class="product-price-4">
-                                    <span class="new-price">$38.50 </span>
+                                    <span class="new-price">{{$product->price}} Tk. </span>
                                     <span class="old-price">$42.85</span>
                                 </div>
                                 <div class="pro-add-to-cart-2">
@@ -78,296 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-zoom mb-15">
-                                <a href="product-details.html">
-                                    <img src="assets/images/product/product-42.jpg" alt="">
-                                </a>
-                                <span class="pro-badge left bg-red">-20%</span>
-                                <div class="product-action-2 tooltip-style-2">
-                                    <button title="Wishlist"><i class="icon-heart"></i></button>
-                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                    <button title="Compare"><i class="icon-refresh"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">fashion</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Herchoe Backpack</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$26.50 </span>
-                                    <span class="old-price">$45.85</span>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3 product-content-position-2">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">fashion</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Herchoe Backpack</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$26.50 </span>
-                                    <span class="old-price">$45.85</span>
-                                </div>
-                                <div class="pro-add-to-cart-2">
-                                    <button title="Add to Cart">Add To Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-zoom mb-15">
-                                <a href="product-details.html">
-                                    <img src="assets/images/product/product-43.jpg" alt="">
-                                </a>
-                                <span class="pro-badge left bg-red">-15%</span>
-                                <div class="product-action-2 tooltip-style-2">
-                                    <button title="Wishlist"><i class="icon-heart"></i></button>
-                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                    <button title="Compare"><i class="icon-refresh"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">baby</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Pampers baby-dry diapers</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(6)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$43.50 </span>
-                                    <span class="old-price">$52.85</span>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3 product-content-position-2">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">baby</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Pampers baby-dry diapers</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(6)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$43.50 </span>
-                                    <span class="old-price">$52.85</span>
-                                </div>
-                                <div class="pro-add-to-cart-2">
-                                    <button title="Add to Cart">Add To Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-zoom mb-15">
-                                <a href="product-details.html">
-                                    <img src="assets/images/product/product-44.jpg" alt="">
-                                </a>
-                                <span class="pro-badge left bg-red">-10%</span>
-                                <div class="product-action-2 tooltip-style-2">
-                                    <button title="Wishlist"><i class="icon-heart"></i></button>
-                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                    <button title="Compare"><i class="icon-refresh"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">furniture </a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">White Plastic Chair</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(3)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$123.50  </span>
-                                    <span class="old-price">$152.85</span>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3 product-content-position-2">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">furniture </a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">White Plastic Chair</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(3)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$123.50 </span>
-                                    <span class="old-price">$152.85</span>
-                                </div>
-                                <div class="pro-add-to-cart-2">
-                                    <button title="Add to Cart">Add To Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-zoom mb-15">
-                                <a href="product-details.html">
-                                    <img src="assets/images/product/product-45.jpg" alt="">
-                                </a>
-                                <span class="pro-badge left bg-red">-35%</span>
-                                <div class="product-action-2 tooltip-style-2">
-                                    <button title="Wishlist"><i class="icon-heart"></i></button>
-                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                    <button title="Compare"><i class="icon-refresh"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">women</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Ciate London Makeup</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star "></i>
-                                    </div>
-                                    <span>(1)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$86.75 </span>
-                                    <span class="old-price">$94.52</span>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3 product-content-position-2">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">beauty</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Ciate London Makeup</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star "></i>
-                                    </div>
-                                    <span>(1)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$86.75 </span>
-                                    <span class="old-price">$94.52</span>
-                                </div>
-                                <div class="pro-add-to-cart-2">
-                                    <button title="Add to Cart">Add To Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-zoom mb-15">
-                                <a href="product-details.html">
-                                    <img src="assets/images/product/product-42.jpg" alt="">
-                                </a>
-                                <span class="pro-badge left bg-red">-20%</span>
-                                <div class="product-action-2 tooltip-style-2">
-                                    <button title="Wishlist"><i class="icon-heart"></i></button>
-                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                    <button title="Compare"><i class="icon-refresh"></i></button>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">fashion</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Herchoe Backpack</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$26.50 </span>
-                                    <span class="old-price">$45.85</span>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap-3 product-content-position-2">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">fashion</a>
-                                </div>
-                                <h3><a class="purple" href="product-details.html">Herchoe Backpack</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star gray"></i>
-                                    </div>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="product-price-4">
-                                    <span class="new-price">$26.50 </span>
-                                    <span class="old-price">$45.85</span>
-                                </div>
-                                <div class="pro-add-to-cart-2">
-                                    <button title="Add to Cart">Add To Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -386,7 +98,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="shop.html">
-                                    <img src="assets/images/product/product-50.png" alt="">
+                                    <img src="{{""}}/assets/images/product/product-50.png" alt="">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -398,7 +110,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="shop.html">
-                                    <img src="assets/images/product/product-51.png" alt="">
+                                    <img src="{{""}}/assets/images/product/product-51.png" alt="">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -410,7 +122,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="shop.html">
-                                    <img src="assets/images/product/product-52.png" alt="">
+                                    <img src="{{""}}/assets/images/product/product-52.png" alt="">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -422,7 +134,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="shop.html">
-                                    <img src="assets/images/product/product-53.png" alt="">
+                                    <img src="{{""}}/assets/images/product/product-53.png" alt="">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -434,7 +146,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="shop.html">
-                                    <img src="assets/images/product/product-54.png" alt="">
+                                    <img src="{{""}}/assets/images/product/product-54.png" alt="">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -446,7 +158,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="shop.html">
-                                    <img src="assets/images/product/product-55.png" alt="">
+                                    <img src="{{""}}/assets/images/product/product-55.png" alt="">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -458,7 +170,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="shop.html">
-                                    <img src="assets/images/product/product-52.png" alt="">
+                                    <img src="{{""}}/assets/images/product/product-52.png" alt="">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -475,7 +187,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="banner-wrap mb-30">
                             <div class="banner-img banner-img-zoom">
-                                <a href="product-details.html"><img src="assets/images/banner/banner-10.jpg" alt=""></a>
+                                <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-10.jpg" alt=""></a>
                             </div>
                             <div class="banner-content-11 banner-content-11-modify">
                                 <h2><span>Zara</span> Pattern Boxed <br>Underwear</h2>
@@ -489,7 +201,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="banner-wrap mb-30">
                             <div class="banner-img banner-img-zoom">
-                                <a href="product-details.html"><img src="assets/images/banner/banner-11.jpg" alt=""></a>
+                                <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-11.jpg" alt=""></a>
                             </div>
                             <div class="banner-content-11 banner-content-11-modify">
                                 <h2><span>Basic</span> Color<br>Caps</h2>
@@ -523,11 +235,11 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-46.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-46.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.html">Mini Protector</a></h3>
+                                                <h3><a href="product-details.html}">Mini Protector</a></h3>
                                                 <div class="product-price-2">
                                                     <span>$38.50</span>
                                                 </div>
@@ -547,7 +259,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-47.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-47.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -571,7 +283,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-48.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-48.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -597,7 +309,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-49.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-49.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -621,7 +333,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-47.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-47.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -649,7 +361,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-49.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-49.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -673,7 +385,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-48.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-48.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -697,7 +409,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-47.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-47.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -723,7 +435,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-46.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-46.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -747,7 +459,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-48.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-48.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -775,7 +487,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-47.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-47.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -799,7 +511,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-46.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-46.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -823,7 +535,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-49.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-49.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -849,7 +561,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-48.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-48.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -873,7 +585,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-46.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-46.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -901,7 +613,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="banner-wrap banner-border-1 mt-40 mb-30">
                                         <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="assets/images/banner/banner-16.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-16.jpg" alt=""></a>
                                         </div>
                                         <div class="banner-content-15">
                                             <div class="banner-content-15-top">
@@ -917,7 +629,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="banner-wrap banner-border-1 banner-mt-none-xs mt-40 mb-30">
                                         <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="assets/images/banner/banner-17.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-17.jpg" alt=""></a>
                                         </div>
                                         <div class="banner-content-16">
                                             <h2>Microsoft Surface Pro 7 - 12.3”</h2>
@@ -971,7 +683,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-81.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-81.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -995,7 +707,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-82.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-82.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1019,7 +731,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-83.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-83.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1043,7 +755,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-84.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-84.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1067,7 +779,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-82.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-82.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1095,7 +807,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-84.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-84.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1119,7 +831,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-83.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-83.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1143,7 +855,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-82.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-82.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1167,7 +879,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-81.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-81.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1191,7 +903,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-83.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-83.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1219,7 +931,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-82.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-82.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1243,7 +955,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-81.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-81.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1267,7 +979,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-84.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-84.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1291,7 +1003,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-83.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-83.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1315,7 +1027,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-81.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-81.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1343,7 +1055,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="banner-wrap banner-border-1 mt-40 mb-30">
                                         <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="assets/images/banner/banner-23.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-23.jpg" alt=""></a>
                                         </div>
                                         <div class="banner-content-19">
                                             <h2>set 3 soften <br>shorts</h2>
@@ -1355,7 +1067,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="banner-wrap banner-border-1 banner-mt-none-xs mt-40 mb-30">
                                         <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="assets/images/banner/banner-24.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-24.jpg" alt=""></a>
                                         </div>
                                         <div class="banner-content-21">
                                             <span>mega sale</span>
@@ -1406,7 +1118,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-85.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-85.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1430,7 +1142,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-86.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-86.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1454,7 +1166,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-87.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-87.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1480,7 +1192,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-88.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-88.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1504,7 +1216,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-86.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-86.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1532,7 +1244,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-88.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-88.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1556,7 +1268,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-87.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-87.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1582,7 +1294,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-86.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-86.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1606,7 +1318,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-85.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-85.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1630,7 +1342,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-86.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-86.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1658,7 +1370,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-86.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-86.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1682,7 +1394,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-85.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-85.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1706,7 +1418,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-88.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-88.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1730,7 +1442,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-87.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-87.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1756,7 +1468,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img src="assets/images/product/product-86.jpg" alt="">
+                                                    <img src="{{""}}/assets/images/product/product-86.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
@@ -1784,7 +1496,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="banner-wrap banner-border-1 mt-40 mb-30">
                                         <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="assets/images/banner/banner-25.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-25.jpg" alt=""></a>
                                         </div>
                                         <div class="banner-content-19">
                                             <h2 class="capitalize">Magic Bullet <br>NutriBullet Blender</h2>
@@ -1796,7 +1508,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="banner-wrap banner-border-1 banner-mt-none-xs mt-40 mb-30">
                                         <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="assets/images/banner/banner-26.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-26.jpg" alt=""></a>
                                         </div>
                                         <div class="banner-content-22">
                                             <span>IKEA</span>
