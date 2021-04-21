@@ -8,7 +8,7 @@
         }
         .s888{
             height: 40px;
-            border: 1px solid aquamarine;
+            border: 1px solid black;
         }
 
     </style>
@@ -26,7 +26,7 @@
                         @foreach ($contents as $content)
                             <li class="single-product-cart">
                             <div class="cart-img">
-                                <a href="#"><img src="" alt=""></a>
+                                <a href="#"><img src="{{asset('/upload/products_images/'.$content->options->image) }}" alt=""></a>
                             </div>
                             <div class="cart-title">
                                 <h4><a href="#">{{ $content->name }}</a></h4>
@@ -40,7 +40,6 @@
                         $total+=$content->subtotal;
                     @endphp
                         @endforeach
-
                     </ul>
                     <div class="cart-total">
                         <h4>Subtotal: <span>{{ $total }}</span></h4>
@@ -69,7 +68,7 @@
                 <h3 class="cart-page-title">Your cart items</h3>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <form action="#">
+
                             <div class="table-content table-responsive cart-table-content">
                                 <table>
                                     <thead>
@@ -77,6 +76,8 @@
                                             <th>Image</th>
                                             <th>Product Name</th>
                                             <th>Until Price</th>
+                                            {{-- <th>Size</th>
+                                            <th>Color</th> --}}
                                             <th>Qty</th>
                                             <th>Subtotal</th>
                                             <th>action</th>
@@ -90,23 +91,36 @@
                                         @foreach ($contents as $content)
                                             <tr>
                                             <td class="product-thumbnail">
-                                                <a href="#"><img src="" alt=""></a>
+                                                <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" width="80px" height="100px" alt=""></a>
                                             </td>
                                             <td class="product-name"><a href="#">{{ $content->name }}</a></td>
                                             <td class="product-price-cart"><span class="amount">{{ $content->price }}</span></td>
                                             <td class="product-quantity pro-details-quality">
-                                                <form action="POST" action="{{ route('update.cart') }}">
+
+                                                <form method="post" action="{{ route('update.cart') }}" >
                                                     @csrf
-                                                    <div>
-                                                        <input type="number" class="mtext-104 cl3 txt-center num-product form-control sss" id="qty" name="qty" value="{{ $content->qty }}">
-                                                        <input type="hidden" name="rowId" value="{{ $content->rowId }}">
-                                                        <input type="submit" value="Update" class="flex-c-m stext-101 c12 bg8 s888 hov-btn3 p-lr-15 trans-04 pointer m-tb--10">
-                                                    </div>
+                                                      <div>
+                                                            <div class="cart-plus-minus" >
+                                                                <input class="cart-plus-minus-box" type="text" name="qty" value="{{ $content->qty }}">
+                                                            </div>
+                                                            <input type="hidden" name="rowId" value="{{ $content->rowId }}">
+                                                              <div class="float-right">
+                                                            <input type="submit" value="Update" class="cart">
+
+
+                                                        </div>
+                                                        </div>
+
+
                                                 </form>
+
+
                                             </td>
                                             <td class="product-subtotal">{{ $content->subtotal }}</td>
                                             <td class="product-remove">
                                                 <a href="{{ route('delete.cart',$content->rowId) }}"><i class="icon_close"></i></a>
+
+
                                             </td>
                                         </tr>
                                         @php
@@ -129,59 +143,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="cart-tax">
-                                    <div class="title-wrap">
-                                        <h4 class="cart-bottom-title section-bg-gray">Estimate Shipping And Tax</h4>
-                                    </div>
-                                    <div class="tax-wrapper">
-                                        <p>Enter your destination to get a shipping estimate.</p>
-                                        <div class="tax-select-wrapper">
-                                            <div class="tax-select">
-                                                <label>
-                                                    * Country
-                                                </label>
-                                                <select class="email s-email s-wid">
-                                                    <option>Bangladesh</option>
-                                                    <option>Albania</option>
-                                                    <option>Åland Islands</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Belgium</option>
-                                                </select>
-                                            </div>
-                                            <div class="tax-select">
-                                                <label>
-                                                    * Region / State
-                                                </label>
-                                                <select class="email s-email s-wid">
-                                                    <option>Bangladesh</option>
-                                                    <option>Albania</option>
-                                                    <option>Åland Islands</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Belgium</option>
-                                                </select>
-                                            </div>
-                                            <div class="tax-select">
-                                                <label>
-                                                    * Zip/Postal Code
-                                                </label>
-                                                <input type="text">
-                                            </div>
-                                            <button class="cart-btn-2" type="submit">Get A Quote</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @if (Session::has('cupon'))
 
-                            @else
+                            {{-- @if (Session::has('cupon'))
+
+                            @else --}}
                             <div class="col-lg-4 col-md-6">
                                 <div class="discount-code-wrapper">
                                     <div class="title-wrap">
                                         <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
                                     </div>
+                                    {{--  @if (Session::has('cupon'))
+
+                                    @else  --}}
                                     <div class="discount-code">
                                         <p>Enter your coupon code if you have one.</p>
                                         <form method="POST" action="{{ route('apply.cuppon') }}">
@@ -190,9 +164,10 @@
                                             <button class="cart-btn-2" type="submit">Apply Coupon</button>
                                         </form>
                                     </div>
+                                    {{--  @endif  --}}
                                 </div>
                             </div>
-                            @endif
+                            {{-- @endif --}}
                             <div class="col-lg-4 col-md-12">
                                 <div class="grand-totall">
                                     <div class="title-wrap">
@@ -200,10 +175,14 @@
                                     </div>
 
                                     @if (Session::has('cupon'))
-                                    <h5>Total products <span>{{ Session::get('cupon')['balance'] }}</span></h5>
+                                    <h5>Total products <span>{{ Session::get('cupon')['blance']}}</span></h5>
                                     @else
-                                       <h5>Total products <span>{{ $total }}</span></h5>
+                                     <h5>Total products <span>{{ Cart::priceTotal() }}</span></h5>
                                     @endif
+
+
+
+
 
                                     <div class="total-shipping">
                                         <h5>Total shipping</h5>
@@ -213,7 +192,7 @@
                                         </ul>
                                     </div>
                                     <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4>
-                                    <a href="#">Proceed to Checkout</a>
+                                    <a href="{{ route('checkout') }}">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>

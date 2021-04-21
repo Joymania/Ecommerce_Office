@@ -121,7 +121,10 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="product-details-content pro-details-content-mrg">
+                    <form action="{{ route('insert.cart') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <div class="product-details-content pro-details-content-mrg">
                         <h2>{{$product->name}}</h2>
                         <div class="product-ratting-review-wrap">
                             <div class="product-ratting-digit-wrap">
@@ -169,7 +172,7 @@
                         <div class="pro-details-quality">
                             <span>Quantity:</span>
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+                                <input class="cart-plus-minus-box" type="text" name="qty" value="1">
                             </div>
                         </div>
                         <div class="product-details-meta">
@@ -184,7 +187,8 @@
                         </div>
                         <div class="pro-details-action-wrap">
                             <div class="pro-details-add-to-cart">
-                                <a title="Add to Cart" href="#">Add To Cart </a>
+                                {{-- //<a title="Add to Cart" href="#">Add To Cart </a> --}}
+                                <button type="submit">Add to Cart</button>
                             </div>
                             <div class="pro-details-action">
                                 <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>
@@ -199,6 +203,8 @@
                             </div>
                         </div>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -370,6 +376,7 @@
                 <h2>Related Product</h2>
             </div>
             <div class="related-product-active">
+
                 <div class="product-plr-1">
                     <div class="single-product-wrap">
                         <div class="product-img product-img-zoom mb-15">
