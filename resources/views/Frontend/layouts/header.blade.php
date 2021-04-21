@@ -205,9 +205,9 @@
                                                     <div class="category-menu-dropdown ct-menu-res-height-1">
                                                         <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
                                                             <h4></h4>
-                                                            <ul>
+                                                             <ul>
                                                                 @foreach($cat->sub_category as $subcat)
-                                                                <li><a href="{{URL::to('/fronts/'.$subcat->id)}}">{{$subcat->sub_category_name}}</a></li>
+                                                                <li><a href="{{route('productByCat',$subcat->id)}}">{{$subcat->sub_category_name}}</a></li>
                                                                 @endforeach
                                                             </ul>
                                                         </div>

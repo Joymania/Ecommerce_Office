@@ -59,11 +59,11 @@ class CategoriesController extends Controller
     }
 
     // deleteCategory
-
+ 
     public function deleteCategory($did)
     {
         category::findOrFail($did)->delete();
-    	return redirect()->route('category.view')->with('delete','Successfully deleted!!!');
+    	return redirect()->route('category.view')->with('success','Successfully Deleted!!!');
     }
 
 

@@ -18,26 +18,20 @@ class FrontendController extends Controller
     public function index(){   
         $data['sliders']=DB::table('products')->orderBy('created_at','desc')->take(2)->get();
         $logos = logo::all()->last();
-        $categories = category::with('sub_category')->get();
+        $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
         $products = product::all();
-        return view('Frontend.layouts.home', $data, compact('categories' , 'logos' , 'contacts' ,'products'));
+        return view('Frontend.layouts.home', $data, compact('categories' , 'logos' , 'contacts' ,'products' ));
     }
-
-    public function productByCat($id)
-    {
-        $logos = logo::all()->last();
-        $categories = category::with('sub_category')->get();
-        $contacts = contacts::all()->last();
-        return view('Frontend.layouts.productByCat' , compact('logos' , 'categories' , 'contacts'));
-    }
+ 
 
     public function contact()
     {
         $logos = logo::all()->last();
         $categories = category::with('sub_category')->get();
         $contacts = contacts::all()->last();
-        return view('Frontend.layouts.contact' , compact('logos' , 'categories' , 'contacts'));
+        $products = product::all();
+        return view('Frontend.layouts.contact' , compact('logos' , 'categories' , 'contacts' , 'products'));
     }
     
 
