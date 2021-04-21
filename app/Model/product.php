@@ -48,4 +48,9 @@ class product extends Model
         return $this->belongsToMany(size::class, 'product_sizes')->withTimestamps();
     }
 
+    public function sub_images()
+    {
+        return $this->hasMany(SubImage::class, 'product_id','id');
+    }
+
 }

@@ -60,63 +60,46 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product-details-tab">
                         <div class="pro-dec-big-img-slider">
-                            <div class="easyzoom-style">
+                           {{-- <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{""}}/assets/images/product-details/b-large-1.jpg">
                                         <img src="{{"/upload/products_images/$product->image"}}" alt="">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-1.jpg"><i class="icon-size-fullscreen"></i></a>
-                            </div>
+                            </div>--}}
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
-                                    <a href="{{""}}/assets/images/product-details/b-large-2.jpg">
+                                    <a href="{{"/upload/products_images/$product->image"}}">
                                         <img src="{{"/upload/products_images/$product->image"}}" alt="">
                                     </a>
                                 </div>
-                                <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-2.jpg"><i class="icon-size-fullscreen"></i></a>
+                                <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/$product->image"}}"><i class="icon-size-fullscreen"></i></a>
                             </div>
-                            <div class="easyzoom-style">
-                                <div class="easyzoom easyzoom--overlay">
-                                    <a href="{{""}}/assets/images/product-details/b-large-3.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
-                                    </a>
+                            @if($product->sub_images)
+                                @foreach($product->sub_images as $image)
+                                <div class="easyzoom-style">
+                                    <div class="easyzoom easyzoom--overlay">
+                                        <a href="{{"/upload/products_images/sub_images/$image->image"}}">
+                                            <img src="{{"/upload/products_images/sub_images/$image->image"}}" alt="">
+                                        </a>
+                                    </div>
+                                    <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/sub_images/$image->image"}}g"><i class="icon-size-fullscreen"></i></a>
                                 </div>
-                                <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-3.jpg"><i class="icon-size-fullscreen"></i></a>
-                            </div>
-                            <div class="easyzoom-style">
-                                <div class="easyzoom easyzoom--overlay">
-                                    <a href="{{""}}/assets/images/product-details/b-large-4.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
-                                    </a>
-                                </div>
-                                <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-4.jpg"><i class="icon-size-fullscreen"></i></a>
-                            </div>
-                            <div class="easyzoom-style">
-                                <div class="easyzoom easyzoom--overlay">
-                                    <a href="{{""}}/assets/images/product-details/b-large-2.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
-                                    </a>
-                                </div>
-                                <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-2.jpg"><i class="icon-size-fullscreen"></i></a>
-                            </div>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="product-dec-slider-small product-dec-small-style1">
                             <div class="product-dec-small active">
-                                <img src="{{""}}/assets/images/product-details/small-1.jpg" alt="">
+                                <img src="{{"/upload/products_images/$product->image"}}" alt="">
                             </div>
-                            <div class="product-dec-small">
-                                <img src="{{""}}/assets/images/product-details/small-2.jpg" alt="">
+                            @if($product->sub_images)
+                            @foreach($product->sub_images as $image)
+                            <div class="product-dec-small active">
+                                <img src="{{"/upload/products_images/sub_images/$image->image"}}" alt="">
                             </div>
-                            <div class="product-dec-small">
-                                <img src="{{""}}/assets/images/product-details/small-3.jpg" alt="">
-                            </div>
-                            <div class="product-dec-small">
-                                <img src="{{""}}/assets/images/product-details/small-4.jpg" alt="">
-                            </div>
-                            <div class="product-dec-small">
-                                <img src="{{""}}/assets/images/product-details/small-2.jpg" alt="">
-                            </div>
+                            @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -126,14 +109,12 @@
                         <div class="product-ratting-review-wrap">
                             <div class="product-ratting-digit-wrap">
                                 <div class="product-ratting">
+                                    @for($i = 0; $i < $rating; $i++)
                                     <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
+                                    @endfor
                                 </div>
                                 <div class="product-digit">
-                                    <span>5.0</span>
+                                    <span>{{$rating}}</span>
                                 </div>
                             </div>
                             <div class="product-review-order">
@@ -210,7 +191,6 @@
                     <div class="dec-review-topbar nav mb-45">
                         <a class="active" data-toggle="tab" href="#des-details1">Description</a>
                         <a data-toggle="tab" href="#des-details2">Specification</a>
-                        <a data-toggle="tab" href="#des-details3">Meterials </a>
                         <a data-toggle="tab" href="#des-details4">Reviews and Ratting </a>
                     </div>
                     <div class="tab-content dec-review-bottom">
@@ -222,7 +202,7 @@
                         </div>
                         <div id="des-details2" class="tab-pane">
                             <div class="specification-wrap table-responsive">
-                                <table>
+                                <table class="text-center">
                                     <tbody>
                                     <tr>
                                         <td class="title width1">Name</td>
@@ -230,51 +210,43 @@
                                     </tr>
                                     <tr>
                                         <td class="title width1">Categories</td>
-                                        <td>{{$product->category->name}}</td>
+                                        <td>{{($product->category->name) ? $product->category->name: "----"}}</td>
                                     </tr>
                                     <tr>
                                         <td class="title width1">Size</td>
-                                        <td>
+                                        @if($product->sizes)
                                             @foreach($product->sizes as $size)
-                                                {{$size->name}}
+                                                <td>{{$size->name}} </td>
                                             @endforeach
-                                        </td>
+                                        @else
+                                            <td>----</td>
+                                        @endif
+
                                     </tr>
                                     <tr>
                                         <td class="title width1">Brand </td>
-                                        <td>Individual Collections</td>
+                                        <td>{{($product->brand) ? $product->brand->name: "----"}}</td>
                                     </tr>
                                     <tr>
                                         <td class="title width1">Color</td>
-                                        <td>Black, White</td>
+                                        @if($product->colors)
+                                            @foreach($product->colors as $color)
+                                            <td>{{$color->name}} </td>
+                                            @endforeach
+                                        @else
+                                            <td>----</td>
+                                        @endif
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div id="des-details3" class="tab-pane">
-                            <div class="specification-wrap table-responsive">
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td class="title width1">Top</td>
-                                        <td>Cotton Digital Print Chain Stitch Embroidery Work</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title width1">Bottom</td>
-                                        <td>Cotton Cambric</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title width1">Dupatta</td>
-                                        <td>Digital Printed Cotton Malmal With Chain Stitch</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
+                        @if($reviews)
                         <div id="des-details4" class="tab-pane">
                             <div class="review-wrapper">
-                                <h2>1 review for Sleeve Button Cowl Neck</h2>
+                                <h2>{{$ratingCount}} review for {{$product->name}}</h2>
+                                @foreach($reviews as $review)
                                 <div class="single-review">
                                     <div class="review-img">
                                         <img src="{{""}}/assets/images/product-details/client-1.png" alt="">
@@ -282,19 +254,18 @@
                                     <div class="review-content">
                                         <div class="review-top-wrap">
                                             <div class="review-name">
-                                                <h5><span>John Snow</span> - March 14, 2019</h5>
+                                                <h5><span>{{$review->name}}</span> - {{$review->created_at}}</h5>
                                             </div>
                                             <div class="review-rating">
+                                                @for($i = 0; $i < $review->rating; $i++)
                                                 <i class="yellow icon_star"></i>
-                                                <i class="yellow icon_star"></i>
-                                                <i class="yellow icon_star"></i>
-                                                <i class="yellow icon_star"></i>
-                                                <i class="yellow icon_star"></i>
+                                                @endfor
                                             </div>
                                         </div>
-                                        <p>Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at egestas magna molestie a. Proin ac ex maximus, ultrices justo eget, sodales orci. Aliquam egestas libero ac turpis pharetra, in vehicula lacus scelerisque</p>
+                                        <p>{{$review->review}}</p>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                             <div class="ratting-form-wrapper">
                                 <span>Add a Review</span>
@@ -359,6 +330,13 @@
                                 </div>
                             </div>
                         </div>
+                        @else
+                            <div id="des-details4" class="tab-pane">
+                                <div class="review-wrapper">
+                                    <h2>No reviews</h2>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

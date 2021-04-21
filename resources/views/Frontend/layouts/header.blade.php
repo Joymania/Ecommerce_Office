@@ -320,25 +320,27 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-6">
                                 <div class="categori-search-wrap categori-search-wrap-modify">
                                     <div class="categori-style-1">
-                                        <select class="nice-select nice-select-style-1">
+                                        <select id="categories" class="nice-select nice-select-style-1">
                                             <option>All Categories </option>
-                                            <option>Clothing </option>
-                                            <option>T-Shirt</option>
-                                            <option>Shoes</option>
-                                            <option>Jeans</option>
+                                            @foreach($categories as $category)
+                                            <option>{{$category->name}} </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="search-wrap-3">
-                                        <form action="#">
-                                            <input placeholder="Search Products..." type="text">
-                                            <button><i class="lnr lnr-magnifier"></i></button>
+                                        <form action="{{route('search.result')}}" method="get">
+                                            <input name="search" placeholder="Search Products..." type="text">
+                                            <input name="category" id="categoryInput" type="text" hidden>
+                                            <button type="submit"><i class="lnr lnr-magnifier"></i></button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-3">
                                 <div class="header-offer-wrap-5">
                                     <h3>50% OFF</h3>

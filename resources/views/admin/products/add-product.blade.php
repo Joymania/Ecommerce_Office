@@ -45,6 +45,13 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
+                                                <label for="stock">Stock</label>
+                                                <input type="number" id="stock" class="form-control" name="stock" placeholder="Stock available">
+                                                @error('stock')
+                                                <span style="color: red">Product stock is required</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
                                                 <label for="single-selection">Select Brand Name</label>
                                                 <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
                                                     @foreach($brands as $row)
@@ -116,21 +123,24 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <label for="image">Upload Image</label>
+                                                <label for="image">Upload Cover Image</label>
                                                 <input type="file" id="image" class="form-control" name="image">
                                                 @error('image')
                                                 <span style="color: red">Product Image is required</span>
                                                 @enderror
                                             </div>
-
                                             <div class="col">
-                                                <label for="stock">Stock</label>
-                                                <input type="number" id="stock" class="form-control" name="stock">
-                                                @error('stock')
-                                                <span style="color: red">Product stock is required</span>
+                                                <label for="image">Upload Sub Images</label>
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                @error('image')
+                                                <span style="color: red">Product Image is required</span>
                                                 @enderror
                                             </div>
                                         </div>
+
                                         <button class="btn btn-primary mt-3" type="submit">Add Product</button>
                                     </form>
                                 </div>

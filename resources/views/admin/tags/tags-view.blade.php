@@ -48,9 +48,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="header">
-                                    <a href="{{route('tags.create')}}">
-                                        <button class="btn-primary" type="submit">Add New Tag <i class="icon-plus"></i></button>
-                                    </a>
+                                    <a class=" btn btn-primary m-b-15" href="{{route('tags.create')}}"><i class="fa fa-plus-circle"></i> Add New Tag</a>
                                 </div>
                                 <div class="body">
                                     <div class="table-responsive">
