@@ -37,10 +37,11 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
-                                                <th>Image</th>
+                                                 <th>Image</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
@@ -48,6 +49,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
@@ -60,6 +62,7 @@
                                                 <tr>
                                                     <td>{{$product->name}}</td>
                                                     <td>{{$product->category->name}}</td>
+                                                    <td>{{$product->sub_category_id}}</td>
                                                     <td>{{$product->brand->name}}</td>
                                                     <td>{{$product->price}} Tk</td>
                                                     <td>{{$product->stock}}</td>

@@ -63,7 +63,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{""}}/assets/images/product-details/b-large-1.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
+                                        <img src="{{""}}/upload/products_images/{{$product->image}}" alt="">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-1.jpg"><i class="icon-size-fullscreen"></i></a>
@@ -71,7 +71,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{""}}/assets/images/product-details/b-large-2.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
+                                        <img src="{{""}}/upload/products_images/{{$product->image}}" alt="">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-2.jpg"><i class="icon-size-fullscreen"></i></a>
@@ -79,7 +79,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{""}}/assets/images/product-details/b-large-3.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
+                                        <img src="{{""}}/upload/products_images/{{$product->image}}" alt="">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-3.jpg"><i class="icon-size-fullscreen"></i></a>
@@ -87,7 +87,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{""}}/assets/images/product-details/b-large-4.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
+                                        <img src="{{""}}/upload/products_images/{{$product->image}}" alt="">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-4.jpg"><i class="icon-size-fullscreen"></i></a>
@@ -95,7 +95,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{""}}/assets/images/product-details/b-large-2.jpg">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
+                                        <img src="{{""}}/upload/products_images/{{$product->image}}" alt="">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-2.jpg"><i class="icon-size-fullscreen"></i></a>

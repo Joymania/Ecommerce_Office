@@ -27,9 +27,11 @@ class category extends Model
 
     public $timestamps = false;
 
+    public function product()
+    {
     return $this->hasMany(product::class, 'category_id', 'id');
 
-  }
+   }
   
 
 }

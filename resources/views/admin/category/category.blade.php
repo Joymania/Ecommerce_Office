@@ -38,7 +38,7 @@
                                     <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('category.edit',$view_cat->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a>
                                    
                                     <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"> 
-                                        <a title="Move to trash" href="{{ route('category.delete',$view_cat->id) }}">
+                                        <a title="Delete" href="{{ route('category.delete',$view_cat->id) }}">
                                             <span><i class="fa fa-trash"></i></span>
                                         </a>
                                 </td>

@@ -9,23 +9,27 @@
                         <div class="tab-content tab-hm6-categories-slider tab-content-mrg-top jump">
                             <div id="product-9" class="tab-pane active">
                                 <div class="product-slider-active-5">
+
+                                    
+                                    @foreach($products as $product)
+
                                     <div class="product-plr-1">
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
-                                                <a href="product-details.html">
-                                                    <img src="{{""}}/assets/images/product/product-46.jpg" alt="">
+                                                <a href="{{route('product.details',$product->id)}}">
+                                                    <img src="{{""}}/upload/products_images/{{$product->image}}" height="270px" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.html">Mini Protector</a></h3>
+                                                <h3><a href="product-details.html">{{$product->name}}</a></h3>
                                                 <div class="product-price-2">
-                                                    <span>$38.50</span>
+                                                    <span>{{$product->price}} Tk</span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="product-details.html">Mini Protector</a></h3>
+                                                <h3><a href="product-details.html">{{$product->name}}</a></h3>
                                                 <div class="product-price-2">
-                                                    <span>$38.50</span>
+                                                    <span>{{$product->price}} Tk</span>
                                                 </div>
                                                 <div class="pro-add-to-cart">
                                                     <button title="Add to Cart">Add To Cart</button>
@@ -33,80 +37,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-plr-1">
-                                        <div class="single-product-wrap">
-                                            <div class="product-img product-img-zoom mb-15">
-                                                <a href="product-details.html">
-                                                    <img src="{{""}}/assets/images/product/product-47.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.html">Norda Coolpix Camera</a></h3>
-                                                <div class="product-price-2">
-                                                    <span>$485.50</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="product-details.html">Norda Coolpix Camera</a></h3>
-                                                <div class="product-price-2">
-                                                    <span>$485.50</span>
-                                                </div>
-                                                <div class="pro-add-to-cart">
-                                                    <button title="Add to Cart">Add To Cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-plr-1">
-                                        <div class="single-product-wrap">
-                                            <div class="product-img product-img-zoom mb-15">
-                                                <a href="product-details.html">
-                                                    <img src="{{""}}/assets/images/product/product-48.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.html">Norda Phone 6s 64GB</a></h3>
-                                                <div class="product-price-2">
-                                                    <span class="new-price">$1,238.50 </span>
-                                                    <span class="old-price">$1,542.85</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="product-details.html">Norda Phone 6s 64GB</a></h3>
-                                                <div class="product-price-2">
-                                                    <span class="new-price">$1,238.50 </span>
-                                                    <span class="old-price">$1,542.85</span>
-                                                </div>
-                                                <div class="pro-add-to-cart">
-                                                    <button title="Add to Cart">Add To Cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-plr-1">
-                                        <div class="single-product-wrap">
-                                            <div class="product-img product-img-zoom mb-15">
-                                                <a href="product-details.html">
-                                                    <img src="{{""}}/assets/images/product/product-49.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.html">Norda Phone A38</a></h3>
-                                                <div class="product-price-2">
-                                                    <span>$938.50</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="product-details.html">Norda Phone A38</a></h3>
-                                                <div class="product-price-2">
-                                                    <span>$938.50</span>
-                                                </div>
-                                                <div class="pro-add-to-cart">
-                                                    <button title="Add to Cart">Add To Cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                    @endforeach
+
                                     
                                 </div>
                             </div>
