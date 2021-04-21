@@ -752,6 +752,7 @@
                 </div>
             </div>
         </div>
+
         <div class="service-area pb-115">
             <div class="container">
                 <div class="service-wrap-border service-wrap-padding-3">
@@ -2916,7 +2917,7 @@
     <script src="assets/website/js/plugins/scrollup.js"></script>
     <script src="assets/website/js/plugins/ajax-mail.js"></script>
 
-    <!-- Use the minified version files listed below for better performance and remove the files listed above  
+    <!-- Use the minified version files listed below for better performance and remove the files listed above
 <script src="assets/website/js/vendor/vendor.min.js"></script>
 <script src="assets/website/js/plugins/plugins.min.js"></script>  -->
     <!-- Main JS -->

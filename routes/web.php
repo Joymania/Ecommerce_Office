@@ -18,6 +18,8 @@ Route::get('/norda','Frontend\FrontendController@index');
 Route::get('/norda/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
 Route::get('/norda/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/norda/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+Route::get('/norda/search-result','Frontend\SearchController@searchResults')->name('search.result');
+Route::get('/norda/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
 Route::prefix('/norda')->group(function (){
     // Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
    
@@ -69,9 +71,9 @@ Route::prefix('products')->group(function () {
     Route::get('/list','Backend\ProductsController@index')->name('products.list');
     Route::get('/create','Backend\ProductsController@create')->name('products.create');
     Route::post('/create','Backend\ProductsController@store')->name('product.store');
-    Route::get('/{product}/edit','Backend\ProductsController@create')->name('product.edit');
+    Route::get('/{product}/edit','Backend\ProductsController@edit')->name('product.edit');
     Route::patch('/{product}/update','Backend\ProductsController@update')->name('product.update');
-    Route::delete('/{product}/delete','Backend\ProductsController@destory')->name('product.destroy');
+    Route::delete('/{product}/delete','Backend\ProductsController@destroy')->name('product.destroy');
 
     //Size CRUD Routes
     Route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');

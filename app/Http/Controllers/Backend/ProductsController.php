@@ -8,9 +8,14 @@ use App\Model\category;
 use App\Model\color;
 use App\Model\product;
 use App\Model\size;
+use App\Model\SubImage;
 use App\Model\tag;
+
+use Illuminate\Http\Request;
+use Illuminate\Queue\RedisQueue;
+use Illuminate\Support\Facades\DB;
 use App\Model\sub_category;
-use Illuminate\Http\Request; 
+
 
 class ProductsController extends Controller
 {
@@ -42,11 +47,11 @@ class ProductsController extends Controller
             'price' => 'required',
             'short_desc' => 'max:255',
             'image' => 'required',
-            'stock' => 'required'
+            'stock' => 'required',
         ]);
 
         $extension = $request->image->getClientOriginalExtension();
-        $filename = time().'.'.$extension;
+        $filename = rand(10000,99999).time().'.'.$extension;
         $request->image->move('upload/products_images',$filename);
         
         $product = new product();
@@ -63,8 +68,75 @@ class ProductsController extends Controller
         $product->save();
         $product->colors()->sync([$request->color_id]);
         $product->sizes()->sync([$request->size_id]);
+
+        if($request->hasfile('images'))
+        {
+           $product_id = product::select('id')->latest('id')->first();
+            foreach($request->file('images') as $image)
+            {
+                $name = rand(10000,99999).time().'.'.$image->getClientOriginalExtension();
+                $image->move('upload/products_images/sub_images',$name);
+                $subImages = new SubImage();
+                $subImages->product_id = $product_id->id;
+                $subImages->image = $name;
+                $subImages->save();
+            }
+        }
+
         return redirect()->route('products.list');
 
+    }
+
+    public function edit(product $product)
+    {
+
+        $categories = category::all();
+        $brands = brand::all();
+        $tags = tag::all();
+        $colors = color::all();
+        $sizes = size::all();
+        return view('admin.products.edit-product',
+            compact('product','categories','brands','tags','colors','sizes'));
+    }
+
+    public function update(Request $request, product $product)
+    {
+        $this->validate($request,[
+            'category_id' => 'required',
+            'brand_id' => 'required',
+            'tag_id' => 'required',
+            'name' => 'required',
+            'price' => 'required',
+            'short_desc' => 'max:255',
+            'stock' => 'required',
+        ]);
+
+        if ($request->hasFile('image')){
+            unlink("upload/products_images/$request->old_image");
+            $extension = $request->image->getClientOriginalExtension();
+            $filename = rand(10000,99999).time().'.'.$extension;
+            $request->image->move('upload/products_images',$filename);
+            $product->image = $filename;
+            $product->save();
+        }
+
+        $product->update($request->all());
+
+        return redirect()->route('products.list');
+    }
+
+    public function destroy(product $product)
+    {
+        unlink("upload/products_images/$product->image");
+        $subImages = SubImage::where('product_id',$product->id)->get();
+        if (sizeof($subImages) > 0){
+            foreach ($subImages as $row){
+                unlink("upload/products_images/sub_images/$row->image");
+            }
+        }
+
+        $product->delete();
+        return redirect()->route('products.list')->with('delete','successfully deleted!!');
     }
 
 }

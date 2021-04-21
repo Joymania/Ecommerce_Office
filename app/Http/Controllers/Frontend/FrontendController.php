@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Model\category;
 use App\Model\product;
 use App\Model\Slider;
 use App\Model\category;
@@ -33,8 +34,6 @@ class FrontendController extends Controller
         $products = product::all();
         return view('Frontend.layouts.contact' , compact('logos' , 'categories' , 'contacts' , 'products'));
     }
-    
-
     
 
 }
