@@ -35,17 +35,17 @@ Route::prefix('/norda')->group(function (){
 // Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
 //Shopping-Cart
-Route::post('add-to-cart','Frontned\CartController@addtoCart')->name('insert.cart');
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
 Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
-Route::post('destroy-cart','Frontned\CartController@destroyCart')->name('destroy.cart');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
 
 //Checkout
 Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
-
+Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
 /*Dashboard*/
 // Route::get('dashboard/ecommerce', 'Backend\DashboardController@ecommerce')->name('dashboard.ecommerce');
 
@@ -114,6 +114,15 @@ Route::prefix('cupon')->group(function () {
     Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
     Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
 });
+
+Route::prefix('order')->group(function () {
+    Route::get('/view','Backend\OrderController@view')->name('order.view');
+    Route::get('/details/{id}','Backend\OrderController@details')->name('order.details');
+    Route::get('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
+    Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
+});
+
+
 
 
 Route::prefix('color')->group(function () {
