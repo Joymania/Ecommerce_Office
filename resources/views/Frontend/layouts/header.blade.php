@@ -42,6 +42,16 @@
             <div class="header-large-device">
                 <div class="header-top header-top-ptb-6 bg-gray-6">
                     <div class="container">
+
+                    @if (session('status'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('status') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                    @endif
+
                         <div class="row align-items-center">
                             <div class="col-xl-8 col-lg-7">
                                 <div class="header-offer-wrap-2 mrg-none">

@@ -11,7 +11,7 @@
                 <span>Welcome,</span>
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Alizee Thomas</strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
-                    <li><a href="{{route('pages.profile1')}}"><i class="icon-user"></i>My Profile</a></li>
+                    <li><a href="{{route('admin.profile')}}"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="{{--{{route('app.inbox')}}--}}"><i class="icon-envelope-open"></i>Messages</a></li>
                     <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
                     <li class="divider"></li>
@@ -56,7 +56,9 @@
                                 <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
                                 <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
                                 <li class="{{ Request::segment(4) === 'slider' ? 'active' : null }}"><a href="{{route('slider.view')}}">Slider</a></li>
+            
                                 <li class="{{ Request::segment(3) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
+                                
                                 <li class="{{ Request::segment(3) === 'users' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
                 
                                 <li class=""><a href="{{route('tags.list')}}">Tags</a></li>

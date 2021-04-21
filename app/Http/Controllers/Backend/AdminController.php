@@ -5,18 +5,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:admin');
-    // }
     /**
      * show dashboard.
      *
@@ -151,7 +143,72 @@ class AdminController extends Controller
         return back();
     }
 
+    public function showProfile()
+    {   $admin = Admin::find(Auth::id());
+        return view('admin.admins.admin-profile', compact('admin'));
+    }
     
+    public function updateProfile(Request $request)
+    {
+        // to update admin
+        $admin = Admin::find(Auth::id());
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
+            // if requested email and admin email same, no validation applied
+            'email' => ($request->email != $admin->email ? 'required|email|unique:admins,email,':''),
+            // if the password field is blank, no validation applied
+            'password' => ($request->password!=''?'min:6|confirmed':''),
+            'role' => 'max: 20',
+            'status' => '',
+            'image' => '',
+            'gender' => 'required|max:10',
+            'address' => 'max:100'
+        ]);
+
+        //  if validation fails
+        if($validator->fails()){
+            $erorrs = ['message' => 'Validation error!',
+                       'errors' => ['name' => $validator->errors()->get('name'),
+                                    'email' => $validator->errors()->get('email'),
+                                    'password' => $validator->errors()->get('password'),
+                                    'role' => $validator->errors()->get('role'),
+                                    'gender' => $validator->errors()->get('gender'),
+                                    'address' => $validator->errors()->get('address')                    
+                                    ]
+                    ];     
+            return redirect()->route('admin.admins.admin-profile')->withInput()->with(['errors' => $erorrs]);
+        }
+
+        //  insert data ........
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->role = $request-> role;
+        $admin->gender = $request-> gender;
+        $admin->address = $request-> address;
+
+        // if there is password & not blank then insert password
+        if($request->has('password') && !empty($request->password)) {
+            $admin->password = bcrypt($request->password);
+        }
+
+        //  if there is image
+        if($request->hasFile('image')) {
+            // remove image
+            $this->removeImage($admin);
+            $file = $request->file('image');
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('upload/admins'), $filename);
+            $admin->image = $filename;
+        }
+
+        $admin->save();
+
+        session()->flash('success_msg' , 'Updated successfully');
+        return back();
+    }
+
+
     public function destroy(Admin $admin)
     {
         // remove image

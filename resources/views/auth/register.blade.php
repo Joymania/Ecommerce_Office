@@ -46,14 +46,15 @@
                                                 </span>
                                             @enderror
 
-                                            <input type="password" name="password_confirmation" placeholder="Password" class=" @error('password') is-invalid @enderror" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
+                                            <input type="password" name="password_confirmation" placeholder="Confirm Password" class=" @error('password') is-invalid @enderror" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
 
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <input type="checkbox">
-                                                    <label>Remember me</label>
+                                                    <input name="remember" id="remember" type="checkbox">
+                                                    <label for="remember">Remember me</label>
                                                    
                                                 <button type="submit">Register</button>
+                                                </div>
                                             </div>
                                         </form>
 

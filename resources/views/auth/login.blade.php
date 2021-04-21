@@ -40,8 +40,8 @@
 
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <input type="checkbox">
-                                                    <label>Remember me</label>
+                                                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                    <label for="remember">Remember me</label>
                                                     <a href="{{ route('password.request') }}" >Forgot Password?</a>
                                                 </div>
 
