@@ -32,7 +32,7 @@ class product extends Model
     {
         return $this->belongsTo(tag::class, 'tag_id','id');
     }
-
+ 
     public function colors()
     {
         return $this->belongsToMany(color::class, 'product_colors')->withTimestamps();

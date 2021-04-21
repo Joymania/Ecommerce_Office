@@ -9,10 +9,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" src="{{""}}/assets/images/favicon.png">
+
+    <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}">
 
     <!-- All CSS is here
 	============================================ -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     <link rel="stylesheet" href="{{""}}/assets/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="{{""}}/assets/css/vendor/signericafat.css">
@@ -85,7 +87,9 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{""}}/assets/images/logo/logo.png" alt="logo"></a>
+
+                                    <a href="index.html"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7">
@@ -162,7 +166,7 @@
                                                     <li><a href="blog-details.html">blog details</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">CONTACT </a></li>
+                                            <li><a href="{{route('contact')}}">CONTACT </a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -193,130 +197,31 @@
                                 <div class="main-categori-wrap main-categori-wrap-modify">
                                     <a class="categori-show" href="#"><i class="lnr lnr-menu"></i> All Department <i class="icon-arrow-down icon-right"></i></a>
                                     <div class="category-menu categori-hide categori-not-visible">
-                                        <nav>
+                                        <nav> 
+                                            
+                                            
                                             <ul>
-                                                <li class="cr-dropdown"><a href="#">Clothing <span class="icon-arrow-right"></span></a>
+                                              @foreach($categories as $cat)
+                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a> 
                                                     <div class="category-menu-dropdown ct-menu-res-height-1">
                                                         <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
-                                                            <h4>Men Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Sleeveless shirt</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt</a></li>
-                                                                <li><a href="shop.html">Trench coat</a></li>
-                                                                <li><a href="shop.html">Cargo pants</a></li>
+                                                            <h4></h4>
+                                                             <ul>
+                                                                @foreach($cat->sub_category as $subcat)
+                                                                <li><a href="{{route('productByCat',$subcat->id)}}">{{$subcat->sub_category_name}}</a></li>
+                                                                @endforeach
                                                             </ul>
                                                         </div>
-                                                        <div class="single-category-menu ct-menu-mrg-bottom ct-menu-mrg-left">
-                                                            <h4>Women Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Wedding dress</a></li>
-                                                                <li><a href="shop.html">Gym clothes</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt </a></li>
-                                                                <li><a href="shop.html">Long coat</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="single-category-menu">
-                                                            <h4>Kids Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Winter Wear </a></li>
-                                                                <li><a href="shop.html">Occasion Gowns</a></li>
-                                                                <li><a href="shop.html">Birthday Tailcoat</a></li>
-                                                                <li><a href="shop.html">Stylish Unicorn</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="single-category-menu">
-                                                            <a href="product-details.html"><img src="{{""}}/assets/images/menu/menu-categori-1.png" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="cr-dropdown"><a href="#">Women <span class="icon-arrow-right"></span></a>
-                                                    <div class="category-menu-dropdown ct-menu-res-height-2">
-                                                        <div class="single-category-menu">
-                                                            <h4>Men Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Sleeveless shirt</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt</a></li>
-                                                                <li><a href="shop.html">Trench coat</a></li>
-                                                                <li><a href="shop.html">Cargo pants</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="single-category-menu ct-menu-mrg-left">
-                                                            <h4>Women Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Wedding dress</a></li>
-                                                                <li><a href="shop.html">Gym clothes</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt </a></li>
-                                                                <li><a href="shop.html">Long coat</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="cr-dropdown"><a href="#">Men <span class="icon-arrow-right"></span></a>
-                                                    <div class="category-menu-dropdown ct-menu-res-height-1">
-                                                        <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
-                                                            <h4>Men Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Sleeveless shirt</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt</a></li>
-                                                                <li><a href="shop.html">Trench coat</a></li>
-                                                                <li><a href="shop.html">Cargo pants</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="single-category-menu ct-menu-mrg-bottom ct-menu-mrg-left">
-                                                            <h4>Women Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Wedding dress</a></li>
-                                                                <li><a href="shop.html">Gym clothes</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt </a></li>
-                                                                <li><a href="shop.html">Long coat</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="single-category-menu">
-                                                            <h4>Kids Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Winter Wear </a></li>
-                                                                <li><a href="shop.html">Occasion Gowns</a></li>
-                                                                <li><a href="shop.html">Birthday Tailcoat</a></li>
-                                                                <li><a href="shop.html">Stylish Unicorn</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="single-category-menu">
-                                                            <a href="#"><img src="{{""}}/assets/images/menu/menu-categori-1.png" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="cr-dropdown"><a href="#">Baby Girl <span class="icon-arrow-right"></span></a>
-                                                    <div class="category-menu-dropdown ct-menu-res-height-2">
-                                                        <div class="single-category-menu">
-                                                            <h4>Men Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Sleeveless shirt</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt</a></li>
-                                                                <li><a href="shop.html">Trench coat</a></li>
-                                                                <li><a href="shop.html">Cargo pants</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="single-category-menu ct-menu-mrg-left">
-                                                            <h4>Women Clothing</h4>
-                                                            <ul>
-                                                                <li><a href="shop.html">Wedding dress</a></li>
-                                                                <li><a href="shop.html">Gym clothes</a></li>
-                                                                <li><a href="shop.html">Cotton T-shirt </a></li>
-                                                                <li><a href="shop.html">Long coat</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="cr-dropdown"><a href="shop.html">Baby Boy </a></li>
-                                                <li class="cr-dropdown"><a href="shop.html">Accessories </a></li>
-                                                <li class="cr-dropdown"><a href="shop.html">Shoes</a></li>
-                                                <li class="cr-dropdown"><a href="shop.html">Shirt</a></li>
-                                                <li class="cr-dropdown"><a href="shop.html">T-Shirt</a></li>
-                                                <li class="cr-dropdown"><a href="shop.html">Coat</a></li>
-                                                <li class="cr-dropdown"><a href="shop.html">Jeans</a></li>
-                                                <li class="cr-dropdown"><a href="shop.html">Collection </a></li>
+
+                                                    </div> 
+                                                </li> 
+                                                @endforeach
+                                                    
                                             </ul>
-                                        </nav>
+
+                                           
+                                        </nav> 
+
                                     </div>
                                 </div>
                             </div>

@@ -103,6 +103,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="col">
+                                                <label for="sub_category_id">sub_category</label>
+                                                <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
+                                                    @foreach($sub_category as $sub)
+                                                    <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-row">

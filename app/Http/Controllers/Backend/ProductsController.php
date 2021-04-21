@@ -10,9 +10,12 @@ use App\Model\product;
 use App\Model\size;
 use App\Model\SubImage;
 use App\Model\tag;
+
 use Illuminate\Http\Request;
 use Illuminate\Queue\RedisQueue;
 use Illuminate\Support\Facades\DB;
+use App\Model\sub_category;
+
 
 class ProductsController extends Controller
 {
@@ -30,7 +33,8 @@ class ProductsController extends Controller
         $tags = tag::all();
         $colors = color::all();
         $sizes = size::all();
-        return view('admin.products.add-product',compact('categories','brands','tags','colors','sizes'));
+        $sub_category = sub_category::all();
+        return view('admin.products.add-product',compact('categories','brands','tags','colors','sizes','sub_category'));
     }
 
     public function store(Request $request)
@@ -49,10 +53,11 @@ class ProductsController extends Controller
         $extension = $request->image->getClientOriginalExtension();
         $filename = rand(10000,99999).time().'.'.$extension;
         $request->image->move('upload/products_images',$filename);
-
+        
         $product = new product();
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
+        $product->sub_category_id = $request->sub_category_id;
         $product->tag_id = $request->tag_id;
         $product->name = $request->name;
         $product->price = $request->price;
