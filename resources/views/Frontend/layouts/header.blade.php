@@ -98,7 +98,7 @@
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
 
-                                    <a href="index.html"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+                                    <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
 
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                                     @guest
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="{{route('login')}}"><i class="icon-user"></i></a>
-                                        </div>                                       
+                                        </div>
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
                                         </div>
@@ -188,7 +188,7 @@
                                                 <span class="cart-amount">$2,435.30</span>
                                             </a>
                                         </div>
-                                    @else   
+                                    @else
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
                                         </div>
@@ -197,7 +197,7 @@
                                                 <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
                                                 <span class="cart-amount">$2,435.30</span>
                                             </a>
-                                        </div> 
+                                        </div>
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="{{route('logout')}}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -207,7 +207,7 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                         </form>
-                                    @endguest     
+                                    @endguest
                                 </div>
                             </div>
                         </div>
@@ -220,12 +220,12 @@
                                 <div class="main-categori-wrap main-categori-wrap-modify">
                                     <a class="categori-show" href="#"><i class="lnr lnr-menu"></i> All Department <i class="icon-arrow-down icon-right"></i></a>
                                     <div class="category-menu categori-hide categori-not-visible">
-                                        <nav> 
-                                            
-                                            
+                                        <nav>
+
+
                                             <ul>
                                               @foreach($categories as $cat)
-                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a> 
+                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a>
                                                     <div class="category-menu-dropdown ct-menu-res-height-1">
                                                         <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
                                                             <h4></h4>
@@ -236,14 +236,14 @@
                                                             </ul>
                                                         </div>
 
-                                                    </div> 
-                                                </li> 
+                                                    </div>
+                                                </li>
                                                 @endforeach
-                                                    
+
                                             </ul>
 
-                                           
-                                        </nav> 
+
+                                        </nav>
 
                                     </div>
                                 </div>
@@ -260,10 +260,10 @@
                                         </select>
                                     </div>
                                     <div class="search-wrap-3">
-                                        <form action="{{route('search.result')}}" method="get">
-                                            <input name="search" placeholder="Search Products..." type="text">
+                                        <form action="{{route('search.result')}}">
+                                            <input name="search" id="searchText" placeholder="Search Products..." type="text">
                                             <input name="category" id="categoryInput" type="text" hidden>
-                                            <button type="submit"><i class="lnr lnr-magnifier"></i></button>
+                                            <button id="searchBtn" type="submit"><i class="lnr lnr-magnifier"></i></button>
                                         </form>
                                     </div>
                                 </div>

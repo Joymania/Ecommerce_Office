@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+
 use App\Model\product;
 use App\Model\Slider;
 use App\Model\sub_category;

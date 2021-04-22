@@ -19,10 +19,11 @@ Route::get('/home','Frontend\FrontendController@index')->name('home')->middlewar
 
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
-Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
+//Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+Route::get('/search-ajax','Frontend\SearchController@ajaxSearch')->name('search.ajax');
 
 
 // contact
@@ -111,7 +112,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
         Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
     });
-    
+
     // Order
     Route::prefix('order')->group(function () {
         Route::get('/view','Backend\OrderController@view')->name('order.view');
@@ -158,7 +159,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('updateCategory','Backend\CategoriesController@updateCategory')->name('category.update');
         Route::get('deleteCategory/{did}','Backend\CategoriesController@deleteCategory')->name('category.delete');
     });
-    
+
     // Sub category
     Route::prefix('subCategory')->group(function(){
         Route::get('subCategory','Backend\subCategoryController@subCategory')->name('subCategory.view');
