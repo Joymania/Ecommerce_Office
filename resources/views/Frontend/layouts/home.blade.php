@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="btn-style-7">
-                        <a href="shop.html">All Product</a>
+                        <a href="{{route('search.result')}}">All Product</a>
                     </div>
                 </div>
                 <div class="product-slider-active-3 nav-style-3">
@@ -30,8 +30,6 @@
                                 <span class="pro-badge left bg-red">-40%</span>
                                 <div class="product-action-2 tooltip-style-2">
                                     <button title="Wishlist"><i class="icon-heart"></i></button>
-                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                    <button title="Compare"><i class="icon-refresh"></i></button>
                                 </div>
                             </div>
                             <div class="product-content-wrap-3">
@@ -214,24 +212,24 @@
                     </div>
                 </div>
             </div>
-        </div> 
-        
+        </div>
+
         @foreach($categories as $cat)
         <div class="product-area pb-85">
             <div class="container">
                 <div class="section-title-5 section-title-5-bg-1 mb-10">
                     <i class="red icon-screen-desktop"></i>
-                    
+
                     <h5 class="red">{{$cat->name}}</h5>
-                    
+
                 </div>
                 <div class="row flex-row-reverse">
                     <div class="col-lg-9">
-                        
+
                         <div class="tab-content tab-hm6-categories-slider tab-content-mrg-top jump">
                             <div id="product-9" class="tab-pane active">
                                 <div class="product-slider-active-5">
-                                    
+
                                     @foreach($cat->product as $prod)
 
                                     <div class="product-plr-1">
@@ -242,13 +240,13 @@
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.html">{{$prod->name}}</a></h3>
+                                                <h3><a href="{{route('product.details',$prod->id)}}">{{$prod->name}}</a></h3>
                                                 <div class="product-price-2">
                                                     <span>{{$prod->price}} Tk</span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="product-details.html">{{$prod->name}}</a></h3>
+                                                <h3><a href="{{route('product.details',$prod->id)}}">{{$prod->name}}</a></h3>
                                                 <div class="product-price-2">
                                                     <span>{{$prod->price}} Tk</span>
                                                 </div>
@@ -263,7 +261,7 @@
 
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="padding-10-row-col">
                             <div class="row">
@@ -300,7 +298,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-3">
                         <div class="product-list-style-wrap">
                             <div class="product-list-style">
@@ -317,8 +315,8 @@
             </div>
         </div>
         @endforeach
-        
-      
+
+
         <div class="about-us-area pb-115">
             <div class="container">
                 <div class="about-us-content-2">

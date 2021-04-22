@@ -13,15 +13,19 @@
                                             <div class="hero-slider-content-1 slider-animated-1 hero-slider-content-1-padding1">
                                                 <h4 class="animated font-dec">New Arrivals</h4>
                                                 <h1 class="animated font-dec">{{ $slider->short_desc }}</h1>
-                                                <p class="animated width-inc"> {{ $slider->long_desc }}</p>
-                                                <div class="btn-style-1">
-                                                    <a class="animated btn-1-padding-1 btn-1-bg-purple" href="product-details.html">Explore</a>
+                                                @if(strlen($slider->long_desc) > 200)
+                                                    <p class="animated width-inc">{{substr($slider->long_desc,0,100) . ' ......'}}</p>
+                                                @else
+                                                    <p class="animated width-inc">{{$slider->long_desc}}</p>
+                                                @endif
+                                                <div class="btn-style-1" style="margin-top: -5px">
+                                                    <a class="animated btn-1-padding-1 btn-1-bg-purple" href="{{route("product.details",$slider->id)}}">Explore</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <div class="hm6-hero-slider-img slider-animated-1">
-                                                <img class="animated" src="{{ asset('upload/products_images/'.$slider->image) }}" width="848px" height="570px" alt="">
+                                                <img class="animated" src="{{ asset('upload/products_images/'.$slider->image) }}" width="848px" height="470px" alt="">
                                             </div>
                                         </div>
                                     </div>

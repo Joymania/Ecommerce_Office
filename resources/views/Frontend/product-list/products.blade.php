@@ -2,8 +2,10 @@
 
 @section('content')
     <div>
+        @if(!empty($_GET))
         <input type="text" id="search" value="{{$_GET['search']}}" hidden>
         <input type="text" id="category" value="{{$_GET['category']}}" hidden>
+         @endif
     </div>
     <div class="shop-area pt-120 pb-120">
         <div class="container">
@@ -18,10 +20,10 @@
                         <div class="product-sorting-wrapper">
                             <div class="product-show shorting-style">
                                 <label>Sort by :</label>
-                                <select>
+                                <select id="sortBy">
                                     <option value="">Default</option>
-                                    <option value=""> Name</option>
-                                    <option value=""> price</option>
+                                    <option value="name"> Name</option>
+                                    <option value="price"> price</option>
                                 </select>
                             </div>
                         </div>
@@ -35,16 +37,14 @@
                                         <div class="single-product-wrap mb-35">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="{{route("product.details",$product->id)}}">
-                                                    <img src="{{""}}/upload/products_images/{{$product->image}}" alt="">
+                                                    <img src="{{""}}/upload/products_images/{{$product->image}}" style="width: 266px; height: 320px;" alt="">
                                                 </a>
                                                 <div class="product-action-2 tooltip-style-2">
                                                     <button title="Wishlist"><i class="icon-heart"></i></button>
-                                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                                    <button title="Compare"><i class="icon-refresh"></i></button>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
+                                                <h3><a href="{{route("product.details",$product->id)}}" class="productName">{{$product->name}}</a></h3>
                                                 <div class="product-price-2">
                                                     <span class="price">{{$product->price}}</span><span style="margin-left: -3px">Tk.</span>
                                                 </div>
@@ -73,7 +73,6 @@
                             </ul>--}}
                             {{$products->links()}}
                         </div>
-
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -82,8 +81,8 @@
                             <h4 class="sidebar-widget-title">Search </h4>
                             <div class="sidebar-search">
                                 <form class="sidebar-search-form" action="#">
-                                    <input type="text" placeholder="Search here...">
-                                    <button>
+                                    <input type="text" id="searchInput" placeholder="Search here...">
+                                    <button id="searchBtn">
                                         <i class="icon-magnifier"></i>
                                     </button>
                                 </form>
@@ -115,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
+                        {{--<div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
                             <h4 class="sidebar-widget-title">Refine By </h4>
                             <div class="sidebar-widget-list">
                                 <ul>
@@ -201,7 +200,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="sidebar-widget shop-sidebar-border pt-40">
                             <h4 class="sidebar-widget-title">Popular Tags</h4>
                             <div class="tag-wrap sidebar-widget-tag">

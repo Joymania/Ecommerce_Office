@@ -2,16 +2,18 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
 class Admin extends Authenticatable
 {
-    protected $guard = 'admin';
+    use Notifiable;
 
-      /**
+    protected $guard = 'admin';
+    public $route = 'admin.password.reset';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -28,4 +30,15 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token, $this->route));
+    }
 }

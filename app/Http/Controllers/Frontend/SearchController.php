@@ -22,8 +22,8 @@ class SearchController extends Controller
         if (empty($category)){
             $products = product::where('name','LIKE','%'.$search.'%')->paginate(12);
 
-        }else if (empty($category) && empty($search)){
-            return back();
+        }else if(empty($category) && empty($search)){
+            $products = product::all();
         }else{
             $products = DB::table('products')
                 ->join('categories','products.category_id','=','categories.id')
@@ -47,12 +47,9 @@ class SearchController extends Controller
                 ->where('products.price','<=',$second)
                 ->where('products.price','>=',$first)->get();
 
-        }else if (empty($search)){
-            $products = DB::table('products')
-                ->join('categories','products.category_id','=','categories.id')
-                ->where('categories.name',$category)
-                ->where('products.price','<=',$second)
-                ->where('products.price','>=',$first)->get();
+        }else if (empty($search) && empty($category)){
+            $products = product::where('products.price','<',$second)
+                                ->where('products.price','>',$first)->get();
         }else{
             $products = DB::table('products')
                 ->join('categories','products.category_id','=','categories.id')
@@ -63,5 +60,19 @@ class SearchController extends Controller
         }
 
         return response()->json($products,200);
+
+        /*  else if (empty($search)){
+        $products = DB::table('products')
+            ->join('categories','products.category_id','=','categories.id')
+            ->where('categories.name',$category)
+            ->where('products.price','<=',$second)
+            ->where('products.price','>=',$first)->get();
+    }*/
+    }
+
+    public function ajaxSearch(Request $request)
+    {
+        $products = product::where('name','LIKE','%'.$request->search.'%')->get();
+        return response()->json($products, 200);
     }
 }

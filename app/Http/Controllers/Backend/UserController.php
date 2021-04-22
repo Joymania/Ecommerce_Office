@@ -28,10 +28,9 @@ class UserController extends Controller
         'name' => 'required|max:100',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6|confirmed',
-        'role' => 'max: 20',
         'status' => '',
         'image' => '',
-        'gender' => 'required|max:10',
+        'gender' => 'max:10',
         'address' => 'max:100'
         ]);
 
@@ -40,12 +39,11 @@ class UserController extends Controller
                        'errors' => ['name' => $validator->errors()->get('name'),
                                     'email' => $validator->errors()->get('email'),
                                     'password' => $validator->errors()->get('password'),
-                                    'role' => $validator->errors()->get('role'),
                                     'gender' => $validator->errors()->get('gender'),
                                     'address' => $validator->errors()->get('address')                    
                                     ]
                     ];     
-            return redirect()->route('users.add')->withInput()->with(['errors' => $erorrs]);
+            return redirect()->route('users.index')->withInput()->with(['errors' => $erorrs]);
         }
 
         $user = new User();
@@ -53,7 +51,6 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->role = $request-> role;
         $user->gender = $request-> gender;
         $user->address = $request-> address;
 
@@ -93,10 +90,9 @@ class UserController extends Controller
             'email' => ($request->email != $user->email ? 'required|email|unique:users,email,':''),
             // if the password field is blank, no validation applied
             'password' => ($request->password!=''?'min:6|confirmed':''),
-            'role' => 'max: 20',
             'status' => '',
             'image' => '',
-            'gender' => 'required|max:10',
+            'gender' => 'max:10',
             'address' => 'max:100'
         ]);
 
@@ -106,7 +102,6 @@ class UserController extends Controller
                        'errors' => ['name' => $validator->errors()->get('name'),
                                     'email' => $validator->errors()->get('email'),
                                     'password' => $validator->errors()->get('password'),
-                                    'role' => $validator->errors()->get('role'),
                                     'gender' => $validator->errors()->get('gender'),
                                     'address' => $validator->errors()->get('address')                    
                                     ]
@@ -117,7 +112,6 @@ class UserController extends Controller
         //  insert data ........
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role = $request-> role;
         $user->gender = $request-> gender;
         $user->address = $request-> address;
 
@@ -125,7 +119,6 @@ class UserController extends Controller
         if($request->has('password') && !empty($request->password)) {
             $user->password = bcrypt($request->password);
         }
-
 
         //  if there is image
         if($request->hasFile('image')) {
