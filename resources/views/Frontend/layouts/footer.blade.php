@@ -253,6 +253,8 @@
 <!-- Main JS -->
 <script src="{{""}}/assets/js/main.js"></script>
 <script src="{{""}}/js/search.js"></script>
+<script src="{{asset('js/search.js')}}"></script>
+@yield('scripts')
 </body>
 
 </html>

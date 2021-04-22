@@ -7,7 +7,7 @@
 
 <div class="row clearfix">
 <div class="col-lg-12">
-<div class="card">
+<div class="card"> 
     <div class="card-header">
         <h3> Create User</h3> 
         <a class=" float-right btn btn-success btn-sm" href="{{ route('admin.index') }}"><i class="fa fa-list"></i> Admin List</a>
