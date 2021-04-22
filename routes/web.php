@@ -18,7 +18,7 @@ Route::get('/home','Frontend\FrontendController@index')->name('home')->middlewar
 
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
-Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
+// Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
