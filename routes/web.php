@@ -17,6 +17,7 @@ Auth::routes(['verify' => true]);
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
 
+// without authentication
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
@@ -24,10 +25,15 @@ Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
 Route::get('/search-ajax','Frontend\SearchController@ajaxSearch')->name('search.ajax');
-
-
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
+//Shopping-Cart
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
 //Checkout
 Route::middleware(['auth','verified'])->group(function () {
@@ -56,14 +62,6 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('dashboard', 'Backend\DashboardController@ecommerce')->name('admin.dashboard');
     // logout
     Route::get('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
-
-    //Shopping-Cart
-    Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
-    Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
-    Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
-    Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
-    Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
-    Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
     /*Products Routes*/
     Route::prefix('products')->group(function () {

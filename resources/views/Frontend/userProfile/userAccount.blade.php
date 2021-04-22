@@ -51,7 +51,13 @@
                                     Method</a>
                                 <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i> address</a>
                                 <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
-                                <a href=""><i class="fa fa-sign-out"></i> Logout</a>
+                                <a href="{{route('logout')}}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                                </form>
+
                             </div>
                         </div>
                         <!-- My Account Tab Menu End -->

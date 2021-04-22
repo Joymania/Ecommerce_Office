@@ -6,10 +6,10 @@
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
-            <img src="{{ asset('assets/img/user.png') }}" class="rounded-circle user-photo" alt="User Profile Picture">
+            <img src="{{ (!empty(auth()->user()->image)) ? url('upload/admins/'.auth()->user()->image):url('upload/noImage.jpg') }}" class="rounded-circle user-photo" alt="User Profile Picture">
             <div class="dropdown">
                 <span>Welcome,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Alizee Thomas</strong></a>
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ auth()->user()->name }}</strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
                     <li><a href="{{route('admin.profile')}}"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="{{--{{route('app.inbox')}}--}}"><i class="icon-envelope-open"></i>Messages</a></li>
