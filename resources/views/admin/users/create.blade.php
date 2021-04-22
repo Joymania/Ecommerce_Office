@@ -10,7 +10,7 @@
 <div class="card">
     <div class="card-header">
         <h3> Create User</h3> 
-        <a class=" float-right btn btn-success btn-sm" href="{{ route('users.index') }}"><i class="fa fa-list"></i> Users List</a>
+        <a class=" float-right btn btn-success btn-sm" href="{{ route('users.index') }}"><i class="fa fa-list"></i> User List</a>
 
         @if(session()->has('success_msg'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -87,20 +87,6 @@
                                 <label class="fancy-radio">
                                     <input name="gender" value="female" type="radio" {{old('gender') == 'female'? "checked":null}}>
                                     <span><i></i>Female</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div>
-                                <label class="fancy-radio">
-                                    <input name="role" value="admin" type="radio" {{old('role') == 'admin'? "checked":null}}>
-                                    <span><i></i>Admin</span>
-                                </label>
-
-                                <label class="fancy-radio">
-                                    <input name="role" value="customer" type="radio" {{old('role') == 'customer'? "checked":null}}>
-                                    <span><i></i>Customer</span>
                                 </label>
                             </div>
                         </div>
