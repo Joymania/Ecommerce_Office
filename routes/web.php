@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 /*Front end routing Starts*/
 Auth::routes(['verify' => true]);
-
+ 
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
 
@@ -24,6 +25,7 @@ Route::get('/search-result','Frontend\SearchController@searchResults')->name('se
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
 Route::get('/search-ajax','Frontend\SearchController@ajaxSearch')->name('search.ajax');
 
+
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 
@@ -31,6 +33,8 @@ Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
+    Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+    Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
 });
 /*Front end routing ends*/
 
