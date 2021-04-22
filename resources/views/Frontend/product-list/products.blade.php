@@ -115,11 +115,6 @@
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            $(document).ready(function () {
-                                console.log($('#amount').val())
-                            });
-                        </script>
                         <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
                             <h4 class="sidebar-widget-title">Refine By </h4>
                             <div class="sidebar-widget-list">

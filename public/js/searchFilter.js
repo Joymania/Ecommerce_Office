@@ -13,7 +13,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'get',
-            url: '/front/search-filter/',
+            url: '/search-filter',
             data: {
                 search: search,
                 category: category,
@@ -28,7 +28,7 @@ $(document).ready(function () {
                             '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                             ' <div class="single-product-wrap mb-35">' +
                             '<div class="product-img product-img-zoom mb-15">' +
-                            '<a href="{{route("product.details",'+data[i].id+')}}">' +
+                            '<a href="/norda/'+data[i].id+'/product-details">">' +
                             '<img src="../upload/products_images/'+data[i].image+'" ></a>' +
                             '<div class="product-action-2 tooltip-style-2">' +
                             '<button title="Wishlist"><i class="icon-heart"></i></button>' +
@@ -36,13 +36,13 @@ $(document).ready(function () {
                             '<button title="Compare"><i class="icon-refresh"></i></button>' +
                             '</div> </div>' +
                             ' <div class="product-content-wrap-2 text-center">' +
-                            '<h3><a href="{{route("product.details",'+data[i].id+')}}">'+data[i].name+'</a></h3>' +
+                            '<h3><a href="/norda/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
                             '<div class="product-price-2">' +
                             '<span class="price">'+data[i].price+'</span><span style="margin-left: -3px">Tk.</span>' +
                             '</div>' +
                             '</div>' +
                             '<div class="product-content-wrap-2 product-content-position text-center">' +
-                            '<h3><a href="{{route("product.details",'+data[i].id+')}}">'+data[i].name+'</a></h3>' +
+                            '<h3><a href="/norda/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
                             '<div class="product-price-2">' +
                             ' <span class="product-price">'+data[i].price+' Tk.</span>' +
                             ' </div>' +

@@ -34,6 +34,7 @@ class SearchController extends Controller
         return view('Frontend.product-list.products',compact('products'));
     }
 
+
     public function filteredResult(Request $request)
     {
         $search = $request->search;

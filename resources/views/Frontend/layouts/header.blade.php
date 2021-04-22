@@ -197,12 +197,12 @@
                                 <div class="main-categori-wrap main-categori-wrap-modify">
                                     <a class="categori-show" href="#"><i class="lnr lnr-menu"></i> All Department <i class="icon-arrow-down icon-right"></i></a>
                                     <div class="category-menu categori-hide categori-not-visible">
-                                        <nav> 
-                                            
-                                            
+                                        <nav>
+
+
                                             <ul>
                                               @foreach($categories as $cat)
-                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a> 
+                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a>
                                                     <div class="category-menu-dropdown ct-menu-res-height-1">
                                                         <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
                                                             <h4></h4>
@@ -213,14 +213,14 @@
                                                             </ul>
                                                         </div>
 
-                                                    </div> 
-                                                </li> 
+                                                    </div>
+                                                </li>
                                                 @endforeach
-                                                    
+
                                             </ul>
 
-                                           
-                                        </nav> 
+
+                                        </nav>
 
                                     </div>
                                 </div>
@@ -237,7 +237,7 @@
                                         </select>
                                     </div>
                                     <div class="search-wrap-3">
-                                        <form action="{{route('search.result')}}" method="get">
+                                        <form action="{{route('search.result')}}">
                                             <input name="search" placeholder="Search Products..." type="text">
                                             <input name="category" id="categoryInput" type="text" hidden>
                                             <button type="submit"><i class="lnr lnr-magnifier"></i></button>
