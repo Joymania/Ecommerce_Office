@@ -14,20 +14,19 @@ use GuzzleHttp\Middleware;
 */
  
 /*Front end routing Starts*/
-Route::get('/norda','Frontend\FrontendController@index');
-Route::get('/norda/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
-Route::get('/norda/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
-Route::get('/norda/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
-Route::get('/norda/search-result','Frontend\SearchController@searchResults')->name('search.result');
-Route::get('/norda/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+Route::get('/','Frontend\FrontendController@index');
+Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
+Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
+Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
+Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+
+
 Route::prefix('/norda')->group(function (){
-    // Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
-   
-    // contact
     Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 });
-  
 
+Route::get('/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
 /*Front end routing ends*/
 
 
