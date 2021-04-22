@@ -18,7 +18,7 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role')->nullable();
+            $table->tinyInteger('role')->nullable()->comment('1=Super Admin | 0=Admin');
             $table->tinyInteger('status')->default(0);
             $table->string('image')->nullable();
             $table->string('gender')->nullable();

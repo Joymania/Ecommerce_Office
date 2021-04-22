@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -26,8 +30,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/';
-    // redirect to home, because '/' has no logout method still
     protected $redirectTo = '/home';
 
     /**
@@ -38,5 +40,49 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, User $user)
+    {
+        $email =$request->input('email');
+        $user = User::where('email',$email)->first();
+        $user->status = '1';
+        $user->save();
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request, User $user)
+    {   
+        // update user->status to 0 just before logout
+        $user = User::find(Auth::id());
+        $user->status = '0';
+        $user->save();
+
+        $this->guard()->logout();
+    
+        /***  to prevent admin/user logout to logout both admin and user at the same time ***/
+        // $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/');
     }
 }

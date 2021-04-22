@@ -15,14 +15,27 @@
                     <p class="lead">Recover my password</p>
                 </div>
                 <div class="body">
-                    <p>Please enter your email address below to receive instructions for resetting password.</p>
-                    <form class="form-auth-small" action="{{route('dashboard.ecommerce')}}">
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="signup-password" placeholder="Password">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">RESET PASSWORD</button>
+                    @endif
+
+                    <form class="form-auth-small" method="post" action="{{ route('admin.password.email') }}">
+                        @csrf 
+                        
+                        <div class="form-group">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus  placeholder="Email">
+
+                            @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Send Password Reset Link</button>
                         <div class="bottom">
-                            <span class="helper-text">Know your password? <a href="{{route('authentication.login')}}">Login</a></span>
+                            <span class="helper-text">Know your password? <a href="{{route('admin.login')}}">Login</a></span>
                         </div>
                     </form>
                 </div>
