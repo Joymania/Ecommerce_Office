@@ -37,10 +37,11 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
-                                                <th>Image</th>
+                                                 <th>Image</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
@@ -48,6 +49,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
@@ -60,6 +62,7 @@
                                                 <tr>
                                                     <td>{{$product->name}}</td>
                                                     <td>{{$product->category->name}}</td>
+                                                    <td>{{$product->sub_category_id}}</td>
                                                     <td>{{$product->brand->name}}</td>
                                                     <td>{{$product->price}} Tk</td>
                                                     <td>{{$product->stock}}</td>
@@ -67,10 +70,12 @@
                                                         <img style="width: 120px" height="100px" src="{{""}}/upload/products_images/{{$product->image}}" alt="">
                                                     </td>
                                                     <td>
-                                                        <a href="" class="editLink" data-toggle="tooltip" title="Edit Product!">
+                                                        <a href="{{route('product.edit',$product->id)}}" class="editLink" data-toggle="tooltip" title="Edit Product!">
                                                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit editBtn"><i class="icon-pencil" aria-hidden="true"></i></button>
                                                         </a>
-                                                        <form action="{{route('product.destroy',$product->id)}}" class="deleteForm" onsubmit="return confirm('Are you sure want to delete this product?')">
+                                                        <form action="{{route('product.destroy',$product->id)}}" class="deleteForm" onsubmit="return confirm('Are you sure want to delete this product?')" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
                                                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-trash" aria-hidden="true"></i></button>
                                                         </form>
                                                     </td>

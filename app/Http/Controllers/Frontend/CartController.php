@@ -15,11 +15,14 @@ use Session;
 class CartController extends Controller
 {
     public function addtoCart(Request $request){
-        $this->validate($request,[
-            'size_id'=>'required',
-            'color_id'=>'required'
-        ]);
+        // $this->validate($request,[
+        //     'size_id'=>'required',
+        //     'color_id'=>'required'
+        // ]);
         $product=product::where('id',$request->id)->first();
+        // $product_size=size::where('id',$request->size_id)->first();
+
+        // $product_color=color::where('id',$request->color_id)->first();
 
         Cart::add([
             'id'=>$product->id,
@@ -28,6 +31,10 @@ class CartController extends Controller
             'name'=>$product->name,
             'weight'=>550,
             'options'=>[
+                // 'size_id' =>$request->size_id,
+                // 'size_name' =>$product_size->name,
+                // 'color_id' =>$request->color_id,
+                // 'color_name' =>$product_color->name,
                 'image'=>$product->image
 
             ]
@@ -40,9 +47,8 @@ class CartController extends Controller
     }
 
     public function updateCart(Request $request){
-        Cart::update($request->rowId,$request->qty);
-        return redirect()->route('show.cart')->with('success','Product updated Successfully.');
-
+        Cart::update($request->rowId, $request->qty);
+        return redirect()->route('show.cart');
     }
 
     public function deleteCart($rowId){
@@ -56,14 +62,20 @@ class CartController extends Controller
     }
     public function applyCuppon(Request $request){
         $check=cupon::where('cupon',$request->cupon)->first();
+        $cart=Cart::subtotal();
+
+
         if($check){
-            $request->session()->put('cupon', [
-                'cupon'=>$request->cupon,
-                'discount'=>$check->discount,
-                'balance'=>Cart::subtotal() - $check->discount,
-            ]);
+           Session::put('cupon', [
+               'cupon'=> $request->cupon,
+               'discount'=> $check->discount,
+               'blance'=>$cart - $check->discount,
+           ]);
+           return redirect()->back();
+
         }
-        return redirect()->back();
+
+        return redirect()->back()->with('error','Invalid Cupon!');
     }
 
 

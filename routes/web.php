@@ -12,26 +12,46 @@ use GuzzleHttp\Middleware;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
-// Auth::routes();
+
 Auth::routes(['verify' => true]);
 
-Route::get('/front','Frontend\FrontendController@index');
+ 
+/*Front end routing Starts*/
+Route::get('/norda','Frontend\FrontendController@index');
+Route::get('/norda/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
+Route::get('/norda/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
+Route::get('/norda/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+Route::get('/norda/search-result','Frontend\SearchController@searchResults')->name('search.result');
+Route::get('/norda/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+Route::prefix('/norda')->group(function (){
+    // Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+   
+    // contact
+    Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
+});
+  
+
+/*Front end routing ends*/
+
+
+
+
 //Admin Routing Starts
 // Route::get('/', function () { return redirect('dashboard/ecommerce'); });
 
 //Shopping-Cart
-Route::post('add-to-cart','Frontned\CartController@addtoCart')->name('insert.cart');
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
 Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
-Route::post('destroy-cart','Frontned\CartController@destroyCart')->name('destroy.cart');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
+
+//Checkout
+Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
 /*Dashboard*/
 // Route::get('dashboard/ecommerce', 'Backend\DashboardController@ecommerce')->name('dashboard.ecommerce');
 
@@ -55,9 +75,9 @@ Route::prefix('products')->group(function () {
     Route::get('/list','Backend\ProductsController@index')->name('products.list');
     Route::get('/create','Backend\ProductsController@create')->name('products.create');
     Route::post('/create','Backend\ProductsController@store')->name('product.store');
-    Route::get('/{product}/edit','Backend\ProductsController@create')->name('product.edit');
+    Route::get('/{product}/edit','Backend\ProductsController@edit')->name('product.edit');
     Route::patch('/{product}/update','Backend\ProductsController@update')->name('product.update');
-    Route::delete('/{product}/delete','Backend\ProductsController@destory')->name('product.destroy');
+    Route::delete('/{product}/delete','Backend\ProductsController@destroy')->name('product.destroy');
 
     //Size CRUD Routes
     Route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
@@ -77,7 +97,6 @@ Route::prefix('/tags')->group(function (){
     Route::delete('/{tag}/delete', 'Backend\TagsController@destroy')->name('tags.delete');
 });
 
-//Admin Routing Ends
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -101,6 +120,15 @@ Route::prefix('cupon')->group(function () {
     Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
 });
 
+Route::prefix('order')->group(function () {
+    Route::get('/view','Backend\OrderController@view')->name('order.view');
+    Route::get('/details/{id}','Backend\OrderController@details')->name('order.details');
+    Route::get('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
+    Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
+});
+
+
+
 
 Route::prefix('color')->group(function () {
     Route::get('/view','Backend\ColorController@view')->name('color.view');
@@ -112,23 +140,29 @@ Route::prefix('color')->group(function () {
 });
 
 
-Route::prefix('slider')->group(function(){
-    Route::get('/view','Backend\SliderController@view')->name('slider.view');
-    Route::get('/add','Backend\SliderController@add')->name('slider.add');
-    Route::post('/store','Backend\SliderController@store')->name('slider.store');
-    Route::get('/edit/{id}','Backend\SliderController@edit')->name('slider.edit');
-    Route::post('/update/{id}','Backend\SliderController@update')->name('slider.update');
-    Route::get('/delete/{id}','Backend\SliderController@delete')->name('slider.delete');
-});
 
-Route::prefix('contact')->group(function(){
-    Route::get('/view','Backend\ContactController@view')->name('contact.view');
-    Route::get('/add','Backend\ContactController@add')->name('contact.add');
-    Route::post('/store','Backend\ContactController@store')->name('contact.store');
-    Route::get('/edit/{id}','Backend\ContactController@edit')->name('contact.edit');
-    Route::post('/update/{id}','Backend\ContactController@update')->name('contact.update');
-    Route::get('/delete/{id}','Backend\ContactController@delete')->name('contact.delete');
-});
+Route::prefix('admin')->group(function () {
+    Route::get('users', 'Backend\UserController@index')->name('users.index');
+
+    Route::prefix('slider')->group(function () {
+        Route::get('/view', 'Backend\SliderController@view')->name('slider.view');
+        Route::get('/add', 'Backend\SliderController@add')->name('slider.add');
+        Route::post('/store', 'Backend\SliderController@store')->name('slider.store');
+        Route::get('/edit/{id}', 'Backend\SliderController@edit')->name('slider.edit');
+        Route::post('/update/{id}', 'Backend\SliderController@update')->name('slider.update');
+        Route::get('/delete/{id}', 'Backend\SliderController@delete')->name('slider.delete');
+    });
+
+    Route::prefix('contact')->group(function () {
+        Route::get('/view', 'Backend\ContactController@view')->name('contact.view');
+        Route::get('/add', 'Backend\ContactController@add')->name('contact.add');
+        Route::post('/store', 'Backend\ContactController@store')->name('contact.store');
+        Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('contact.edit');
+        Route::post('/update/{id}', 'Backend\ContactController@update')->name('contact.update');
+        Route::get('/delete/{id}', 'Backend\ContactController@delete')->name('contact.delete');
+    });
+
+    });
 
 
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
@@ -166,3 +200,30 @@ Route::prefix('admin')->group(function () {
 });
 Route::get('/','Frontend\FrontendController@index')->middleware('verified');
 Route::get('/home','HomeController@index')->middleware('verified');
+
+Route::prefix('category')->group(function(){
+    Route::get('category', 'Backend\CategoriesController@category')->name('category.view');
+    Route::get('insertCategory', 'Backend\CategoriesController@insertCategory')->name('category.add');
+    Route::post('insertcat','Backend\CategoriesController@insertcat')->name('category.store');
+    Route::get('editCategory/{eid}', 'Backend\CategoriesController@editCategory')->name('category.edit');
+    Route::post('updateCategory','Backend\CategoriesController@updateCategory')->name('category.update');
+    Route::get('deleteCategory/{did}','Backend\CategoriesController@deleteCategory')->name('category.delete');
+});
+
+Route::prefix('subCategory')->group(function(){
+    Route::get('subCategory','Backend\subCategoryController@subCategory')->name('subCategory.view');
+    Route::get('insertSubCategory', 'Backend\subCategoryController@insertSubCategory')->name('subCategory.add');
+    Route::post('insertSubcat', 'Backend\subCategoryController@insertSubcat')->name('subCategory.store');
+    Route::get('editSubCategory/{id}', 'Backend\subCategoryController@editSubCategory')->name('subCategory.edit');
+    Route::post('updateSubCategory','Backend\subCategoryController@updateSubCategory')->name('subCategory.update');
+    Route::get('deleteSubCategory/{did}','Backend\subCategoryController@deleteSubCategory')->name('subCategory.delete');
+});
+
+Route::prefix('logo')->group(function(){
+    Route::get('logo', 'Backend\LogoController@logo')->name('logo.view');
+    Route::get('insertLogo', 'Backend\LogoController@insertLogo')->name('logo.add');
+    Route::post('insertlog', 'Backend\LogoController@insertlog')->name('logo.store');
+    Route::get('editLogo/{id}', 'Backend\LogoController@editLogo')->name('logo.edit');
+    Route::post('updateLogo','Backend\LogoController@updateLogo')->name('logo.update');
+    Route::get('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
+});

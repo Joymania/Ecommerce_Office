@@ -32,7 +32,7 @@ class product extends Model
     {
         return $this->belongsTo(tag::class, 'tag_id','id');
     }
-
+ 
     public function colors()
     {
         return $this->belongsToMany(color::class, 'product_colors')->withTimestamps();
@@ -40,12 +40,17 @@ class product extends Model
 
     public function reviews()
     {
-        return $this->hasMany(review::class, 'review_id', 'id');
+        return $this->hasMany(review::class, 'product_id', 'id');
     }
 
     public function sizes()
     {
         return $this->belongsToMany(size::class, 'product_sizes')->withTimestamps();
+    }
+
+    public function sub_images()
+    {
+        return $this->hasMany(SubImage::class, 'product_id','id');
     }
 
 }

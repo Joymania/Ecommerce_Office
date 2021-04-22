@@ -45,11 +45,18 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
+                                                <label for="stock">Stock</label>
+                                                <input type="number" id="stock" class="form-control" name="stock" placeholder="Stock available">
+                                                @error('stock')
+                                                <span style="color: red">Product stock is required</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
                                                 <label for="single-selection">Select Brand Name</label>
                                                 <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
                                                     @foreach($brands as $row)
                                                         <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach                                          
+                                                    @endforeach
                                                 </select>
                                                 @error('brand_id')
                                                 <span style="color: red">Brand Name is required</span>
@@ -96,6 +103,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="col">
+                                                <label for="sub_category_id">sub_category</label>
+                                                <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
+                                                    @foreach($sub_category as $sub)
+                                                    <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-row">
@@ -116,21 +131,25 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <label for="image">Upload Image</label>
+                                                <label for="image">Upload Cover Image</label>
                                                 <input type="file" id="image" class="form-control" name="image">
                                                 @error('image')
                                                 <span style="color: red">Product Image is required</span>
                                                 @enderror
                                             </div>
-
                                             <div class="col">
-                                                <label for="stock">Stock</label>
-                                                <input type="number" id="stock" class="form-control" name="stock">
-                                                @error('stock')
-                                                <span style="color: red">Product stock is required</span>
+                                                <label for="image">Upload Sub Images</label>
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                <input type="file" id="image" class="form-control" name="images[]">
+                                                @error('image')
+                                                <span style="color: red">Product Image is required</span>
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        <button class="btn btn-primary mt-3" type="submit">Add Product</button>
                                     </form>
                                 </div>
                             </div>
