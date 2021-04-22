@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Model\category;
 use App\Model\product;
 use App\Model\Slider;
-use App\Model\category;
 use App\Model\sub_category;
 use App\Model\contacts;
 use App\Model\logo;
@@ -34,6 +33,5 @@ class FrontendController extends Controller
         $products = product::all();
         return view('Frontend.layouts.contact' , compact('logos' , 'categories' , 'contacts' , 'products'));
     }
-    
 
 }
