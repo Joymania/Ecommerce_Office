@@ -20,13 +20,13 @@ Route::get('/norda/{id}','Frontend\ProductBySubcatController@productByCat')->nam
 Route::get('/norda/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/norda/search-result','Frontend\SearchController@searchResults')->name('search.result');
 Route::get('/norda/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+
+
 Route::prefix('/norda')->group(function (){
-    // Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
-   
-    // contact
     Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 });
   
+Route::get('userAccount','Frontend\userAccountController@userAccount');
 
 /*Front end routing ends*/
 
