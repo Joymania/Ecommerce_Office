@@ -50,9 +50,9 @@ class AdminLoginController extends Controller
         // update user->status to 0 just before logout
         $admin = Admin::find(Auth::id());
         $admin->status = '0';
-        $admin->save();
+        $admin->save(); 
 
-        $this->guard()->logout();
+        $this->guard()->logout(); 
 
         /*** to prevent admin/user logout to logout both admin and user at the same time ***/
         // $request->session()->invalidate();

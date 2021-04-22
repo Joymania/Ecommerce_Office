@@ -12,6 +12,25 @@
                 <li class="active">my account </li>
             </ul>
         </div>
+        @if(session()->has('success_msg'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session()->get('success_msg') }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> 
+        @endif
+        @if(session()->has('errors'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{ $errors['message'] }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if(session()->has('errors'))
+         {{--dd($errors['errors']--}}
+        @endif
     </div>
 </div>
 <!-- my account wrapper start -->
@@ -32,7 +51,7 @@
                                     Method</a>
                                 <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i> address</a>
                                 <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
-                                <a href="login-register.html"><i class="fa fa-sign-out"></i> Logout</a>
+                                <a href=""><i class="fa fa-sign-out"></i> Logout</a>
                             </div>
                         </div>
                         <!-- My Account Tab Menu End -->
@@ -44,7 +63,7 @@
                                     <div class="myaccount-content">
                                         <h3>Dashboard</h3>
                                         <div class="welcome">
-                                            <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
+                                            <p>Hello, <strong>{{$users->name}}</strong> (If Not <strong>Tuntuni !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
                                         </div>
 
                                         <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
@@ -67,27 +86,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($order as $orders)
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td>Aug 22, 2018</td>
+                                                        <td>{{$orders->id}}</td>
+                                                        <td>{{$orders->created_at}}</td>
+                                                        @if ($orders->status==0)
                                                         <td>Pending</td>
-                                                        <td>$3000</td>
+                                                        @elseif ($orders->status==1)
+                                                        <td>Accepted</td>
+                                                        @endif
+                                                        <td></td>
                                                         <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>July 22, 2018</td>
-                                                        <td>Approved</td>
-                                                        <td>$200</td>
-                                                        <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>June 12, 2017</td>
-                                                        <td>On Hold</td>
-                                                        <td>$990</td>
-                                                        <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
-                                                    </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -99,7 +110,7 @@
                                 <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Payment Method</h3>
-                                        <p class="saved-message">You Can't Saved Your Payment Method yet.</p>
+                                        <p class="saved-message">You have used <strong>{{$orders->payment}}</strong> as your payment method.</p>
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
@@ -108,10 +119,12 @@
                                     <div class="myaccount-content">
                                         <h3>Billing Address</h3>
                                         <address>
-                                            <p><strong>Alex Tuntuni</strong></p>
-                                            <p>1355 Market St, Suite 900 <br>
-                                        San Francisco, CA 94103</p>
-                                            <p>Mobile: (123) 456-7890</p>
+                                            <p><strong>{{$users->name}}</strong></p>
+                                            @foreach($order as $ord)
+                                            <p>{{$ord->biling_address}}<br>
+                                                {{$ord->biling_city}}</p>
+                                            <p>Mobile: {{$ord->biling_phone}}</p>
+                                            @endforeach
                                         </address>
                                         <a href="#" class="check-btn sqr-btn "><i class="fa fa-edit"></i> Edit Address</a>
                                     </div>
@@ -122,46 +135,31 @@
                                     <div class="myaccount-content">
                                         <h3>Account Details</h3>
                                         <div class="account-details-form">
-                                            <form action="#">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="single-input-item">
-                                                            <label for="first-name" class="required">First Name</label>
-                                                            <input type="text" id="first-name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="single-input-item">
-                                                            <label for="last-name" class="required">Last Name</label>
-                                                            <input type="text" id="last-name" />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <form method="POST" action="{{ route('userUpdate', $users->id) }}" enctype="multipart/form-data">
+                                                @csrf
+
                                                 <div class="single-input-item">
-                                                    <label for="display-name" class="required">Display Name</label>
-                                                    <input type="text" id="display-name" />
+                                                    <label for="display-name" class="required">Full Name</label>
+                                                    <input name="name" type="text" id="display-name" value="{{$users->name}}"/>
                                                 </div>
                                                 <div class="single-input-item">
                                                     <label for="email" class="required">Email Addres</label>
-                                                    <input type="email" id="email" />
+                                                    <input name="email" type="email" id="email" value="{{$users->email}}" />
                                                 </div>
                                                 <fieldset>
                                                     <legend>Password change</legend>
-                                                    <div class="single-input-item">
-                                                        <label for="current-pwd" class="required">Current Password</label>
-                                                        <input type="password" id="current-pwd" />
-                                                    </div>
+                                                    
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
                                                                 <label for="new-pwd" class="required">New Password</label>
-                                                                <input type="password" id="new-pwd" />
+                                                                <input name="password" type="password" class="form-control" placeholder="New Password">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
                                                                 <label for="confirm-pwd" class="required">Confirm Password</label>
-                                                                <input type="password" id="confirm-pwd" />
+                                                                <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm New Password">
                                                             </div>
                                                         </div>
                                                     </div>
