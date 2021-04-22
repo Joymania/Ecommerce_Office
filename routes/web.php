@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 /*Front end routing Starts*/
 Auth::routes(['verify' => true]);
 
@@ -22,6 +23,7 @@ Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('pro
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+Route::get('/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
 
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
