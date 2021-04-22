@@ -105,7 +105,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route('authentication.login')}}" class="icon-menu"><i class="icon-login"></i></a>
+                        <a href="{{route('admin.login')}}" class="icon-menu"><i class="icon-login"></i></a>
                     </li>
                 </ul>
             </div>

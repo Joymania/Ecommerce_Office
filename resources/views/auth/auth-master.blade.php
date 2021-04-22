@@ -9,29 +9,29 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets')}}/images/favicon.png">
 
     <!-- All CSS is here
 	============================================ -->
 
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/signericafat.css">
-    <link rel="stylesheet" href="assets/css/vendor/cerebrisans.css">
-    <link rel="stylesheet" href="assets/css/vendor/simple-line-icons.css">
-    <link rel="stylesheet" href="assets/css/vendor/elegant.css">
-    <link rel="stylesheet" href="assets/css/vendor/linear-icon.css">
-    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
-    <link rel="stylesheet" href="assets/css/plugins/easyzoom.css">
-    <link rel="stylesheet" href="assets/css/plugins/slick.css">
-    <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/plugins/jquery-ui.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/vendor/signericafat.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/vendor/cerebrisans.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/vendor/simple-line-icons.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/vendor/elegant.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/vendor/linear-icon.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/plugins/easyzoom.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/plugins/slick.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/plugins/animate.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/plugins/jquery-ui.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/style.css">
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above
-    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
-    <link rel="stylesheet" href="assets/css/style.min.css"> -->
+    <link rel="stylesheet" href="{{asset('assets')}}/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/style.min.css"> -->
 
 </head>
 
@@ -92,7 +92,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/images/logo/logo.png" alt="logo"></a>
+                                    <a href="index.html"><img src="{{asset('assets')}}/images/logo/logo.png" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="col-xl-8 col-lg-7">
@@ -142,7 +142,7 @@
                                                                 </ul>
                                                             </li>
                                                             <li>
-                                                                <a href="shop.html"><img src="assets/images/banner/banner-12.png" alt=""></a>
+                                                                <a href="shop.html"><img src="{{asset('assets')}}/images/banner/banner-12.png" alt=""></a>
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -209,7 +209,7 @@
                         <div class="col-5">
                             <div class="mobile-logo">
                                 <a href="index.html">
-                                    <img alt="" src="assets/images/logo/logo.png">
+                                    <img alt="" src="{{asset('assets')}}/images/logo/logo.png">
                                 </a>
                             </div>
                         </div>
@@ -371,7 +371,7 @@
                     <ul>
                         <li class="single-product-cart">
                             <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
+                                <a href="#"><img src="{{asset('assets')}}/images/cart/cart-1.jpg" alt=""></a>
                             </div>
                             <div class="cart-title">
                                 <h4><a href="#">Simple Black T-Shirt</a></h4>
@@ -383,7 +383,7 @@
                         </li>
                         <li class="single-product-cart">
                             <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
+                                <a href="#"><img src="{{asset('assets')}}/images/cart/cart-2.jpg" alt=""></a>
                             </div>
                             <div class="cart-title">
                                 <h4><a href="#">Norda Backpack</a></h4>
@@ -416,58 +416,9 @@
                 </div>
             </div>
         </div>
-        <div class="login-register-area pt-115 pb-120">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12 ml-auto mr-auto">
-                        <div class="login-register-wrapper">
-                            <div class="login-register-tab-list nav">
-                                <a class="active" data-toggle="tab" href="#lg1">
-                                    <h4> login </h4>
-                                </a>
-                                <a data-toggle="tab" href="#lg2">
-                                    <h4> register </h4>
-                                </a>
-                            </div>
-                            <div class="tab-content">
-                                <div id="lg1" class="tab-pane active">
-                                    <div class="login-form-container">
-                                        <div class="login-register-form">
-                                            <form action="#" method="post">
-                                                <input type="text" name="user-name" placeholder="Username">
-                                                <input type="password" name="user-password" placeholder="Password">
-                                                <div class="button-box">
-                                                    <div class="login-toggle-btn">
-                                                        <input type="checkbox">
-                                                        <label>Remember me</label>
-                                                        <a href="#">Forgot Password?</a>
-                                                    </div>
-                                                    <button type="submit">Login</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="lg2" class="tab-pane">
-                                    <div class="login-form-container">
-                                        <div class="login-register-form">
-                                            <form action="#" method="post">
-                                                <input type="text" name="user-name" placeholder="Username">
-                                                <input type="password" name="user-password" placeholder="Password">
-                                                <input name="user-email" placeholder="Email" type="email">
-                                                <div class="button-box">
-                                                    <button type="submit">Register</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        @yield('content')
+
         <div class="subscribe-area bg-gray pt-115 pb-115">
             <div class="container">
                 <div class="row">
@@ -501,7 +452,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="contact-info-wrap">
                             <div class="footer-logo">
-                                <a href="#"><img src="assets/images/logo/logo.png" alt="logo"></a>
+                                <a href="#"><img src="{{asset('assets')}}/images/logo/logo.png" alt="logo"></a>
                             </div>
                             <div class="single-contact-info">
                                 <span>Our Location</span>
@@ -546,29 +497,30 @@
     <!-- All JS is here
 ============================================ -->
 
-    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
-    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/plugins/slick.js"></script>
-    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
-    <script src="assets/js/plugins/jquery.instagramfeed.min.js"></script>
-    <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
-    <script src="assets/js/plugins/wow.js"></script>
-    <script src="assets/js/plugins/jquery-ui-touch-punch.js"></script>
-    <script src="assets/js/plugins/jquery-ui.js"></script>
-    <script src="assets/js/plugins/magnific-popup.js"></script>
-    <script src="assets/js/plugins/sticky-sidebar.js"></script>
-    <script src="assets/js/plugins/easyzoom.js"></script>
-    <script src="assets/js/plugins/scrollup.js"></script>
-    <script src="assets/js/plugins/ajax-mail.js"></script>
+    <script src="{{asset('assets')}}/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="{{asset('assets')}}/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="{{asset('assets')}}/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="{{asset('assets')}}/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/slick.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/jquery.instagramfeed.min.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/jquery.nice-select.min.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/wow.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/jquery-ui-touch-punch.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/jquery-ui.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/magnific-popup.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/sticky-sidebar.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/easyzoom.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/scrollup.js"></script>
+    <script src="{{asset('assets')}}/js/plugins/ajax-mail.js"></script>
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above  
-<script src="assets/js/vendor/vendor.min.js"></script>
-<script src="assets/js/plugins/plugins.min.js"></script>  -->
+<script src="{{asset('assets')}}/js/vendor/vendor.min.js"></script>
+<script src="{{asset('assets')}}/js/plugins/plugins.min.js"></script>  -->
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets')}}/js/main.js"></script>
 
 </body>
 
 </html>
+   

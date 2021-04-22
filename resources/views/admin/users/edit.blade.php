@@ -10,7 +10,7 @@
 <div class="card">
     <div class="card-header">
         <h3>Edit User</h3> 
-        <a class=" float-right btn btn-success btn-sm" href="{{ route('users.index') }}"><i class="fa fa-list"></i> Users List</a>
+        <a class=" float-right btn btn-success btn-sm" href="{{ route('users.index') }}"><i class="fa fa-list"></i> User List</a>
 
         @if(session()->has('success_msg'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -46,7 +46,7 @@
                             <h6>Profile Photo</h6>
                             <div class="media photo">
                                 <div class="media-left m-r-15">
-                                    <img src="{{ (!empty($user->image))?url('upload/users/'.$user->image):url('upload/noImage.jpg') }}" class="user-photo media-object" alt="User" width="140px" height="140px">
+                                    <img src="{{ (!empty($user->image)) ? url('upload/users/'.$user->image):url('upload/noImage.jpg') }}" class="user-photo media-object" alt="User" width="140px" height="140px">
                                 </div>
                                 <div class="media-body">
                                     <p>Upload your photo.
@@ -89,27 +89,13 @@
                                 </label>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div>
-                                <label class="fancy-radio">
-                                    <input name="role" value="admin" type="radio" {{ $user->role == 'admin'? "checked" : null}} >
-                                    <span><i></i>Admin</span>
-                                </label>
-
-                                <label class="fancy-radio">
-                                    <input name="role" value="customer" type="radio" {{ $user->role == 'customer'? "checked" : null}}>
-                                    <span><i></i>Customer</span>
-                                </label>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
 
                 <div class="col-lg-6 col-md-12">
                     
-                    <div class="col-lg-6 col-md-12">
+                    <div class="body">
                         <h6>Change Password</h6>
 
                         <div class="form-group">

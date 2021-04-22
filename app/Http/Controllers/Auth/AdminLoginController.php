@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -29,11 +30,31 @@ class AdminLoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
-    public function logout(Request $request)
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request)
     {
+        $email =$request->input('email');
+        $admin = Admin::where('email',$email)->first();
+        $admin->status = '1';
+        $admin->save();
+    }
+
+    public function logout(Request $request, Admin $admin)
+    {
+        // update user->status to 0 just before logout
+        $admin = Admin::find(Auth::id());
+        $admin->status = '0';
+        $admin->save();
+
         $this->guard()->logout();
 
-        /*** to prevent admin logout to logout user also and vice versa***/
+        /*** to prevent admin/user logout to logout both admin and user at the same time ***/
         // $request->session()->invalidate();
 
         $request->session()->regenerateToken();
@@ -45,40 +66,6 @@ class AdminLoginController extends Controller
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect('/admin/login');
-    }
-
-
-    // public function login(Request $request)
-    // {
-    //     $this->validateLogin($request);
-        
-    //     if ($this->attemptLogin($request)) {
-    //         return $this->sendLoginResponse($request);
-    //     }
-    //     return $this->sendFailedLoginResponse($request);
-    // }
-
-    
-    // public function login(Request $request)
-    // {
-    //   // Validate the form data
-    //   $this->validate($request, [
-    //     'email'   => 'required|email',
-    //     'password' => 'required|min:6'
-    //   ]);
-    //   // Attempt to log the user in
-    //   if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
-    //     // if successful, then redirect to their intended location
-    //     return redirect()->intended(route('admin.dashboard'));
-    //   } 
-    //   // if unsuccessful, then redirect back to the login with the form data
-    //   return redirect()->back()->withInput($request->only('email', 'remember'));
-    // }
-    
-    // public function logout()
-    // {
-    //     Auth::guard('admin')->logout();
-    //     return redirect(route('admin.login'));
-    // }
+    } 
 
 }

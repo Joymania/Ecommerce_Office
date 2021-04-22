@@ -46,7 +46,7 @@
                             <h6>Profile Photo</h6>
                             <div class="media photo">
                                 <div class="media-left m-r-15">
-                                    <img src="{{ (!empty($admin->image))?url('upload/admin/'.$admin->image):url('upload/noImage.jpg') }}" class="admin-photo media-object" alt="admin" width="140px" height="140px">
+                                    <img src="{{ (!empty($admin->image))?url('upload/admins/'.$admin->image):url('upload/noImage.jpg') }}" class="admin-photo media-object" alt="admin" width="140px" height="140px">
                                 </div>
                                 <div class="media-body">
                                     <p>Upload your photo.
@@ -93,12 +93,12 @@
                         <div class="form-group">
                             <div>
                                 <label class="fancy-radio">
-                                    <input name="role" value="super_admin" type="radio" {{ $admin->role == 'super_admin'? "checked" : null}} >
+                                    <input name="role" value="1" type="radio" {{ $admin->role == '1'? "checked" : null}} >
                                     <span><i></i>Super Admin</span>
                                 </label>
 
                                 <label class="fancy-radio">
-                                    <input name="role" value="admin" type="radio" {{ $admin->role == 'admin'? "checked" : null}}>
+                                    <input name="role" value="0" type="radio" {{ $admin->role == '0'? "checked" : null}}>
                                     <span><i></i>Admin</span>
                                 </label>
                             </div>
@@ -109,7 +109,7 @@
 
                 <div class="col-lg-6 col-md-12">
                     
-                    <div class="col-lg-6 col-md-12">
+                    <div class="body">
                         <h6>Change Password</h6>
 
                         <div class="form-group">
