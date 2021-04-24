@@ -15,6 +15,18 @@ class ProductsController extends Controller
         return view('admin.products.products-list',compact('products'));
     }
 
+    public function getProductById($id){
+        $products = product::find($id);
+
+        // if(request()->expectsJson()){
+            return response()->json($products);
+        // } else{
+            // Todo: return blade file 
+            
+            // return "create blade file";
+        // }
+    }
+
     public function create()
     {
         return view('admin.products.add-product');

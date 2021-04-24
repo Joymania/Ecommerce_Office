@@ -51,13 +51,12 @@ Route::prefix('products')->group(function () {
     Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
     Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
 
+
+    // Get products by id
+    Route::get('/{id}','Backend\ProductsController@getProductById')->name('products.jsonbyid');
+
 });
 
-/*Product Purchases Routes*/
-Route::name('purchase.')->prefix('purchases')->group(function () {
-    // Product Purchase
-    Route::get('/create','Backend\ProductPurchaseController@create')->name('add');
-});
 
 Route::prefix('/tags')->group(function (){
     Route::get('/list','Backend\TagsController@index')->name('tags.list');
@@ -70,10 +69,17 @@ Route::prefix('/tags')->group(function (){
 
 //Admin Routing Ends
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/*Product Purchases Routes*/
+Route::name('purchase.')->prefix('purchases')->group(function () {
+    // Product Purchase
+    Route::get('/create','Backend\ProductPurchaseController@create')->name('add');
+    Route::post('/store','Backend\ProductPurchaseController@store')->name('store');
+});
 
 
 Route::prefix('brand')->group(function () {
