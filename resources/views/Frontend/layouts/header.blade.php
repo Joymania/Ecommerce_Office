@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
 
-    <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}">
+    {{-- <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}"> --}}
 
     <!-- All CSS is here
 	============================================ -->
@@ -98,7 +98,7 @@
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
 
-                                    <a href="index.html"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+                                    {{-- <a href="index.html"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a> --}}
 
                                 </div>
                             </div>
@@ -164,7 +164,7 @@
                                                     <li><a href="wishlist.html">wishlist </a></li>
                                                     <li><a href="compare.html">compare </a></li>
                                                     <li><a href="contact.html">contact us </a></li>
-                                                    <li><a href="order-tracking.html">order tracking</a></li>
+                                                    <li><a href="{{ route('track.show') }}">order tracking</a></li>
                                                     <li><a href="{{route('login')}}">login / register </a></li>
                                                 </ul>
                                             </li>
@@ -186,7 +186,7 @@
                                     @guest
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="{{route('login')}}"><i class="icon-user"></i></a>
-                                        </div>                                       
+                                        </div>
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
                                         </div>
@@ -196,7 +196,7 @@
                                                 <span class="cart-amount">$2,435.30</span>
                                             </a>
                                         </div>
-                                    @else   
+                                    @else
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
                                         </div>
@@ -205,7 +205,7 @@
                                                 <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
                                                 <span class="cart-amount">$2,435.30</span>
                                             </a>
-                                        </div> 
+                                        </div>
                                         <div class="same-style-2 same-style-2-font-inc">
                                             <a href="{{route('logout')}}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -215,7 +215,7 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                         </form>
-                                    @endguest     
+                                    @endguest
                                 </div>
                             </div>
                         </div>
@@ -228,12 +228,12 @@
                                 <div class="main-categori-wrap main-categori-wrap-modify">
                                     <a class="categori-show" href="#"><i class="lnr lnr-menu"></i> All Department <i class="icon-arrow-down icon-right"></i></a>
                                     <div class="category-menu categori-hide categori-not-visible">
-                                        <nav> 
-                                            
-                                            
+                                        <nav>
+
+
                                             <ul>
                                               @foreach($categories as $cat)
-                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a> 
+                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a>
                                                     <div class="category-menu-dropdown ct-menu-res-height-1">
                                                         <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
                                                             <h4></h4>
@@ -244,14 +244,14 @@
                                                             </ul>
                                                         </div>
 
-                                                    </div> 
-                                                </li> 
+                                                    </div>
+                                                </li>
                                                 @endforeach
-                                                    
+
                                             </ul>
 
-                                           
-                                        </nav> 
+
+                                        </nav>
 
                                     </div>
                                 </div>
@@ -428,7 +428,7 @@
                                         <li><a href="wishlist.html">wishlist </a></li>
                                         <li><a href="compare.html">compare </a></li>
                                         <li><a href="contact.html">contact us </a></li>
-                                        <li><a href="order-tracking.html">order tracking</a></li>
+                                        <li><a href="{{ route('track.show') }}">order tracking</a></li>
                                         <li><a href="{{route('login')}}">login / register </a></li>
                                     </ul>
                                 </li>
