@@ -89,6 +89,7 @@
                                 @endforeach
                             @endif
                         </div>
+
                         <div class="product-dec-slider-small product-dec-small-style1">
                             <div class="product-dec-small active">
                                 <img src="{{"/upload/products_images/$product->image"}}" alt="">
@@ -104,6 +105,9 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
+                    <form action="{{ route('insert.cart') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}">
                     <div class="product-details-content pro-details-content-mrg">
                         <h2>{{$product->name}}</h2>
                         <div class="product-ratting-review-wrap">
@@ -150,7 +154,7 @@
                         <div class="pro-details-quality">
                             <span>Quantity:</span>
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+                                <input class="cart-plus-minus-box" type="text" name="qty" value="1">
                             </div>
                         </div>
                         <div class="product-details-meta">
@@ -165,7 +169,8 @@
                         </div>
                         <div class="pro-details-action-wrap">
                             <div class="pro-details-add-to-cart">
-                                <a title="Add to Cart" href="#">Add To Cart </a>
+                                {{-- <a href="{{ route('insert.cart') }}">Add To Cart </a> --}}
+                                <input type="submit" value="Add To Cart">
                             </div>
                             <div class="pro-details-action">
                                 <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>
@@ -180,6 +185,8 @@
                             </div>
                         </div>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>

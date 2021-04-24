@@ -36,9 +36,9 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
-    public function report(Throwable $exception)
+    public function report(Throwable $Throwable)
     {
-        parent::report($exception);
+        parent::report($Throwable);
     }
 
     /**
@@ -50,9 +50,9 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $Throwable)
     {
-        return parent::render($request, $exception);
+        return parent::render($request, $Throwable);
     }
 
     /**
@@ -70,7 +70,7 @@ class Handler extends ExceptionHandler
         }
 
         $guard = Arr::get( $exception->guards(), 0 );
-        
+
         $route = '';
         if($guard == 'admin'){
             $route = route('admin.login');

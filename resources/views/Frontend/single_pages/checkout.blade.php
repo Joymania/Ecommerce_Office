@@ -62,7 +62,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="billing-info mb-20">
                                                 <label>First Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="fname" value="{{ @$users->fname }}">
+                                                <input type="text" name="fname" value="{{ @$users->name }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -191,13 +191,13 @@
                                             </div>
                                         </div>
                                         <div class="payment-method">
-                                            <div class="pay-top sin-payment">
-                                                <input id="payment_method_1" class="input-radio" type="radio" value="cheque" checked="checked" name="payment_method">
+                                            {{-- <div class="pay-top sin-payment">
+                                                <input id="payment_method_1" class="input-radio" type="radio" value="cheque" name="payment_method">
                                                 <label for="payment_method_1"> Direct Bank Transfer </label>
                                                 <div class="payment-box payment_method_bacs">
                                                     <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="pay-top sin-payment">
                                                 <input id="payment-method-3" class="input-radio" type="radio" value="cheque" name="payment">

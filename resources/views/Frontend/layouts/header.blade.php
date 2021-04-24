@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
 
-    <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}">
+    {{-- <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}"> --}}
 
     <!-- All CSS is here
 	============================================ -->
@@ -99,7 +99,7 @@
                                 <div class="logo">
 
                                     <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
-
+                                    
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7">
@@ -156,7 +156,7 @@
                                                     <li><a href="wishlist.html">wishlist </a></li>
                                                     <li><a href="compare.html">compare </a></li>
                                                     <li><a href="contact.html">contact us </a></li>
-                                                    <li><a href="order-tracking.html">order tracking</a></li>
+                                                    <li><a href="{{ route('track.show') }}">order tracking</a></li>
                                                     <li><a href="{{route('login')}}">login / register </a></li>
                                                 </ul>
                                             </li>
@@ -420,7 +420,7 @@
                                         <li><a href="wishlist.html">wishlist </a></li>
                                         <li><a href="compare.html">compare </a></li>
                                         <li><a href="contact.html">contact us </a></li>
-                                        <li><a href="order-tracking.html">order tracking</a></li>
+                                        <li><a href="{{ route('track.show') }}">order tracking</a></li>
                                         <li><a href="{{route('login')}}">login / register </a></li>
                                     </ul>
                                 </li>

@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->integer("stock");
             $table->integer("sub_category_id")->nullable();
+            $table->integer('cart_shopping_id')->nullable();
             $table->timestamps();
         });
     }
