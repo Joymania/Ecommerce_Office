@@ -37,7 +37,7 @@
         <form method="POST" action="{{ route('admin.update', $admin->id) }}" enctype="multipart/form-data">
             @csrf
             @method('put')
-
+ 
             <div class="row clearfix">
 
                 <div class="col-lg-12">

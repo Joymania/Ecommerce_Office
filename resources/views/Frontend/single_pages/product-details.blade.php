@@ -57,9 +57,9 @@
     <div class="product-details-area pt-120 pb-115">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-5 col-md-5">
                     <div class="product-details-tab">
-                        <div class="pro-dec-big-img-slider">
+                        <div class="pro-dec-big-img-slider text-center">
                            {{-- <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a href="{{""}}/assets/images/product-details/b-large-1.jpg">
@@ -69,9 +69,9 @@
                                 <a class="easyzoom-pop-up img-popup" href="{{""}}/assets/images/product-details/b-large-1.jpg"><i class="icon-size-fullscreen"></i></a>
                             </div>--}}
                             <div class="easyzoom-style">
-                                <div class="easyzoom easyzoom--overlay">
+                                <div class="easyzoom easyzoom--overlay float-right">
                                     <a href="{{"/upload/products_images/$product->image"}}">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="">
+                                        <img src="{{"/upload/products_images/$product->image"}}" style="width: 400px; height: 500px;" alt="">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/$product->image"}}"><i class="icon-size-fullscreen"></i></a>
@@ -79,12 +79,12 @@
                             @if($product->sub_images)
                                 @foreach($product->sub_images as $image)
                                 <div class="easyzoom-style">
-                                    <div class="easyzoom easyzoom--overlay">
+                                    <div class="easyzoom easyzoom--overlay float-right">
                                         <a href="{{"/upload/products_images/sub_images/$image->image"}}">
-                                            <img src="{{"/upload/products_images/sub_images/$image->image"}}" alt="">
+                                            <img src="{{"/upload/products_images/sub_images/$image->image"}}" style="width: 400px; height: 500px;" alt="">
                                         </a>
                                     </div>
-                                    <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/sub_images/$image->image"}}g"><i class="icon-size-fullscreen"></i></a>
+                                    <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/sub_images/$image->image"}}"><i class="icon-size-fullscreen"></i></a>
                                 </div>
                                 @endforeach
                             @endif
@@ -146,7 +146,7 @@
                             <div class="pro-details-size-content">
                                 <ul>
                                     @foreach($product->sizes as $size)
-                                    <li><a href="#">{{$size->name}}</a></li>
+                                    <li><a class="productSizeContent" href="#">{{$size->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -633,4 +633,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{asset('js/product-details.js')}}"></script>
 @endsection
