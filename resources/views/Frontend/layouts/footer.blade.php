@@ -46,6 +46,7 @@
                         </div>
                     </div>
                 </div>
+                @if(!empty($contacts))
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="footer-widget mb-40 ">
                         <h3 class="footer-title">Contact Us</h3>
@@ -85,6 +86,11 @@
                         </div>
                     </div>
                 </div>
+
+                @else
+                <p>no contact data</p>
+
+                @endif
             </div>
         </div>
     </div>

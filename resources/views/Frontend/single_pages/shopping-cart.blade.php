@@ -13,7 +13,7 @@
 
     </style>
 
-              <div class="sidebar-cart-active">
+              {{-- <div class="sidebar-cart-active">
             <div class="sidebar-cart-all">
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="breadcrumb-area bg-gray">
             <div class="container">
                 <div class="breadcrumb-content text-center">
@@ -69,6 +69,71 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
+                        @if (Auth::user())
+
+                        <div class="table-content table-responsive cart-table-content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th>Until Price</th>
+                                        {{-- <th>Size</th>
+                                        <th>Color</th> --}}
+                                        <th>Qty</th>
+                                        <th>Subtotal</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- @php
+                                        dd($showCart);
+                                    @endphp --}}
+                                    @foreach ($showCart as $show)
+
+                                        <tr>
+                                        <td class="product-thumbnail">
+                                            <a href="#"><img src="{{ asset('upload/products_images/'.$show['product']['image']) }}" width="80px" height="100px" alt=""></a>
+                                        </td>
+                                        <td class="product-name"><a href="#">{{ $show['product']['name'] }}</a></td>
+                                        <td class="product-price-cart"><span class="amount">{{ $show['product']['price'] }}</span></td>
+                                        <td class="product-quantity pro-details-quality">
+
+                                            <form method="post" action="{{ route('update.cart') }}" >
+                                                @csrf
+                                                  <div>
+                                                        <div class="cart-plus-minus" >
+                                                            <input class="cart-plus-minus-box" type="text" name="qty" value="{{ $show['qty'] }}">
+                                                        </div>
+                                                        <input type="hidden" name="rowId" value="{{ $show['id'] }}">
+                                                          <div class="float-right">
+                                                        <input type="submit" value="Update" class="cart">
+
+
+                                                    </div>
+                                                    </div>
+
+
+                                            </form>
+
+
+                                        </td>
+                                        <td class="product-subtotal">{{ $show['subtotal'] }}</td>
+                                        <td class="product-remove">
+                                            {{-- <a href="{{ route('delete.cart',$show['id']) }}"><i class="icon_close"></i></a> --}}
+
+
+                                        </td>
+                                    </tr>
+                                    {{-- @php
+                                        $total+=$content->subtotal;
+                                    @endphp --}}
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                        @else
                             <div class="table-content table-responsive cart-table-content">
                                 <table>
                                     <thead>
@@ -131,6 +196,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @endif
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="cart-shiping-update-wrapper">

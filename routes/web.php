@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 /*Front end routing Starts*/
+ 
 Auth::routes(['verify' => true]);
  
 // redirect verified user
@@ -20,6 +21,26 @@ Route::get('/home','Frontend\FrontendController@index')->name('home')->middlewar
 // without authentication
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
+
+//  Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
+Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
+Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+
+//Shopping-Cart
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+ Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
+
+Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
+
+Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
+Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
+
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
@@ -37,11 +58,15 @@ Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.c
 
 //Checkout
 Route::middleware(['auth','verified'])->group(function () {
+
     Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
-    Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+    // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
+ 
 });
+
+Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 /*Front end routing ends*/
 
 
@@ -101,8 +126,8 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/delete/{id}','Backend\BrandController@delete')->name('brand.delete');
     });
 
-    // cupon
-    Route::prefix('cupon')->group(function () {
+     // cupon
+     Route::prefix('cupon')->group(function () {
         Route::get('/view','Backend\CuponController@view')->name('cupon.view');
         Route::get('/add','Backend\CuponController@add')->name('cupon.add');
         Route::post('/store','Backend\CuponController@store')->name('cupon.store');
@@ -110,7 +135,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
         Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
     });
-
+  
     // Order
     Route::prefix('order')->group(function () {
         Route::get('/view','Backend\OrderController@view')->name('order.view');
@@ -168,6 +193,24 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('deleteSubCategory/{did}','Backend\subCategoryController@deleteSubCategory')->name('subCategory.delete');
     });
 
+    // expenseCategory
+Route::prefix('expenseCategory')->group(function(){
+    Route::get('/', 'Backend\expenseCategoryController@expenseCategory')->name('expenseCategory.view');
+    Route::get('insertExpCat', 'Backend\expenseCategoryController@insertExpCat')->name('expenseCategory.add');
+    Route::post('storeExp', 'Backend\expenseCategoryController@storeExp')->name('expenseCategory.store');
+    Route::get('deleteExp/{did}','Backend\expenseCategoryController@deleteExp')->name('expenseCategory.delete');
+});
+
+// expense 
+Route::prefix('expense')->group(function(){
+    Route::get('/', 'Backend\expenseController@expense')->name('expense.view');
+    Route::get('insertExpense', 'Backend\expenseController@insertExpense')->name('expense.add');
+    Route::post('storeExpense', 'Backend\expenseController@storeExpense')->name('expense.store');
+    Route::get('editExpense/{id}', 'Backend\expenseController@editExpense')->name('expense.edit');
+    Route::post('updateExpense','Backend\expenseController@updateExpense')->name('updateExpense');
+    Route::get('deleteexpense/{did}','Backend\expenseController@deleteexpense')->name('expense.delete');
+});
+
     // logo
     Route::prefix('logo')->group(function(){
         Route::get('logo', 'Backend\LogoController@logo')->name('logo.view');
@@ -204,3 +247,4 @@ Route::prefix('admin')->group(function () {
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
 //Admin Routing Ends
+
