@@ -3,8 +3,10 @@
 @section('content')
     @include('Frontend.layouts.slider')
     @include('Frontend.layouts.service_area')
-      <div class="product-area pb-110">
+        
+        <div class="product-area pb-110">
             <div class="container">
+                <!-- flash deal header -->
                 <div class="section-title-btn-wrap border-bottom-3 mb-50 pb-20">
                     <div class="section-title-deal-wrap">
                         <div class="section-title-3">
@@ -19,15 +21,22 @@
                         <a href="{{route('search.result')}}">All Product</a>
                     </div>
                 </div>
+                <!-- flash deal header  end-->
+                
+                <!-- flash deal products start-->
                 <div class="product-slider-active-3 nav-style-3">
+
                     @foreach($products as $product)
+                    @if($product->promo_price == null)
+                        @continue
+                    @endif
                     <div class="product-plr-1">
                         <div class="single-product-wrap">
                             <div class="product-img product-img-zoom mb-15">
                                 <a href="{{route('product.details',$product->id)}}">
                                     <img style="width: 212px; height: 262px;" src="{{"/upload/products_images/$product->image"}}" alt="Product Image">
                                 </a>
-                                <span class="pro-badge left bg-red">-40%</span>
+                                <span class="pro-badge left bg-red">-{{(($product->price - $product->promo_price)*100)/$product->price}}%</span>
                                 <div class="product-action-2 tooltip-style-2">
                                     <button title="Wishlist"><i class="icon-heart"></i></button>
                                 </div>
@@ -48,8 +57,8 @@
                                     <span>(4)</span>
                                 </div>
                                 <div class="product-price-4">
-                                    <span class="new-price">{{$product->price}} Tk. </span>
-                                    <span class="old-price">$42.85</span>
+                                    <span class="new-price">{{$product->promo_price}} Tk. </span>
+                                    <span class="old-price">{{$product->price}} Tk.</span>
                                 </div>
                             </div>
                             <div class="product-content-wrap-3 product-content-position-2">
@@ -68,8 +77,8 @@
                                     <span>(4)</span>
                                 </div>
                                 <div class="product-price-4">
-                                    <span class="new-price">{{$product->price}} Tk. </span>
-                                    <span class="old-price">$42.85</span>
+                                    <span class="new-price">{{$product->promo_price}} Tk. </span>
+                                    <span class="old-price">{{$product->price}} Tk.</span>
                                 </div>
                                 <div class="pro-add-to-cart-2">
                                     <button title="Add to Cart">Add To Cart</button>
@@ -79,8 +88,10 @@
                     </div>
                     @endforeach
                 </div>
+                <!-- flash deal products end-->
             </div>
         </div>
+
         <div class="product-categories-area pb-115">
             <div class="container">
                 <div class="section-title-btn-wrap border-bottom-3 mb-50 pb-20">

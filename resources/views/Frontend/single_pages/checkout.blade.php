@@ -18,7 +18,7 @@
         @endphp
         <div class="checkout-main-area pt-120 pb-120">
             <div class="container">
-                <div class="customer-zone mb-20">
+                {{-- <div class="customer-zone mb-20">
                     <p class="cart-page-title">Returning customer? <a class="checkout-click1" href="#">Click here to login</a></p>
                     <div class="checkout-login-info">
                         <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing & Shipping section.</p>
@@ -50,7 +50,7 @@
                         </form>
 
                     </div>
-                </div>
+                </div> --}}
                 <form action="{{ route('checkout.store') }}" method="POST">
                     @csrf
                     <div class="checkout-wrap pt-30">
@@ -62,7 +62,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="billing-info mb-20">
                                                 <label>First Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="fname" value="{{ @$users->name }}">
+                                                <input type="text" name="name" value="{{ @$users->name }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -168,27 +168,52 @@
                                                     <li>Product <span>Total</span></li>
                                                 </ul>
                                             </div>
+                                            @if (Auth::user())
                                             <div class="your-order-middle">
-                                                @foreach ($contents as $content)
-                                                    <li> Product :{{ $content->name }} <span> ({{ $content->qty }}x{{ $content->price }} )</span></li>
+
+                                                @foreach ($showCart as $show)
+
+                                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['price'] }} )</span></li>
                                                 @endforeach
-
-                                                <ul>
-
-
-                                                </ul>
                                             </div>
+                                            @php
+                                            $subammount=0;
+                                                foreach ($showCart as $show) {
+                                                $subammount+=$show->subtotal;
+                                                }
+                                            @endphp
                                             <div class="your-order-info order-subtotal">
                                                 <ul>
-                                                    <li>Subtotal <span> {{ Cart::subtotal() }} tk</span></li>
+                                                    <li>Subtotal <span> {{ $subammount }} tk</span></li>
                                                 </ul>
                                             </div>
 
                                             <div class="your-order-info order-total">
                                                 <ul>
-                                                    <li>Total <span>{{ Cart::total() }} tk </span></li>
+                                                    <li>Total <span>{{ $subammount +20}} tk </span></li>
                                                 </ul>
                                             </div>
+                                            @else
+                                            <div class="your-order-middle">
+                                                @foreach ($contents as $content)
+                                                    <li> Product :{{ $content->name }} <span> ({{ $content->qty }}x{{ $content->price }} )</span></li>
+                                                @endforeach
+                                                <div class="your-order-info order-subtotal">
+                                                    <ul>
+                                                        <li>Subtotal <span> {{ Cart::subtotal() }} tk</span></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="your-order-info order-total">
+                                                    <ul>
+                                                        <li>Total <span>{{ Cart::total() }} tk </span></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                            @endif
+
+
                                         </div>
                                         <div class="payment-method">
                                             {{-- <div class="pay-top sin-payment">

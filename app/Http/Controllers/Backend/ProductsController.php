@@ -66,6 +66,13 @@ class ProductsController extends Controller
         $product->image = $filename;
         $product->stock = $request->stock;
         $product->stock_warning = $request->stock_warning;
+
+        if($request->promo == 1){
+            $product->promo_price = $request->promo_price;
+            $product->start_date = $request->start_date;
+            $product->end_date = $request->end_date;
+        }
+
         $product->save();
 
         if ($request->color_id){
@@ -125,6 +132,7 @@ class ProductsController extends Controller
             $product->image = $filename;
             $product->save();
         }
+
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
         $product->sub_category_id = $request->sub_category_id;
@@ -135,6 +143,21 @@ class ProductsController extends Controller
         $product->long_desc = $request->long_desc;
         $product->stock = $request->stock;
         $product->stock_warning = $request->stock_warning;
+        
+
+        if($request->promo == 1){
+            $product->promo_price = $request->promo_price;
+            $product->start_date = $request->start_date;
+            $product->end_date = $request->end_date;
+            $product->save();
+        }
+        else {
+            $product->promo_price = null;
+            $product->start_date = null;
+            $product->end_date = null;
+            $product->save();
+        }
+
         $product->save();
         return redirect()->route('products.list');
     }

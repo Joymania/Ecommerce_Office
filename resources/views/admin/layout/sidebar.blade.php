@@ -68,6 +68,8 @@
 
                                 <li class="{{ Request::segment(4) === 'category' ? 'active' : null }}"><a href="{{route('category.view')}}">Category</a></li>
                                 <li class="{{ Request::segment(4) === 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
+                                <li class="{{ Request::segment(4) === 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
+                                <li class="{{ Request::segment(4) === 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
                                 <li class="{{ Request::segment(4) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
 
                             </ul>

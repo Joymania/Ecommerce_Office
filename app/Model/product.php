@@ -19,6 +19,9 @@ class product extends Model
         'stock',
         'stock_warning',
         'sub_category_id'
+        'promo_price',
+        'start_date',
+        'end_date'
     ];
 
     public function category()

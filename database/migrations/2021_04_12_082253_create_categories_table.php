@@ -10,7 +10,7 @@ class CreateCategoriesTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+     */ 
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {

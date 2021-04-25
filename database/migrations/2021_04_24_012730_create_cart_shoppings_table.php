@@ -17,7 +17,6 @@ class CreateCartShoppingsTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('product_size')->nullable();
-
             $table->bigInteger('product_color')->nullable();
             $table->integer('qty');
             $table->double('subtotal');

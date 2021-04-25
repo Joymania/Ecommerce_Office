@@ -21,7 +21,7 @@ class category extends Model
     public function delete() {
       $this->sub_category()->delete();
       return parent::delete();
-  }
+  } 
 
 
 

@@ -11,7 +11,7 @@
          Add Cupon
         <a class=" float-right btn btn-success btn-sm" href="{{ route('cupon.view') }}"><i class="fa fa-list"></i> Cupon List</a>
       </h3>
-    </div>
+    </div> 
     <div class="card-body">
       <form method="post" action="{{route('cupon.store') }}" id="myform" enctype="multipart/form-data">
           @csrf

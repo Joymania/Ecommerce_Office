@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
 
-    @if(isset($logos->image))
-    <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}">
-    @endif
-
-    {{-- <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}"> --}}
+    @if(!empty($logos))
+   <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}">
+   @else 
+   <p>no logo</p>
+   @endif
 
 
     <!-- All CSS is here
@@ -102,9 +102,14 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    @if(isset($logos->image))
+                                    
+                                    @if(!empty($logos))
+                                    
                                     <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
-                                    @endif
+
+                                    @else
+                                    <p>no logo</p>
+                                   @endif
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7">
@@ -158,7 +163,7 @@
                                                     <li><a href="cart.html">cart page</a></li>
                                                     <li><a href="checkout.html">checkout </a></li>
                                                     <li><a href="my-account.html">my account</a></li>
-                                                    <li><a href="wishlist.html">wishlist </a></li>
+                                                    <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
                                                     <li><a href="compare.html">compare </a></li>
                                                     <li><a href="contact.html">contact us </a></li>
                                                     <li><a href="{{ route('track.show') }}">order tracking</a></li>

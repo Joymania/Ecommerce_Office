@@ -22,6 +22,8 @@ use Session;
 
 class CartController extends Controller
 {
+
+
     public function addtoCart(Request $request){
 
         //dd($id);
@@ -50,6 +52,7 @@ class CartController extends Controller
             ]
 
         ]);
+
         $subtotal=$request->qty * $product->price;
 
             $idauth = Auth::id();
@@ -62,6 +65,7 @@ class CartController extends Controller
             $cart_add->qty=$request->qty;
             $cart_add->subtotal=$subtotal;
             $cart_add->save();
+
             }
 
         return redirect()->route('show.cart')->with('success','Product added Successfully.');
@@ -71,14 +75,11 @@ class CartController extends Controller
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
-        //Cart::store('$id');
         $id = Auth::id();
-        //dd($id.'User _id');
             if($id){
             $data['showCart']=CartShopping::with('product')->where(function($querry)use($id) {
                 $querry->where('user_id',$id)->where('status','0');
             })->get();
-            // dd( $data['showCart']);
 
         }
 
@@ -87,18 +88,44 @@ class CartController extends Controller
     }
 
     public function updateCart(Request $request){
-        Cart::update($request->rowId, $request->qty);
+        if($request->id){
+            $id=$request->id;
+            $cart_add=CartShopping::find($id);
+            $cartprice=$cart_add->subtotal/$cart_add->qty;
+            $cart_add->qty=$request->qty;
+            $cart_add->subtotal=$request->qty * $cartprice;
+            $cart_add->save();
+
+        }
+    if($request->rowId){
+         Cart::update($request->rowId, $request->qty);
+    }
+
         return redirect()->route('show.cart');
     }
 
     public function deleteCart($rowId){
+
         Cart::remove($rowId);
+        return redirect()->route('show.cart')->with('success','Product removed Successfully.');
+    }
+    public function deleteAuthCart($id){
+        $data=CartShopping::find($id);
+        $data->delete();
         return redirect()->route('show.cart')->with('success','Product removed Successfully.');
     }
 
     public function destroyCart(){
         Cart::destroy();
         return redirect()->route('show.cart');
+    }
+    public function destroyAauthCart($id){
+        $cart=CartShopping::where('user_id',$id)->get();
+        foreach($cart as $cart){
+            $cart->delete();
+        }
+        return redirect()->route('show.cart')->with('success','Product removed Successfully.');
+
     }
     public function applyCuppon(Request $request){
         $check=cupon::where('cupon',$request->cupon)->first();

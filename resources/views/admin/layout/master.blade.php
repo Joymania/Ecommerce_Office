@@ -26,7 +26,7 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}">
         @endif
-
+        
         @if (Request::segment(2) === 'iot' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/morrisjs/morris.css') }}">
         @endif
