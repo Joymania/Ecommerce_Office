@@ -16,7 +16,8 @@ class product extends Model
         'short_desc',
         'long_desc',
         'image',
-        'stock'
+        'stock',
+        'stock_warning'
     ];
 
     public function category()
@@ -32,7 +33,7 @@ class product extends Model
     {
         return $this->belongsTo(tag::class, 'tag_id','id');
     }
- 
+
     public function colors()
     {
         return $this->belongsToMany(color::class, 'product_colors')->withTimestamps();

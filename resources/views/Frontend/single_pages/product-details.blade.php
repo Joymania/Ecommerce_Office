@@ -216,7 +216,7 @@
                                         <td class="title width1">Size</td>
                                         @if($product->sizes)
                                             @foreach($product->sizes as $size)
-                                                <td>{{$size->name}} </td>
+                                                <td>{{$size->name}}</td>
                                             @endforeach
                                         @else
                                             <td>----</td>
@@ -229,13 +229,9 @@
                                     </tr>
                                     <tr>
                                         <td class="title width1">Color</td>
-                                        @if($product->colors)
                                             @foreach($product->colors as $color)
-                                            <td>{{$color->name}} </td>
+                                            <td>{{!(array)$product?'hello world':$color->name}} </td>
                                             @endforeach
-                                        @else
-                                            <td>----</td>
-                                        @endif
                                     </tr>
                                     </tbody>
                                 </table>

@@ -179,40 +179,6 @@
                 </div>
             </div>
         </div>
-        <div class="banner-area pb-90">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner-wrap mb-30">
-                            <div class="banner-img banner-img-zoom">
-                                <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-10.jpg" alt=""></a>
-                            </div>
-                            <div class="banner-content-11 banner-content-11-modify">
-                                <h2><span>Zara</span> Pattern Boxed <br>Underwear</h2>
-                                <p>Stretch, & Fress cool</p>
-                                <div class="btn-style-4">
-                                    <a class="hover-red" href="product-details.html">Shop now <i class="icon-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner-wrap mb-30">
-                            <div class="banner-img banner-img-zoom">
-                                <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-11.jpg" alt=""></a>
-                            </div>
-                            <div class="banner-content-11 banner-content-11-modify">
-                                <h2><span>Basic</span> Color<br>Caps</h2>
-                                <p>Less is more!</p>
-                                <div class="btn-style-4">
-                                    <a class="hover-red" href="product-details.html">Shop now <i class="icon-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         @foreach($categories as $cat)
         <div class="product-area pb-85">

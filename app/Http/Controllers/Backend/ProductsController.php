@@ -42,18 +42,18 @@ class ProductsController extends Controller
         $this->validate($request,[
             'category_id' => 'required',
             'brand_id' => 'required',
-            'tag_id' => 'required',
             'name' => 'required',
             'price' => 'required',
             'short_desc' => 'max:255',
             'image' => 'required',
             'stock' => 'required',
+            'stock_warning' => 'required'
         ]);
 
         $extension = $request->image->getClientOriginalExtension();
         $filename = rand(10000,99999).time().'.'.$extension;
         $request->image->move('upload/products_images',$filename);
-        
+        $request->image = $filename;
         $product = new product();
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
@@ -65,9 +65,15 @@ class ProductsController extends Controller
         $product->long_desc = $request->long_desc;
         $product->image = $filename;
         $product->stock = $request->stock;
+        $product->stock_warning = $request->stock_warning;
         $product->save();
-        $product->colors()->sync([$request->color_id]);
-        $product->sizes()->sync([$request->size_id]);
+
+        if ($request->color_id){
+            $product->colors()->sync([$request->color_id]);
+        }
+        if ($request->size_id){
+            $product->sizes()->sync([$request->size_id]);
+        }
 
         if($request->hasfile('images'))
         {
@@ -84,7 +90,6 @@ class ProductsController extends Controller
         }
 
         return redirect()->route('products.list');
-
     }
 
     public function edit(product $product)

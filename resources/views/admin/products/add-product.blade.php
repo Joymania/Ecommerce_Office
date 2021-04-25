@@ -38,6 +38,76 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
+                                                <label for="single-selection">Select Category</label>
+                                                <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Category</option>
+                                                    @foreach($categories as $row)
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('category_id')
+                                                <span style="color: red">Category Name is required</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <label for="sub_category_id">sub_category</label>
+                                                <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Sub Category</option>
+                                                    @foreach($sub_category as $sub)
+                                                        <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label for="single-selection">Select Brand Name</label>
+                                                <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Brand name</option>
+                                                    @foreach($brands as $row)
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('brand_id')
+                                                <span style="color: red">Brand Name is required</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <label for="single-selection">Select Tag</label>
+                                                <select id="single-selection" name="tag_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Tags</option>
+                                                    @foreach($tags as $row)
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('tag_id')
+                                                <span style="color: red">Tag is required</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <label for="single-selection">Select Colors</label>
+                                                <select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Product Color</option>
+                                                    @foreach($colors as $row)
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="single-selection">Select Sizes</label>
+                                                <select id="single-selection" name="size_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Product Size</option>
+                                                    @foreach($sizes as $row)
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col">
                                                 <label for="productPrice">Product Price</label>
                                                 <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product price">
                                                 @error('price')
@@ -52,64 +122,11 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
-                                                <label for="single-selection">Select Brand Name</label>
-                                                <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
-                                                    @foreach($brands as $row)
-                                                        <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('brand_id')
-                                                <span style="color: red">Brand Name is required</span>
+                                                <label for="stock">Stock Warning</label>
+                                                <input type="number" id="stock" class="form-control" name="stock_warning" placeholder="Stock Warning">
+                                                @error('stock_warning')
+                                                <span style="color: red">Product Stock Warning is required</span>
                                                 @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <label for="single-selection">Select Category</label>
-                                                <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
-                                                   @foreach($categories as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                                   @endforeach
-                                                </select>
-                                                @error('category_id')
-                                                <span style="color: red">Category Name is required</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Tag</label>
-                                                <select id="single-selection" name="tag_id" class="multiselect multiselect-custom form-control">
-                                                    @foreach($tags as $row)
-                                                        <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('tag_id')
-                                                <span style="color: red">Tag is required</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Colors</label>
-                                                <select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">
-                                                    @foreach($colors as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Sizes</label>
-                                                <select id="single-selection" name="size_id" class="form-control multiselect multiselect-custom">
-                                                    @foreach($sizes as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <label for="sub_category_id">sub_category</label>
-                                                <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
-                                                    @foreach($sub_category as $sub)
-                                                    <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
-                                                    @endforeach
-                                                </select>
                                             </div>
                                         </div>
 
@@ -143,9 +160,6 @@
                                                 <input type="file" id="image" class="form-control" name="images[]">
                                                 <input type="file" id="image" class="form-control" name="images[]">
                                                 <input type="file" id="image" class="form-control" name="images[]">
-                                                @error('image')
-                                                <span style="color: red">Product Image is required</span>
-                                                @enderror
                                             </div>
                                         </div>
 
