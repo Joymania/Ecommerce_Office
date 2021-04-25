@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-
+ 
     //category
     public function category()
     {
@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     }
 
     // insertCategory
-    public function insertCategory()
+    public function insertCategory() 
     {
         return view('admin.category.insertCategory');
     }

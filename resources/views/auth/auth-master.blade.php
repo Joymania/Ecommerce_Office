@@ -92,8 +92,16 @@
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="/"><img src="{{asset($logos->image)}}" alt="logo"></a>
-                                </div>
+                                    @if(!empty($logos))
+                                    
+                                    <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+
+                                    @else
+                                    <p>no logo</p>
+
+
+                                   @endif
+                                </div> 
                             </div>
                             <div class="col-xl-8 col-lg-7">
                                 <div class="main-menu main-menu-padding-1 main-menu-lh-1">
@@ -208,9 +216,15 @@
                     <div class="row align-items-center">
                         <div class="col-5">
                             <div class="mobile-logo">
-                                <a href="/">
-                                    <img alt="Logo" src="{{asset($logos->image)}}>
-                                </a>
+                                @if(!empty($logos))
+                                    
+                                    <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+
+                                    @else
+                                    <p>no logo</p>
+
+
+                                   @endif
                             </div>
                         </div>
                         <div class="col-7">
@@ -452,7 +466,15 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="contact-info-wrap">
                             <div class="footer-logo">
-                                <a href="/"><img src="{{asset($logos->image)}}" alt="logo"></a>
+                                @if(!empty($logos))
+                                    
+                                    <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+
+                                    @else
+                                    <p>no logo</p>
+
+
+                                   @endif
                             </div>
                             <div class="single-contact-info">
                                 <span>Our Location</span>

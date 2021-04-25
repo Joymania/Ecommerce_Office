@@ -16,7 +16,10 @@ class product extends Model
         'short_desc',
         'long_desc',
         'image',
-        'stock'
+        'stock',
+        'promo_price',
+        'start_date',
+        'end_date'
     ];
 
     public function category()
@@ -52,6 +55,5 @@ class product extends Model
     {
         return $this->hasMany(SubImage::class, 'product_id','id');
     }
-
 
 }

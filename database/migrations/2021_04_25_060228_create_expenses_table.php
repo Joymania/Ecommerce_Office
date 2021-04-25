@@ -4,20 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
-     */ 
+     */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->unique();
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
+            $table->integer('category_id');
+            $table->Integer('amount');
+            $table->string('note')->nullable();
+            $table->string('expense_by')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('expenses');
     }
 }
