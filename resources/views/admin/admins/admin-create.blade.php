@@ -3,7 +3,7 @@
 @section('parentPageTitle', 'Admin')
 
 
-@section('content')
+@section('content') 
 
 <div class="row clearfix">
 <div class="col-lg-12">

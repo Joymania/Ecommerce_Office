@@ -25,7 +25,7 @@ class AdminController extends Controller
     {
         return view('admin.admins.admin-create');
     }
-
+ 
     // wil be used for admin registration
     public function store(Request $request, Admin $admin)
     {

@@ -8,7 +8,6 @@ use App\Model\category;
 use App\Model\product;
 use App\Model\Slider;
 use App\Model\sub_category;
-use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
 use Illuminate\Http\Request;

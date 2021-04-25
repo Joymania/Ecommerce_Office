@@ -69,7 +69,7 @@
                                     <div class="myaccount-content">
                                         <h3>Dashboard</h3>
                                         <div class="welcome">
-                                            <p>Hello, <strong>{{$users->name}}</strong> (If Not <strong>Tuntuni !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
+                                            <p>Hello, <strong>{{$users->name}}</strong> <strong></strong><a href="" class="logout"> </a></p>
                                         </div>
 
                                         <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
@@ -82,10 +82,10 @@
                                         <h3>Orders</h3>
                                         <div class="myaccount-table table-responsive text-center">
                                             <table class="table table-bordered">
-                                                <thead class="thead-light">
+                                                <thead class="thead-light"> 
                                                     <tr>
                                                         <th>Order</th>
-                                                        <th>Date</th>
+                                                         <th>Date</th>
                                                         <th>Status</th>
                                                         <th>Total</th>
                                                         <th>Action</th>
@@ -102,7 +102,7 @@
                                                         <td>Accepted</td>
                                                         @endif
                                                         <td></td>
-                                                        <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
+                                                        {{-- <td><a href="" class="check-btn sqr-btn ">View</a></td> --}}
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -132,7 +132,7 @@
                                             <p>Mobile: {{$ord->biling_phone}}</p>
                                             @endforeach
                                         </address>
-                                        <a href="#" class="check-btn sqr-btn "><i class="fa fa-edit"></i> Edit Address</a>
+                                        
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
