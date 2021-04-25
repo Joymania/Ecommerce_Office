@@ -28,7 +28,9 @@ Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.car
  Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
 Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');

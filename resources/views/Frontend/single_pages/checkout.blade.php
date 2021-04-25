@@ -62,7 +62,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="billing-info mb-20">
                                                 <label>First Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="fname" value="{{ @$users->name }}">
+                                                <input type="text" name="name" value="{{ @$users->name }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">

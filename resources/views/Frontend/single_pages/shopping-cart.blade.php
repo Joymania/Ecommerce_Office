@@ -102,10 +102,11 @@
                                             <form method="post" action="{{ route('update.cart') }}" >
                                                 @csrf
                                                   <div>
+
                                                         <div class="cart-plus-minus" >
-                                                            <input class="cart-plus-minus-box" type="text" name="qty" value="{{ $show['qty'] }}">
+                                                            <input class="cart-plus-minus-box" type="text" name="qty" value="{{ $show->qty }}">
                                                         </div>
-                                                        <input type="hidden" name="rowId" value="{{ $show['id'] }}">
+                                                        <input type="hidden" name="id" value="{{ $show->id }}">
                                                           <div class="float-right">
                                                         <input type="submit" value="Update" class="cart">
 
@@ -120,7 +121,7 @@
                                         </td>
                                         <td class="product-subtotal">{{ $show['subtotal'] }}</td>
                                         <td class="product-remove">
-                                            {{-- <a href="{{ route('delete.cart',$show['id']) }}"><i class="icon_close"></i></a> --}}
+                                            <a href="{{ route('delete.authcart',$show['id']) }}"><i class="icon_close"></i></a>
 
 
                                         </td>
@@ -203,9 +204,18 @@
                                         <div class="cart-shiping-update">
                                             <a href="#">Continue Shopping</a>
                                         </div>
+                                        @if (Auth::user())
+                                        <div class="cart-clear">
+
+                                            <a href="{{ route('destroyauth.cart',Auth::user()) }}">Clear Cart</a>
+
+
+                                        </div>
+                                        @else
                                         <div class="cart-clear">
                                             <a href="{{ route('destroy.cart') }}">Clear Cart</a>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +224,7 @@
                             {{-- @if (Session::has('cupon'))
 
                             @else --}}
-                            <div class="col-lg-4 col-md-6">
+                            {{-- <div class="col-lg-4 col-md-6">
                                 <div class="discount-code-wrapper">
                                     <div class="title-wrap">
                                         <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
@@ -222,17 +232,17 @@
                                     {{--  @if (Session::has('cupon'))
 
                                     @else  --}}
-                                    <div class="discount-code">
+                                    {{-- <div class="discount-code">
                                         <p>Enter your coupon code if you have one.</p>
                                         <form method="POST" action="{{ route('apply.cuppon') }}">
                                             @csrf
                                             <input type="text" required name="cupon">
                                             <button class="cart-btn-2" type="submit">Apply Coupon</button>
                                         </form>
-                                    </div>
+                                    </div> --}}
                                     {{--  @endif  --}}
-                                </div>
-                            </div>
+                                {{-- </div>
+                            </div> --}}
                             {{-- @endif --}}
                             <div class="col-lg-4 col-md-12">
                                 <div class="grand-totall">
@@ -293,6 +303,36 @@
                 </div>
             </div>
         </div>
+
+        <script>
+             $(document).ready(function () {
+
+            $('.increment-btn').click(function (e) {
+                e.preventDefault();
+                var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+                var value = parseInt(incre_value, 10);
+                value = isNaN(value) ? 0 : value;
+                if(value<10){
+                    value++;
+                    $(this).parents('.quantity').find('.qty-input').val(value);
+                }
+
+            });
+
+            $('.decrement-btn').click(function (e) {
+                e.preventDefault();
+                var decre_value = $(this).parents('.quantity').find('.qty-input').val();
+                var value = parseInt(decre_value, 10);
+                value = isNaN(value) ? 0 : value;
+                if(value>1){
+                    value--;
+                    $(this).parents('.quantity').find('.qty-input').val(value);
+                }
+            });
+
+});
+
+        </script>
     @endsection
         <!-- mini cart start -->
 
