@@ -230,7 +230,7 @@
 
                                     @else
                                      <div class="discount-code">
-                                        <p>Enter your coupon  if you have one.</p>
+                                        <p>Enter your coupon code if you have one.</p>
                                         <form method="POST" action="{{ route('apply.cuppon') }}">
                                             @csrf
                                             <input type="text" required name="cupon">
