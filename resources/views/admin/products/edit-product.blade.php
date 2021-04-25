@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="row clearfix">
+    <div onload="showPromo()" class="row clearfix">
 
         <div class="col-lg-12 col-md-12">
             <div class="card planned_task">
@@ -118,6 +118,47 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                         <!-- Promotional Price  Start-->
+                                         <div class="form-row my-4" >
+                                            <div class="">
+                                                <label for="promo_btn">Add Promotion</label>
+                                                <input type="checkbox" id="promo_btn" class="btn btn-primary mr-3" value="1" name="promo" onclick="showPromo()" {{($product->promo_price) ? "checked" : null}}>
+                                            </div>
+
+                                            <div id="promo_section" style="{{($product->promo_price) ? 'display: flex;' : 'display: none;'}}">
+
+                                                <div class="col-md-3">
+                                                    <label for="promo_price">Promotional Price</label>
+                                                    <input type="text" name="promo_price" id="promo_price" placeholder="Pormotional Price" value="{{$product->promo_price}}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="start_date">Start Date</label>
+                                                    <input type="date" name="start_date" id="start_date" value="{{$product->start_date}}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="end_date">End Date</label>
+                                                    <input type="date" name="end_date" id="end_date" value="{{$product->end_date}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <script>
+                                            document.getElementById("promo_section").onload = function() {
+                                                console.log("loaded")
+                                                showPromo()};
+
+                                            function showPromo(){      
+                                                var checkBox = document.getElementById("promo_btn");                                  
+                                                var promo_section = document.getElementById('promo_section');
+                                                if (checkBox.checked == true){                                                 
+                                                    promo_section.style.display = "flex";
+                                                } else {
+                                                    promo_section.style.display = "none";
+                                                }
+                                            }
+                                        </script>
+                                         <!-- Promotional Price End-->
 
                                         <div class="form-row">
                                             <div class="col">

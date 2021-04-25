@@ -26,6 +26,10 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->integer("stock");
             $table->integer("sub_category_id")->nullable();
+
+            $table->double('promo_price')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
