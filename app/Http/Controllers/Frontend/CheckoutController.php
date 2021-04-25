@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Model\CartShopping;
 use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
@@ -11,6 +12,7 @@ use App\Model\OrderProduct;
 use App\User;
 use Illuminate\Http\Request;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -18,14 +20,23 @@ class CheckoutController extends Controller
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
-        $data['users']=User::find(1);
+        $data['users']=Auth::user();
+
+        $id = Auth::id();
+
+            if($id){
+            $data['showCart']=CartShopping::with('product')->where(function($querry)use($id) {
+                $querry->where('user_id',$id)->where('status','0');
+            })->get();
+        }
         return view('Frontend.single_pages.checkout',$data);
-    }
+
+}
 
     public function store(Request $request){
        $order=Order::create([
         'user_id'=>auth()->user()? auth()->user()->id : null,
-        'biling_fname'=>$request->fname,
+        'biling_fname'=>$request->name,
         'biling_lname'=>$request->lname,
         'biling_address'=>$request->address,
         'biling_city'=>$request->city,
@@ -56,18 +67,13 @@ class CheckoutController extends Controller
     }
 
     public function track(Request $request){
+        $id=Auth::id();
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
-            $data['orders']=Order::where('id',$request->order_id)->with('products')->first();
-            return view('Frontend.single_pages.order_tracking',$data);
-           //$email=$request->email;
-           //dd($email);
-           //$orders=Order::with('products')->find('khorshedicepust@gmail.com');
-        //    dd($orders);
-        //     foreach ($orders->products as $value) {
-        //         echo $value['pivot']['order_id'];
-        //     }
+        $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();
+        //dd($data['orders']);
+        return view('Frontend.single_pages.order_tracking',$data);
 
     }
 

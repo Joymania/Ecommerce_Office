@@ -42,6 +42,7 @@
 
                                 @endif
                                  <a href="{{ route('order.status',$order->id) }}" class="btn btn-success" ><i class="fa fa-arrow-up"></i> <span>Approve</span></a>
+                                 <a href="{{ route('order.delivarystatus',$order->id) }}" class="btn btn-info" ><i class="fa fa-truck"></i> <span>Delivary</span></a>
 
                             </td>
 

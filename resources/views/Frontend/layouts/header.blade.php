@@ -166,7 +166,7 @@
                                                     <li><a href="cart.html">cart page</a></li>
                                                     <li><a href="checkout.html">checkout </a></li>
                                                     <li><a href="my-account.html">my account</a></li>
-                                                    <li><a href="wishlist.html">wishlist </a></li>
+                                                    <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
                                                     <li><a href="compare.html">compare </a></li>
                                                     <li><a href="contact.html">contact us </a></li>
                                                     <li><a href="{{ route('track.show') }}">order tracking</a></li>

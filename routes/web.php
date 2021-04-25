@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 /*Front end routing Starts*/
  
 Auth::routes(['verify' => true]);
- 
+
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
 
@@ -32,11 +32,19 @@ Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.car
  Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
+//Checkout
 Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
 Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
+
+
+//wishlist
+Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
+Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
 
 Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
 Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
@@ -56,12 +64,13 @@ Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('de
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
-//Checkout
-Route::middleware(['auth','verified'])->group(function () {
 
-    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
-    Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
+
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+
     // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
  
 });
@@ -135,13 +144,14 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
         Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
     });
-  
+
     // Order
     Route::prefix('order')->group(function () {
         Route::get('/view','Backend\OrderController@view')->name('order.view');
         Route::get('/details/{id}','Backend\OrderController@details')->name('order.details');
         Route::get('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
         Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
+        Route::get('deliver/{id}','Backend\OrderController@deliveryStatus')->name('order.delivarystatus');
     });
     // Color
     Route::prefix('color')->group(function () {

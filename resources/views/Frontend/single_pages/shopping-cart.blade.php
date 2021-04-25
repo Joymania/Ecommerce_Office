@@ -102,10 +102,11 @@
                                             <form method="post" action="{{ route('update.cart') }}" >
                                                 @csrf
                                                   <div>
+
                                                         <div class="cart-plus-minus" >
-                                                            <input class="cart-plus-minus-box" type="text" name="qty" value="{{ $show['qty'] }}">
+                                                            <input class="cart-plus-minus-box" type="text" name="qty" value="{{ $show->qty }}">
                                                         </div>
-                                                        <input type="hidden" name="rowId" value="{{ $show['id'] }}">
+                                                        <input type="hidden" name="id" value="{{ $show->id }}">
                                                           <div class="float-right">
                                                         <input type="submit" value="Update" class="cart">
 
@@ -120,7 +121,7 @@
                                         </td>
                                         <td class="product-subtotal">{{ $show['subtotal'] }}</td>
                                         <td class="product-remove">
-                                            {{-- <a href="{{ route('delete.cart',$show['id']) }}"><i class="icon_close"></i></a> --}}
+                                            <a href="{{ route('delete.authcart',$show['id']) }}"><i class="icon_close"></i></a>
 
 
                                         </td>
@@ -203,26 +204,32 @@
                                         <div class="cart-shiping-update">
                                             <a href="#">Continue Shopping</a>
                                         </div>
+                                        @if (Auth::user())
+                                        <div class="cart-clear">
+
+                                            <a href="{{ route('destroyauth.cart',Auth::user()) }}">Clear Cart</a>
+
+
+                                        </div>
+                                        @else
                                         <div class="cart-clear">
                                             <a href="{{ route('destroy.cart') }}">Clear Cart</a>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         <div class="row">
 
-                            {{-- @if (Session::has('cupon'))
-
-                            @else --}}
                             <div class="col-lg-4 col-md-6">
                                 <div class="discount-code-wrapper">
                                     <div class="title-wrap">
                                         <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
                                     </div>
-                                    {{--  @if (Session::has('cupon'))
+                                      @if (Session::has('cupon'))
 
-                                    @else  --}}
-                                    <div class="discount-code">
+                                    @else
+                                     <div class="discount-code">
                                         <p>Enter your coupon code if you have one.</p>
                                         <form method="POST" action="{{ route('apply.cuppon') }}">
                                             @csrf
@@ -230,10 +237,9 @@
                                             <button class="cart-btn-2" type="submit">Apply Coupon</button>
                                         </form>
                                     </div>
-                                    {{--  @endif  --}}
-                                </div>
+                                     @endif
+                                 </div>
                             </div>
-                            {{-- @endif --}}
                             <div class="col-lg-4 col-md-12">
                                 <div class="grand-totall">
                                     <div class="title-wrap">
@@ -242,22 +248,27 @@
 
                                     @if (Session::has('cupon'))
                                     <h5>Total products <span>{{ Session::get('cupon')['blance']}}</span></h5>
+                                    @elseif(Auth::user())
+                                    @php
+                                    $subammount=0;
+                                        foreach ($showCart as $show) {
+                                           $subammount+=$show->subtotal;
+                                        }
+                                    @endphp
+                                      <h5>Total products <span>{{ $subammount }}</span></h5>
                                     @else
-                                     <h5>Total products <span>{{ Cart::priceTotal() }}</span></h5>
+                                     <h5>Total products <span>{{ Cart::subtotal() }}</span></h5>
                                     @endif
-
-
-
-
 
                                     <div class="total-shipping">
                                         <h5>Total shipping</h5>
                                         <ul>
-                                            <li><input type="checkbox"> Standard <span>$20.00</span></li>
-                                            <li><input type="checkbox"> Express <span>$30.00</span></li>
+                                            <li><input type="radio" name="check" value="1" checked> Standard <span>20.00</span></li>
+                                            <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4>
+
+                                    {{-- <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4> --}}
                                     <a href="{{ route('checkout') }}">Proceed to Checkout</a>
                                 </div>
                             </div>
@@ -293,6 +304,7 @@
                 </div>
             </div>
         </div>
+
     @endsection
         <!-- mini cart start -->
 
