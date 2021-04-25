@@ -11,7 +11,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
-    protected $route = 'password.reset';
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token, $this->route));
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     /**

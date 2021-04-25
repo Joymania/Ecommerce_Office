@@ -129,10 +129,62 @@ $(document).ready(function () {
                             '<button title="Add to Cart">Add To Cart</button>' +
                             ' </div> </div>  </div> </div>')
                     }
+                }else {
+                    shopArea.append('' +
+                        '<div class="col-12 text-center"><h3>No Result Found</h3></div>');
                 }
             }
 
         })
     })
+});
+
+$(document).ready(function () {
+    $(".categoryName").on('click', function (e) {
+        e.preventDefault();
+        let shopArea = $('#shopArea');
+        let categoryName = $(this).text();
+        let singleProduct = $('.singleProduct');
+        $.ajax({
+            type: 'GET',
+            url: '/category-products',
+            data: {category: categoryName},
+            success: function (data) {
+                singleProduct.attr('hidden',true);
+                if (data.length > 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        shopArea.append('' +
+                            '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
+                            ' <div class="single-product-wrap mb-35">' +
+                            '<div class="product-img product-img-zoom mb-15">' +
+                            '<a href="/'+data[i].id+'/product-details">' +
+                            '<img src="../upload/products_images/'+data[i].image+'" ></a>' +
+                            '<div class="product-action-2 tooltip-style-2">' +
+                            '<button title="Wishlist"><i class="icon-heart"></i></button>' +
+                            '</div> </div>' +
+                            ' <div class="product-content-wrap-2 text-center">' +
+                            '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
+                            '<div class="product-price-2">' +
+                            '<span class="price">'+data[i].price+'</span><span style="margin-left: -3px">Tk.</span>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="product-content-wrap-2 product-content-position text-center">' +
+                            '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
+                            '<div class="product-price-2">' +
+                            ' <span class="product-price">'+data[i].price+' Tk.</span>' +
+                            ' </div>' +
+                            '<div class="pro-add-to-cart">' +
+                            '<button title="Add to Cart">Add To Cart</button>' +
+                            ' </div> </div>  </div> </div>')
+                    }
+                }else {
+                    $('#noResult').remove();
+                    shopArea.append('' +
+                        '<div id="noResult" class="col-12 text-center"><h3>No Result Found</h3></div>');
+                }
+            }
+        })
+
+    });
 });
 

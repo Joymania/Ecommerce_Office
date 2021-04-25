@@ -10,11 +10,11 @@ use App\Model\product;
 use App\Model\size;
 use App\Model\SubImage;
 use App\Model\tag;
-
+use App\Model\sub_category;
 use Illuminate\Http\Request;
 use Illuminate\Queue\RedisQueue;
 use Illuminate\Support\Facades\DB;
-use App\Model\sub_category;
+
 
 
 class ProductsController extends Controller
@@ -100,8 +100,9 @@ class ProductsController extends Controller
         $tags = tag::all();
         $colors = color::all();
         $sizes = size::all();
+        $sub_category = sub_category::all();
         return view('admin.products.edit-product',
-            compact('product','categories','brands','tags','colors','sizes'));
+            compact('product','categories','brands','tags','colors','sizes','sub_category'));
     }
 
     public function update(Request $request, product $product)
@@ -124,9 +125,17 @@ class ProductsController extends Controller
             $product->image = $filename;
             $product->save();
         }
-
-        $product->update($request->all());
-
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->sub_category_id = $request->sub_category_id;
+        $product->tag_id = $request->tag_id;
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->short_desc = $request->short_desc;
+        $product->long_desc = $request->long_desc;
+        $product->stock = $request->stock;
+        $product->stock_warning = $request->stock_warning;
+        $product->save();
         return redirect()->route('products.list');
     }
 

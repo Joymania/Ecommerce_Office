@@ -4,14 +4,13 @@ namespace App\Model;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use App\Notifications\AdminPasswordReset as ResetPasswordNotification;
 
 class Admin extends Authenticatable
 {
     use Notifiable;
 
     protected $guard = 'admin';
-    public $route = 'admin.password.reset';
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +38,6 @@ class Admin extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token, $this->route));
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

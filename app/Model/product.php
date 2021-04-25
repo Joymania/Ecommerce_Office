@@ -17,7 +17,8 @@ class product extends Model
         'long_desc',
         'image',
         'stock',
-        'stock_warning'
+        'stock_warning',
+        'sub_category_id'
     ];
 
     public function category()

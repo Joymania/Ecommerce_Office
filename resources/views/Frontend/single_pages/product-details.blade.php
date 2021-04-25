@@ -89,6 +89,7 @@
                                 @endforeach
                             @endif
                         </div>
+
                         <div class="product-dec-slider-small product-dec-small-style1">
                             <div class="product-dec-small active">
                                 <img src="{{"/upload/products_images/$product->image"}}" alt="">
@@ -104,6 +105,9 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
+                    <form action="{{ route('insert.cart') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}">
                     <div class="product-details-content pro-details-content-mrg">
                         <h2>{{$product->name}}</h2>
                         <div class="product-ratting-review-wrap">
@@ -127,6 +131,7 @@
                             <span class="new-price">{{$product->price}} Tk.</span>
                             <span class="old-price">$95.72</span>
                         </div>
+                        @if(count($product->colors) > 0)
                         <div class="pro-details-color-wrap">
                             <span>Color:</span>
                             <div class="pro-details-color-content">
@@ -137,6 +142,9 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
+
+                        @if(count($product->sizes) > 0)
                         <div class="pro-details-size">
                             <span>Size:</span>
                             <div class="pro-details-size-content">
@@ -147,10 +155,11 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
                         <div class="pro-details-quality">
                             <span>Quantity:</span>
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+                                <input class="cart-plus-minus-box" type="text" name="qty" value="1">
                             </div>
                         </div>
                         <div class="product-details-meta">
@@ -165,7 +174,8 @@
                         </div>
                         <div class="pro-details-action-wrap">
                             <div class="pro-details-add-to-cart">
-                                <a title="Add to Cart" href="#">Add To Cart </a>
+                                {{-- <a href="{{ route('insert.cart') }}">Add To Cart </a> --}}
+                                <input type="submit" value="Add To Cart">
                             </div>
                             <div class="pro-details-action">
                                 <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>
@@ -180,6 +190,8 @@
                             </div>
                         </div>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -212,27 +224,26 @@
                                         <td class="title width1">Categories</td>
                                         <td>{{($product->category->name) ? $product->category->name: "----"}}</td>
                                     </tr>
+                                    @if(count($product->sizes) > 0)
                                     <tr>
                                         <td class="title width1">Size</td>
-                                        @if($product->sizes)
                                             @foreach($product->sizes as $size)
                                                 <td>{{$size->name}}</td>
                                             @endforeach
-                                        @else
-                                            <td>----</td>
-                                        @endif
-
                                     </tr>
+                                    @endif
                                     <tr>
                                         <td class="title width1">Brand </td>
                                         <td>{{($product->brand) ? $product->brand->name: "----"}}</td>
                                     </tr>
+                                    @if(count($product->colors) > 0)
                                     <tr>
                                         <td class="title width1">Color</td>
                                             @foreach($product->colors as $color)
-                                            <td>{{!(array)$product?'hello world':$color->name}} </td>
+                                            <td>{{$color->name}} </td>
                                             @endforeach
                                     </tr>
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

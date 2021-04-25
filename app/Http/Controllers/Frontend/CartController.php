@@ -3,26 +3,36 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Model\CartShopping;
+use App\Model\CartShoppingProduct;
+use App\Model\category;
 use App\Model\color;
+use App\Model\contacts;
 use App\Model\cupon;
+use App\Model\logo;
+use App\Model\Order;
 use App\Model\product;
 use App\Model\size;
 use Illuminate\Http\Request;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
+
 
 class CartController extends Controller
 {
     public function addtoCart(Request $request){
+
+        //dd($id);
         // $this->validate($request,[
         //     'size_id'=>'required',
         //     'color_id'=>'required'
         // ]);
         $product=product::where('id',$request->id)->first();
-        // $product_size=size::where('id',$request->size_id)->first();
+        $product_size=size::where('id',$request->size_id)->first();
+        $product_color=color::where('id',$request->color_id)->first();
 
-        // $product_color=color::where('id',$request->color_id)->first();
 
         Cart::add([
             'id'=>$product->id,
@@ -40,10 +50,40 @@ class CartController extends Controller
             ]
 
         ]);
+        $subtotal=$request->qty * $product->price;
+
+            $idauth = Auth::id();
+            if($idauth){
+            $cart_add=new CartShopping();
+            $cart_add->user_id=$idauth;
+            $cart_add->product_id=$product->id;
+            $cart_add->product_size=$product_size;
+            $cart_add->product_color=$product_color;
+            $cart_add->qty=$request->qty;
+            $cart_add->subtotal=$subtotal;
+            $cart_add->save();
+            }
+
         return redirect()->route('show.cart')->with('success','Product added Successfully.');
     }
+
     public function showCart(){
-        return view('Frontend.single_pages.shopping-cart');
+        $data['logos']=logo::first();
+        $data['categories']=category::all();
+        $data['contacts']=contacts::first();
+        //Cart::store('$id');
+        $id = Auth::id();
+        //dd($id.'User _id');
+            if($id){
+            $data['showCart']=CartShopping::with('product')->where(function($querry)use($id) {
+                $querry->where('user_id',$id)->where('status','0');
+            })->get();
+            // dd( $data['showCart']);
+
+        }
+
+        return view('Frontend.single_pages.shopping-cart',$data);
+
     }
 
     public function updateCart(Request $request){
@@ -63,7 +103,6 @@ class CartController extends Controller
     public function applyCuppon(Request $request){
         $check=cupon::where('cupon',$request->cupon)->first();
         $cart=Cart::subtotal();
-
 
         if($check){
            Session::put('cupon', [

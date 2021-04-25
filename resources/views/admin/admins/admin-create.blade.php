@@ -7,7 +7,7 @@
 
 <div class="row clearfix">
 <div class="col-lg-12">
-<div class="card">
+<div class="card"> 
     <div class="card-header">
         <h3> Create User</h3> 
         <a class=" float-right btn btn-success btn-sm" href="{{ route('admin.index') }}"><i class="fa fa-list"></i> Admin List</a>
@@ -31,7 +31,7 @@
         @endif
 
         @if(session()->has('errors'))
-         {{--dd($errors['errors']--}}
+         {{-- dd($errors['errors'] --}}
         @endif
     </div>
 
@@ -68,13 +68,9 @@
                         <h6>Basic Information</h6>
 
                         <div class="form-group">                                                
-                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" value="{{old('name')}}">
+                            <input name="name" type="text" class="form-control placeholder="Name" value="{{old('name')}}">
                         </div>
-                        @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+            
                     
                         <div class="form-group">
                             <input name="email" type="email" class="form-control" placeholder="Email" value="{{old('email')}}">
