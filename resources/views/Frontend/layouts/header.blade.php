@@ -9,11 +9,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
+
     @if(!empty($logos))
    <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}">
    @else 
    <p>no logo</p>
    @endif
+
 
     <!-- All CSS is here
 	============================================ -->
@@ -101,18 +103,13 @@
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
                                     
-                                    
                                     @if(!empty($logos))
                                     
                                     <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
 
                                     @else
                                     <p>no logo</p>
-
-
                                    @endif
-
-                                    
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-7">

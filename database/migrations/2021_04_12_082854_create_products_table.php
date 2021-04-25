@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('category_id');
             $table->integer('brand_id');
-            $table->integer('tag_id');
+            $table->integer('tag_id')->nullable();
             $table->integer('review_id')->nullable();
             $table->string('name');
             $table->double('price');
@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->text('long_desc')->nullable();
             $table->string('image')->nullable();
             $table->integer("stock");
+            $table->integer('stock_warning');
             $table->integer("sub_category_id")->nullable();
 
 

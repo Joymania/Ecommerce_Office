@@ -131,6 +131,7 @@
                             <span class="new-price">{{$product->price}} Tk.</span>
                             <span class="old-price">$95.72</span>
                         </div>
+                        @if(count($product->colors) > 0)
                         <div class="pro-details-color-wrap">
                             <span>Color:</span>
                             <div class="pro-details-color-content">
@@ -141,6 +142,9 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
+
+                        @if(count($product->sizes) > 0)
                         <div class="pro-details-size">
                             <span>Size:</span>
                             <div class="pro-details-size-content">
@@ -151,6 +155,7 @@
                                 </ul>
                             </div>
                         </div>
+                        @endif
                         <div class="pro-details-quality">
                             <span>Quantity:</span>
                             <div class="cart-plus-minus">
@@ -219,31 +224,26 @@
                                         <td class="title width1">Categories</td>
                                         <td>{{($product->category->name) ? $product->category->name: "----"}}</td>
                                     </tr>
+                                    @if(count($product->sizes) > 0)
                                     <tr>
                                         <td class="title width1">Size</td>
-                                        @if($product->sizes)
                                             @foreach($product->sizes as $size)
-                                                <td>{{$size->name}} </td>
+                                                <td>{{$size->name}}</td>
                                             @endforeach
-                                        @else
-                                            <td>----</td>
-                                        @endif
-
                                     </tr>
+                                    @endif
                                     <tr>
                                         <td class="title width1">Brand </td>
                                         <td>{{($product->brand) ? $product->brand->name: "----"}}</td>
                                     </tr>
+                                    @if(count($product->colors) > 0)
                                     <tr>
                                         <td class="title width1">Color</td>
-                                        @if($product->colors)
                                             @foreach($product->colors as $color)
                                             <td>{{$color->name}} </td>
                                             @endforeach
-                                        @else
-                                            <td>----</td>
-                                        @endif
                                     </tr>
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

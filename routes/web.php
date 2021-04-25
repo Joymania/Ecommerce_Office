@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 
 
 /*Front end routing Starts*/
- 
 Auth::routes(['verify' => true]);
 
 // redirect verified user
@@ -26,6 +25,7 @@ Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+Route::get('/category-products','Frontend\SearchController@categoryProducts')->name('category.products');
 
 //Shopping-Cart
 Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
