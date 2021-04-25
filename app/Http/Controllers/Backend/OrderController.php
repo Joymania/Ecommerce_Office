@@ -42,4 +42,10 @@ class OrderController extends Controller
             $order->save();
             return redirect()->back();
         }
+        public function deliveryStatus($id){
+            $order=Order::where('id',$id)->first();
+            $order->status=2;
+            $order->save();
+            return redirect()->back();
+        }
 }

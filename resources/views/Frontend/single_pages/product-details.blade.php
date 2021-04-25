@@ -173,7 +173,7 @@
                                 <input type="submit" value="Add To Cart">
                             </div>
                             <div class="pro-details-action">
-                                <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>
+                                <a title="Add to Wishlist" href="{{ route('wishlist.add',$product->id) }}"><i class="icon-heart"></i></a>
                                 <a title="Add to Compare" href="#"><i class="icon-refresh"></i></a>
                                 <a class="social" title="Social" href="#"><i class="icon-share"></i></a>
                                 <div class="product-dec-social">

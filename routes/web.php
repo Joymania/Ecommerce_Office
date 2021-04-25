@@ -33,17 +33,22 @@ Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.
 Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
+//Checkout
 Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
 Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
+
+
+//wishlist
+Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
+Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
 
 Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
 Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 
-//Checkout
-Route::middleware(['auth','verified'])->group(function () {
 
+Route::middleware(['auth','verified'])->group(function () {
 
 });
 /*Front end routing ends*/
@@ -123,6 +128,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/details/{id}','Backend\OrderController@details')->name('order.details');
         Route::get('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
         Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
+        Route::get('deliver/{id}','Backend\OrderController@deliveryStatus')->name('order.delivarystatus');
     });
     // Color
     Route::prefix('color')->group(function () {

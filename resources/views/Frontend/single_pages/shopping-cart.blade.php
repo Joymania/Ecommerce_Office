@@ -221,29 +221,25 @@
                             </div>
                         <div class="row">
 
-                            {{-- @if (Session::has('cupon'))
-
-                            @else --}}
-                            {{-- <div class="col-lg-4 col-md-6">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="discount-code-wrapper">
                                     <div class="title-wrap">
                                         <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
                                     </div>
-                                    {{--  @if (Session::has('cupon'))
+                                      @if (Session::has('cupon'))
 
-                                    @else  --}}
-                                    {{-- <div class="discount-code">
+                                    @else
+                                     <div class="discount-code">
                                         <p>Enter your coupon code if you have one.</p>
                                         <form method="POST" action="{{ route('apply.cuppon') }}">
                                             @csrf
                                             <input type="text" required name="cupon">
                                             <button class="cart-btn-2" type="submit">Apply Coupon</button>
                                         </form>
-                                    </div> --}}
-                                    {{--  @endif  --}}
-                                {{-- </div>
-                            </div> --}}
-                            {{-- @endif --}}
+                                    </div>
+                                     @endif
+                                 </div>
+                            </div>
                             <div class="col-lg-4 col-md-12">
                                 <div class="grand-totall">
                                     <div class="title-wrap">
@@ -252,22 +248,27 @@
 
                                     @if (Session::has('cupon'))
                                     <h5>Total products <span>{{ Session::get('cupon')['blance']}}</span></h5>
+                                    @elseif(Auth::user())
+                                    @php
+                                    $subammount=0;
+                                        foreach ($showCart as $show) {
+                                           $subammount+=$show->subtotal;
+                                        }
+                                    @endphp
+                                      <h5>Total products <span>{{ $subammount }}</span></h5>
                                     @else
-                                     <h5>Total products <span>{{ Cart::priceTotal() }}</span></h5>
+                                     <h5>Total products <span>{{ Cart::subtotal() }}</span></h5>
                                     @endif
-
-
-
-
 
                                     <div class="total-shipping">
                                         <h5>Total shipping</h5>
                                         <ul>
-                                            <li><input type="checkbox"> Standard <span>$20.00</span></li>
-                                            <li><input type="checkbox"> Express <span>$30.00</span></li>
+                                            <li><input type="radio" name="check" value="1" checked> Standard <span>20.00</span></li>
+                                            <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4>
+
+                                    {{-- <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4> --}}
                                     <a href="{{ route('checkout') }}">Proceed to Checkout</a>
                                 </div>
                             </div>
@@ -304,35 +305,6 @@
             </div>
         </div>
 
-        <script>
-             $(document).ready(function () {
-
-            $('.increment-btn').click(function (e) {
-                e.preventDefault();
-                var incre_value = $(this).parents('.quantity').find('.qty-input').val();
-                var value = parseInt(incre_value, 10);
-                value = isNaN(value) ? 0 : value;
-                if(value<10){
-                    value++;
-                    $(this).parents('.quantity').find('.qty-input').val(value);
-                }
-
-            });
-
-            $('.decrement-btn').click(function (e) {
-                e.preventDefault();
-                var decre_value = $(this).parents('.quantity').find('.qty-input').val();
-                var value = parseInt(decre_value, 10);
-                value = isNaN(value) ? 0 : value;
-                if(value>1){
-                    value--;
-                    $(this).parents('.quantity').find('.qty-input').val(value);
-                }
-            });
-
-});
-
-        </script>
     @endsection
         <!-- mini cart start -->
 

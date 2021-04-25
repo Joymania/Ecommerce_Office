@@ -22,6 +22,8 @@ use Session;
 
 class CartController extends Controller
 {
+
+
     public function addtoCart(Request $request){
 
         //dd($id);

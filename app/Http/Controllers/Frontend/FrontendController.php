@@ -10,7 +10,7 @@ use App\Model\Slider;
 use App\Model\sub_category;
 use App\Model\contacts;
 use App\Model\logo;
-use Illuminate\Http\Request;
+use Request;
 use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
@@ -22,6 +22,7 @@ class FrontendController extends Controller
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
         $products = product::all();
+
         return view('Frontend.layouts.home', $data, compact('categories' , 'logos' , 'contacts' ,'products' ));
     }
 
