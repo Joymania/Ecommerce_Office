@@ -65,6 +65,12 @@ class ProductsController extends Controller
         $product->long_desc = $request->long_desc;
         $product->image = $filename;
         $product->stock = $request->stock;
+
+        if($request->promo == 1){
+            $product->promo_price = $request->promo_price;
+            $product->start_date = $request->start_date;
+            $product->end_date = $request->end_date;
+        }
         $product->save();
         $product->colors()->sync([$request->color_id]);
         $product->sizes()->sync([$request->size_id]);
@@ -121,6 +127,19 @@ class ProductsController extends Controller
         }
 
         $product->update($request->all());
+
+        if($request->promo == 1){
+            $product->promo_price = $request->promo_price;
+            $product->start_date = $request->start_date;
+            $product->end_date = $request->end_date;
+            $product->save();
+        }
+        else {
+            $product->promo_price = null;
+            $product->start_date = null;
+            $product->end_date = null;
+            $product->save();
+        }
 
         return redirect()->route('products.list');
     }

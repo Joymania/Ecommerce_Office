@@ -129,6 +129,44 @@
                                                            placeholder="Product Long Description"></textarea>
                                             </div>
                                         </div>
+
+                                        <!-- Promotional Price  Start-->
+                                        <div class="form-row mb-4" >
+                                            <div class="">
+                                                <label for="promo_btn">Add Promotion</label>
+                                                <input type="checkbox" id="promo_btn" class="btn btn-primary mr-3" value="1" name="promo" onclick="showPromo()">
+                                            </div>
+
+                                            <div  id="promo_section" style="display: none;" >
+
+                                                <div class="col-md-3">
+                                                    <label for="promo_price">Promotional Price</label>
+                                                    <input type="text" name="promo_price" id="promo_price" placeholder="Pormotional Price">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="start_date">Start Date</label>
+                                                    <input type="date" name="start_date" id="start_date">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="end_date">End Date</label>
+                                                    <input type="date" name="end_date" id="end_date">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            function showPromo(){      
+                                                var checkBox = document.getElementById("promo_btn");                                  
+                                                var promo_section = document.getElementById('promo_section');
+                                                if (checkBox.checked == true){                                                 
+                                                    promo_section.style.display = "flex";
+                                                } else {
+                                                    promo_section.style.display = "none";
+                                                }
+                                            }
+                                        </script>
+                                         <!-- Promotional Price End-->
+                                        
                                         <div class="form-row">
                                             <div class="col">
                                                 <label for="image">Upload Cover Image</label>
@@ -159,6 +197,8 @@
             </div>
         </div>
 
+
     </div>
 
 @stop
+
