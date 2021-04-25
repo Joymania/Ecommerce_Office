@@ -27,7 +27,7 @@ class AdminController extends Controller
     }
 
     // wil be used for admin registration
-    public function store(Request $request, Admin $admins)
+    public function store(Request $request, Admin $admin)
     {
         $validator = Validator::make($request->all(), [
         'name' => 'required|max:100',
@@ -176,8 +176,8 @@ class AdminController extends Controller
                                     'gender' => $validator->errors()->get('gender'),
                                     'address' => $validator->errors()->get('address')                    
                                     ]
-                    ];     
-            return redirect()->route('admin.admins.admin-profile')->withInput()->with(['errors' => $erorrs]);
+                    ];
+            return redirect()->route('admin.profile')->withInput()->with(['errors' => $erorrs]);
         }
 
         //  insert data ........

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Model\logo;
 
 class RegisterController extends Controller
 {
@@ -44,6 +45,18 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm()
+    {
+        $logos = logo::all()->last();
+        return view('auth.register', compact('logos'));
+    }
+
 
     /**
      * Get a validator for an incoming registration request.

@@ -10,11 +10,11 @@ use App\Model\product;
 use App\Model\size;
 use App\Model\SubImage;
 use App\Model\tag;
-
+use App\Model\sub_category;
 use Illuminate\Http\Request;
 use Illuminate\Queue\RedisQueue;
 use Illuminate\Support\Facades\DB;
-use App\Model\sub_category;
+
 
 
 class ProductsController extends Controller

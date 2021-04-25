@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="btn-style-7">
-                        <a href="shop.html">All Product</a>
+                        <a href="{{route('search.result')}}">All Product</a>
                     </div>
                 </div>
                 <div class="product-slider-active-3 nav-style-3">
@@ -30,8 +30,6 @@
                                 <span class="pro-badge left bg-red">-40%</span>
                                 <div class="product-action-2 tooltip-style-2">
                                     <button title="Wishlist"><i class="icon-heart"></i></button>
-                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                    <button title="Compare"><i class="icon-refresh"></i></button>
                                 </div>
                             </div>
                             <div class="product-content-wrap-3">
@@ -181,57 +179,24 @@
                 </div>
             </div>
         </div>
-        <div class="banner-area pb-90">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner-wrap mb-30">
-                            <div class="banner-img banner-img-zoom">
-                                <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-10.jpg" alt=""></a>
-                            </div>
-                            <div class="banner-content-11 banner-content-11-modify">
-                                <h2><span>Zara</span> Pattern Boxed <br>Underwear</h2>
-                                <p>Stretch, & Fress cool</p>
-                                <div class="btn-style-4">
-                                    <a class="hover-red" href="product-details.html">Shop now <i class="icon-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner-wrap mb-30">
-                            <div class="banner-img banner-img-zoom">
-                                <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-11.jpg" alt=""></a>
-                            </div>
-                            <div class="banner-content-11 banner-content-11-modify">
-                                <h2><span>Basic</span> Color<br>Caps</h2>
-                                <p>Less is more!</p>
-                                <div class="btn-style-4">
-                                    <a class="hover-red" href="product-details.html">Shop now <i class="icon-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        
+      
+       
         @foreach($categories as $cat)
         <div class="product-area pb-85">
             <div class="container">
                 <div class="section-title-5 section-title-5-bg-1 mb-10">
                     <i class="red icon-screen-desktop"></i>
-                    
+
                     <h5 class="red">{{$cat->name}}</h5>
-                    
+
                 </div>
                 <div class="row flex-row-reverse">
                     <div class="col-lg-9">
-                        
+
                         <div class="tab-content tab-hm6-categories-slider tab-content-mrg-top jump">
                             <div id="product-9" class="tab-pane active">
                                 <div class="product-slider-active-5">
-                                    
+
                                     @foreach($cat->product as $prod)
 
                                     <div class="product-plr-1">
@@ -242,13 +207,13 @@
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.html">{{$prod->name}}</a></h3>
+                                                <h3><a href="{{route('product.details',$prod->id)}}">{{$prod->name}}</a></h3>
                                                 <div class="product-price-2">
                                                     <span>{{$prod->price}} Tk</span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="product-details.html">{{$prod->name}}</a></h3>
+                                                <h3><a href="{{route('product.details',$prod->id)}}">{{$prod->name}}</a></h3>
                                                 <div class="product-price-2">
                                                     <span>{{$prod->price}} Tk</span>
                                                 </div>
@@ -263,44 +228,11 @@
 
                                 </div>
                             </div>
-                            
+
                         </div>
-                        <div class="padding-10-row-col">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="banner-wrap banner-border-1 mt-40 mb-30">
-                                        <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-16.jpg" alt=""></a>
-                                        </div>
-                                        <div class="banner-content-15">
-                                            <div class="banner-content-15-top">
-                                                <div class="banner-content-15-brand">
-                                                    <span>JATA</span>
-                                                </div>
-                                                <p>super bass <br>tech 2.0</p>
-                                            </div>
-                                            <h2>Jata Speaker</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="banner-wrap banner-border-1 banner-mt-none-xs mt-40 mb-30">
-                                        <div class="banner-img banner-img-zoom">
-                                            <a href="product-details.html"><img src="{{""}}/assets/images/banner/banner-17.jpg" alt=""></a>
-                                        </div>
-                                        <div class="banner-content-16">
-                                            <h2>Microsoft Surface Pro 7 - 12.3”</h2>
-                                            <div class="banner-price">
-                                                <span class="old-price">$502.50</span>
-                                                <span>$425.60</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
-                    
+
                     <div class="col-lg-3">
                         <div class="product-list-style-wrap">
                             <div class="product-list-style">
@@ -317,16 +249,15 @@
             </div>
         </div>
         @endforeach
-        
-      
+
+
         <div class="about-us-area pb-115">
             <div class="container">
                 <div class="about-us-content-2">
                     <div class="about-us-content-2-title">
                         <h4>NORDA The One-stop Shopping Destination</h4>
                     </div>
-                    <p>E-commerce is revolutionizing the way we all shop in Bangladesh. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click? Not only mobiles. Flipkart houses everything you can possibly imagine, from trending electronics like laptops, tablets, smartphones, and mobile accessories to in-vogue fashion staples like shoes, clothing and lifestyle accessories; from modern furniture like sofa sets and wardrobes to appliances that make your life easy like washing machines, TVs, ACs, mixer grinder juicers and other time-saving kitchen and small appliances; from home furnishings like cushion covers, mattresses and bedsheets to toys and musical instruments, we got them all covered. You name it, and you can stay assured about finding them all here. For those of you with erratic working hours, Flipkart is your best bet. Shop in your PJs, at night or in the wee hours of the morning. This e-commerce never shuts down.</p>
-                    <p>What's more, with our year-round shopping festivals and events, our prices are irresistible. We're sure you'll find yourself picking up more than what you had in mind. If you are wondering why you should shop from Flipkart when there are multiple options available to you, well, the below will answer your question.</p>
+                    <p>E-commerce is revolutionizing the way we all shop in Bangladesh. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click? Not only mobiles. Flipkart houses everything you can possibly imagine, from trending.</p>
                 </div>
             </div>
         </div>
@@ -357,6 +288,6 @@
                 </div>
             </div>
         </div>
-
+    </div>
 
 @endsection

@@ -10,14 +10,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 /*Front end routing Starts*/
- Auth::routes(['verify' => true]);
+
+Auth::routes(['verify' => true]);
 
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
 
+// without authentication
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
+
 //  Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
@@ -44,11 +48,27 @@ Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->
 
 Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
 Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
+
+//Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
+Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
+Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
+Route::get('/search-ajax','Frontend\SearchController@ajaxSearch')->name('search.ajax');
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
+//Shopping-Cart
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
+
 
 
 Route::middleware(['auth','verified'])->group(function () {
+    Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+    Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
 
 });
 /*Front end routing ends*/
@@ -119,8 +139,6 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
         Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
     });
-
-
 
     // Order
     Route::prefix('order')->group(function () {
