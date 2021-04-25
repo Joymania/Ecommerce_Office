@@ -8,43 +8,71 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public function index()
+ 
+    //category
+    public function category()
     {
-        $categories = category::all();
-        return view('admin.categories.categories-view',compact('categories'));
+        $view_cats = category::all();
+    	return view('admin.category.category', compact('view_cats'));
     }
 
-    public function create()
+    // insertCategory
+    public function insertCategory() 
     {
-        return view('admin.categories.categories-add');
+        return view('admin.category.insertCategory');
     }
 
-    public function store(Request $request)
+    // insertcat
+    public function insertcat(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|unique:categories,name'
+        // validation
+        $request->validate([
+            'name' => 'required|unique:categories|max:255',
+        ],
+        // error message
+        [
+            'name.unique' => 'Category name must be unique',
+            'name.required' => 'category name is required',
         ]);
-        category::create($request->all());
-        return redirect()->route('categories.list');
+    
+    // inserting into database
+    	category::insert([
+    		'name'=>$request-> name,
+    	]);
+    	return back();
+    }
+    // editCategory
+    public function editCategory($eid)
+    {
+        $edits = category::findOrFail($eid);
+    	return view('admin.category.editCategory', compact('edits'));
     }
 
-    public function edit(category $category)
+    // updateCategory
+   function updateCategory(Request $request)
     {
-        return view('admin.categories.categories-edit',compact('category'));
+        category::findOrFail($request->id)->update([
+            'name'=>$request-> name,
+          ]); 
+  
+          return redirect()->route('category.view')->with('success','Successfully Update!!!');
     }
 
-    public function update(Request $request, category $category)
+    // deleteCategory
+ 
+    public function deleteCategory($did)
     {
-        $this->validate($request,[
-           'name' => 'required|unique:categories,name,'.$category->id
-        ]);
-        $category->update($request->all());
-        return redirect()->route('categories.list')->with('success','Successfully Update!!!');
+        category::findOrFail($did)->delete();
+    	return redirect()->route('category.view')->with('success','Successfully Deleted!!!');
     }
 
-    public function destroy(category $category)
-    {
-        $category->delete();
-        return redirect()->route('categories.list')->with('delete','Successfully deleted!!!');
-    }
+
+
+
 }
+
+
+
+
+
+

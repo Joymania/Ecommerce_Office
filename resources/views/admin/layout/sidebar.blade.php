@@ -6,16 +6,16 @@
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
-            <img src="{{ asset('assets/img/user.png') }}" class="rounded-circle user-photo" alt="User Profile Picture">
+            <img src="{{ (!empty(auth()->user()->image)) ? url('upload/admins/'.auth()->user()->image):url('upload/noImage.jpg') }}" class="rounded-circle user-photo" alt="User Profile Picture">
             <div class="dropdown">
                 <span>Welcome,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Alizee Thomas</strong></a>
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ auth()->user()->name }}</strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
-                    <li><a href="{{route('pages.profile1')}}"><i class="icon-user"></i>My Profile</a></li>
+                    <li><a href="{{route('admin.profile')}}"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="{{--{{route('app.inbox')}}--}}"><i class="icon-envelope-open"></i>Messages</a></li>
                     <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
                     <li class="divider"></li>
-                    <li><a href="{{--{{route('authentication.login')}}--}}"><i class="icon-power"></i>Logout</a></li>
+                    <li><a href="{{route('admin.logout')}}"><i class="icon-power"></i>Logout</a></li>
                 </ul>
             </div>
             <hr>
@@ -52,14 +52,25 @@
                             <ul>
                                 <li class=""><a href="{{route('products.list')}}">Products List</a></li>
                                 <li class=""><a href="{{route('products.sizes')}}">Size List</a></li>
-                                <li class="{{ Request::segment(2) === 'ecommerce' ? 'active' : null }}"><a href="{{route('dashboard.ecommerce')}}">eCommerce</a></li>
+                                <li class="{{ Request::segment(2) === 'ecommerce' ? 'active' : null }}"><a href="{{route('admin.dashboard')}}">eCommerce</a></li>
                                 <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
                                 <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
                                 <li class="{{ Request::segment(4) === 'slider' ? 'active' : null }}"><a href="{{route('slider.view')}}">Slider</a></li>
-                                <li class="{{ Request::segment(4) === 'user' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
+            
+                                <li class="{{ Request::segment(3) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
+                                
+                                <li class="{{ Request::segment(3) === 'users' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
 
                                 <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
                                 <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
+                                <li class=""><a href="{{route('cupon.view')}}">Cupon</a></li>
+                                <li class=""><a href="{{route('order.view')}}">Order</a></li>
+
+                                <li class="{{ Request::segment(4) === 'category' ? 'active' : null }}"><a href="{{route('category.view')}}">Category</a></li>
+                                <li class="{{ Request::segment(4) === 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
+                                <li class="{{ Request::segment(4) === 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
+                                <li class="{{ Request::segment(4) === 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
+                                <li class="{{ Request::segment(4) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
 
                             </ul>
                         </li>

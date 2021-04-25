@@ -230,11 +230,21 @@
                 <div class="container-fluid">
                     <div class="block-header">
                         <div class="row">
-                       
+
                             <div class="col-lg-5 col-md-8 col-sm-12">
+
+                                @if (session('status'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('status') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+
                                 <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> @yield('title')</h2>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('dashboard.ecommerce')}}"><i class="icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="icon-home"></i></a></li>
                                     @if (trim($__env->yieldContent('parentPageTitle')))
                                        <li class="breadcrumb-item">@yield('parentPageTitle')</li>
                                     @endif
@@ -416,7 +426,18 @@
             <script src="{{ asset('assets/vendor/parsleyjs/js/parsley.min.js') }}"></script>
         @endif
 
-        @if (Request::segment(2) === 'advance-elements' )
+        {{--@if (Request::segment(2) === 'advance-elements' )
+            <script src="{{ asset('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js') }}"></script>
+            <script src="{{ asset('assets/vendor/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
+            <script src="{{ asset('assets/vendor/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
+            <script src="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
+            <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
+            <script src="{{ asset('assets/vendor/nouislider/nouislider.js') }}"></script>
+            <script src="{{ asset('assets/js/pages/forms/advanced-form-elements.js') }}"></script>
+        @endif--}}
+        @if (request()->segment(2) === 'advance-elements' )
             <script src="{{ asset('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>

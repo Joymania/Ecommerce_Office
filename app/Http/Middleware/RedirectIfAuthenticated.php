@@ -16,12 +16,16 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
+    // redirect login to dashboard if user is already logged in
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+            if($guard == 'admin'){
+                return redirect(route('admin.dashboard'));
+            }
+            else return redirect(route('home'));
+            // return redirect(RouteServiceProvider::HOME);
         }
-
         return $next($request);
     }
 }

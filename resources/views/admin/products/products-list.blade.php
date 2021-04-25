@@ -9,7 +9,7 @@
 
         <div class="col-lg-12 col-md-12">
             <div class="card planned_task">
-                <div class="header">
+                {{--<div class="header">
                     <h2>Products List</h2>
                     <ul class="header-dropdown">
                         <li class="dropdown">
@@ -21,27 +21,27 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
+                </div>--}}
                 <div class="body">
                     <div class="row clearfix">
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="header">
-                                    <a href="{{route('products.create')}}">
-                                        <button class="btn-primary" type="submit">Add Product <i class="icon-plus"></i></button>
-                                    </a>
+                                    <h2>Color List</h2>
                                 </div>
                                 <div class="body">
+                                    <a class=" btn btn-primary m-b-15" href="{{route('products.create')}}"><i class="fa fa-plus-circle"></i> Add Product</a>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover js-basic-example dataTable table-custom">
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Price</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
+                                                <th>Price</th>
                                                 <th>Stock</th>
-                                                <th>Image</th>
+                                                 <th>Image</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
@@ -49,6 +49,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
@@ -57,44 +58,29 @@
                                             </tr>
                                             </tfoot>
                                             <tbody>
-                                            <tr>
-                                                <td>Shirt</td>
-                                                <td>Men</td>
-                                                <td>Easy</td>
-                                                <td>5000</td>
-                                                <td>50</td>
-                                                <td>
-                                                    <img src="{{""}}/uploads/" alt="">
-                                                </td>
-                                                <td>
-                                                    <form action="" class="deleteForm">
-                                                        <button class="deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-note"></i></button>
-                                                    </form>
-                                                    <a href="" class="editLink" data-toggle="tooltip" title="Edit Product!">
-                                                        <button class="editBtn"><i class="icon-trash"></i></button>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                           {{-- @foreach($products as $product)
-                                            <tr>
-                                                <td>{{$product->name}} Shirt</td>
-                                                <td>{{$product->category->name}} Men</td>
-                                                <td>{{$product->brand->name}} Easy</td>
-                                                <td>{{$product->price}} 5000</td>
-                                                <td>{{$product->stock}}50</td>
-                                                <td>
-                                                    <img src="{{""}}/uploads/{{$product->avatar}}" alt="">
-                                                </td>
-                                                <td>
-                                                    <a href="">
-                                                        <div class="col-md-3 col-sm-4">
-                                                            <i class="icon-trash"></i> icon-trash </div>
-                                                    </a>
-                                                    <button type="submit"></button>
-                                                </td>
-                                            </tr>
-                                            @endforeach--}}
+                                            @foreach($products as $product)
+                                                <tr>
+                                                    <td>{{$product->name}}</td>
+                                                    <td>{{$product->category->name}}</td>
+                                                    <td>{{$product->sub_category_id}}</td>
+                                                    <td>{{$product->brand->name}}</td>
+                                                    <td>{{$product->price}} Tk</td>
+                                                    <td>{{$product->stock}}</td>
+                                                    <td>
+                                                        <img style="width: 120px" height="100px" src="{{""}}/upload/products_images/{{$product->image}}" alt="">
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{route('product.edit',$product->id)}}" class="editLink" data-toggle="tooltip" title="Edit Product!">
+                                                            <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit editBtn"><i class="icon-pencil" aria-hidden="true"></i></button>
+                                                        </a>
+                                                        <form action="{{route('product.destroy',$product->id)}}" class="deleteForm" onsubmit="return confirm('Are you sure want to delete this product?')" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-trash" aria-hidden="true"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
