@@ -15,13 +15,13 @@ class category extends Model
     public function sub_category()
     {
 
-      return $this->hasMany(sub_category::class); 
+      return $this->hasMany(sub_category::class,'category_id','id');
     }
 
     public function delete() {
       $this->sub_category()->delete();
       return parent::delete();
-  }
+  } 
 
 
 
@@ -32,5 +32,5 @@ class category extends Model
     return $this->hasMany(product::class, 'category_id', 'id');
 
    }
-  
+
 }

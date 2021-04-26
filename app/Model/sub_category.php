@@ -1,8 +1,8 @@
 <?php
- 
+
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model; 
 
 class sub_category extends Model
 {
@@ -11,7 +11,7 @@ class sub_category extends Model
 
     public function category()
     {
-        return $this->belongsTo(category::class); 
+        return $this->belongsTo(category::class,'sub_category_id','id');
     }
 
     public $timestamps = false;

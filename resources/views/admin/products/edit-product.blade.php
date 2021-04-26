@@ -30,42 +30,9 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
-                                                <label for="productPrice">Product Price</label>
-                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product price"
-                                                value="{{old('price',$product->price)}}">
-                                                @error('price')
-                                                <span style="color: red">{{$message}}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col">
-                                                <label for="stock">Stock</label>
-                                                <input type="number" id="stock" class="form-control" name="stock" placeholder="Stock available"
-                                                value="{{old('stock',$product->stock)}}">
-                                                @error('stock')
-                                                <span style="color: red">Product stock is required</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Brand Name</label>
-                                                <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
-                                                    @foreach($brands as $row)
-                                                        @if($row->name == $product->brand->name)
-                                                            <option value="{{$row->id}}" selected>{{$row->name}}</option>
-                                                        @else
-                                                            <option value="{{$row->id}}">{{$row->name}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                                @error('brand_id')
-                                                <span style="color: red">Brand Name is required</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col">
                                                 <label for="single-selection">Select Category</label>
                                                 <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Category</option>
                                                     @foreach($categories as $row)
                                                         @if($row->name == $product->category->name)
                                                             <option value="{{$row->id}}" selected>{{$row->name}}</option>
@@ -79,8 +46,37 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
+                                                <label for="sub_category_id">sub_category</label>
+                                                <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Sub Category</option>
+                                                    @foreach($sub_category as $sub)
+                                                        <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label for="single-selection">Select Brand Name</label>
+                                                <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Brand Name</option>
+                                                    @foreach($brands as $row)
+                                                        @if($row->name == $product->brand->name)
+                                                            <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                        @else
+                                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                @error('brand_id')
+                                                <span style="color: red">Brand Name is required</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
                                                 <label for="single-selection">Select Tag</label>
                                                 <select id="single-selection" name="tag_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Tag</option>
                                                     @foreach($tags as $row)
                                                         @if($row->name == $product->tag->name)
                                                             <option value="{{$row->id}}" selected>{{$row->name}}</option>
@@ -96,9 +92,12 @@
                                             <div class="col">
                                                 <label for="single-selection">Select Colors</label>
                                                 <select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Colors</option>
                                                     @foreach($colors as $row)
-                                                        @if($row->name == $product->colors[0]->name)
-                                                            <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                        @if(count($product->colors) > 0)
+                                                            @if($row->name == $product->colors[0]->name)
+                                                                <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                            @endif
                                                         @else
                                                             <option value="{{$row->id}}">{{$row->name}}</option>
                                                         @endif
@@ -108,15 +107,46 @@
                                             <div class="col">
                                                 <label for="single-selection">Select Sizes</label>
                                                 <select id="single-selection" name="size_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Size</option>
                                                     @foreach($sizes as $row)
+                                                        @if(count($product->sizes) > 0)
                                                         @if($row->name == $product->sizes[0]->name)
-                                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                                            <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                        @endif
                                                         @else
                                                             <option value="{{$row->id}}">{{$row->name}}</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label for="productPrice">Product Price</label>
+                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product price"
+                                                       value="{{old('price',$product->price)}}">
+                                                @error('price')
+                                                <span style="color: red">{{$message}}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="stock">Stock</label>
+                                                <input type="number" id="stock" class="form-control" name="stock" placeholder="Stock available"
+                                                       value="{{old('stock',$product->stock)}}">
+                                                @error('stock')
+                                                <span style="color: red">Product stock is required</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="stock">Stock Warning</label>
+                                                <input type="number" id="stock" class="form-control" name="stock_warning" value="{{old('stock_warning',$product->stock_warning)}}" placeholder="Stock Warning">
+                                                @error('stock_warning')
+                                                <span style="color: red">Product Stock Warning is required</span>
+                                                @enderror
+                                            </div>
+
                                         </div>
 
                                          <!-- Promotional Price  Start-->

@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request; 
 use App\Model\category;
-use App\Model\sub_category;
+use App\Model\sub_category; 
 
 class subCategoryController extends Controller
 {
@@ -48,7 +48,7 @@ class subCategoryController extends Controller
     function updateSubCategory(Request $request)
     {
         // validation
-        $request->validate([
+        $request->validate([ 
             'sub_category_name' => 'required|max:255',
         ],
         // error message

@@ -42,18 +42,18 @@ class ProductsController extends Controller
         $this->validate($request,[
             'category_id' => 'required',
             'brand_id' => 'required',
-            'tag_id' => 'required',
             'name' => 'required',
             'price' => 'required',
             'short_desc' => 'max:255',
             'image' => 'required',
             'stock' => 'required',
+            'stock_warning' => 'required'
         ]);
 
         $extension = $request->image->getClientOriginalExtension();
         $filename = rand(10000,99999).time().'.'.$extension;
         $request->image->move('upload/products_images',$filename);
-        
+        $request->image = $filename;
         $product = new product();
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
@@ -65,15 +65,22 @@ class ProductsController extends Controller
         $product->long_desc = $request->long_desc;
         $product->image = $filename;
         $product->stock = $request->stock;
+        $product->stock_warning = $request->stock_warning;
 
         if($request->promo == 1){
             $product->promo_price = $request->promo_price;
             $product->start_date = $request->start_date;
             $product->end_date = $request->end_date;
         }
+
         $product->save();
-        $product->colors()->sync([$request->color_id]);
-        $product->sizes()->sync([$request->size_id]);
+
+        if ($request->color_id){
+            $product->colors()->sync([$request->color_id]);
+        }
+        if ($request->size_id){
+            $product->sizes()->sync([$request->size_id]);
+        }
 
         if($request->hasfile('images'))
         {
@@ -90,7 +97,6 @@ class ProductsController extends Controller
         }
 
         return redirect()->route('products.list');
-
     }
 
     public function edit(product $product)
@@ -101,8 +107,9 @@ class ProductsController extends Controller
         $tags = tag::all();
         $colors = color::all();
         $sizes = size::all();
+        $sub_category = sub_category::all();
         return view('admin.products.edit-product',
-            compact('product','categories','brands','tags','colors','sizes'));
+            compact('product','categories','brands','tags','colors','sizes','sub_category'));
     }
 
     public function update(Request $request, product $product)
@@ -126,7 +133,17 @@ class ProductsController extends Controller
             $product->save();
         }
 
-        $product->update($request->all());
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->sub_category_id = $request->sub_category_id;
+        $product->tag_id = $request->tag_id;
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->short_desc = $request->short_desc;
+        $product->long_desc = $request->long_desc;
+        $product->stock = $request->stock;
+        $product->stock_warning = $request->stock_warning;
+        
 
         if($request->promo == 1){
             $product->promo_price = $request->promo_price;
@@ -141,6 +158,7 @@ class ProductsController extends Controller
             $product->save();
         }
 
+        $product->save();
         return redirect()->route('products.list');
     }
 

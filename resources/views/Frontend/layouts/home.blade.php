@@ -190,8 +190,6 @@
                 </div>
             </div>
         </div>
-      
-       
         @foreach($categories as $cat)
         <div class="product-area pb-85">
             <div class="container">
@@ -241,7 +239,7 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
 
                     <div class="col-lg-3">

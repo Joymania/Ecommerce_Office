@@ -33,7 +33,7 @@
                         @foreach ($alldata as $key=>$order)
                             <tr class="gradeA">
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $order['user']['fname'] }}</td>
+                            <td>{{ $order['user']['name'] }}</td>
                             <td>
                                 @if ($order->status==0)
                                     <button type="button" class="btn btn-warning"><i class="fa fa-warning"></i> <span>Pending</span></button>
@@ -42,6 +42,7 @@
 
                                 @endif
                                  <a href="{{ route('order.status',$order->id) }}" class="btn btn-success" ><i class="fa fa-arrow-up"></i> <span>Approve</span></a>
+                                 <a href="{{ route('order.delivarystatus',$order->id) }}" class="btn btn-info" ><i class="fa fa-truck"></i> <span>Delivary</span></a>
 
                             </td>
 
