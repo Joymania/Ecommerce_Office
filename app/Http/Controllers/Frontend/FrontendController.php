@@ -12,11 +12,14 @@ use App\Model\contacts;
 use App\Model\logo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class FrontendController extends Controller
 {
-
     public function index(){
+        $date = Carbon::today()->toDateString();
+        // $products = product::where('end_date' > $date);
+        
         $data['sliders']=DB::table('products')->orderBy('created_at','desc')->take(2)->get();
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
