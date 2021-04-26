@@ -32,7 +32,7 @@
                                 <div class="body">
                                     <a class=" btn btn-primary m-b-15" href="{{route('products.create')}}"><i class="fa fa-plus-circle"></i> Add Product</a>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover js-basic-example dataTable table-custom">
+                                        <table id="myTable" class="table table-bordered table-hover js-basic-example dataTable table-custom">
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -91,7 +91,7 @@
                                                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-trash" aria-hidden="true"></i></button>
                                                         </form>
                                                     </td>
-                                        
+
 
                                                 </tr>
                                             @endforeach
@@ -109,3 +109,4 @@
     </div>
 
 @stop
+
