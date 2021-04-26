@@ -124,6 +124,7 @@
                                 <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Billing Address</h3>
+                                        
                                         <address>
                                             <p><strong>{{$users->name}}</strong></p>
                                             @foreach($order as $ord)
@@ -168,7 +169,7 @@
                                                                 <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm New Password">
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> 
                                                 </fieldset>
                                                 <div class="single-input-item">
                                                     <button class="check-btn sqr-btn ">Save Changes</button>

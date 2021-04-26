@@ -18,7 +18,7 @@ class product extends Model
         'image',
         'stock',
         'stock_warning',
-        'sub_category_id'
+        'sub_category_id',
         'promo_price',
         'start_date',
         'end_date'

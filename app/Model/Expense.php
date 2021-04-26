@@ -9,13 +9,13 @@ class Expense extends Model
     protected $fillable = [
         'category_id',
         'amount',
-        'note',
+        'note', 
         'expense_by'
     ]; 
  
     public function expenseCategory ()
     {
-        return $this->belongsTo(expenseCategory::class , 'category_id'); 
+        return $this->belongsTo(expenseCategory::class , 'category_id','id'); 
     }
 
     public $timestamps = false;
