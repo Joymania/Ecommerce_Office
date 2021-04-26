@@ -58,7 +58,7 @@ class userAccountController extends Controller
         if($request->has('password') && !empty($request->password)) {
             $user->password = bcrypt($request->password);
         }
-
+ 
 
         $user->save();
 

@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
-{
+{ 
     protected $guarded=[];
 
     public function user(){
@@ -14,5 +14,8 @@ class Order extends Model
     }
     public function products(){
         return $this->belongsToMany(product::class)->withPivot('qty' );//'size', 'price'
+    }
+    public function orderProduct(){
+        return $this->belongsTo(OrderProduct::class);
     }
 }

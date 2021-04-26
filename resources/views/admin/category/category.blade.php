@@ -22,7 +22,6 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Created by</th>
-                                <th>Updated by</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,7 +30,6 @@
                             <tr>
                                 <td>{{$view_cat->id}}</td>
                                 <td>{{$view_cat->name}}</td>
-                                <td></td>
                                 <td></td>
                                 <td class="action">
                                    

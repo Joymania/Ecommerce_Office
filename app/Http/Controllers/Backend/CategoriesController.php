@@ -28,7 +28,7 @@ class CategoriesController extends Controller
         // validation
         $request->validate([
             'name' => 'required|unique:categories|max:255',
-        ],
+        ], 
         // error message
         [
             'name.unique' => 'Category name must be unique',
@@ -38,7 +38,7 @@ class CategoriesController extends Controller
     // inserting into database
     	category::insert([
     		'name'=>$request-> name,
-    	]);
+    	]); 
     	return back();
     }
     // editCategory
