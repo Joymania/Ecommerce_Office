@@ -18,7 +18,7 @@ class product extends Model
         'image',
         'stock',
         'stock_warning',
-        'sub_category_id'
+        'sub_category_id',
         'promo_price',
         'start_date',
         'end_date'
@@ -56,6 +56,10 @@ class product extends Model
     public function sub_images()
     {
         return $this->hasMany(SubImage::class, 'product_id','id');
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class)->withPivot('qty' );//'size', 'price'
     }
 
 }
