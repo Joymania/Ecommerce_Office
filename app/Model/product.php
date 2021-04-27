@@ -17,13 +17,22 @@ class product extends Model
         'long_desc',
         'image',
         'stock',
+        'stock_warning',
+        'sub_category_id',
         'promo_price',
         'start_date',
-        'end_date'
+        'end_date',
+        'buying_price'
     ];
 
-    public function category()
+    public function OrderProduct()
     {
+
+      return $this->hasMany(OrderProduct::class,'order_id','id');
+    }
+
+    public function category()
+    { 
         return $this->belongsTo(category::class, 'category_id','id');
     }
     public function brand()
@@ -54,6 +63,10 @@ class product extends Model
     public function sub_images()
     {
         return $this->hasMany(SubImage::class, 'product_id','id');
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class)->withPivot('qty' );//'size', 'price'
     }
 
 }

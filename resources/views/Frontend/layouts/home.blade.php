@@ -27,23 +27,23 @@
                 <div class="product-slider-active-3 nav-style-3">
 
                     @foreach($products as $product)
-                    @if($product->promo_price == null)
-                        @continue
-                    @endif
                     <div class="product-plr-1">
                         <div class="single-product-wrap">
                             <div class="product-img product-img-zoom mb-15">
                                 <a href="{{route('product.details',$product->id)}}">
                                     <img style="width: 212px; height: 262px;" src="{{"/upload/products_images/$product->image"}}" alt="Product Image">
                                 </a>
-                                <span class="pro-badge left bg-red">-{{(($product->price - $product->promo_price)*100)/$product->price}}%</span>
+                                <!-- reduced price -->
+                                <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
+                                <!-- add to wishlist -->
                                 <div class="product-action-2 tooltip-style-2">
-                                    <button title="Wishlist"><i class="icon-heart"></i></button>
+                                    <a href="{{ route('wishlist.add', $product->id) }}"> <button title="Wishlist"><i class="icon-heart"></i></button> </a>
                                 </div>
                             </div>
+
                             <div class="product-content-wrap-3">
                                 <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">{{$product->category->name}}</a>
+                                    <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
                                 </div>
                                 <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
@@ -61,18 +61,19 @@
                                     <span class="old-price">{{$product->price}} Tk.</span>
                                 </div>
                             </div>
+
                             <div class="product-content-wrap-3 product-content-position-2">
                                 <div class="product-content-categories">
-                                    <a class="purple" href="shop.html">{{$product->category->name}}</a>
+                                    <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
                                 </div>
                                 <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
                                     <div class="product-rating-4">
+                                    
+                                        
                                         <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
+                                          
+                                                       
                                     </div>
                                     <span>(4)</span>
                                 </div>
@@ -99,99 +100,32 @@
                         <h2>Popular Categories</h2>
                     </div>
                     <div class="btn-style-7">
-                        <a href="shop.html">All Product</a>
+                        <a href=" {{ route('search.result') }} ">All Product</a>
                     </div>
                 </div>
                 <div class="product-categories-slider-1 nav-style-3">
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="shop.html">
-                                    <img src="{{""}}/assets/images/product/product-50.png" alt="">
-                                </a>
-                            </div>
-                            <div class="product-content-categories-2 text-center">
-                                <h5><a href="shop.html">Fashion</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="shop.html">
-                                    <img src="{{""}}/assets/images/product/product-51.png" alt="">
-                                </a>
-                            </div>
-                            <div class="product-content-categories-2 text-center">
-                                <h5><a href="shop.html">Electronic</a></h5>
+                    @if($popular_categories->isNotEmpty())
+                        @foreach($popular_categories as $cat)
+                        <div class="product-plr-1">
+                            <div class="single-product-wrap">
+                                <div class="product-img product-img-border mb-20">
+                                    <a href="{{ route('productByCategory', $cat->id) }}">
+                                        <img src="{{ (!empty($cat->image)) ? url('upload/categories/'.$cat->image):url('upload/defaultCategory.jpg') }}" alt="{{ $cat->name }}">
+                                    </a>
+                                </div>
+                                <div class="product-content-categories-2 text-center">
+                                    <h5><a href="#"> {{$cat->name}} </a></h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="shop.html">
-                                    <img src="{{""}}/assets/images/product/product-52.png" alt="">
-                                </a>
-                            </div>
-                            <div class="product-content-categories-2 text-center">
-                                <h5><a href="shop.html">computer</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="shop.html">
-                                    <img src="{{""}}/assets/images/product/product-53.png" alt="">
-                                </a>
-                            </div>
-                            <div class="product-content-categories-2 text-center">
-                                <h5><a href="shop.html">beauty</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="shop.html">
-                                    <img src="{{""}}/assets/images/product/product-54.png" alt="">
-                                </a>
-                            </div>
-                            <div class="product-content-categories-2 text-center">
-                                <h5><a href="shop.html">sport</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="shop.html">
-                                    <img src="{{""}}/assets/images/product/product-55.png" alt="">
-                                </a>
-                            </div>
-                            <div class="product-content-categories-2 text-center">
-                                <h5><a href="shop.html">baby</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="shop.html">
-                                    <img src="{{""}}/assets/images/product/product-52.png" alt="">
-                                </a>
-                            </div>
-                            <div class="product-content-categories-2 text-center">
-                                <h5><a href="shop.html">computer</a></h5>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
+
                 </div>
             </div>
         </div>
-      
-       
+
+
         @foreach($categories as $cat)
         <div class="product-area pb-85">
             <div class="container">
@@ -241,7 +175,7 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
 
                     <div class="col-lg-3">
@@ -252,7 +186,7 @@
                                 @endforeach
                             </div>
                             <div class="btn-style-8">
-                                <a href="shop.html">View All </a>
+                                <a href="#">View All </a>
                             </div>
                         </div>
                     </div>
@@ -261,7 +195,6 @@
         </div>
         @endforeach
 
-
         <div class="about-us-area pb-115">
             <div class="container">
                 <div class="about-us-content-2">
@@ -269,33 +202,6 @@
                         <h4>NORDA The One-stop Shopping Destination</h4>
                     </div>
                     <p>E-commerce is revolutionizing the way we all shop in Bangladesh. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click? Not only mobiles. Flipkart houses everything you can possibly imagine, from trending.</p>
-                </div>
-            </div>
-        </div>
-        <div class="subscribe-area bg-gray-4 pt-95 pb-95">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <div class="section-title-3">
-                            <h2>Our Newsletter</h2>
-                            <p>Get updates by subscribe our weekly newsletter</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div id="mc_embed_signup" class="subscribe-form-2">
-                            <form id="mc-embedded-subscribe-form" class="validate subscribe-form-style-2" novalidate="" target="_blank" name="mc-embedded-subscribe-form" method="post" action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
-                                <div id="mc_embed_signup_scroll" class="mc-form-2">
-                                    <input class="email" type="email" required="" placeholder="Enter your email address" name="EMAIL" value="">
-                                    <div class="mc-news-2" aria-hidden="true">
-                                        <input type="text" value="" tabindex="-1" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
-                                    </div>
-                                    <div class="clear-2 clear-2-purple">
-                                        <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="Subscribe">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

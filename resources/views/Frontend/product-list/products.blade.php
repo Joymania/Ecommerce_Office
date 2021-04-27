@@ -1,4 +1,4 @@
-@extends('Frontend.product-list.master')
+@extends('Frontend.layouts.master')
 
 @section('content')
     <div>
@@ -32,6 +32,7 @@
                         <div class="tab-content jump">
                             <div id="shop-1" class="tab-pane active">
                                 <div class="row" id="shopArea">
+                                    @if(count((array)$products) > 0)
                                     @foreach($products as $product)
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
                                         <div class="single-product-wrap mb-35">
@@ -61,9 +62,13 @@
                                         </div>
                                     </div>
                                     @endforeach
+                                    @else
+                                        <div class="col-12 text-center">No Result Found.</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
+                        @if(count((array)$products) > 0)
                         <div class="text-center mt-10">
                             {{--<ul>
                                 <li><a class="prev" href="#"><i class="icon-arrow-left"></i></a></li>
@@ -73,6 +78,7 @@
                             </ul>--}}
                             {{$products->links()}}
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -92,12 +98,9 @@
                             <h4 class="sidebar-widget-title">Categories </h4>
                             <div class="shop-catigory">
                                 <ul>
-                                    <li><a href="shop.html">T-Shirt</a></li>
-                                    <li><a href="shop.html">Shoes</a></li>
-                                    <li><a href="shop.html">Clothing </a></li>
-                                    <li><a href="shop.html">Women </a></li>
-                                    <li><a href="shop.html">Baby Boy </a></li>
-                                    <li><a href="shop.html">Accessories </a></li>
+                                    @foreach($categories as $row)
+                                    <li><a href="" class="categoryName">{{$row->name}}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>

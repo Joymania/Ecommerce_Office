@@ -32,17 +32,16 @@
                                 <div class="body">
                                     <a class=" btn btn-primary m-b-15" href="{{route('products.create')}}"><i class="fa fa-plus-circle"></i> Add Product</a>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover js-basic-example dataTable table-custom">
+                                        <table id="myTable" class="table table-bordered table-hover js-basic-example dataTable table-custom">
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
-                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
-                                                 <th>Image</th>
-                                                 <th>Promo Price</th>
+                                                <th>Image</th>
+                                                <th>Promo Price</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Actions</th>
@@ -52,7 +51,6 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
-                                                <th>Sub-category id</th>
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
@@ -66,19 +64,25 @@
                                             <tbody>
                                             @foreach($products as $product)
                                                 <tr>
-                                                    <td>{{$product->name}}</td>
+                                                    <td>
+                                                        @if(strlen($product->name) > 30)
+                                                            {{substr($product->name,0,25) . ' ...'}}
+                                                        @else
+                                                            {{$product->name}}
+                                                        @endif
+                                                    </td>
                                                     <td>{{$product->category->name}}</td>
-                                                    <td>{{$product->sub_category_id}}</td>
                                                     <td>{{$product->brand->name}}</td>
                                                     <td>{{$product->price}} Tk</td>
                                                     <td>{{$product->stock}}</td>
                                                     <td>
-                                                        <img style="width: 120px" height="100px" src="{{""}}/upload/products_images/{{$product->image}}" alt="">
+                                                        <img style="width: 100px; height: 120px" src="{{""}}/upload/products_images/{{$product->image}}" alt="">
                                                     </td>
                                                     <td>{{$product->promo_price}}</td>
                                                     <td>{{$product->start_date}}</td>
                                                     <td>{{$product->end_date}}</td>
                                                     <td>
+                                                        <div class="btn-group" role="group" aria-label="Basic example">
                                                         <a href="{{route('product.edit',$product->id)}}" class="editLink" data-toggle="tooltip" title="Edit Product!">
                                                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit editBtn"><i class="icon-pencil" aria-hidden="true"></i></button>
                                                         </a>
@@ -87,8 +91,9 @@
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-trash" aria-hidden="true"></i></button>
                                                         </form>
+                                                        </div>
                                                     </td>
-                                        
+
 
                                                 </tr>
                                             @endforeach
@@ -106,3 +111,4 @@
     </div>
 
 @stop
+

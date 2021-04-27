@@ -121,7 +121,7 @@ class CartController extends Controller
         return redirect()->route('show.cart')->with('success','Product removed Successfully.');
     }
     public function deleteAuthCart($id){
-        $data=CartShopping::find($id);
+        $data=CartShopping::find($id); 
         $data->delete();
         return redirect()->route('show.cart')->with('success','Product removed Successfully.');
     }

@@ -12,8 +12,8 @@ class subCategoryController extends Controller
     //subCategory
     public function subCategory()
     {
-        $lists = sub_category::with('category')->get();
-    	return view('admin.subCategory.subCategory',compact('lists'));
+        $list = sub_category::with('category')->get();
+    	return view('admin.subCategory.subCategory',compact('list'));
     }
 
     // insertSubCategory
@@ -26,6 +26,16 @@ class subCategoryController extends Controller
     // insertSubcat
     function insertSubcat(Request $request)
     {
+        $request->validate([
+            'category_id' => 'required',
+            'sub_category_name' => 'required',
+        ], 
+        // error message
+        [
+            'sub_category_name.unique' => 'Sub-Category name must be unique',
+            'category_id.required' => 'Category is required',
+        ]); 
+
         $state = sub_category::insert([
     		'sub_category_name'=>$request-> sub_category_name,
     		'category_id'=>$request-> category_id,
@@ -48,12 +58,14 @@ class subCategoryController extends Controller
     function updateSubCategory(Request $request)
     {
         // validation
-        $request->validate([ 
-            'sub_category_name' => 'required|max:255',
-        ],
+        $request->validate([
+            'category_id' => 'required',
+            'sub_category_name' => 'required',
+        ], 
         // error message
         [
-            'sub_category_name.required' => 'category name is required',
+            'sub_category_name.unique' => 'Sub-Category name must be unique',
+            'category_id.required' => 'Category is required',
         ]);
 
 

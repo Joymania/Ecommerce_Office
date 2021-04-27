@@ -27,6 +27,7 @@
                                 <img src="../assets/img/user.png" class="user-photo media-object" alt="User">
                             </div>
                             <div class="media-body">
+                            <div class="media-body">
                                 <p>Upload your photo.
                                     <br> <em>Image should be at least 140px x 140px</em></p>
                                 <button type="button" class="btn btn-default-dark" id="btn-upload-photo">Upload Photo</button>

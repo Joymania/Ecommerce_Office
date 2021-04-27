@@ -11,16 +11,6 @@
             <div class="card planned_task">
                 <div class="header">
                     <h2>Add Product</h2>
-                    <ul class="header-dropdown">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another Action</a></li>
-                                <li><a href="javascript:void(0);">Something else</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
                 <div class="body">
                     <div class="row clearfix">
@@ -38,22 +28,33 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
-                                                <label for="productPrice">Product Price</label>
-                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product price">
-                                                @error('price')
-                                                <span style="color: red">{{$message}}</span>
+                                                <label for="single-selection">Select Category</label>
+                                                <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Category</option>
+                                                    @foreach($categories as $row)
+                                                         <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('category_id')
+                                                <span style="color: red">Category Name is required</span>
                                                 @enderror
                                             </div>
                                             <div class="col">
-                                                <label for="stock">Stock</label>
-                                                <input type="number" id="stock" class="form-control" name="stock" placeholder="Stock available">
-                                                @error('stock')
-                                                <span style="color: red">Product stock is required</span>
-                                                @enderror
+                                                <label for="sub_category_id">sub_category</label>
+                                                <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Sub Category</option>
+                                                    @foreach($sub_category as $sub)
+                                                        <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
+
+                                        <div class="form-row">
                                             <div class="col">
                                                 <label for="single-selection">Select Brand Name</label>
                                                 <select id="single-selection" name="brand_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Brand name</option>
                                                     @foreach($brands as $row)
                                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                                     @endforeach
@@ -62,23 +63,10 @@
                                                 <span style="color: red">Brand Name is required</span>
                                                 @enderror
                                             </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <label for="single-selection">Select Category</label>
-                                                <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
-                                                   @foreach($categories as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                                   @endforeach
-                                                </select>
-                                                @error('category_id')
-                                                <span style="color: red">Category Name is required</span>
-                                                @enderror
-                                            </div>
                                             <div class="col">
                                                 <label for="single-selection">Select Tag</label>
                                                 <select id="single-selection" name="tag_id" class="multiselect multiselect-custom form-control">
+                                                    <option value="">Select Tags</option>
                                                     @foreach($tags as $row)
                                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                                     @endforeach
@@ -89,27 +77,54 @@
                                             </div>
                                             <div class="col">
                                                 <label for="single-selection">Select Colors</label>
-                                                <select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">
+                                                {{--<select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">--}}
+                                                <select id="multiselect-size" name="color_id" class="form-control multiselect multiselect-custom" multiple="multiple">
+                                                    <option value="">Select Product Color</option>
                                                     @foreach($colors as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="col">
                                                 <label for="single-selection">Select Sizes</label>
                                                 <select id="single-selection" name="size_id" class="form-control multiselect multiselect-custom">
+                                                    <option value="">Select Product Size</option>
                                                     @foreach($sizes as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                        <option value="{{$row->id}}">{{$row->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+
+                                        </div>
+
+                                        <div class="form-row">
                                             <div class="col">
-                                                <label for="sub_category_id">sub_category</label>
-                                                <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
-                                                    @foreach($sub_category as $sub)
-                                                    <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="productPrice">Selling Price</label>
+                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product Selling price">
+                                                @error('price')
+                                                <span style="color: red">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <label for="buyingPrice">Buying Price</label>
+                                                <input type="number" id="buyingPrice" name="buying_price" class="form-control" placeholder="Product Buying price">
+                                                @error('buying_price')
+                                                <span style="color: red">Buying Price is required!</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <label for="stock">Stock</label>
+                                                <input type="number" id="stock" class="form-control" name="stock" placeholder="Stock available">
+                                                @error('stock')
+                                                <span style="color: red">Product stock is required</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <label for="stock">Stock Warning</label>
+                                                <input type="number" id="stock" class="form-control" name="stock_warning" placeholder="Stock Warning">
+                                                @error('stock_warning')
+                                                <span style="color: red">Product Stock Warning is required</span>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -155,10 +170,10 @@
                                         </div>
 
                                         <script>
-                                            function showPromo(){      
-                                                var checkBox = document.getElementById("promo_btn");                                  
+                                            function showPromo(){
+                                                var checkBox = document.getElementById("promo_btn");
                                                 var promo_section = document.getElementById('promo_section');
-                                                if (checkBox.checked == true){                                                 
+                                                if (checkBox.checked == true){
                                                     promo_section.style.display = "flex";
                                                 } else {
                                                     promo_section.style.display = "none";
@@ -166,7 +181,7 @@
                                             }
                                         </script>
                                          <!-- Promotional Price End-->
-                                        
+
                                         <div class="form-row">
                                             <div class="col">
                                                 <label for="image">Upload Cover Image</label>
@@ -181,9 +196,6 @@
                                                 <input type="file" id="image" class="form-control" name="images[]">
                                                 <input type="file" id="image" class="form-control" name="images[]">
                                                 <input type="file" id="image" class="form-control" name="images[]">
-                                                @error('image')
-                                                <span style="color: red">Product Image is required</span>
-                                                @enderror
                                             </div>
                                         </div>
 
@@ -201,4 +213,5 @@
     </div>
 
 @stop
+
 
