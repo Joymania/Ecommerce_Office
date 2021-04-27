@@ -104,7 +104,7 @@
                                                   <div>
 
                                                         <div class="cart-plus-minus" >
-                                                            <input class="cart-plus-minus-box" type="text" name="qty" value="{{ $show->qty }}">
+                                                            <input class="cart-plus-minus-box"    type="text" name="qty" value="{{ $show->qty }}">
                                                         </div>
                                                         <input type="hidden" name="id" value="{{ $show->id }}">
                                                           <div class="float-right">

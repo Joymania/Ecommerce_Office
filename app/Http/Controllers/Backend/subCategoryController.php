@@ -12,8 +12,8 @@ class subCategoryController extends Controller
     //subCategory
     public function subCategory()
     {
-        $lists = sub_category::with('category')->get();
-    	return view('admin.subCategory.subCategory',compact('lists'));
+        $list = sub_category::with('category')->get();
+    	return view('admin.subCategory.subCategory',compact('list'));
     }
 
     // insertSubCategory

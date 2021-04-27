@@ -22,11 +22,11 @@
             <ul class="row list-unstyled">
                 <li class="col-4">
                     <small>Sales</small>
-                    <h6>456</h6>
+                    <h6>{{session('sales')}}</h6>
                 </li>
                 <li class="col-4">
                     <small>Order</small>
-                    <h6>1350</h6>
+                    <h6>{{session('orders')}}</h6>
                 </li>
                 <li class="col-4">
                     <small>Revenue</small>
@@ -37,9 +37,6 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu">Menu</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Chat"><i class="icon-book-open"></i></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#setting"><i class="icon-settings"></i></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#question"><i class="icon-question"></i></a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -50,28 +47,43 @@
                         <li class="{{ Request::segment(1) === 'dashboard' ? 'active' : null }}">
                             <a href="#Dashboard" class="has-arrow"><i class="icon-home"></i> <span>Dashboard</span></a>
                             <ul>
-                                <li class=""><a href="{{route('products.list')}}">Products List</a></li>
-                                <li class=""><a href="{{route('products.sizes')}}">Size List</a></li>
                                 <li class="{{ Request::segment(2) === 'ecommerce' ? 'active' : null }}"><a href="{{route('admin.dashboard')}}">eCommerce</a></li>
-                                <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
-                                <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
-                                <li class="{{ Request::segment(4) === 'slider' ? 'active' : null }}"><a href="{{route('slider.view')}}">Slider</a></li>
-            
-                                <li class="{{ Request::segment(3) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
-                                
-                                <li class="{{ Request::segment(3) === 'users' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
-
-                                <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
                                 <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
                                 <li class=""><a href="{{route('cupon.view')}}">Cupon</a></li>
-                                <li class=""><a href="{{route('order.view')}}">Order</a></li>
 
-                                <li class="{{ Request::segment(4) === 'category' ? 'active' : null }}"><a href="{{route('category.view')}}">Category</a></li>
-                                <li class="{{ Request::segment(4) === 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
                                 <li class="{{ Request::segment(4) === 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
                                 <li class="{{ Request::segment(4) === 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
                                 <li class="{{ Request::segment(4) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
+                                <li><a href="{{route('sales.report')}}">Report</a></li>
 
+                            </ul>
+                        </li>
+
+                        <li class="{{ Request::segment(1) === 'products' ? 'active' : null }}">
+                            <a href="#Products" class="has-arrow"><i class="icon-basket-loaded"></i> <span>Products</span></a>
+                            <ul>
+                                <li class=""><a href="{{route('products.list')}}">Products List</a></li>
+                                <li class=""><a href="{{route('products.sizes')}}">Size List</a></li>
+                                <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
+                                <li class="{{ Request::segment(4) === 'category' ? 'active' : null }}"><a href="{{route('category.view')}}">Category</a></li>
+                                <li class="{{ Request::segment(4) === 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
+                                <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
+                                <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="{{ Request::segment(1) === 'orders' ? 'active' : null }}">
+                            <a href="#Orders" class="has-arrow"><i class="icon-notebook"></i> <span>Orders</span></a>
+                            <ul>
+                                <li class=""><a href="{{route('order.view')}}">Order</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                            <a href="#Users" class="has-arrow"><i class="icon-users"></i> <span>Users</span></a>
+                            <ul>
+                                <li class="{{ Request::segment(3) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
+                                <li class="{{ Request::segment(3) === 'users' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
                             </ul>
                         </li>
                     </ul>

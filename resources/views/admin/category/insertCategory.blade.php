@@ -4,9 +4,11 @@
 
 
 @section('content')
-<div class="row clearfix">
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
+<div class="card">
+    <div class="card-header">
+      <h3>
+       
             <div class="body">
                 <div id="errorElement "></div>
 
@@ -59,9 +61,6 @@
             </div>    
         </div>
     </div>
-</div>
-
-
 
 
 @stop

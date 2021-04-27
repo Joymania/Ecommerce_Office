@@ -71,7 +71,7 @@ Route::middleware(['auth','verified'])->group(function () {
     // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
- 
+
 });
 
 /*Front end routing ends*/
@@ -209,7 +209,7 @@ Route::prefix('expenseCategory')->group(function(){
     Route::get('deleteExp/{did}','Backend\expenseCategoryController@deleteExp')->name('expenseCategory.delete');
 });
 
-// expense 
+// expense
 Route::prefix('expense')->group(function(){
     Route::get('/', 'Backend\expenseController@expense')->name('expense.view');
     Route::get('insertExpense', 'Backend\expenseController@insertExpense')->name('expense.add');
@@ -228,6 +228,10 @@ Route::prefix('expense')->group(function(){
         Route::post('updateLogo','Backend\LogoController@updateLogo')->name('logo.update');
         Route::get('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
     });
+
+
+    //Report page route
+    Route::get('/report','Backend\ReportController@index')->name('sales.report');
 
     // fallback route
     Route::fallback(function () {
@@ -254,5 +258,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
+
 //Admin Routing Ends
 

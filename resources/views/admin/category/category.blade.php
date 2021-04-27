@@ -23,7 +23,6 @@
                                 <th>Name</th>
                                 <th>Image</th>
                                 <th>Created by</th>
-                                <th>Updated by</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,7 +36,6 @@
                                     <img style="width: 100px; height: 120px" src="{{""}}/upload/categories/{{$view_cat->image}}" alt="">
                                     @endif
                                 </td>
-                                <td></td>
                                 <td></td>
                                 <td class="action">
                                    

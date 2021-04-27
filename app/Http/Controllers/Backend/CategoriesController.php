@@ -30,12 +30,13 @@ class CategoriesController extends Controller
             'name' => 'required|unique:categories|max:255',
             'image' => ''
         ],
+
         // error message
         [
             'name.unique' => 'Category name must be unique',
             'name.required' => 'category name is required',
         ]);
-    
+      
         $category = new category();
         $category->name = $request-> name;
 
