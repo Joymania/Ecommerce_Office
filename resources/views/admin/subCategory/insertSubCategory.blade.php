@@ -16,17 +16,16 @@
           @csrf
           <div class="form-row col-md-6">
               <label for="category_id">Category</label>
-              <select class="form-control col-sm-11" id="category_id" name="category_id" required>
-                <option required>Select Category</option>
+              <select class="form-control col-sm-11" id="category_id" name="category_id" >
+                <option value="">Select Category</option>
 
             @foreach($categories as $categorie)         
-                <option value="{{$categorie->id}}" required>{{$categorie->name}}</option>
+                <option value="{{$categorie->id}}">{{$categorie->name}}</option>
             @endforeach
               </select>
-
               @error('category_id')
-              <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
+              <span style="color: red">Category Name is required</span>
+              @enderror
           </div>
 
         <div class="form-row col-md-6">

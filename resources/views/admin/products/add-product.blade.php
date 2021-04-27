@@ -42,7 +42,7 @@
                                                 <select id="single-selection" name="category_id" class="multiselect multiselect-custom form-control">
                                                     <option value="">Select Category</option>
                                                     @foreach($categories as $row)
-                                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('category_id')

@@ -199,7 +199,7 @@
                                                     <li> Product :{{ $content->name }} <span> ({{ $content->qty }}x{{ $content->price }} )</span></li>
                                                 @endforeach
                                                 <div class="your-order-info order-subtotal">
-                                                    <ul>
+                                                     <ul>
                                                         <li>Subtotal <span> {{ Cart::subtotal() }} tk</span></li>
                                                     </ul>
                                                 </div>
