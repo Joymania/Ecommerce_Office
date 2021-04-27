@@ -44,10 +44,11 @@ class ProductsController extends Controller
             'brand_id' => 'required',
             'name' => 'required',
             'price' => 'required',
-            'short_desc' => 'max:255',
+            'short_desc' => 'required|max:255',
             'image' => 'required',
             'stock' => 'required',
-            'stock_warning' => 'required'
+            'stock_warning' => 'required',
+            'buying_price' => 'required'
         ]);
 
         $extension = $request->image->getClientOriginalExtension();
@@ -66,6 +67,7 @@ class ProductsController extends Controller
         $product->image = $filename;
         $product->stock = $request->stock;
         $product->stock_warning = $request->stock_warning;
+        $product->buying_price = $request->buying_price;
 
         if($request->promo == 1){
             $product->promo_price = $request->promo_price;
@@ -120,8 +122,9 @@ class ProductsController extends Controller
             'tag_id' => 'required',
             'name' => 'required',
             'price' => 'required',
-            'short_desc' => 'max:255',
+            'short_desc' => 'required|max:255',
             'stock' => 'required',
+            'buying_price' => 'required',
         ]);
 
         if ($request->hasFile('image')){
@@ -143,7 +146,7 @@ class ProductsController extends Controller
         $product->long_desc = $request->long_desc;
         $product->stock = $request->stock;
         $product->stock_warning = $request->stock_warning;
-        
+
 
         if($request->promo == 1){
             $product->promo_price = $request->promo_price;

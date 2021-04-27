@@ -40,8 +40,8 @@
                                                 <th>Brand Name</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
-                                                 <th>Image</th>
-                                                 <th>Promo Price</th>
+                                                <th>Image</th>
+                                                <th>Promo Price</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Actions</th>
@@ -82,6 +82,7 @@
                                                     <td>{{$product->start_date}}</td>
                                                     <td>{{$product->end_date}}</td>
                                                     <td>
+                                                        <div class="btn-group" role="group" aria-label="Basic example">
                                                         <a href="{{route('product.edit',$product->id)}}" class="editLink" data-toggle="tooltip" title="Edit Product!">
                                                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit editBtn"><i class="icon-pencil" aria-hidden="true"></i></button>
                                                         </a>
@@ -90,6 +91,7 @@
                                                             @method('DELETE')
                                                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-trash" aria-hidden="true"></i></button>
                                                         </form>
+                                                        </div>
                                                     </td>
 
 

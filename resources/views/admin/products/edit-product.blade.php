@@ -122,11 +122,20 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <label for="productPrice">Product Price</label>
-                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product price"
+                                                <label for="productPrice">Product Selling Price</label>
+                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product Selling price"
                                                        value="{{old('price',$product->price)}}">
                                                 @error('price')
                                                 <span style="color: red">{{$message}}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="buyingPrice">Buying Price</label>
+                                                <input type="number" id="buyingPrice" name="buying_price" class="form-control" placeholder="Product Buying price"
+                                                value="{{old('buying_price',$product->buying_price)}}">
+                                                @error('buying_price')
+                                                <span style="color: red">Buying Price is required!</span>
                                                 @enderror
                                             </div>
 
@@ -172,16 +181,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <script>
                                             document.getElementById("promo_section").onload = function() {
                                                 console.log("loaded")
                                                 showPromo()};
 
-                                            function showPromo(){      
-                                                var checkBox = document.getElementById("promo_btn");                                  
+                                            function showPromo(){
+                                                var checkBox = document.getElementById("promo_btn");
                                                 var promo_section = document.getElementById('promo_section');
-                                                if (checkBox.checked == true){                                                 
+                                                if (checkBox.checked == true){
                                                     promo_section.style.display = "flex";
                                                 } else {
                                                     promo_section.style.display = "none";
