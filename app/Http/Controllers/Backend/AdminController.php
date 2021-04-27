@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Backend;
 
+use App\Model\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin;
@@ -17,7 +18,7 @@ class AdminController extends Controller
     public function index()
     {
         $admins = Admin::paginate(10);
-        return view('admin.admins.admin-index')->with(['admins' => $admins]);
+        return view('admin.admins.admin-index',compact('sales','orders'))->with(['admins' => $admins]);
     }
 
     // return create view
@@ -25,7 +26,7 @@ class AdminController extends Controller
     {
         return view('admin.admins.admin-create');
     }
- 
+
     // wil be used for admin registration
     public function store(Request $request, Admin $admin)
     {
@@ -40,16 +41,16 @@ class AdminController extends Controller
         'address' => 'max:100'
         ]);
 
-        if($validator->fails()){         
+        if($validator->fails()){
             $erorrs = ['message' => 'Validation error!',
                        'errors' => ['name' => $validator->errors()->get('name'),
                                     'email' => $validator->errors()->get('email'),
                                     'password' => $validator->errors()->get('password'),
                                     'role' => $validator->errors()->get('role'),
                                     'gender' => $validator->errors()->get('gender'),
-                                    'address' => $validator->errors()->get('address')                    
+                                    'address' => $validator->errors()->get('address')
                                     ]
-                    ];     
+                    ];
             return redirect()->route('admin.create')->withInput()->with(['errors' => $erorrs]);
         }
 
@@ -84,7 +85,7 @@ class AdminController extends Controller
     {
         return view('admin.admins.admin-edit', compact('admin'));
     }
-  
+
     //  to update admin
     public function update(Request $request, Admin $admin)
     {
@@ -109,9 +110,9 @@ class AdminController extends Controller
                                     'password' => $validator->errors()->get('password'),
                                     'role' => $validator->errors()->get('role'),
                                     'gender' => $validator->errors()->get('gender'),
-                                    'address' => $validator->errors()->get('address')                    
+                                    'address' => $validator->errors()->get('address')
                                     ]
-                    ];     
+                    ];
             return redirect()->route('admin.edit', $admin->id)->withInput()->with(['errors' => $erorrs]);
         }
 
@@ -147,7 +148,7 @@ class AdminController extends Controller
     {   $admin = Admin::find(Auth::id());
         return view('admin.admins.admin-profile', compact('admin'));
     }
-    
+
     public function updateProfile(Request $request)
     {
         // to update admin
@@ -174,7 +175,7 @@ class AdminController extends Controller
                                     'password' => $validator->errors()->get('password'),
                                     'role' => $validator->errors()->get('role'),
                                     'gender' => $validator->errors()->get('gender'),
-                                    'address' => $validator->errors()->get('address')                    
+                                    'address' => $validator->errors()->get('address')
                                     ]
                     ];
             return redirect()->route('admin.profile')->withInput()->with(['errors' => $erorrs]);
@@ -214,10 +215,10 @@ class AdminController extends Controller
         // remove image
         $this->removeImage($admin);
         $admin->delete();
-        
+
         return redirect()->route('admin.index')->with("success_msg", 'Deleted successfully');
     }
-    
+
     private function removeImage($admin)
     {
         if($admin->image != "" && \File::exists('upload/admins/' . $admin->image)) {

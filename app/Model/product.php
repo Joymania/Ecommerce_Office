@@ -21,7 +21,8 @@ class product extends Model
         'sub_category_id',
         'promo_price',
         'start_date',
-        'end_date'
+        'end_date',
+        'buying_price'
     ];
 
     public function OrderProduct()
@@ -62,6 +63,10 @@ class product extends Model
     public function sub_images()
     {
         return $this->hasMany(SubImage::class, 'product_id','id');
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class)->withPivot('qty' );//'size', 'price'
     }
 
 }

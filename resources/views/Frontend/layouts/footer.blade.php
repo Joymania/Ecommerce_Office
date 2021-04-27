@@ -1,53 +1,73 @@
+<div class="subscribe-area bg-gray-4 pt-115 pb-115">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-5">
+                <div class="section-title">
+                    <h2>keep connected</h2>
+                    <p>Get updates by subscribe our weekly newsletter</p>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div id="mc_embed_signup" class="subscribe-form">
+                    <form id="mc-embedded-subscribe-form" class="validate subscribe-form-style" novalidate="" target="_blank" name="mc-embedded-subscribe-form" method="post" action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
+                        <div id="mc_embed_signup_scroll" class="mc-form">
+                            <input class="email" type="email" required="" placeholder="Enter your email address" name="EMAIL" value="">
+                            <div class="mc-news" aria-hidden="true">
+                                <input type="text" value="" tabindex="-1" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
+                            </div>
+                            <div class="clear">
+                                <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="Subscribe">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer class="footer-area bg-gray-4">
     <div class="footer-top border-bottom-4 pb-55">
         <div class="container">
             <div class="row">
+                <!-- Quick shop -->
+                @if($categories->isNotEmpty())
                 <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                     <div class="footer-widget mb-40">
                         <h3 class="footer-title">Quick Shop</h3>
                         <div class="footer-info-list info-list-50-parcent">
                             <ul>
-                                <li><a href="shop.html">New In</a></li>
-                                <li><a href="shop.html">T-Shirts</a></li>
-                                <li><a href="shop.html">Best Seller</a></li>
-                                <li><a href="shop.html">Shirts</a></li>
-                                <li><a href="shop.html">Clothing</a></li>
-                                <li><a href="shop.html">Bags</a></li>
-                                <li><a href="shop.html">Men</a></li>
-                                <li><a href="shop.html">Dresses</a></li>
-                                <li><a href="shop.html">Women</a></li>
-                                <li><a href="shop.html">Jeans</a></li>
-                                <li><a href="shop.html">Baby Girl</a></li>
-                                <li><a href="shop.html">Shorts</a></li>
-                                <li><a href="shop.html">Baby Boys</a></li>
-                                <li><a href="shop.html">Blouses & Shirts</a></li>
-                                <li><a href="shop.html">Accessories</a></li>
-                                <li><a href="shop.html">Blazers</a></li>
-                                <li><a href="shop.html">Shoes</a></li>
+                                @foreach($categories as $cat)
+                                    <li><a href="{{ route('search.result') }}">{{ $cat->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                 </div>
+                @else                    
+                @endif
+
                 <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                     <div class="footer-widget ml-70 mb-40">
                         <h3 class="footer-title">useful links</h3>
                         <div class="footer-info-list">
                             <ul>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">My Wishlish</a></li>
+                                <li><a href="{{ route('userAccount') }}">My Account</a></li>
+                                <li><a href="{{ route('wishlist.view') }}">My Wishlish</a></li>
                                 <li><a href="#">Term & Conditions</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Track Order</a></li>
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="{{ route('track.show') }}">Track Order</a></li>
+                                <li><a href="{{ route('search.result') }}">Shop</a></li>
+                                <li><a href="#">About Us</a></li>
                                 <li><a href="#">Returns/Exchange</a></li>
                                 <li><a href="#">FAQs</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
                 @if(!empty($contacts))
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div id="contact" class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="footer-widget mb-40 ">
                         <h3 class="footer-title">Contact Us</h3>
                         <div class="contact-info-2">
@@ -57,7 +77,7 @@
                                 </div>
                                 <div class="contact-info-2-content contact-info-2-content-purple">
                                     <p>Got a question? Call us 24/7</p>
-                                    <h3 class="purple">{{$contacts->mobile_no}}</h3>
+                                    <h3 class="purple">{{ $contacts->mobile_no }}</h3>
                                 </div>
                             </div>
                             <div class="single-contact-info-2">
@@ -65,7 +85,7 @@
                                     <i class="icon-cursor icons"></i>
                                 </div>
                                 <div class="contact-info-2-content">
-                                    <p>{{$contacts->address}}</p>
+                                    <p>{{ $contacts->address }}</p>
                                 </div>
                             </div>
                             <div class="single-contact-info-2">
@@ -73,7 +93,7 @@
                                     <i class="icon-envelope-open "></i>
                                 </div>
                                 <div class="contact-info-2-content">
-                                    <p>{{$contacts->email}}</p>
+                                    <p>{{ $contacts->email }}</p>
                                 </div>
                             </div>
                         </div>
@@ -88,12 +108,12 @@
                 </div>
 
                 @else
-                <p>no contact data</p>
-
+                <p>No contact data available!</p>
                 @endif
             </div>
         </div>
     </div>
+
     <div class="footer-bottom pt-30 pb-30 ">
         <div class="container">
             <div class="row flex-row-reverse">
@@ -231,7 +251,6 @@
     </div>
 </div>
 <!-- Modal end -->
-</div>
 
 <!-- All JS is here
 ============================================ -->

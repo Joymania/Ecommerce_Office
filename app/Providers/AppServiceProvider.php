@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Model\wishlist;
+use App\Model\CartShopping;
+use App\Model\category;
+use App\Model\contacts;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->wishlist_num = wishlist::all()->count();
+        $this->cart_num = CartShopping::all()->count();
+        $this->categories = category::with('sub_category')->get();
+        
+        View::composer('Frontend.layouts.master', function ($view) {
+            $view->with('wishlist_num' , $this->wishlist_num);
+            $view->with('cart_num' , $this->cart_num);
+            $view->with('categories' , $this->categories);
+            
+        });
     }
 }

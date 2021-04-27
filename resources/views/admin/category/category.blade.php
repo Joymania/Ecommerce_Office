@@ -21,7 +21,9 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
+                                <th>Image</th>
                                 <th>Created by</th>
+                                <th>Updated by</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -30,6 +32,12 @@
                             <tr>
                                 <td>{{$view_cat->id}}</td>
                                 <td>{{$view_cat->name}}</td>
+                                <td>
+                                    @if(!empty($view_cat->image))
+                                    <img style="width: 100px; height: 120px" src="{{""}}/upload/categories/{{$view_cat->image}}" alt="">
+                                    @endif
+                                </td>
+                                <td></td>
                                 <td></td>
                                 <td class="action">
                                    
@@ -46,11 +54,7 @@
                     </table>
                     </div>
                 </div>
-            </div>    
-        </div>
+        </div>    
     </div>
 </div>
-
-
-
 @stop

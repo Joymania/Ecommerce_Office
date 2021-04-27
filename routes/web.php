@@ -9,17 +9,18 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 */
-
+Route::get('/test', 'Frontend\FrontendController@test');
 
 /*Front end routing Starts*/
 Auth::routes(['verify' => true]);
 
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
-
+Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about_us');
 // without authentication
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
+Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 
 //  Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
@@ -41,11 +42,11 @@ Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.c
 Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
 Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
 
-
 //wishlist
 Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
 Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
 
+// tracking
 Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
 Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
 
@@ -64,18 +65,15 @@ Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('de
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
-
-
 Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+    Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
 
     // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
- 
+
 });
 
-Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 /*Front end routing ends*/
 
 
@@ -211,7 +209,7 @@ Route::prefix('expenseCategory')->group(function(){
     Route::get('deleteExp/{did}','Backend\expenseCategoryController@deleteExp')->name('expenseCategory.delete');
 });
 
-// expense 
+// expense
 Route::prefix('expense')->group(function(){
     Route::get('/', 'Backend\expenseController@expense')->name('expense.view');
     Route::get('insertExpense', 'Backend\expenseController@insertExpense')->name('expense.add');
@@ -230,6 +228,10 @@ Route::prefix('expense')->group(function(){
         Route::post('updateLogo','Backend\LogoController@updateLogo')->name('logo.update');
         Route::get('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
     });
+
+
+    //Report page route
+    Route::get('/report','Backend\ReportController@index')->name('sales.report');
 
     // fallback route
     Route::fallback(function () {
@@ -256,5 +258,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
+
 //Admin Routing Ends
 

@@ -18,9 +18,8 @@ use Illuminate\Support\Facades\Validator;
 // find(Auth::id());
 class userAccountController extends Controller
 {
-    Public Function userAccount($id)
+    Public Function userAccount()
     {
-        
         $user = User::all()->find($id);
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
