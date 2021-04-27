@@ -2,45 +2,6 @@
 @section('content')
     <!-- mini cart start -->
     <div class="sidebar-cart-active">
-        <div class="sidebar-cart-all">
-            <a class="cart-close" href="#"><i class="icon_close"></i></a>
-            <div class="cart-content">
-                <h3>Shopping Cart</h3>
-                <ul>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="{{""}}/assets/images/cart/cart-1.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Simple Black T-Shirt</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="{{""}}/assets/images/cart/cart-2.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Norda Backpack</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="cart-total">
-                    <h4>Subtotal: <span>$170.00</span></h4>
-                </div>
-                <div class="cart-checkout-btn">
-                    <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
-                    <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="breadcrumb-area bg-gray">
         <div class="container">
@@ -132,23 +93,27 @@
                             <span class="old-price">$95.72</span>
                         </div>
                         <div class="pro-details-color-wrap">
-                            <span>Color:</span>
+                            <span>Colors:</span>
                             <div class="pro-details-color-content">
-                                <ul>
-                                    @foreach($product->colors as $color)
-                                    <li><a class="{{strtolower($color->name)}}" href="#">{{$color->name}}</a></li>
-                                    @endforeach
-                                </ul>
+                                <select class="js-select2" name="color_id">
+                                    <option>Choose an option</option>
+                                        @foreach ($colors as $color)
+                                        <option value=" {{ $color->color_id }}">{{ $color['color']['name'] }}</option>
+
+                                        @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="pro-details-size">
-                            <span>Size:</span>
+                            <span>Sizes:</span>
                             <div class="pro-details-size-content">
-                                <ul>
-                                    @foreach($product->sizes as $size)
-                                    <li><a class="productSizeContent" href="#">{{$size->name}}</a></li>
+                                <select class="js-select2" name="size_id"  >
+                                    <option>Choose an option</option>
+                                    @foreach ($sizes as $size)
+                                    <option value=" {{ $size->size_id }}">{{ $size['size']['name'] }}</option>
+
                                     @endforeach
-                                </ul>
+                            </select>
                             </div>
                         </div>
                         <div class="pro-details-quality">

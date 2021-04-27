@@ -47,11 +47,8 @@
                          <strong>Email:</strong>{{ $order->biling_email }}&nbsp;&nbsp;&nbsp&nbsp;&nbsp;
                          <strong>Address:</strong>{{ $order->biling_address }}&nbsp;&nbsp&nbsp;&nbsp;<br>
                          <strong>Mobile:</strong>{{ $order->biling_phone }}&nbsp;&nbsp;
-                         {{-- <strong>Payment:</strong>&nbsp;&nbsp;
-                         {{ $order['payment']['payment_method'] }}
-                         @if ($order['payment']['payment_method']=='Bkash')
-                         <span> (Transaction No:{{ $order['payment']['transaction'] }})</span>
-                          @endif --}}
+                         <strong>Payment:</strong>&nbsp;&nbsp;
+                         {{ $order->payment }}
                          </td>
                      </tr>
 
@@ -69,8 +66,15 @@
                                  <img src="{{ asset('upload/products_images/'.$details['image']) }}" style="width: 50px; height: 50px;"> &nbsp; {{ $details['name'] }}
                              </td>
                              <td>
-                                 {{ $details['color']['name'] }} <br>
-                                 {{ $details['size']['name'] }}
+                                 @foreach ($product->color as $item)
+                                      {{ $item['name'] }} <br>
+
+                                 @endforeach
+                                 @foreach ($product->size as $size)
+                                 {{ $size['name'] }} <br>
+
+                                 @endforeach
+
                              </td>
 
                              <td>
