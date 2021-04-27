@@ -62,13 +62,15 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="billing-info mb-20">
                                                 <label>First Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="name" value="{{ @$users->name }}">
+                                                <input type="text" name="name"  value="{{ @$users->name }}">
+                                                <font color="red">{{ ($errors->has('name'))?($errors->first('name')): '' }}</font>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="billing-info mb-20">
                                                 <label>Last Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="lname" value="{{ @$users->lname }}">
+                                                <input type="text" name="lname"  value="{{ @$users->lname }}">
+
                                             </div>
                                         </div>
 
@@ -76,14 +78,16 @@
                                         <div class="col-lg-12">
                                             <div class="billing-info mb-20">
                                                 <label>Street Address <abbr class="required" title="required">*</abbr></label>
-                                                <input class="billing-address" placeholder="House number and street name" type="text" name="address" value="{{ @$users->address }}">
+                                                <input class="billing-address"  placeholder="House number and street name" type="text" name="address" value="{{ @$users->address }}">
+                                                <font color="red">{{ ($errors->has('address'))?($errors->first('address')): '' }}</font>
 
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="billing-info mb-20">
                                                 <label>Town / City <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="city" value="{{ @$users->city }}">
+                                                <input type="text" name="city"  value="{{ @$users->city }}">
+                                                <font color="red">{{ ($errors->has('city'))?($errors->first('city')): '' }}</font>
                                             </div>
                                         </div>
 
@@ -91,13 +95,15 @@
                                         <div class="col-lg-12 col-md-12">
                                             <div class="billing-info mb-20">
                                                 <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="phone" value="{{ @$users->phone }}">
+                                                <input type="text" name="phone"  value="{{ @$users->phone }}">
+                                                <font color="red">{{ ($errors->has('phone'))?($errors->first('phone')): '' }}</font>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12">
                                             <div class="billing-info mb-20">
                                                 <label>Email Address <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="email" value="{{ @$users->email }}">
+                                                <input type="text" name="email"  value="{{ @$users->email }}">
+                                                <font color="red">{{ ($errors->has('email'))?($errors->first('email')): '' }}</font>
                                             </div>
                                         </div>
                                     </div>
@@ -206,7 +212,11 @@
 
                                                 <div class="your-order-info order-total">
                                                     <ul>
-                                                        <li>Total <span>{{ Cart::total() }} tk </span></li>
+                                                        {{--  @php
+                                                            (float)$sum=Cart::subtotal();
+                                                        @endphp  --}}
+
+                                                        <li>Total <span>{{ Cart::subtotal() }} tk </span></li>
                                                     </ul>
                                                 </div>
 
@@ -225,7 +235,8 @@
                                             </div> --}}
 
                                             <div class="pay-top sin-payment">
-                                                <input id="payment-method-3" class="input-radio" type="radio" value="cheque" name="payment">
+                                                <input id="payment-method-3" class="input-radio" type="radio" value="Handcash" name="payment">
+                                                <font color="red">{{ ($errors->has('payment'))?($errors->first('payment')): '' }}</font>
                                                 <label for="payment-method-3">Cash on delivery </label>
                                                 <div class="payment-box payment_method_bacs">
                                                     {{--  <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>  --}}

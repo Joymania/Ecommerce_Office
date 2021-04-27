@@ -26,47 +26,58 @@ class CartController extends Controller
 
     public function addtoCart(Request $request){
 
-        //dd($id);
-        // $this->validate($request,[
-        //     'size_id'=>'required',
-        //     'color_id'=>'required'
-        // ]);
+         $this->validate($request,[
+             'size_id'=>'required',
+             'color_id'=>'required'
+             ]);
+
         $product=product::where('id',$request->id)->first();
         $product_size=size::where('id',$request->size_id)->first();
         $product_color=color::where('id',$request->color_id)->first();
+        $subtotal=$request->qty * $product->price;
 
+        if(Auth::user()){
 
-        Cart::add([
+            $idauth = Auth::id();
+            $identity=$request->id;
+            $sizeID=$request->size_id;
+            $colorId=$request->color_id;
+            $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+
+            if($cartCheck==NULL){
+            $cart_add=new CartShopping();
+            $cart_add->user_id=$idauth;
+            $cart_add->product_id=$product->id;
+            $cart_add->product_size=$request->size_id;
+            $cart_add->product_color=$request->color_id;
+            $cart_add->qty=$request->qty;
+            $cart_add->subtotal=$subtotal;
+            $cart_add->save();
+
+        }
+        else{
+            return redirect()->route('show.cart');
+        }
+
+        }
+        else{
+             Cart::add([
             'id'=>$product->id,
             'qty'=>$request->qty,
             'price'=>$product->price,
             'name'=>$product->name,
             'weight'=>550,
             'options'=>[
-                // 'size_id' =>$request->size_id,
-                // 'size_name' =>$product_size->name,
-                // 'color_id' =>$request->color_id,
-                // 'color_name' =>$product_color->name,
+                 'size_id' =>$request->size_id,
+                 'size_name' =>$product_size->name,
+                 'color_id' =>$request->color_id,
+                 'color_name' =>$product_color->name,
                 'image'=>$product->image
-
             ]
 
         ]);
 
-        $subtotal=$request->qty * $product->price;
-
-            $idauth = Auth::id();
-            if($idauth){
-            $cart_add=new CartShopping();
-            $cart_add->user_id=$idauth;
-            $cart_add->product_id=$product->id;
-            $cart_add->product_size=$product_size;
-            $cart_add->product_color=$product_color;
-            $cart_add->qty=$request->qty;
-            $cart_add->subtotal=$subtotal;
-            $cart_add->save();
-
-            }
+        }
 
         return redirect()->route('show.cart')->with('success','Product added Successfully.');
     }
@@ -132,10 +143,10 @@ class CartController extends Controller
         $cart=Cart::subtotal();
 
         if($check){
-           Session::put('cupon', [
+           Session::push('cupon', [
                'cupon'=> $request->cupon,
                'discount'=> $check->discount,
-               'blance'=>$cart - $check->discount,
+               'blance'=>$cart-$check->discount,
            ]);
            return redirect()->back();
 

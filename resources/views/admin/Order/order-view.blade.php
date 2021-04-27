@@ -28,7 +28,7 @@
                             <th>Actions</th>
 
                         </tr>
-                    </thead> 
+                    </thead>
                     <tbody>
                         @foreach ($alldata as $key=>$order)
                             <tr class="gradeA">
@@ -46,7 +46,7 @@
 
                             </td>
 
-                            <td></td>
+                            <td>{{ $order->payment }}</td>
                             <td class="actions">
 
                                 <a href="{{ route('order.details',$order->id) }}">
