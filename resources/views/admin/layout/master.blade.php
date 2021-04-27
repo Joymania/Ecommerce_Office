@@ -119,6 +119,8 @@
         @if (Request::segment(2) === 'validation' or Request::segment(2) === 'advance-elements' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css') }}"/>
         @endif
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/vendor/multi-select/css/multi-select.css')}}" />
 
         @if (Request::segment(2) === 'advance-elements' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" />
@@ -127,6 +129,7 @@
             <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" />
             <link rel="stylesheet" href="{{ asset('assets/vendor/nouislider/nouislider.min.css')}}" />
         @endif
+
 
         @if (Request::segment(2) === 'dragdrop' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/dropify/css/dropify.min.css') }}"/>
@@ -146,11 +149,12 @@
 
         @if (Request::segment(2) === 'jquery-datatable' )
            {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jqueryhttps://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css.dataTables.min.css">--}}
-            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
             <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}"/>
             <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}"/>
         @endif
-
+        {{--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">--}}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}">
 
         @if (Request::segment(2) === 'dragger' )
             <link rel="stylesheet" href="{{ asset('assets/vendor/table-dragger/table-dragger.min.css') }}"/>
@@ -304,7 +308,7 @@
             <script src="{{ asset('assets/bundles/jvectormap.bundle.js') }}"></script>
             <script src="{{ asset('assets/bundles/chartist.bundle.js') }}"></script>
             <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
-            <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
+            {{--<script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>--}}
             <script src="{{ asset('assets/js/index7.js') }}"></script>
         @endif
 
@@ -427,18 +431,9 @@
             <script src="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
             <script src="{{ asset('assets/vendor/parsleyjs/js/parsley.min.js') }}"></script>
         @endif
+        <script src="{{ asset('assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
 
-        {{--@if (Request::segment(2) === 'advance-elements' )
-            <script src="{{ asset('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js') }}"></script>
-            <script src="{{ asset('assets/vendor/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
-            <script src="{{ asset('assets/vendor/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
-            <script src="{{ asset('assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
-            <script src="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
-            <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-            <script src="{{ asset('assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
-            <script src="{{ asset('assets/vendor/nouislider/nouislider.js') }}"></script>
-            <script src="{{ asset('assets/js/pages/forms/advanced-form-elements.js') }}"></script>
-        @endif--}}
         @if (request()->segment(2) === 'advance-elements' )
             <script src="{{ asset('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
@@ -450,6 +445,7 @@
             <script src="{{ asset('assets/vendor/nouislider/nouislider.js') }}"></script>
             <script src="{{ asset('assets/js/pages/forms/advanced-form-elements.js') }}"></script>
         @endif
+
 
         @if (Request::segment(2) === 'wizard' )
             <script src="{{ asset('assets/vendor/jquery-validation/jquery.validate.js') }}"></script>
@@ -484,16 +480,16 @@
 
         @if (Request::segment(2) === 'jquery-datatable' )
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
-            <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
         @endif
 
+        <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
 
 
         @if (Request::segment(2) === 'editable' )

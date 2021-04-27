@@ -21,7 +21,8 @@ class product extends Model
         'sub_category_id',
         'promo_price',
         'start_date',
-        'end_date'
+        'end_date',
+        'buying_price'
     ];
 
     public function category()

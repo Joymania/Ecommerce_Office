@@ -11,16 +11,6 @@
             <div class="card planned_task">
                 <div class="header">
                     <h2>Add Product</h2>
-                    <ul class="header-dropdown">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another Action</a></li>
-                                <li><a href="javascript:void(0);">Something else</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
                 <div class="body">
                     <div class="row clearfix">
@@ -87,7 +77,8 @@
                                             </div>
                                             <div class="col">
                                                 <label for="single-selection">Select Colors</label>
-                                                <select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">
+                                                {{--<select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">--}}
+                                                <select id="multiselect-size" name="color_id" class="form-control multiselect multiselect-custom" multiple="multiple">
                                                     <option value="">Select Product Color</option>
                                                     @foreach($colors as $row)
                                                         <option value="{{$row->id}}">{{$row->name}}</option>
@@ -108,10 +99,17 @@
 
                                         <div class="form-row">
                                             <div class="col">
-                                                <label for="productPrice">Product Price</label>
-                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product price">
+                                                <label for="productPrice">Selling Price</label>
+                                                <input type="number" id="productPrice" name="price" class="form-control" placeholder="Product Selling price">
                                                 @error('price')
                                                 <span style="color: red">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <label for="buyingPrice">Buying Price</label>
+                                                <input type="number" id="buyingPrice" name="buying_price" class="form-control" placeholder="Product Buying price">
+                                                @error('buying_price')
+                                                <span style="color: red">Buying Price is required!</span>
                                                 @enderror
                                             </div>
                                             <div class="col">
@@ -172,10 +170,10 @@
                                         </div>
 
                                         <script>
-                                            function showPromo(){      
-                                                var checkBox = document.getElementById("promo_btn");                                  
+                                            function showPromo(){
+                                                var checkBox = document.getElementById("promo_btn");
                                                 var promo_section = document.getElementById('promo_section');
-                                                if (checkBox.checked == true){                                                 
+                                                if (checkBox.checked == true){
                                                     promo_section.style.display = "flex";
                                                 } else {
                                                     promo_section.style.display = "none";
@@ -183,7 +181,7 @@
                                             }
                                         </script>
                                          <!-- Promotional Price End-->
-                                        
+
                                         <div class="form-row">
                                             <div class="col">
                                                 <label for="image">Upload Cover Image</label>
@@ -215,4 +213,5 @@
     </div>
 
 @stop
+
 

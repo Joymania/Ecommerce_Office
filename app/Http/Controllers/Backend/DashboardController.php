@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Admin;
 use App\Model\Order;
 use App\Model\product;
+use App\Model\review;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,18 +18,22 @@ class DashboardController extends Controller
     public function ecommerce()
     {
         $admin = Admin::find(Auth::id());
-        $sales = Order::where('status',1)->count();
-        $orders = Order::where('status',0)->count();
+        $sales = Order::where('status',2)->count();
+        $orders = Order::count();
         session()->put('sales',$sales);
         session()->put('orders',$orders);
         $customers = User::count();
-        $recentOrders = Order::with('products')->latest()->limit(5)->get();
-        //$newOrders = Order::with('products')->where('status',0)->latest()->limit(5)->get();
+        $recentOrders = Order::with('products')->latest()->get();
+        $data['pending'] = Order::where('status',0)->count();
+        $data['completed'] = $sales;
+        $data['processing'] = Order::where('status',1)->count();
+        $data['customerSatisfaction'] = review::count();
+        $data['totalProducts'] = product::sum('stock');
 
        $a = DB::table('order_product')
            ->select('product_id',DB::raw('SUM(qty) as total_sales'))
            ->groupBy('product_id')
-           ->orderByRaw('product_id DESC')->limit(5)->get();
+           ->orderByRaw('total_sales DESC')->limit(5)->get();
 
        $b = array();
         foreach ($a as $row)
@@ -37,6 +42,6 @@ class DashboardController extends Controller
         }
         $tsp = product::find($b);
         return view('admin.dashboard.ecommerce',
-            compact('admin','sales','orders','customers','recentOrders','tsp','a'));
+            compact('admin','sales','orders','customers','recentOrders','tsp','a','data'));
     }
 }

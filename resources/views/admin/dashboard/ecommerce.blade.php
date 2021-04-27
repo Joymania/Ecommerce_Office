@@ -40,8 +40,54 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h3>68% <i class=" icon-heart float-right"></i></h3>
-                <span>Customer Satisfaction</span>
+                <h3>{{$data['customerSatisfaction']}} <i class=" icon-heart float-right"></i></h3>
+                <span>Customer Reviews</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-green m-b-0">
+                <div class="progress-bar" data-transitiongoal="68"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h3>{{$data['pending']}} <i class="icon-hourglass float-right"></i></h3>
+                <span>Order Pending</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                <div class="progress-bar" data-transitiongoal="64"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h3>{{$data['processing']}} <i class="fa fa-cogs float-right"></i></h3>
+                <span>Order Processing</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">
+                <div class="progress-bar" data-transitiongoal="67"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h3>{{$data['completed']}} <i class="fa fa-check-square-o float-right"></i></h3>
+                <span>Order Complete</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">
+                <div class="progress-bar" data-transitiongoal="89"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h3>{{$data['totalProducts']}} <i class="fa fa-archive float-right"></i></h3>
+                <span>Total Products</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-green m-b-0">
                 <div class="progress-bar" data-transitiongoal="68"></div>
@@ -117,8 +163,8 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="table table-bordered table-hover table-striped js-basic-example dataTable table-custom thead-dark" >
+                    <table class="table table table-bordered table-hover table-striped js-basic-example dataTable table-custom">
+                        <thead class="thead-dark">
                             <tr>
                                 {{--<th style="width:60px;">#</th>--}}
                                 <th>Name</th>
@@ -169,12 +215,12 @@
             <div class="body">
                 <div id="world-map-markers" class="jvector-map" style="height: 300px">
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-striped">
+                        <table id="" class="table table-hover table-bordered table-striped">
                             <thead class="thead-success">
-                            <tr>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @php($i = 0)
