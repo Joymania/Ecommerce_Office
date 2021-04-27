@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Validator;
 
 class userAccountController extends Controller
 {
-    Public Function userAccount($id)
+    Public Function userAccount()
     {
+        $id = Auth::id();
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();

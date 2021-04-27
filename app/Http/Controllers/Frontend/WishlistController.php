@@ -40,7 +40,7 @@ class WishlistController extends Controller
         $data['wishlist']=wishlist::with('product')->where(function ($querry) use($id){
             $querry->where('user_id',$id)->where('status','0');
         })->get()->toArray();
-
+        
         return view('Frontend.single_pages.wishlist',$data);
         }
         else{

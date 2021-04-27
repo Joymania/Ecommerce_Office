@@ -9,17 +9,18 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 */
-
+Route::get('/test', 'Frontend\FrontendController@test');
 
 /*Front end routing Starts*/
 Auth::routes(['verify' => true]);
 
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
-
+Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about_us');
 // without authentication
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
+Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 
 //  Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
@@ -41,11 +42,11 @@ Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.c
 Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
 Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
 
-
 //wishlist
 Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
 Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
 
+// tracking
 Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
 Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
 
@@ -64,10 +65,8 @@ Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('de
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
-
-
 Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+    Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
 
     // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 
@@ -75,7 +74,6 @@ Route::middleware(['auth','verified'])->group(function () {
  
 });
 
-Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 /*Front end routing ends*/
 
 

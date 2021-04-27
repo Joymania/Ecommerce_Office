@@ -16,17 +16,21 @@
 
                              <input name="id" type="hidden" class="form-control" id="fname" value="{{$edits->id}}"> 
 
-                             <div class="form-group row">
-                                 <label for="name" class="col-sm-3 text-right control-label col-form-label">Category Name*</label>
-                                 <div class="col-sm-9">
-                                     <input name="name" type="text" class="form-control" id="name" value="{{$edits->name}}">
-                                 </div>
-                             </div>
-
-                             
-
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 text-right control-label col-form-label">Category Name*</label>
+                                <div class="col-sm-9">
+                                    <input name="name" type="text" class="form-control" id="name" value="{{$edits->name}}">
+                                </div>
+                            </div>
                             
-                            
+                            <div class="form-group row">
+                                <label for="image" class="col-sm-3 text-right control-label col-form-label">Category Image</label>
+                                <div class="col-sm-9">
+                                    <input name="image" type="file" class="form-control" id="image">
+                                </div>
+                            </div>
+
+               
                          </div>
                          <div class="border-top">
                              <div class="card-body">

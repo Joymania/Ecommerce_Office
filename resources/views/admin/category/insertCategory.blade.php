@@ -27,7 +27,12 @@
                                 </div>
                             </div>
 
-                    
+                            <div class="form-group row">
+                                <label for="image" class="col-sm-3 text-right control-label col-form-label">Category Image</label>
+                                <div class="col-sm-9">
+                                    <input name="image" type="file" class="form-control" id="image">
+                                </div>
+                            </div>                   
                             
                             <div class="form-group row">
                                 <label for="createdBy" class="col-sm-3 text-right control-label col-form-label">Created By</label>

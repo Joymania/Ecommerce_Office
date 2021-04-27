@@ -1,4 +1,4 @@
-@extends('Frontend.product-list.master')
+@extends('Frontend.layouts.master')
 
 @section('content')
     <div>
