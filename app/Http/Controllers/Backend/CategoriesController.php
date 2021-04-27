@@ -28,19 +28,32 @@ class CategoriesController extends Controller
         // validation
         $request->validate([
             'name' => 'required|unique:categories|max:255',
-        ], 
+            'image' => ''
+        ],
+
         // error message
         [
             'name.unique' => 'Category name must be unique',
             'name.required' => 'category name is required',
         ]);
-    
-    // inserting into database
-    	category::insert([
-    		'name'=>$request-> name,
-    	]); 
-    	return back();
+      
+        $category = new category();
+        $category->name = $request-> name;
+
+        // if there is file in image field
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+
+            $file->move(public_path('upload/categories'), $filename);
+            $category->image = $filename;
+        }
+        $category->save();
+
+    	return redirect()->route('category.view')->with('success','Created successfully!!!');
     }
+
     // editCategory
     public function editCategory($eid)
     {
@@ -51,22 +64,42 @@ class CategoriesController extends Controller
     // updateCategory
    function updateCategory(Request $request)
     {
-        category::findOrFail($request->id)->update([
-            'name'=>$request-> name,
-          ]); 
-  
-          return redirect()->route('category.view')->with('success','Successfully Update!!!');
+        $category = category::findOrFail($request->id);
+        $category->name = $request-> name;
+
+        // if there is file in image field
+        if($request->hasFile('image')) {
+            // remove image
+            $this->removeImage($category);
+            
+            $file = $request->file('image');
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+    
+            $file->move(public_path('upload/categories'), $filename);
+            $category->image = $filename;
+        }
+
+        $category->save();
+
+        return redirect()->route('category.view')->with('success','Successfully Update!!!');
     }
 
     // deleteCategory
  
     public function deleteCategory($did)
     {
-        category::findOrFail($did)->delete();
+        $category = category::findOrFail($did);
+        $this->removeImage($category);
+        $category->delete();
     	return redirect()->route('category.view')->with('success','Successfully Deleted!!!');
     }
 
-
+    private function removeImage($category)
+    {
+        if($category->image != "" && \File::exists('upload/categories/' . $category->image)) {
+            @unlink(public_path('upload/categories/' . $category->image));
+        }
+    }
 
 
 }
