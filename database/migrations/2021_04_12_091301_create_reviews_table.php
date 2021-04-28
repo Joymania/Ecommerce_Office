@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->integer('product_id');
             $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->integer('rating')->nullable();
+            $table->float('rating')->nullable();
             $table->string('review')->nullable();
             $table->timestamps();
         });

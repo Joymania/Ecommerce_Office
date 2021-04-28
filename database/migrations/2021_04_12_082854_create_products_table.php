@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->double('promo_price')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->float('avg_rating')->nullable();
 
             $table->integer('cart_shopping_id')->nullable();
             $table->timestamps();

@@ -18,16 +18,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
-    public function test(){
-        $products = product::with('reviews')->get();
-        // dd($products);
-        foreach($products as $product){
-            // dd( $product->reviews);
-            $rating = $product->reviews->first();
-        }
-        dd($rating);
-        return $rating;
-    }
 
     public function index(){
         if(Auth::user()){

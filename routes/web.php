@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test', 'Frontend\FrontendController@test');
 
 /*Front end routing Starts*/
-
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
@@ -60,13 +59,14 @@ Route::get('/search-ajax','Frontend\SearchController@ajaxSearch')->name('search.
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
 
     // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
 
+    Route::post('review/{prod_id}', 'Frontend\ReviewController@store')->name('store-review');
 });
 
 /*Front end routing ends*/

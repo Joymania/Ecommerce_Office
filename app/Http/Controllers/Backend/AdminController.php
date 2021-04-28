@@ -18,8 +18,7 @@ class AdminController extends Controller
     public function index()
     {
         $admins = Admin::paginate(10);
-        $admin=Admin::where('role','0')->get();
-        return view('admin.admins.admin-index',compact('sales','orders','admin'))->with(['admins' => $admins]);
+        return view('admin.admins.admin-index',compact('admins'));
     }
 
     // return create view
