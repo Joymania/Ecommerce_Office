@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'Report')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Sales Report')
+@section('pageTitle') <a href="{{route('sales.report')}}">Sales Report</a> @endsection
+@section('parentPageTitle', '')
 
 
 @section('content')

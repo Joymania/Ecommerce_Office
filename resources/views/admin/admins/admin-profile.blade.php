@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('title', 'Admin Profile')
-@section('parentPageTitle', 'admin')
+@section('pageTitle')<a href="#">Admin Profile</a> @endsection
+@section('parentPageTitle') <a href="{{route('admin.index')}}">Admins</a> @endsection
 
 
 @section('content')
@@ -9,7 +10,7 @@
 <div class="col-lg-12">
 <div class="card">
     <div class="card-header">
-        <h3>Admin Profile</h3> 
+        <h3>Admin Profile</h3>
 
         @if(session()->has('success_msg'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -17,7 +18,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div> 
+            </div>
         @endif
         @if(session()->has('errors'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -56,23 +57,23 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                </div>     
-            </div>   
+                    </div>
+                </div>
+            </div>
 
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12">
                     <div class="body">
                         <h6>Basic Information</h6>
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="name" type="text" class="form-control" placeholder="Name" value="{{$admin->name}}">
                         </div>
-                    
+
                         <div class="form-group">
                             <input name="email" type="email" class="form-control" placeholder="Email" value="{{$admin->email}}">
                         </div>
 
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="address" type="text" class="form-control" placeholder="Address" value="{{$admin->address}}">
                         </div>
 
@@ -103,7 +104,7 @@
                                     </label>
                                 </div>
                             </div>
-                        @else 
+                        @else
                             <div>
                                 <label class="fancy-radio">
                                             <input name="role" value="0" type="radio" checked>
@@ -116,7 +117,7 @@
                 </div>
 
                 <div class="col-lg-6 col-md-12">
-                    
+
                     <div class="body">
                         <h6>Change Password</h6>
 
@@ -137,7 +138,7 @@
 </div>
 </div>
 
-                  
+
 @endsection
 
 @section('page-script')

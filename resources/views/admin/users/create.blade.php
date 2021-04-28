@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('title', 'Add user')
-@section('parentPageTitle', 'User')
+@section('pageTitle') <a href="{{route('users.store')}}">Add User</a> @endsection
+@section('parentPageTitle') <a href="{{route('users.index')}}">Users</a> @endsection
 
 
 @section('content')
@@ -9,7 +10,7 @@
 <div class="col-lg-12">
 <div class="card">
     <div class="card-header">
-        <h3> Create User</h3> 
+        <h3> Create User</h3>
         <a class=" float-right btn btn-success btn-sm" href="{{ route('users.index') }}"><i class="fa fa-list"></i> User List</a>
 
         @if(session()->has('success_msg'))
@@ -58,23 +59,23 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                </div>     
-            </div>   
+                    </div>
+                </div>
+            </div>
 
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12">
                     <div class="body">
                         <h6>Basic Information</h6>
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="name" type="text" class="form-control" placeholder="Name" value="{{old('name')}}">
                         </div>
-                    
+
                         <div class="form-group">
                             <input name="email" type="email" class="form-control" placeholder="Email" value="{{old('email')}}">
                         </div>
 
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="address" type="text" class="form-control" placeholder="Address" value="{{old('address')}}">
                         </div>
 
@@ -95,7 +96,7 @@
                 </div>
 
                 <div class="col-lg-6 col-md-12">
-                    
+
                     <div class="col-lg-6 col-md-12">
                         <h6>Change Password</h6>
 
@@ -116,7 +117,7 @@
 </div>
 </div>
 
-                  
+
 @endsection
 
 @section('page-script')

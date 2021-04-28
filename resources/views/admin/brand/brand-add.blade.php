@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'Form Validation')
-@section('parentPageTitle', 'Forms')
-
+@section('title', 'Add Brand')
+@section('pageTitle') <a href="{{route('brand.add')}}">Add Brand</a> @endsection
+@section('parentPageTitle') <a href="{{route('brand.view')}}">Brands</a> @endsection
 
 @section('content')
 

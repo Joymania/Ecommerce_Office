@@ -11,7 +11,6 @@ use App\Model\sub_category;
 use App\Model\contacts;
 use App\Model\logo;
 use App\Model\review;
-use Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;

@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'Form Validation')
-@section('parentPageTitle', 'Forms')
+@section('title','Add Contact')
+@section('pageTitle') <a href="{{route('contact.add')}}">Add Contact</a> @endsection
+@section('parentPageTitle')<a href="{{route('contact.view')}}">Contacts</a> @endsection
 
 
 @section('content')

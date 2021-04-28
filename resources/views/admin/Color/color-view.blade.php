@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'jQuery Datatable')
-@section('parentPageTitle', 'Table')
+@section('title', 'Colors')
+@section('pageTitle') <a href="{{route('color.view')}}">Colors</a> @endsection
+@section('parentPageTitle', '')
 
 
 @section('content')
