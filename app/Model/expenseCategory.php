@@ -11,9 +11,9 @@ class expenseCategory extends Model
 ];
 
     public function Expense()
-    {
+    { 
 
-      return $this->hasMany(Expense::class, 'id'); 
+      return $this->hasMany(Expense::class,'category_id','id'); 
     }
   
     public function delete() {

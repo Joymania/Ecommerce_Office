@@ -30,17 +30,25 @@
 
 
 
-                            @foreach($lists as $list)
+                            @foreach($list as $li)
                             <tr>
-                                <td>{{$list->id}}</td>
-                                <td>{{$list->category->name}}</td>
-                                <td>{{$list->sub_category_name}}</td>
+                                <td>{{$li->id}}</td>
+                                <td>{{$li->category->name}}</td>
+                                <td>{{$li->sub_category_name}}</td>
                                 <td class="action">
+<<<<<<< HEAD
 
                                     <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('subCategory.edit',$list->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a>
 
                                     <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove">
                                     <a title="Move to trash" href="{{ route('subCategory.delete',$list->id) }}">
+=======
+                                   
+                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('subCategory.edit',$li->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a>
+                                   
+                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"> 
+                                    <a title="Move to trash" href="{{ route('subCategory.delete',$li->id) }}">
+>>>>>>> 2c677f9db2d91ff982dc0be83258d860a587c359
                                         <span><i class="fa fa-trash"></i></span>
                                     </a>
                                 </td>

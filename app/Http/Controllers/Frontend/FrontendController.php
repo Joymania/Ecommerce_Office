@@ -10,20 +10,53 @@ use App\Model\Slider;
 use App\Model\sub_category;
 use App\Model\contacts;
 use App\Model\logo;
+use App\Model\review;
 use Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class FrontendController extends Controller
 {
+    public function test(){
+        $products = product::with('reviews')->get();
+        // dd($products); 
+        foreach($products as $product){
+            // dd( $product->reviews);
+            $rating = $product->reviews->first();
+        }
+        dd($rating);
+        return $rating;
+    }
 
     public function index(){
+        
+        //  finding popular categories
+        $prod = DB::table('order_product')->select('product_id', DB::raw('SUM(qty) as total_sales'))->groupBy('product_id')->orderByRaw('total_sales DESC')->limit(10)->get();
+        
+        $prod_id = array();
+        foreach( $prod as $row){
+            array_push( $prod_id , $row->product_id);
+        }
+
+        $cat = DB::table('products')->select('category_id')->whereIn('id', $prod_id)->get();
+
+        $cat_id = array();
+        foreach( $cat as $row){
+            array_push( $cat_id , $row->category_id);
+        }
+        $popular_categories = category::find($cat_id);
+
+        
         $data['sliders']=DB::table('products')->orderBy('created_at','desc')->take(2)->get();
         $logos = logo::all()->last();
-        $categories = category::with('sub_category','product')->take(-4)->get();
+        $categories = category::with('sub_category','product')->take(4)->get();
         $contacts = contacts::all()->last();
-        $products = product::all();
 
-        return view('Frontend.layouts.home', $data, compact('categories' , 'logos' , 'contacts' ,'products' ));
+        // only flash deal products
+        $date = Carbon::today()->toDateString();
+        $products = product::where('end_date', '>=', $date)->with('reviews')->get();
+
+        return view('Frontend.layouts.home', $data, compact('categories' , 'logos' , 'contacts' ,'products', 'popular_categories' ));
     }
 
 
@@ -34,6 +67,12 @@ class FrontendController extends Controller
         $contacts = contacts::all()->last();
         $products = product::all();
         return view('Frontend.layouts.contact' , compact('logos' , 'categories' , 'contacts' , 'products'));
+    }
+
+    public function aboutUs()
+    {
+        $logos = logo::all()->last();
+        return view('Frontend.single_pages.about_us', compact('logos'));
     }
 
 

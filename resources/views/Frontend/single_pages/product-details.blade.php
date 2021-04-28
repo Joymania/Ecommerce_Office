@@ -2,45 +2,6 @@
 @section('content')
     <!-- mini cart start -->
     <div class="sidebar-cart-active">
-        <div class="sidebar-cart-all">
-            <a class="cart-close" href="#"><i class="icon_close"></i></a>
-            <div class="cart-content">
-                <h3>Shopping Cart</h3>
-                <ul>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="{{""}}/assets/images/cart/cart-1.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Simple Black T-Shirt</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="{{""}}/assets/images/cart/cart-2.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Norda Backpack</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="cart-total">
-                    <h4>Subtotal: <span>$170.00</span></h4>
-                </div>
-                <div class="cart-checkout-btn">
-                    <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
-                    <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="breadcrumb-area bg-gray">
         <div class="container">
@@ -133,26 +94,30 @@
                         </div>
                         @if(count($product->colors) > 0)
                         <div class="pro-details-color-wrap">
-                            <span>Color:</span>
+                            <span>Colors:</span>
                             <div class="pro-details-color-content">
-                                <ul>
-                                    @foreach($product->colors as $color)
-                                    <li><a class="{{strtolower($color->name)}}" href="#">{{$color->name}}</a></li>
-                                    @endforeach
-                                </ul>
+                                <select class="js-select2" name="color_id">
+                                    <option>Choose an option</option>
+                                        @foreach ($colors as $color)
+                                        <option value=" {{ $color->color_id }}">{{ $color['color']['name'] }}</option>
+
+                                        @endforeach
+                                </select>
                             </div>
                         </div>
                         @endif
 
                         @if(count($product->sizes) > 0)
                         <div class="pro-details-size">
-                            <span>Size:</span>
+                            <span>Sizes:</span>
                             <div class="pro-details-size-content">
-                                <ul>
-                                    @foreach($product->sizes as $size)
-                                    <li><a class="productSizeContent" href="#">{{$size->name}}</a></li>
+                                <select class="js-select2" name="size_id"  >
+                                    <option>Choose an option</option>
+                                    @foreach ($sizes as $size)
+                                    <option value=" {{ $size->size_id }}">{{ $size['size']['name'] }}</option>
+
                                     @endforeach
-                                </ul>
+                            </select>
                             </div>
                         </div>
                         @endif
@@ -344,290 +309,6 @@
                                 </div>
                             </div>
                         @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="related-product pb-115">
-        <div class="container">
-            <div class="section-title mb-45 text-center">
-                <h2>Related Product</h2>
-            </div>
-            <div class="related-product-active">
-                <div class="product-plr-1">
-                    <div class="single-product-wrap">
-                        <div class="product-img product-img-zoom mb-15">
-                            <a href="product-details.html">
-                                <img src="{{""}}/assets/images/product/product-13.jpg" alt="">
-                            </a>
-                            <div class="product-action-2 tooltip-style-2">
-                                <button title="Wishlist"><i class="icon-heart"></i></button>
-                                <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                <button title="Compare"><i class="icon-refresh"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Basic Joggin Shorts</a></h3>
-                            <div class="product-price-2">
-                                <span>$20.50</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 product-content-position text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Basic Joggin Shorts</a></h3>
-                            <div class="product-price-2">
-                                <span>$20.50</span>
-                            </div>
-                            <div class="pro-add-to-cart">
-                                <button title="Add to Cart">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-plr-1">
-                    <div class="single-product-wrap">
-                        <div class="product-img product-img-zoom mb-15">
-                            <a href="product-details.html">
-                                <img src="{{""}}/assets/images/product/product-14.jpg" alt="">
-                            </a>
-                            <span class="pro-badge left bg-red">-20%</span>
-                            <div class="product-action-2 tooltip-style-2">
-                                <button title="Wishlist"><i class="icon-heart"></i></button>
-                                <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                <button title="Compare"><i class="icon-refresh"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Make Thing Happen T-Shirt</a></h3>
-                            <div class="product-price-2">
-                                <span class="new-price">$35.45</span>
-                                <span class="old-price">$45.80</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 product-content-position text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Make Thing Happen T-Shirt</a></h3>
-                            <div class="product-price-2">
-                                <span class="new-price">$35.45</span>
-                                <span class="old-price">$45.80</span>
-                            </div>
-                            <div class="pro-add-to-cart">
-                                <button title="Add to Cart">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-plr-1">
-                    <div class="single-product-wrap">
-                        <div class="product-img product-img-zoom mb-15">
-                            <a href="product-details.html">
-                                <img src="{{""}}/assets/images/product/product-15.jpg" alt="">
-                            </a>
-                            <div class="product-action-2 tooltip-style-2">
-                                <button title="Wishlist"><i class="icon-heart"></i></button>
-                                <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                <button title="Compare"><i class="icon-refresh"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Basic White Simple Sneaker</a></h3>
-                            <div class="product-price-2">
-                                <span>$35.45</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 product-content-position text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Basic White Simple Sneaker</a></h3>
-                            <div class="product-price-2">
-                                <span>$35.45</span>
-                            </div>
-                            <div class="pro-add-to-cart">
-                                <button title="Add to Cart">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-plr-1">
-                    <div class="single-product-wrap">
-                        <div class="product-img product-img-zoom mb-15">
-                            <a href="product-details.html">
-                                <img src="{{""}}/assets/images/product/product-18.jpg" alt="">
-                            </a>
-                            <div class="product-action-2 tooltip-style-2">
-                                <button title="Wishlist"><i class="icon-heart"></i></button>
-                                <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                <button title="Compare"><i class="icon-refresh"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Tie-up Sute Sandals</a></h3>
-                            <div class="product-price-2">
-                                <span>$55.50</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 product-content-position text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Tie-up Sute Sandals</a></h3>
-                            <div class="product-price-2">
-                                <span>$55.50</span>
-                            </div>
-                            <div class="pro-add-to-cart">
-                                <button title="Add to Cart">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-plr-1">
-                    <div class="single-product-wrap">
-                        <div class="product-img product-img-zoom mb-15">
-                            <a href="product-details.html">
-                                <img src="{{""}}/assets/images/product/product-19.jpg" alt="">
-                            </a>
-                            <div class="product-action-2 tooltip-style-2">
-                                <button title="Wishlist"><i class="icon-heart"></i></button>
-                                <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                <button title="Compare"><i class="icon-refresh"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Faded Grey T-Shirt</a></h3>
-                            <div class="product-price-2">
-                                <span>$65.50</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap-2 product-content-position text-center">
-                            <div class="product-rating-wrap">
-                                <div class="product-rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star gray"></i>
-                                </div>
-                                <span>(2)</span>
-                            </div>
-                            <h3><a href="product-details.html">Faded Grey T-Shirt</a></h3>
-                            <div class="product-price-2">
-                                <span>$65.50</span>
-                            </div>
-                            <div class="pro-add-to-cart">
-                                <button title="Add to Cart">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="subscribe-area bg-gray pt-115 pb-115">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-5">
-                    <div class="section-title">
-                        <h2>keep connected</h2>
-                        <p>Get updates by subscribe our weekly newsletter</p>
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-7">
-                    <div id="mc_embed_signup" class="subscribe-form">
-                        <form id="mc-embedded-subscribe-form" class="validate subscribe-form-style" novalidate="" target="_blank" name="mc-embedded-subscribe-form" method="post" action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
-                            <div id="mc_embed_signup_scroll" class="mc-form">
-                                <input class="email" type="email" required="" placeholder="Enter your email address" name="EMAIL" value="">
-                                <div class="mc-news" aria-hidden="true">
-                                    <input type="text" value="" tabindex="-1" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
-                                </div>
-                                <div class="clear">
-                                    <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="Subscribe">
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>

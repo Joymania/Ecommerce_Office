@@ -30,7 +30,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h3>2,318 <i class="fa fa-dollar float-right"></i></h3>
+                <h3>{{$data['netProfit']}}<small>tk.</small> <i class="fa fa-dollar float-right"></i></h3>
                 <span>Net Profit</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">

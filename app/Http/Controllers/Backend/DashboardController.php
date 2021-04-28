@@ -21,8 +21,10 @@ class DashboardController extends Controller
         $admin = Admin::find(Auth::id());
         $sales = Order::where('status',2)->count();
         $orders = Order::count();
+        $revenue = Order::sum('subtotal');
         session()->put('sales',$sales);
         session()->put('orders',$orders);
+        session()->put('revenue',$revenue);
         $customers = User::count();
         $recentOrders = Order::with('products')->latest()->get();
         $data['pending'] = Order::where('status',0)->count();
@@ -32,7 +34,8 @@ class DashboardController extends Controller
         $data['totalProducts'] = product::sum('stock');
         $data['totalExpense'] = Expense::sum('amount');
         $data['totalPurchase'] = product::sum('buying_price');
-        $data['totalSales'] = 10002;
+        $data['totalSales'] = Order::sum('subtotal');
+        $data['netProfit'] = $revenue - $data['totalExpense']-$data['totalPurchase'];
 
        $a = DB::table('order_product')
            ->select('product_id',DB::raw('SUM(qty) as total_sales'))

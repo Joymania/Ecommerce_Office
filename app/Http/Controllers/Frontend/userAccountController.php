@@ -9,22 +9,24 @@ use App\Model\contacts;
 use App\Model\logo;
 use App\User;
 use App\Model\Order;
+use App\Model\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-
+// find(Auth::id());
 class userAccountController extends Controller
 {
-    Public Function userAccount($id)
+    Public Function userAccount()
     {
+        $user = User::all()->find($id);
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
-        $users = User::find(Auth::id());
         $order = Order::all()->where('user_id' , $id);
-        return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'users' , 'order'));
+        $OrderProduct = OrderProduct::with('product')->find($id);
+        return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'user' , 'order' , 'OrderProduct'));
     }
 
     public function userUpdate(Request $request)
@@ -58,7 +60,7 @@ class userAccountController extends Controller
         if($request->has('password') && !empty($request->password)) {
             $user->password = bcrypt($request->password);
         }
-
+ 
 
         $user->save();
 

@@ -1,4 +1,4 @@
-@extends('auth.auth-master')
+@extends('Frontend.layouts.master')
 
 @section('content')
     <div class="login-register-area pt-115 pb-120">

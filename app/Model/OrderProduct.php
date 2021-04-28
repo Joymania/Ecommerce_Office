@@ -8,4 +8,6 @@ class OrderProduct extends Model
 {
     protected $table = 'order_product';
     protected $guarded=[];
+
+
 }

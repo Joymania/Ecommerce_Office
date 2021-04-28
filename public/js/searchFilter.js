@@ -5,8 +5,8 @@ $(document).ready(function () {
         let split = amount.split('-');
         let first =split[0].replace('$','');
         let second = split[1].replace('$','');
-        let search = $('#search').val();
-        let category = $('#category').val();
+        /*let search = $('#search').val();
+        let category = $('#category').val();*/
         let shopArea = $('#shopArea');
         let singleProduct = $('.singleProduct');
 
@@ -14,8 +14,6 @@ $(document).ready(function () {
             type: 'get',
             url: '/search-filter',
             data: {
-                search: search,
-                category: category,
                 first: first,
                 second: second
             },
@@ -94,7 +92,7 @@ $(document).ready(function () {
 //Newly Search products
 $(document).ready(function () {
 
-    $('#searchBtn').on('click', function (e) {
+    $('#search2').on('submit', function (e) {
         e.preventDefault();
 
         let shopArea = $('#shopArea');

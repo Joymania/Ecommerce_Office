@@ -1,10 +1,10 @@
-@extends('Frontend.product-list.master')
+@extends('Frontend.layouts.master')
 
 @section('content')
     <div>
         @if(!empty($_GET))
         <input type="text" id="search" value="{{$_GET['search']}}" hidden>
-        <input type="text" id="category" value="{{$_GET['category']}}" hidden>
+       {{-- <input type="text" id="category" value="{{$_GET['category']}}" hidden>--}}
         @endif
     </div>
     <div class="shop-area pt-120 pb-120">
@@ -86,7 +86,7 @@
                         <div class="sidebar-widget mb-40">
                             <h4 class="sidebar-widget-title">Search </h4>
                             <div class="sidebar-search">
-                                <form class="sidebar-search-form" action="#">
+                                <form id="search2" class="sidebar-search-form" action="#">
                                     <input type="text" id="searchInput" placeholder="Search here...">
                                     <button id="searchBtn">
                                         <i class="icon-magnifier"></i>
@@ -117,93 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{--<div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
-                            <h4 class="sidebar-widget-title">Refine By </h4>
-                            <div class="sidebar-widget-list">
-                                <ul>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox"> <a href="#">On Sale <span>4</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">New <span>5</span></a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">In Stock <span>6</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
-                            <h4 class="sidebar-widget-title">Size </h4>
-                            <div class="sidebar-widget-list">
-                                <ul>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">XL <span>4</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">L <span>5</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">SM <span>6</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">XXL <span>7</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
-                            <h4 class="sidebar-widget-title">Color </h4>
-                            <div class="sidebar-widget-list">
-                                <ul>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">Green <span>7</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">Cream <span>8</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">Blue <span>9</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-widget-list-left">
-                                            <input type="checkbox" value=""> <a href="#">Black <span>3</span> </a>
-                                            <span class="checkmark"></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>--}}
+
                         <div class="sidebar-widget shop-sidebar-border pt-40">
                             <h4 class="sidebar-widget-title">Popular Tags</h4>
                             <div class="tag-wrap sidebar-widget-tag">
