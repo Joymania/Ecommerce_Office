@@ -28,10 +28,8 @@ class CheckoutController extends Controller
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
         $data['users']=Auth::user();
-        if(Auth::user()){
-            $idauth=Auth::id();
-        }
-        $data['cartpage']=CartShopping::with('product')->where('user_id',$idauth)->where('status','0')->get();
+
+        $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
 
         $id = Auth::id();
 
