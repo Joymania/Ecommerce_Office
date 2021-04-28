@@ -86,6 +86,10 @@ class CartController extends Controller
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
+        if(Auth::user()){
+            $idauth=Auth::id();
+        }
+        $data['cartpage']=CartShopping::with('product')->where('user_id',$idauth)->where('status','0')->get();
         $id = Auth::id();
             if($id){
             $data['showCart']=CartShopping::with('product')->where(function($querry)use($id) {
@@ -121,7 +125,7 @@ class CartController extends Controller
         return redirect()->route('show.cart')->with('success','Product removed Successfully.');
     }
     public function deleteAuthCart($id){
-        $data=CartShopping::find($id); 
+        $data=CartShopping::find($id);
         $data->delete();
         return redirect()->route('show.cart')->with('success','Product removed Successfully.');
     }

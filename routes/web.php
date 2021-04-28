@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -77,6 +78,12 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     // for profile
     Route::get('profile', 'Backend\AdminController@showProfile')->name('admin.profile');
     Route::put('profile/update', 'Backend\AdminController@updateProfile')->name('admin.profile-update');
+    Route::get('markasread',function(){
+        $admin=Admin::where('role','0')->first();
+        $admin->unreadNotifications->markAsRead();
+        return redirect()->back();
+
+    })->name('markasRead');
 
     // users
     Route::get('users', 'Backend\UserController@index')->name('users.index');

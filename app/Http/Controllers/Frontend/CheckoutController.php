@@ -16,8 +16,9 @@ use Illuminate\Http\Request;
 use Cart;
 use Dotenv\Validator;
 use Gloudemans\Shoppingcart\Facades\Cart as FacadesCart;
-use Illuminate\Notifications\Notification;
+use Notification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 Use Session;
 
 class CheckoutController extends Controller
@@ -27,6 +28,10 @@ class CheckoutController extends Controller
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
         $data['users']=Auth::user();
+        if(Auth::user()){
+            $idauth=Auth::id();
+        }
+        $data['cartpage']=CartShopping::with('product')->where('user_id',$idauth)->where('status','0')->get();
 
         $id = Auth::id();
 
@@ -48,6 +53,7 @@ class CheckoutController extends Controller
             'email'=>'required',
             'payment'=>'required'
         ]);
+
          if(Auth::user()){
              $idauth=Auth::id();
              $cartsubtotal=CartShopping::where('user_id',$idauth)->get();
@@ -76,6 +82,7 @@ class CheckoutController extends Controller
         $idauth=Auth::id();
         $cartShop=CartShopping::where('user_id',$idauth)->where('status','0')->get();
 
+
         //dd($cartShop[0]->product_id);
         foreach($cartShop as $confirmOrder){
             OrderProduct::create([
@@ -86,6 +93,7 @@ class CheckoutController extends Controller
                 'color_id'=>$confirmOrder->product_id,
             ]);
             $confirmOrder->delete();
+
         }
 
 
@@ -105,6 +113,10 @@ class CheckoutController extends Controller
         Session::flush();
         Session::forget('cupon');
     }
+    $name=$request->name;
+    $admin=Admin::where('role','0')->get();
+    Notification::send($admin, new OrderNotification($name));
+
         return redirect()->back();
     }
     public function showTrack(){
