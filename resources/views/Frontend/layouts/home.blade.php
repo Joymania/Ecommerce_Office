@@ -35,6 +35,7 @@
                                 </a>
                                 <!-- reduced price -->
                                 <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
+                                
                                 <!-- add to wishlist -->
                                 <div class="product-action-2 tooltip-style-2">
                                     <a href="{{ route('wishlist.add', $product->id) }}"> <button title="Wishlist"><i class="icon-heart"></i></button> </a>
@@ -47,14 +48,12 @@
                                 </div>
                                 <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
+                                    @if($product->review_id >0)
                                     <div class="product-rating-4">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
+                                        <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->review_id , 1, '.' , ',') }}">                                                                                                    
                                     </div>
-                                    <span>(4)</span>
+                                    <span>{{ number_format( $product->review_id , 1, '.' , ',') }}</span>
+                                    @endif
                                 </div>
                                 <div class="product-price-4">
                                     <span class="new-price">{{$product->promo_price}} Tk. </span>
@@ -70,12 +69,10 @@
                                 <div class="product-rating-wrap-2">
                                     <div class="product-rating-4">
                                     
-                                        
-                                        <i class="icon_star"></i>
-                                          
-                                                       
+                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->review_id , 1, '.' , ',') }}">         
+                                                                                             
                                     </div>
-                                    <span>(4)</span>
+                                    <span>{{ number_format( $product->review_id , 1, '.' , ',') }}</span>
                                 </div>
                                 <div class="product-price-4">
                                     <span class="new-price">{{$product->promo_price}} Tk. </span>
@@ -206,5 +203,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $('.input-2').rating({displayOnly: true, step: 0.1});
+    </script>
 
 @endsection

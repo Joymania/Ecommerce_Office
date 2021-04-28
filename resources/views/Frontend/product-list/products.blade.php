@@ -41,7 +41,9 @@
                                                     <img src="{{""}}/upload/products_images/{{$product->image}}" style="width: 266px; height: 320px;" alt="">
                                                 </a>
                                                 <div class="product-action-2 tooltip-style-2">
+                                                <a href="{{ route('wishlist.add', $product->id) }}">
                                                     <button title="Wishlist"><i class="icon-heart"></i></button>
+                                                </a>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
