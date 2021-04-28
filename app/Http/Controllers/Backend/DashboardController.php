@@ -19,6 +19,7 @@ class DashboardController extends Controller
     public function ecommerce()
     {
         $admin = Admin::find(Auth::id());
+        session()->put('admin',$admin);
         $sales = Order::where('status',2)->count();
         $orders = Order::count();
         $revenue = Order::sum('subtotal');

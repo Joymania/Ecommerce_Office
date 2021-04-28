@@ -334,7 +334,7 @@
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
                     <h3>Shopping Cart</h3>
-                    @if (Auth::user())
+
                     <ul>
                         @php
                             $total=0;
@@ -357,7 +357,7 @@
                              $total+=$cart->subtotal;
                          @endphp
                         @endforeach
-                            @endif
+
 
 
                      </ul>
