@@ -11,6 +11,7 @@ class BrandController extends Controller
 {
     public function view(){
         $data['alldata']=Brand::all();
+        $data['admin']=Admin::where('role','0')->first();
         return view('admin.brand.brand-view',$data);
     }
 
@@ -30,11 +31,13 @@ class BrandController extends Controller
 
         public function edit($id){
             $editdata=Brand::find($id);
-            return view('admin.brand.brand-add',compact('editdata'));
+            $admin=Admin::where('role','0')->first();
+            return view('admin.brand.brand-add',compact('editdata','admin'));
 
         }
         public function update(BrandRequest $request, $id){
             $data=Brand::find($id);
+
             $data->updated_by=Auth::user()->id;
             $data->name=$request->name;
             $data->save();

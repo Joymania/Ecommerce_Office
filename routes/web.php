@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,7 @@ Route::get('/category-products','Frontend\SearchController@categoryProducts')->n
 
 //Shopping-Cart
 Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
- Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
 Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
@@ -57,13 +58,6 @@ Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('s
 Route::get('/search-ajax','Frontend\SearchController@ajaxSearch')->name('search.ajax');
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
-//Shopping-Cart
-Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
-Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
-Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
-Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
-Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
-Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
@@ -84,6 +78,12 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     // for profile
     Route::get('profile', 'Backend\AdminController@showProfile')->name('admin.profile');
     Route::put('profile/update', 'Backend\AdminController@updateProfile')->name('admin.profile-update');
+    Route::get('markasread',function(){
+        $admin=Admin::where('role','0')->first();
+        $admin->unreadNotifications->markAsRead();
+        return redirect()->back();
+
+    })->name('markasRead');
 
     // users
     Route::get('users', 'Backend\UserController@index')->name('users.index');

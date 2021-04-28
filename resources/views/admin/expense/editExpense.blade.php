@@ -20,7 +20,7 @@
           <div class="form-row col-md-6">
               <label for="description">Category</label>
               <select class="form-control col-sm-11" id="category_id" name="category_id" required>
-                <option required>Select Category</option>
+                <option value="">Select Category</option>
 
             @foreach($categories as $categorie)         
                 <option value="{{$categorie->id}}" required>{{$categorie->name}}</option>

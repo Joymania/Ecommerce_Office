@@ -48,11 +48,11 @@
                                 </div>
                                 <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
-                                    @if($product->review_id >0)
+                                    @if($product->avg_rating >0)
                                     <div class="product-rating-4">
-                                        <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->review_id , 1, '.' , ',') }}">                                                                                                    
+                                        <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->avg_rating , 1, '.' , ',') }}">                                                                                                    
                                     </div>
-                                    <span>{{ number_format( $product->review_id , 1, '.' , ',') }}</span>
+                                    <span>{{ number_format( $product->avg_rating , 1, '.' , ',') }}</span>
                                     @endif
                                 </div>
                                 <div class="product-price-4">
@@ -69,10 +69,10 @@
                                 <div class="product-rating-wrap-2">
                                     <div class="product-rating-4">
                                     
-                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->review_id , 1, '.' , ',') }}">         
+                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->avg_rating , 1, '.' , ',') }}">         
                                                                                              
                                     </div>
-                                    <span>{{ number_format( $product->review_id , 1, '.' , ',') }}</span>
+                                    <span>{{ number_format( $product->avg_rating , 1, '.' , ',') }}</span>
                                 </div>
                                 <div class="product-price-4">
                                     <span class="new-price">{{$product->promo_price}} Tk. </span>

@@ -28,10 +28,7 @@ class CategoriesController extends Controller
         // validation
         $request->validate([
             'name' => 'required|unique:categories|max:255',
-            'image' => ''
-        ],
 
-        // error message
         [
             'name.unique' => 'Category name must be unique',
             'name.required' => 'category name is required',

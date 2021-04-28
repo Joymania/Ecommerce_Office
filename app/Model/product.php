@@ -25,8 +25,14 @@ class product extends Model
         'buying_price'
     ];
 
-    public function category()
+    public function OrderProduct()
     {
+
+      return $this->hasMany(OrderProduct::class,'order_id','id');
+    }
+
+    public function category()
+    { 
         return $this->belongsTo(category::class, 'category_id','id');
     }
     public function brand()

@@ -8,6 +8,7 @@ use App\Model\wishlist;
 use App\Model\CartShopping;
 use App\Model\category;
 use App\Model\contacts;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,12 +32,12 @@ class AppServiceProvider extends ServiceProvider
         $this->wishlist_num = wishlist::all()->count();
         $this->cart_num = CartShopping::all()->count();
         $this->categories = category::with('sub_category')->get();
-        
+
         View::composer('Frontend.layouts.master', function ($view) {
             $view->with('wishlist_num' , $this->wishlist_num);
             $view->with('cart_num' , $this->cart_num);
             $view->with('categories' , $this->categories);
-            
+
         });
     }
 }

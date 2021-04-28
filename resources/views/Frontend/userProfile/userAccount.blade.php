@@ -18,7 +18,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div> 
+            </div>
         @endif
         @if(session()->has('errors'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -69,7 +69,7 @@
                                     <div class="myaccount-content">
                                         <h3>Dashboard</h3>
                                         <div class="welcome">
-                                            <p>Hello, <strong>{{$users->name}}</strong> <strong></strong><a href="" class="logout"> </a></p>
+                                            <p>Hello, <strong></strong>{{$user->name}}<strong></strong><a href="" class="logout"> </a></p>
                                         </div>
 
                                         <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
@@ -82,13 +82,13 @@
                                         <h3>Orders</h3>
                                         <div class="myaccount-table table-responsive text-center">
                                             <table class="table table-bordered">
-                                                <thead class="thead-light"> 
+                                                <thead class="thead-light">
                                                     <tr>
                                                         <th>Order</th>
                                                          <th>Date</th>
                                                         <th>Status</th>
-                                                        <th>Total</th>
-                                                        <th>Action</th>
+                                                        <th>Product Name</th>
+                                                        <th>Quantity</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -101,8 +101,11 @@
                                                         @elseif ($orders->status==1)
                                                         <td>Accepted</td>
                                                         @endif
-                                                        <td></td>
-                                                        {{-- <td><a href="" class="check-btn sqr-btn ">View</a></td> --}}
+
+
+                                                        <td>{{$OrderProduct->product->name}}</td>
+                                                        <td>{{$OrderProduct->qty}}</td>
+
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -111,7 +114,7 @@
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
-                                
+
                                 <!-- Single Tab Content Start -->
                                 <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                     <div class="myaccount-content">
@@ -124,16 +127,16 @@
                                 <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Billing Address</h3>
-                                        
+
                                         <address>
-                                            <p><strong>{{$users->name}}</strong></p>
+                                            <p><strong>{{$user->name}}</strong></p>
                                             @foreach($order as $ord)
                                             <p>{{$ord->biling_address}}<br>
                                                 {{$ord->biling_city}}</p>
                                             <p>Mobile: {{$ord->biling_phone}}</p>
                                             @endforeach
                                         </address>
-                                        
+
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
@@ -142,20 +145,20 @@
                                     <div class="myaccount-content">
                                         <h3>Account Details</h3>
                                         <div class="account-details-form">
-                                            <form method="POST" action="{{ route('userUpdate', $users->id) }}" enctype="multipart/form-data">
-                                                @csrf
+                                            <form method="POST" action="{{ route('userUpdate', $user->id) }} " enctype="multipart/form-data">
+                                            @csrf
 
                                                 <div class="single-input-item">
                                                     <label for="display-name" class="required">Full Name</label>
-                                                    <input name="name" type="text" id="display-name" value="{{$users->name}}"/>
+                                                    <input name="name" type="text" id="display-name" value="{{$user->name}} "/>
                                                 </div>
                                                 <div class="single-input-item">
                                                     <label for="email" class="required">Email Addres</label>
-                                                    <input name="email" type="email" id="email" value="{{$users->email}}" />
+                                                    <input name="email" type="email" id="email" value="{{$user->email}}" />
                                                 </div>
                                                 <fieldset>
                                                     <legend>Password change</legend>
-                                                    
+
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
@@ -169,7 +172,7 @@
                                                                 <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm New Password">
                                                             </div>
                                                         </div>
-                                                    </div> 
+                                                    </div>
                                                 </fieldset>
                                                 <div class="single-input-item">
                                                     <button class="check-btn sqr-btn ">Save Changes</button>

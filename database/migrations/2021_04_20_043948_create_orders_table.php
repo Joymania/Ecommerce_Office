@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
             $table->string('biling_notes')->nullable();
             $table->tinyInteger('status')->default('0');
             $table->string('payment');
+            $table->string('subtotal');
             $table->timestamps();
         });
     }

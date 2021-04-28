@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Admin;
 use App\Model\Order;
+use App\Model\OrderProduct;
 use App\Model\product;
 use Illuminate\Http\Request;
 
@@ -11,19 +13,22 @@ class OrderController extends Controller
 {
     public function view(){
         $data['alldata']=Order::all();
+        $data['admin']=Admin::where('role','0')->first();
+        //dd($data['alldata']);
         return view('admin.Order.order-view',$data);
     }
 
         public function details($id){
             $data['order']=Order::find($id);
-            $data['product']=Order::where('id',$id)->with('products')->first();
+            $data['admin']=Admin::where('role','0')->first();
+            $data['product']=Order::where('id',$id)->with('products','color','size')->first();
+            //return $data['product'];
             return view('admin.Order.order-details',$data);
 
         }
 
         public function delete($id){
             $data=Order::find($id);
-
             $data->delete();
             return redirect()->route('order.view')->with('success', 'Data Deleted Successfully.');
         }

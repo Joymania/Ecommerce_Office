@@ -48,7 +48,7 @@ class ReviewController extends Controller
         }
         // return $avg_rating;
         $product = product::find($prod_id);
-        $product->review_id = $avg_rating;
+        $product->avg_rating = $avg_rating;
         $product->save();
 
         return redirect()->back()->with(['status' => 'You have reviewed it!']);
