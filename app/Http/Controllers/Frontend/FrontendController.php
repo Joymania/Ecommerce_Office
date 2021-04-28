@@ -20,10 +20,8 @@ class FrontendController extends Controller
 {
 
     public function index(){
-        if(Auth::user()){
-            $idauth=Auth::id();
-        }
-        $cartpage=CartShopping::with('product')->where('user_id',$idauth)->where('status','0')->first();
+
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->first();
         //  finding popular categories
         $prod = DB::table('order_product')->select('product_id', DB::raw('SUM(qty) as total_sales'))->groupBy('product_id')->orderByRaw('total_sales DESC')->limit(10)->get();
 
