@@ -18,7 +18,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div> 
+            </div>
         @endif
         @if(session()->has('errors'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -82,7 +82,7 @@
                                         <h3>Orders</h3>
                                         <div class="myaccount-table table-responsive text-center">
                                             <table class="table table-bordered">
-                                                <thead class="thead-light"> 
+                                                <thead class="thead-light">
                                                     <tr>
                                                         <th>Order</th>
                                                          <th>Date</th>
@@ -102,10 +102,10 @@
                                                         <td>Accepted</td>
                                                         @endif
 
-                                                       
+
                                                         <td>{{$OrderProduct->product->name}}</td>
-                                                        <td>{{$OrderProduct->qty}}</td> 
-                                                        
+                                                        <td>{{$OrderProduct->qty}}</td>
+
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
-                                
+
                                 <!-- Single Tab Content Start -->
                                 <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                     <div class="myaccount-content">
@@ -122,21 +122,21 @@
                                         <p class="saved-message">You have used <strong>{{$orders->payment}}</strong> as your payment method.</p>
                                     </div>
                                 </div>
-                                <!-- Single Tab Content End --> 
+                                <!-- Single Tab Content End -->
                                 <!-- Single Tab Content Start -->
                                 <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Billing Address</h3>
-                                        
+
                                         <address>
-                                            <p><strong>{{$user->name}}</strong></p> 
+                                            <p><strong>{{$user->name}}</strong></p>
                                             @foreach($order as $ord)
                                             <p>{{$ord->biling_address}}<br>
                                                 {{$ord->biling_city}}</p>
                                             <p>Mobile: {{$ord->biling_phone}}</p>
                                             @endforeach
                                         </address>
-                                        
+
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
@@ -158,7 +158,7 @@
                                                 </div>
                                                 <fieldset>
                                                     <legend>Password change</legend>
-                                                    
+
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
@@ -172,7 +172,7 @@
                                                                 <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm New Password">
                                                             </div>
                                                         </div>
-                                                    </div> 
+                                                    </div>
                                                 </fieldset>
                                                 <div class="single-input-item">
                                                     <button class="check-btn sqr-btn ">Save Changes</button>

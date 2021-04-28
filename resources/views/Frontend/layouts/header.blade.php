@@ -12,8 +12,8 @@
 
     @if(!empty($logos))
    <link rel="shortcut icon" type="image/x-icon" src="{{asset($logos->image)}}">
-   @else 
- 
+   @else
+
    @endif
 
 
@@ -72,10 +72,10 @@
                                             <a href="{{route('track.show')}}">Track Your Order</a>
                                         </div>
                                         <div class="same-style same-style-border language-wrap">
-                                            <a class="language-dropdown-active" href="#">English</a>                                        
+                                            <a class="language-dropdown-active" href="#">English</a>
                                         </div>
                                         <div class="same-style same-style-border currency-wrap">
-                                            <a class="currency-dropdown-active" href="#">BDT</a>                                        
+                                            <a class="currency-dropdown-active" href="#">BDT</a>
                                         </div>
                                     </div>
                                     <div class="social-style-1 social-style-1-mrg">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-                </div>   
+                </div>
                 <!-- header top end -->
 
                 <!-- header middle start -->
@@ -98,8 +98,8 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    
-                                    @if(!empty($logos))                                 
+
+                                    @if(!empty($logos))
                                     <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
                                     @else
                                     <p>No logo</p>
@@ -110,7 +110,7 @@
                                 <div class="main-menu main-menu-padding-1 main-menu-lh-2">
                                     <nav>
                                         <ul>
-                                            <li><a href="/">HOME </a>          
+                                            <li><a href="/">HOME </a>
                                             </li>
                                             <li><a href="{{ route('search.result') }}">SHOP </a></li>
 
@@ -120,14 +120,14 @@
                                                     <li><a href="{{ route('show.cart') }}" >cart page</a></li>
                                                     <li><a href="{{ route('checkout') }}" >checkout </a></li>
                                                     <li><a href="{{ route('userAccount') }}">my account</a></li>
-                                                    <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>                                                  
+                                                    <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
                                                     <li><a href="#contact">contact us </a></li>
                                                     <li><a href="{{ route('track.show') }}">order tracking</a></li>
                                                     <li><a href="{{route('login')}}">login / register </a></li>
                                                 </ul>
                                             </li>
 
-                                            <li><a href="#">BLOG <span class="bg-green">NEW</span></a>                                          
+                                            <li><a href="#">BLOG <span class="bg-green">NEW</span></a>
                                             </li>
                                             <li><a href="{{route('contact')}}">CONTACT </a></li>
                                         </ul>
@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="same-style-2 same-style-2-font-inc header-cart">
                                             <a class="cart-active" href=" {{ route('show.cart') }} ">
-                                                <i class="icon-basket-loaded"></i>                                               
+                                                <i class="icon-basket-loaded"></i>
                                             </a>
                                         </div>
                                     @else
@@ -194,7 +194,7 @@
                                             <ul>
                                               @foreach($categories as $cat)
                                                 @if($cat->sub_category->isEmpty())
-                                                <li class="cr-dropdown @yield('category')"><a href="{{ route('productByCategory', $cat->id) }}">{{$cat->name}}</a></li>                                          
+                                                <li class="cr-dropdown @yield('category')"><a href="{{ route('productByCategory', $cat->id) }}">{{$cat->name}}</a></li>
                                                 @else
                                                 <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a>
                                                     <div class="category-menu-dropdown ct-menu-res-height-1">
@@ -261,8 +261,8 @@
                     <div class="row align-items-center">
                         <div class="col-5">
                             <div class="mobile-logo">
-                                @if(!empty($logos))                              
-                                    <a href="/"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>                    
+                                @if(!empty($logos))
+                                    <a href="/"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
                                 @endif
                             </div>
                         </div>
@@ -278,7 +278,7 @@
                                     </div>
                                     <div class="same-style-2 same-style-2-font-inc header-cart">
                                         <a class="cart-active" href=" {{ route('show.cart') }} ">
-                                            <i class="icon-basket-loaded"></i>                                               
+                                            <i class="icon-basket-loaded"></i>
                                         </a>
                                     </div>
                                 @else
@@ -326,38 +326,68 @@
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
                     <h3>Shopping Cart</h3>
+                    @if (Auth::user())
                     <ul>
-                        <li class="single-product-cart">
+                        @php
+                            $total=0;
+                        @endphp
+
+                        @foreach ($cartpage as $cart)
+                             <li class="single-product-cart">
+                             <div class="cart-img">
+                                 <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
+                             </div>
+                             <div class="cart-title">
+                                 <h4><a href="#">{{ $cart->product->name }}</a></h4>
+                                 <span> {{ $cart->product->qty }} × {{ $cart->product->price }} tk	</span>
+                             </div>
+                             <div class="cart-delete">
+                                 <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
+                             </div>
+                         </li>
+                         @php
+                             $total+=$cart->subtotal;
+                         @endphp
+                        @endforeach
+
+
+                     </ul>
+                     <div class="cart-total">
+                         <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                     </div>
+                    @else
+                    <ul>
+                       @php
+                           $contents=Cart::content();
+                           $total=0;
+                       @endphp
+                       @foreach ($contents as $content)
+                            <li class="single-product-cart">
                             <div class="cart-img">
-                                <a href="#"><img src="{{""}}/assets/images/cart/cart-1.jpg" alt=""></a>
+                                <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" alt=""></a>
                             </div>
                             <div class="cart-title">
-                                <h4><a href="#">Simple Black T-Shirt</a></h4>
-                                <span> 1 × $49.00	</span>
+                                <h4><a href="#">{{ $content->name }}</a></h4>
+                                <span> {{ $content->qty }} × {{ $content->price }} tk	</span>
                             </div>
                             <div class="cart-delete">
-                                <a href="#">×</a>
+                                <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
                             </div>
                         </li>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="{{""}}/assets/images/cart/cart-2.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h4><a href="#">Norda Backpack</a></h4>
-                                <span> 1 × $49.00	</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#">×</a>
-                            </div>
-                        </li>
+                        @php
+                            $total+=$content->subtotal;
+                        @endphp
+                       @endforeach
+
+
                     </ul>
                     <div class="cart-total">
-                        <h4>Subtotal: <span>$170.00</span></h4>
+                        <h4>Subtotal: <span>{{ $total }}tk</span></h4>
                     </div>
+                    @endif
                     <div class="cart-checkout-btn">
-                        <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
-                        <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
+                        <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
+                        <a class="no-mrg btn-hover cart-btn-style" href="{{ route('checkout') }}">checkout</a>
                     </div>
                 </div>
             </div>
@@ -393,7 +423,7 @@
                                         <li><a href="{{ route('show.cart') }}" >cart page</a></li>
                                         <li><a href="{{ route('checkout') }}" >checkout </a></li>
                                         <li><a href="{{ route('userAccount') }}">my account</a></li>
-                                        <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>                                                  
+                                        <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
                                         <li><a href="#contact">contact us </a></li>
                                         <li><a href="{{ route('track.show') }}">order tracking</a></li>
                                         <li><a href="{{route('login')}}">login / register </a></li>
@@ -403,7 +433,7 @@
                                 <li><a href="{{route('contact')}}">Contact </a></li>
                             </ul>
                         </nav>
-                        <!-- mobile menu end -->                        
+                        <!-- mobile menu end -->
                     </div>
 
                     <div class="main-categori-wrap mobile-menu-wrap mobile-header-padding-border-3">
@@ -420,20 +450,20 @@
                                             <li class="menu-item-has-children"><a href="{{route('productByCat',$subcat->id)}}">{{$subcat->sub_category_name}}</a> </li>
                                             @endforeach
                                         </ul>
-                                    </li>    
+                                    </li>
                                     @endforeach
-                                </ul>                                
+                                </ul>
                             </nav>
                         </div>
                     </div>
 
-                    <div class="mobile-header-info-wrap mobile-header-padding-border-3">                     
+                    <div class="mobile-header-info-wrap mobile-header-padding-border-3">
                         <div class="single-mobile-header-info">
-                            <a class="mobile-language-active" href="#">English</a>                         
+                            <a class="mobile-language-active" href="#">English</a>
                         </div>
 
                         <div class="single-mobile-header-info">
-                            <a class="mobile-currency-active" href="#">BDT <span><i class="icon-arrow-down"></i></span></a>                         
+                            <a class="mobile-currency-active" href="#">BDT <span><i class="icon-arrow-down"></i></span></a>
                         </div>
 
                         <div class="mobile-contact-info mobile-header-padding-border-4">
