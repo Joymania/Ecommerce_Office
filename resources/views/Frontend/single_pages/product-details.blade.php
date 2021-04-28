@@ -8,13 +8,21 @@
             <div class="breadcrumb-content text-center">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li class="active">product details </li>
                 </ul>
             </div>
         </div>
     </div>
+    @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('status') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    @endif
     <div class="product-details-area pt-120 pb-115">
         <div class="container">
             <div class="row">
@@ -74,9 +82,7 @@
                         <div class="product-ratting-review-wrap">
                             <div class="product-ratting-digit-wrap">
                                 <div class="product-ratting">
-                                    @for($i = 0; $i < $rating; $i++)
-                                    <i class="icon_star"></i>
-                                    @endfor
+                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" data-step="0.1" value="{{ $rating }}">  
                                 </div>
                                 <div class="product-digit">
                                     <span>{{$rating}}</span>
@@ -84,13 +90,13 @@
                             </div>
                             <div class="product-review-order">
                                 <span>{{count($product->reviews)}} Reviews</span>
-                                <span>242 orders</span>
+                                <span></span>
                             </div>
                         </div>
                         <p>{{$product->short_descc}}</p>
                         <div class="pro-details-price">
-                            <span class="new-price">{{$product->price}} Tk.</span>
-                            <span class="old-price">$95.72</span>
+                            <span class="new-price">{{ ($product->promo_price) ? $product->promo_price : $product->price }} Tk.</span>
+                            <span class="old-price"> {{ ($product->promo_price) ?  $product->price .'Tk.' : null}}</span>
                         </div>
                         @if(count($product->colors) > 0)
                         <div class="pro-details-color-wrap">
@@ -142,6 +148,7 @@
                                 {{-- <a href="{{ route('insert.cart') }}">Add To Cart </a> --}}
                                 <input type="submit" value="Add To Cart">
                             </div>
+
                             <div class="pro-details-action">
                                 <a title="Add to Wishlist" href="{{ route('wishlist.add',$product->id) }}"><i class="icon-heart"></i></a>
                                 <a title="Add to Compare" href="#"><i class="icon-refresh"></i></a>
@@ -221,7 +228,7 @@
                                 @foreach($reviews as $review)
                                 <div class="single-review">
                                     <div class="review-img">
-                                        <img src="{{""}}/assets/images/product-details/client-1.png" alt="">
+                                        <img src="{{ (!empty(auth()->user()->image)) ? url('upload/users/'.auth()->user()->image):url('upload/noImage60x60.jpg') }}" alt="user image" width="60px" height="60px">
                                     </div>
                                     <div class="review-content">
                                         <div class="review-top-wrap">
@@ -229,9 +236,9 @@
                                                 <h5><span>{{$review->name}}</span> - {{$review->created_at}}</h5>
                                             </div>
                                             <div class="review-rating">
-                                                @for($i = 0; $i < $review->rating; $i++)
-                                                <i class="yellow icon_star"></i>
-                                                @endfor
+                                            
+                                                <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5" data-size="xs" value=" {{ $review->rating }} ">
+                                               
                                             </div>
                                         </div>
                                         <p>{{$review->review}}</p>
@@ -239,58 +246,37 @@
                                 </div>
                                 @endforeach
                             </div>
+
+                            @auth
                             <div class="ratting-form-wrapper">
-                                <span>Add a Review</span>
-                                <p>Your email address will not be published. Required fields are marked <span>*</span></p>
+                                <span>Add a Review</span>                             
+                                                        
                                 <div class="ratting-form">
-                                    <form action="#">
+                                    <form action=" {{ route('store-review', $product->id) }} " method="post">
+                                        @csrf
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="rating-form-style mb-20">
-                                                    <label>Name <span>*</span></label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="rating-form-style mb-20">
-                                                    <label>Email <span>*</span></label>
-                                                    <input type="email">
-                                                </div>
-                                            </div>
+                                            
                                             <div class="col-lg-12">
-                                                <div class="star-box-wrap">
-                                                    <div class="single-ratting-star">
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                    </div>
-                                                    <div class="single-ratting-star">
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                    </div>
-                                                    <div class="single-ratting-star">
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                    </div>
-                                                    <div class="single-ratting-star">
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                    </div>
-                                                    <div class="single-ratting-star">
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                        <a href="#"><i class="icon_star"></i></a>
-                                                    </div>
+                                                <div class="star-box-wrap">                                      
+                                                    <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-size="xs" required data-step="0.5">                                   
                                                 </div>
+
+                                                @error('rating')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="rating-form-style mb-20">
                                                     <label>Your review <span>*</span></label>
-                                                    <textarea name="Your Review"></textarea>
+                                                    <textarea maxlength="255" id="review" name="review" onkeyup="checklimit()"></textarea>
                                                 </div>
+                                                @error('review')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-submit">
@@ -301,6 +287,7 @@
                                     </form>
                                 </div>
                             </div>
+                            @endauth
                         </div>
                         @else
                             <div id="des-details4" class="tab-pane">
@@ -314,6 +301,14 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.input-2').rating({displayOnly: true, step: 0.1});
+        var checklimit = function (){
+            if (document.getElementById('review').value.length >= 255) {
+                alert('You have exceeded your review limit!');
+            }
+        };
+    </script>
 @endsection
 
 @section('scripts')

@@ -36,9 +36,13 @@
                     <div class="footer-widget mb-40">
                         <h3 class="footer-title">Quick Shop</h3>
                         <div class="footer-info-list info-list-50-parcent">
-                            <ul>
-                                @foreach($categories as $cat)
+                            <ul>                              
+                                @foreach($categories as $i => $cat)                               
+                                    @if( $i >= 5 )
+                                        @break
+                                    @endif
                                     <li><a href="{{ route('search.result') }}">{{ $cat->name }}</a></li>
+                                
                                 @endforeach
                             </ul>
                         </div>
@@ -58,9 +62,7 @@
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="{{ route('track.show') }}">Track Order</a></li>
                                 <li><a href="{{ route('search.result') }}">Shop</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Returns/Exchange</a></li>
-                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">About Us</a></li>                           
                             </ul>
                         </div>
                     </div>

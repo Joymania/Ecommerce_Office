@@ -10,15 +10,17 @@ use Illuminate\Notifications\Notification;
 class OrderNotification extends Notification
 {
     use Queueable;
+    public $name;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($id)
+    public function __construct($name)
     {
-        $this->id=$id;
+        $this->name=$name;
+
     }
 
     /**
@@ -55,7 +57,8 @@ class OrderNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id'=>$this->id
+            'name'=>$this->name,
+            'text'=>'Oederd From Your Site.',
         ];
     }
 }
