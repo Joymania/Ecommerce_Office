@@ -19,11 +19,11 @@
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                             <i class="icon-bell"></i>
-                            <span class="">{{$admin->unreadNotifications->count() }}</span>
+                            <span class="">{{session('admin')->unreadNotifications->count() }}</span>
                         </a>
                         <ul class="dropdown-menu notifications">
-                            <li class="header"><strong>You have {{ $admin->unreadNotifications->count() }} new Notifications</strong></li>
-                                @foreach ($admin->unreadNotifications as $notification)
+                            <li class="header"><strong>You have {{ session('admin')->unreadNotifications->count() }} new Notifications</strong></li>
+                                @foreach (session('admin')->unreadNotifications as $notification)
                                  <li>
                                 <a href="javascript:void(0);">
                                     <div class="media">

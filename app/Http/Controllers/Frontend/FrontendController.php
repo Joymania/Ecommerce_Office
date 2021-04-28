@@ -11,7 +11,6 @@ use App\Model\sub_category;
 use App\Model\contacts;
 use App\Model\logo;
 use App\Model\review;
-use Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +21,7 @@ class FrontendController extends Controller
     public function index(){
 
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->first();
+        // dd($cartpage->product->image);
         //  finding popular categories
         $prod = DB::table('order_product')->select('product_id', DB::raw('SUM(qty) as total_sales'))->groupBy('product_id')->orderByRaw('total_sales DESC')->limit(10)->get();
 

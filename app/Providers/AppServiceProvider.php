@@ -32,14 +32,14 @@ class AppServiceProvider extends ServiceProvider
         $this->wishlist_num = wishlist::all()->count();
         $this->cart_num = CartShopping::all()->count();
         $this->categories = category::with('sub_category')->get();
-        $this->cartpage = CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->first();
+        // $this->cartpage = CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->first();
         // dd($this->cartpage);
 
         View::composer('Frontend.layouts.master', function ($view) {
             $view->with('wishlist_num' , $this->wishlist_num);
             $view->with('cart_num' , $this->cart_num);
             $view->with('categories' , $this->categories);
-            $view->with('cartpage' , $this->cartpage);
+            // $view->with('cartpage' , $this->cartpage);
 
         });
     }

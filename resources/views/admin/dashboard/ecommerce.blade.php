@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'eCommerce')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Dashboard')
+@section('pageTitle') <a href="{{route('admin.dashboard')}}">Dashboard</a> @endsection
+@section('parentPageTitle', '')
 
 @section('content')
 <div class="row clearfix">
@@ -29,7 +30,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h3>2,318 <i class="fa fa-dollar float-right"></i></h3>
+                <h3>{{$data['netProfit']}}<small>tk.</small> <i class="fa fa-dollar float-right"></i></h3>
                 <span>Net Profit</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">
@@ -100,31 +101,21 @@
     <div class="col-lg-8 col-md-12">
         <div class="card">
             <div class="header">
-                <h2>Annual Report <small>Description text here...</small></h2>
-                <ul class="header-dropdown">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another Action</a></li>
-                            <li><a href="javascript:void(0);">Something else</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <h2>Current Report <small>Description text here...</small></h2>
             </div>
             <div class="body">
                 <div class="row clearfix">
                     <div class="col-lg-4 col-md-4 col-sm-4">
-                        <span class="text-muted">Sales Report</span>
-                        <h3 class="text-warning">$4,516</h3>
+                        <span class="text-muted">Total Expense</span>
+                        <h3 class="text-warning">{{$data['totalExpense']}}<small>tk.</small></h3>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4">
-                        <span class="text-muted">Annual Revenue </span>
-                        <h3 class="text-info">$6,481</h3>
+                        <span class="text-muted">Total Purchase</span>
+                        <h3 class="text-info">{{$data['totalPurchase']}}<small>tk.</small></h3>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4">
-                        <span class="text-muted">Total Profit</span>
-                        <h3 class="text-success">$3,915</h3>
+                        <span class="text-muted">Total Sales</span>
+                        <h3 class="text-success">{{$data['totalSales']}}<small>tk.</small></h3>
                     </div>
                 </div>
                 <div id="area_chart" class="graph"></div>

@@ -1,6 +1,6 @@
 @extends('admin.layout.authentication')
 @section('title', '500')
-
+@section('pageTitle') '500' @endsection
 
 @section('content')
 

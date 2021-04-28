@@ -20,7 +20,8 @@ class userAccountController extends Controller
 {
     Public Function userAccount()
     {
-        $user = User::all()->find($id);
+        $id = Auth::id();
+        $user = User::find($id);
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();

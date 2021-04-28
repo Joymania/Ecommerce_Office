@@ -30,7 +30,7 @@
                 </li>
                 <li class="col-4">
                     <small>Revenue</small>
-                    <h6>$2.13B</h6>
+                    <h6>{{session('revenue')}}</h6>
                 </li>
             </ul>
         </div>

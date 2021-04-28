@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'Form Validation')
-@section('parentPageTitle', 'Forms')
+@section('title', 'Add Color')
+@section('pageTitle') <a href="{{route('color.add')}}">Add Color</a> @endsection
+@section('parentPageTitle') <a href="{{route('color.view')}}">Colors</a> @endsection
 
 
 @section('content')

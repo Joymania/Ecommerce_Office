@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Model\Admin;
+use App\Model\Expense;
 use App\Model\Order;
 use App\Model\product;
 use App\Model\review;
@@ -18,10 +19,13 @@ class DashboardController extends Controller
     public function ecommerce()
     {
         $admin = Admin::find(Auth::id());
+        session()->put('admin',$admin);
         $sales = Order::where('status',2)->count();
         $orders = Order::count();
+        $revenue = Order::sum('subtotal');
         session()->put('sales',$sales);
         session()->put('orders',$orders);
+        session()->put('revenue',$revenue);
         $customers = User::count();
         $recentOrders = Order::with('products')->latest()->get();
         $data['pending'] = Order::where('status',0)->count();
@@ -29,6 +33,10 @@ class DashboardController extends Controller
         $data['processing'] = Order::where('status',1)->count();
         $data['customerSatisfaction'] = review::count();
         $data['totalProducts'] = product::sum('stock');
+        $data['totalExpense'] = Expense::sum('amount');
+        $data['totalPurchase'] = product::sum('buying_price');
+        $data['totalSales'] = Order::sum('subtotal');
+        $data['netProfit'] = $revenue - $data['totalExpense']-$data['totalPurchase'];
 
        $a = DB::table('order_product')
            ->select('product_id',DB::raw('SUM(qty) as total_sales'))

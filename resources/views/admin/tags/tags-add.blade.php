@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('title', 'Add New Tag')
-@section('parentPageTitle', 'Tag List')
+@section('pageTitle') <a href="{{route('tags.create')}}">Add New Tag</a> @endsection
+@section('parentPageTitle') <a href="{{route('tags.list')}}">Tags</a> @endsection
 
 
 @section('content')

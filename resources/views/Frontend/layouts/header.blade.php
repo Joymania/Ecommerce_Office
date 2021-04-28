@@ -231,18 +231,18 @@
 
                             <div class="col-lg-6">
                                 <div class="categori-search-wrap categori-search-wrap-modify">
-                                    <div class="categori-style-1">
-                                        <select id="categories" class="nice-select nice-select-style-1">
-                                            <option>All Categories </option>
+                                   {{-- <div class="categori-style-1">
+                                        <select id="categoriesName" class="nice-select nice-select-style-1">
+                                            <option value="">All Categories </option>
                                             @foreach($categories as $category)
-                                            <option>{{$category->name}} </option>
+                                            <option value="{{$category->id}}">{{$category->name}} </option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div>--}}
                                     <div class="search-wrap-3">
                                         <form action="{{route('search.result')}}">
                                             <input name="search" id="searchText" placeholder="Search Products..." type="text">
-                                            <input name="category" id="categoryInput" type="text" hidden>
+                                            {{--<input name="category" id="categoryInput" type="text" hidden>--}}
                                             <button id="searchBtn" type="submit"><i class="lnr lnr-magnifier"></i></button>
                                         </form>
                                     </div>
@@ -334,36 +334,36 @@
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
                     <h3>Shopping Cart</h3>
-                     dd($cartpage)
-                    @if (Auth::user())
-                        <ul>
-                            @php
-                                $total=0;
-                            @endphp
 
-                            @foreach ($cartpage as $cart)
-                                <li class="single-product-cart">
-                                <div class="cart-img">
-                                    <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
-                                </div>
-                                <div class="cart-title">
-                                    <h4><a href="#">{{ $cart->product->name }}</a></h4>
-                                    <span> {{ $cart->product->qty }} × {{ $cart->product->price }} tk	</span>
-                                </div>
-                                <div class="cart-delete">
-                                    <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
-                                </div>
-                            </li>
-                            @php
-                                $total+=$cart->subtotal;
-                            @endphp
-                            @endforeach
+                    <ul>
+                        @php
+                            $total=0;
+                        @endphp
+                    @if(!empty($cartpage))                  
+                        @foreach ($cartpage as $cart)
+                             <li class="single-product-cart">
+                             <div class="cart-img">
+                                 <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
+                             </div>
+                             <div class="cart-title">
+                                 <h4><a href="#">{{ $cart->product->name }}</a></h4>
+                                 <span> {{ $cart->product->qty }} × {{ $cart->product->price }} tk	</span>
+                             </div>
+                             <div class="cart-delete">
+                                 <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
+                             </div>
+                         </li>
+                         @php
+                             $total+=$cart->subtotal;
+                         @endphp
+                        @endforeach
 
 
-                        </ul>
-                        <div class="cart-total">
-                            <h4>Subtotal: <span>{{ $total }}tk</span></h4>
-                        </div>
+
+                     </ul>
+                     <div class="cart-total">
+                         <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                     </div>
                     @else
                         <ul>
                        @php

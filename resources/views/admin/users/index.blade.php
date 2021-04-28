@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('title', 'Users')
-@section('parentPageTitle', 'Table')
+@section('pageTitle') <a href="{{route('users.index')}}">Users</a> @endsection
+@section('parentPageTitle','')
 
 
 @section('content')
@@ -10,7 +11,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
-                <h3>Users</h3>                     
+                <h3>Users</h3>
             </div>
             @if(session()->has('success_msg'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,7 +21,7 @@
                     </button>
                 </div>
             @endif
-            
+
             <div class="body">
                 <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
@@ -65,8 +66,8 @@
                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
 
                                 <!-- for deleting user using one form -->
-                                <div hidden> {{$route = route('users.delete',$user->id)}}</div>                               
-                                <a href="{{ route('users.delete',$user->id) }}" 
+                                <div hidden> {{$route = route('users.delete',$user->id)}}</div>
+                                <a href="{{ route('users.delete',$user->id) }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('delete-form').setAttribute('action', '{{$route}}');
                                     confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
@@ -75,7 +76,7 @@
                                     data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i>
                                 </a>
                             </td>
-                        </tr>  
+                        </tr>
                     @endforeach
                     <form id="delete-form" method="POST"  class="d-none">
                             @csrf
@@ -86,6 +87,6 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 @stop
