@@ -22,13 +22,14 @@ $(document).ready(function () {
             success: function (data) {
                 singleProduct.attr('hidden',true);
                 if (data.length > 0) {
+                    $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
                         shopArea.append('' +
                             '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                             ' <div class="single-product-wrap mb-35">' +
                             '<div class="product-img product-img-zoom mb-15">' +
                             '<a href="/'+data[i].id+'/product-details">' +
-                            '<img src="../upload/products_images/'+data[i].image+'" ></a>' +
+                            '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
                             '<div class="product-action-2 tooltip-style-2">' +
                             '<button title="Wishlist"><i class="icon-heart"></i></button>' +
                             '</div> </div>' +
@@ -47,10 +48,14 @@ $(document).ready(function () {
                             '<button title="Add to Cart">Add To Cart</button>' +
                             ' </div> </div>  </div> </div>')
                     }
+                }else {
+                    $('#noResult').remove();
+                    shopArea.append('' +
+                        '<div id="noResult" class="col-12 text-center"><h3>No Result Found</h3></div>');
                 }
             },
             error: function (error) {
-                console.log(error)
+
             }
         })
 
@@ -104,13 +109,14 @@ $(document).ready(function () {
             success: function (data) {
                 singleProduct.attr('hidden',true);
                 if (data.length > 0) {
+                    $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
                         shopArea.append('' +
                             '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                             ' <div class="single-product-wrap mb-35">' +
                             '<div class="product-img product-img-zoom mb-15">' +
                             '<a href="/'+data[i].id+'/product-details">' +
-                            '<img src="../upload/products_images/'+data[i].image+'" ></a>' +
+                            '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
                             '<div class="product-action-2 tooltip-style-2">' +
                             '<button title="Wishlist"><i class="icon-heart"></i></button>' +
                             '</div> </div>' +
@@ -130,8 +136,9 @@ $(document).ready(function () {
                             ' </div> </div>  </div> </div>')
                     }
                 }else {
+                    $('#noResult').remove();
                     shopArea.append('' +
-                        '<div class="col-12 text-center"><h3>No Result Found</h3></div>');
+                        '<div id="noResult" class="col-12 text-center"><h3>No Result Found</h3></div>');
                 }
             }
 
@@ -152,13 +159,14 @@ $(document).ready(function () {
             success: function (data) {
                 singleProduct.attr('hidden',true);
                 if (data.length > 0) {
+                    $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
                         shopArea.append('' +
                             '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                             ' <div class="single-product-wrap mb-35">' +
                             '<div class="product-img product-img-zoom mb-15">' +
                             '<a href="/'+data[i].id+'/product-details">' +
-                            '<img src="../upload/products_images/'+data[i].image+'" ></a>' +
+                            '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
                             '<div class="product-action-2 tooltip-style-2">' +
                             '<button title="Wishlist"><i class="icon-heart"></i></button>' +
                             '</div> </div>' +

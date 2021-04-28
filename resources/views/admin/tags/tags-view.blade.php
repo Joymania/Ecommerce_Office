@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'Tags list')
-@section('parentPageTitle', 'Tags')
+@section('title', 'Tags')
+@section('pageTitle') <a href="{{route('tags.list')}}">Tags</a> @endsection
+@section('parentPageTitle', '')
 
 
 @section('content')
@@ -9,9 +10,6 @@
 
         <div class="col-lg-12 col-md-12">
             <div class="card planned_task">
-                <div class="header">
-                    <h2>Tags List</h2>
-                </div>
                 <div class="body">
                     <div class="row">
                         <div class="col-md-12">

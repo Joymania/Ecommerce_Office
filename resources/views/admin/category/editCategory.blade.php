@@ -1,20 +1,21 @@
 @extends('admin.layout.master')
-@section('title', 'Update category')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Edit category')
+@section('pageTitle') <a href="#">Edit Category</a> @endsection
+@section('parentPageTitle') <a href="{{route('category.view')}}">Categories</a> @endsection
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
             <div class="body">
                 <form action="{{route('category.update')}}" method="post" class="form-horizontal" class="dropzone" enctype="multipart/form-data">
                     @csrf
 
                          <div class="card-body">
-                            
 
-                             <input name="id" type="hidden" class="form-control" id="fname" value="{{$edits->id}}"> 
+
+                             <input name="id" type="hidden" class="form-control" id="fname" value="{{$edits->id}}">
 
                              <div class="form-group row">
                                  <label for="name" class="col-sm-3 text-right control-label col-form-label">Category Name*</label>
@@ -23,10 +24,10 @@
                                  </div>
                              </div>
 
-                             
 
-                            
-                            
+
+
+
                          </div>
                          <div class="border-top">
                              <div class="card-body">
@@ -36,7 +37,7 @@
                      </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

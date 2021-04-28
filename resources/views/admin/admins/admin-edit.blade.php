@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('title', 'Edit Admin')
-@section('parentPageTitle', 'admin')
+@section('pageTitle') <a href="{{route('admin.edit',$admin->id)}}">Edit Admin</a> @endsection
+@section('parentPageTitle') <a href="{{route('admin.index')}}">Admins</a> @endsection
 
 
 @section('content')
@@ -9,7 +10,7 @@
 <div class="col-lg-12">
 <div class="card">
     <div class="card-header">
-        <h3>Edit Admin</h3> 
+        <h3>Edit Admin</h3>
         <a class=" float-right btn btn-success btn-sm" href="{{ route('admin.index') }}"><i class="fa fa-list"></i> Admin List</a>
 
         @if(session()->has('success_msg'))
@@ -37,7 +38,7 @@
         <form method="POST" action="{{ route('admin.update', $admin->id) }}" enctype="multipart/form-data">
             @csrf
             @method('put')
- 
+
             <div class="row clearfix">
 
                 <div class="col-lg-12">
@@ -57,23 +58,23 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                </div>     
-            </div>   
+                    </div>
+                </div>
+            </div>
 
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12">
                     <div class="body">
                         <h6>Basic Information</h6>
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="name" type="text" class="form-control" placeholder="Name" value="{{$admin->name}}">
                         </div>
-                    
+
                         <div class="form-group">
                             <input name="email" type="email" class="form-control" placeholder="Email" value="{{$admin->email}}">
                         </div>
 
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="address" type="text" class="form-control" placeholder="Address" value="{{$admin->address}}">
                         </div>
 
@@ -108,7 +109,7 @@
                 </div>
 
                 <div class="col-lg-6 col-md-12">
-                    
+
                     <div class="body">
                         <h6>Change Password</h6>
 
@@ -129,7 +130,7 @@
 </div>
 </div>
 
-                  
+
 @endsection
 
 @section('page-script')

@@ -1,15 +1,16 @@
 @extends('admin.layout.master')
-@section('title', 'Update Sub-Category')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Edit Sub-Category')
+@section('pageTitle') <a href="#">Edit Sub-Category</a> @endsection
+@section('parentPageTitle') <a href="{{route('subCategory.view')}}">Sub-Categories</a> @endsection
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
             <div class="body">
                 <form action="{{route('subCategory.update')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
-                            
+
                 @csrf
 
                 <input name="id" type="hidden" class="form-control" id="fname" value="{{$edits->id}}">
@@ -19,7 +20,7 @@
                     <select class="form-control col-sm-9" id="category_id" name="category_id" >
                       <option >Select Designation</option>
 
-            @foreach($cats as $cat)         
+            @foreach($cats as $cat)
                       <option value="{{$cat->id}}" >{{$cat->name}}</option>
             @endforeach
 
@@ -38,11 +39,11 @@
                             <div class="card-body">
                                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                      
+
                     </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

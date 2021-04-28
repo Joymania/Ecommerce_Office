@@ -80,7 +80,8 @@ class SearchController extends Controller
     public function categoryProducts(Request $request)
     {
         $products = product::join('categories','products.category_id','categories.id')
-                        ->where('categories.name','LIKE','%'.$request->category.'%')->get();
+                        ->where('categories.name','=',$request->category)
+                        ->select('products.name','products.price','products.id','products.image')->get();
         return response()->json($products,200);
     }
 }

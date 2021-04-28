@@ -1,18 +1,19 @@
 @extends('admin.layout.master')
-@section('title', 'Insert Expense Category')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Add Expense Category')
+@section('pageTitle') <a href="{{route('expenseCategory.add')}}">Add Expense Category</a> @endsection
+@section('parentPageTitle') <a href="{{route('expenseCategory.view')}}">Expense Categories</a> @endsection
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
             <div class="body">
                 <div id="errorElement "></div>
 
                 <form action="{{route('expenseCategory.store')}}" method="post" class="form-horizontal" id="form" enctype="multipart/form-data">
-                            
-                @csrf                      
+
+                @csrf
 
 
                             <div class="form-group row col-md-10">
@@ -23,21 +24,21 @@
                                     {{-- validation --}}
                                     @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror 
-                                    
+                                    @enderror
+
                                 </div>
                             </div>
-                           
+
                         </div>
                         <div class="border-top">
                             <div class="card-body">
                                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                      
+
                     </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

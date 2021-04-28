@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'Form Validation')
-@section('parentPageTitle', 'Forms')
+@section('title', 'Add Coupon')
+@section('pageTitle') <a href="{{route('cupon.add')}}">Add Coupon</a> @endsection
+@section('parentPageTitle')<a href="{{route('cupon.view')}}">Coupons</a>@endsection
 
 
 @section('content')
@@ -11,7 +12,7 @@
          Add Cupon
         <a class=" float-right btn btn-success btn-sm" href="{{ route('cupon.view') }}"><i class="fa fa-list"></i> Cupon List</a>
       </h3>
-    </div> 
+    </div>
     <div class="card-body">
       <form method="post" action="{{route('cupon.store') }}" id="myform" enctype="multipart/form-data">
           @csrf

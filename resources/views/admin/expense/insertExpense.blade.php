@@ -1,15 +1,16 @@
 @extends('admin.layout.master')
-@section('title', 'Insert Expense')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Add Expense')
+@section('pageTitle') <a href="{{route('expense.add')}}">Add Expense</a> @endsection
+@section('parentPageTitle') <a href="{{route('expense.view')}}">Expenses</a> @endsection
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
             <div class="body">
                 <form action="{{route('expense.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
-                            
+
                 @csrf
 
 
@@ -19,7 +20,7 @@
                                         <select class="form-control col-sm-11" id="category_id" name="category_id" required>
                                           <option required>Select Category</option>
 
-                                @foreach($categories as $categorie)         
+                                @foreach($categories as $categorie)
                                           <option value="{{$categorie->id}}" required>{{$categorie->name}}</option>
                                 @endforeach
                                         </select>
@@ -34,7 +35,7 @@
                                     {{-- validation --}}
                                 @error('amount')
                                     <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror 
+                                @enderror
 
                                 </div>
                             </div>
@@ -47,7 +48,7 @@
                                     {{-- validation --}}
                                  @error('note')
                                     <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror 
+                                @enderror
 
                                 </div>
                             </div>
@@ -57,10 +58,10 @@
                                 <div class="col-sm-9">
                                     <input name="expense_by" type="text" class="form-control @error('expense_by') is-invalid @enderror " id="expense_by" placeholder="Expense by">
 
-                                    validation 
+                                    validation
                                  @error('expense_by')
                                     <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror  
+                                @enderror
                                 </div>
                             </div> --}}
 
@@ -69,11 +70,11 @@
                             <div class="card-body">
                                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                      
+
                     </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

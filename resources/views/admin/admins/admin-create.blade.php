@@ -1,15 +1,16 @@
 @extends('admin.layout.master')
 @section('title', 'Add admin')
-@section('parentPageTitle', 'Admin')
+@section('pageTitle') <a href="{{route('admin.create')}}">Create Admin</a> @endsection
+@section('parentPageTitle') <a href="{{route('admin.index')}}">Admin</a> @endsection
 
 
-@section('content') 
+@section('content')
 
 <div class="row clearfix">
 <div class="col-lg-12">
-<div class="card"> 
+<div class="card">
     <div class="card-header">
-        <h3> Create User</h3> 
+        <h3> Create User</h3>
         <a class=" float-right btn btn-success btn-sm" href="{{ route('admin.index') }}"><i class="fa fa-list"></i> Admin List</a>
 
         @if(session()->has('success_msg'))
@@ -58,25 +59,25 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                </div>     
-            </div>   
+                    </div>
+                </div>
+            </div>
 
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12">
                     <div class="body">
                         <h6>Basic Information</h6>
 
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="name" type="text" class="form-control placeholder="Name" value="{{old('name')}}">
                         </div>
-            
-                    
+
+
                         <div class="form-group">
                             <input name="email" type="email" class="form-control" placeholder="Email" value="{{old('email')}}">
                         </div>
 
-                        <div class="form-group">                                                
+                        <div class="form-group">
                             <input name="address" type="text" class="form-control" placeholder="Address" value="{{old('address')}}">
                         </div>
 
@@ -111,7 +112,7 @@
                 </div>
 
                 <div class="col-lg-6 col-md-12">
-                    
+
                     <div class="body">
                         <h6>Change Password</h6>
                         <div class="form-group">
@@ -130,7 +131,7 @@
 </div>
 </div>
 
-                  
+
 @endsection
 
 @section('page-script')

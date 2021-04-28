@@ -1,15 +1,16 @@
 @extends('admin.layout.master')
-@section('title', 'Insert Category')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Add Sub-Category')
+@section('pageTitle') <a href="{{route('subCategory.add')}}">Add Sub-Category</a> @endsection
+@section('parentPageTitle') <a href="{{route('subCategory.view')}}">Sub-Categories</a> @endsection
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
             <div class="body">
                 <form action="{{route('subCategory.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
-                            
+
                 @csrf
 
 
@@ -18,7 +19,7 @@
                                         <select class="form-control col-sm-9" id="category_id" name="category_id" required>
                                           <option required>Select Category</option>
 
-                                @foreach($categories as $categorie)         
+                                @foreach($categories as $categorie)
                                           <option value="{{$categorie->id}}" required>{{$categorie->name}}</option>
                                 @endforeach
                                         </select>
@@ -42,11 +43,11 @@
                             <div class="card-body">
                                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                      
+
                     </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

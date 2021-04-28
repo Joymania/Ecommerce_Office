@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('title', 'Add Product')
-@section('parentPageTitle', 'Products')
+@section('pageTitle') <a href="{{route('products.create')}}">Add Product</a> @endsection
+@section('parentPageTitle') <a href="{{route('products.list')}}">Products</a> @endsection
 
 
 @section('content')

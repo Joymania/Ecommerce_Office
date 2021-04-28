@@ -1,6 +1,6 @@
 @extends('admin.layout.authentication')
 @section('title', 'Forget Password')
-
+@section('pageTitle') <a href="">Forgot Password</a> @endsection
 
 @section('content')
 
@@ -22,8 +22,8 @@
                     @endif
 
                     <form class="form-auth-small" method="post" action="{{ route('admin.password.email') }}">
-                        @csrf 
-                        
+                        @csrf
+
                         <div class="form-group">
                             <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus  placeholder="Email">
 

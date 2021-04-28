@@ -1,5 +1,6 @@
 @extends('admin.layout.authentication')
 @section('title', 'Login')
+@section('pageTitle') <a href="{{url('/admin/login')}}">Login</a> @endsection
 
 
 @section('content')
@@ -13,9 +14,9 @@
 			<div class="card">
                 <div class="header">
                     <p class="lead">Login to your account</p>
-                    
+
                     @if(session()->has('errors'))
-                        
+
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>Your credentials does not match!</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

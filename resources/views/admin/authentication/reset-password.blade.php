@@ -1,6 +1,6 @@
 @extends('admin.layout.authentication')
 @section('title', 'Reset Password')
-
+@section('pageTitle') <a href="">Reset Password</a> @endsection
 
 @section('content')
 

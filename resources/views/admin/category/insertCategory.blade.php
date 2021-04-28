@@ -1,18 +1,19 @@
 @extends('admin.layout.master')
-@section('title', 'Insert Category')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Add Category')
+@section('pageTitle') <a href="{{route('category.add')}}">Add Category</a> @endsection
+@section('parentPageTitle') <a href="{{route('category.view')}}">Categories</a> @endsection
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
             <div class="body">
                 <div id="errorElement "></div>
 
                 <form action="{{route('category.store')}}" method="post" class="form-horizontal" id="form" enctype="multipart/form-data">
-                            
-                @csrf                      
+
+                @csrf
 
 
                             <div class="form-group row">
@@ -27,8 +28,8 @@
                                 </div>
                             </div>
 
-                    
-                            
+
+
                             <div class="form-group row">
                                 <label for="createdBy" class="col-sm-3 text-right control-label col-form-label">Created By</label>
                                 <div class="col-sm-9">
@@ -47,11 +48,11 @@
                             <div class="card-body">
                                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                      
+
                     </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

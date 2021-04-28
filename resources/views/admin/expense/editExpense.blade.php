@@ -1,15 +1,16 @@
 @extends('admin.layout.master')
-@section('title', 'Insert Expense')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Edit Expense')
+@section('pageTitle') <a href="#">Edit Expense</a> @endsection
+@section('parentPageTitle') <a href="{{route('expense.view')}}">Expenses</a> @endsection
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        
+
             <div class="body">
                 <form action="{{route('updateExpense')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
-                            
+
                 @csrf
 
                 <input name="id" type="hidden" class="form-control" id="fname" value="{{$edits->id}}">
@@ -18,7 +19,7 @@
                                         <select class="form-control col-sm-9" id="category_id" name="category_id" >
                                           <option>Select Category</option>
 
-                                @foreach($categories as $categorie)         
+                                @foreach($categories as $categorie)
                                           <option value="{{$categorie->id}}">{{$categorie->name}}</option>
                                 @endforeach
 
@@ -48,17 +49,17 @@
                             </div> --}}
 
                         </div>
-                        
+
                         <div class="border-top">
                             <div class="card-body">
                                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                           
-                      
+
+
                     </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </div>
