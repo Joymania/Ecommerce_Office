@@ -334,37 +334,38 @@
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
                     <h3>Shopping Cart</h3>
+                     dd($cartpage)
                     @if (Auth::user())
-                    <ul>
-                        @php
-                            $total=0;
-                        @endphp
+                        <ul>
+                            @php
+                                $total=0;
+                            @endphp
 
-                        @foreach ($cartpage as $cart)
-                             <li class="single-product-cart">
-                             <div class="cart-img">
-                                 <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
-                             </div>
-                             <div class="cart-title">
-                                 <h4><a href="#">{{ $cart->product->name }}</a></h4>
-                                 <span> {{ $cart->product->qty }} × {{ $cart->product->price }} tk	</span>
-                             </div>
-                             <div class="cart-delete">
-                                 <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
-                             </div>
-                         </li>
-                         @php
-                             $total+=$cart->subtotal;
-                         @endphp
-                        @endforeach
+                            @foreach ($cartpage as $cart)
+                                <li class="single-product-cart">
+                                <div class="cart-img">
+                                    <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
+                                </div>
+                                <div class="cart-title">
+                                    <h4><a href="#">{{ $cart->product->name }}</a></h4>
+                                    <span> {{ $cart->product->qty }} × {{ $cart->product->price }} tk	</span>
+                                </div>
+                                <div class="cart-delete">
+                                    <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
+                                </div>
+                            </li>
+                            @php
+                                $total+=$cart->subtotal;
+                            @endphp
+                            @endforeach
 
 
-                     </ul>
-                     <div class="cart-total">
-                         <h4>Subtotal: <span>{{ $total }}tk</span></h4>
-                     </div>
+                        </ul>
+                        <div class="cart-total">
+                            <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                        </div>
                     @else
-                    <ul>
+                        <ul>
                        @php
                            $contents=Cart::content();
                            $total=0;
@@ -388,10 +389,10 @@
                        @endforeach
 
 
-                    </ul>
-                    <div class="cart-total">
-                        <h4>Subtotal: <span>{{ $total }}tk</span></h4>
-                    </div>
+                        </ul>
+                        <div class="cart-total">
+                            <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                        </div>
                     @endif
                     <div class="cart-checkout-btn">
                         <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
