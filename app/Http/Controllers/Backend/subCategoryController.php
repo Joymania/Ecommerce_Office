@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use App\Model\category;
-use App\Model\sub_category; 
+use App\Model\sub_category;
 
 class subCategoryController extends Controller
 {
@@ -29,19 +29,19 @@ class subCategoryController extends Controller
         $request->validate([
             'category_id' => 'required',
             'sub_category_name' => 'required',
-        ], 
+        ],
         // error message
         [
             'sub_category_name.unique' => 'Sub-Category name must be unique',
             'category_id.required' => 'Category is required',
-        ]); 
+        ]);
 
         $state = sub_category::insert([
     		'sub_category_name'=>$request-> sub_category_name,
     		'category_id'=>$request-> category_id,
-        
-        
-    	]); 
+
+
+    	]);
 
     	return back();
     }
@@ -49,9 +49,9 @@ class subCategoryController extends Controller
     // editSubCategory
     function editSubCategory($id)
     {
-    	$cats = category::all();
+    	$categories = category::all();
     	$edits = sub_category::findOrFail($id);
-    	return view('admin.subCategory.editSubCategory',compact('cats','edits'));
+    	return view('admin.subCategory.editSubCategory',compact('categories','edits'));
     }
 
     // updateSubCategory
@@ -61,7 +61,7 @@ class subCategoryController extends Controller
         $request->validate([
             'category_id' => 'required',
             'sub_category_name' => 'required',
-        ], 
+        ],
         // error message
         [
             'sub_category_name.unique' => 'Sub-Category name must be unique',
@@ -72,7 +72,7 @@ class subCategoryController extends Controller
         sub_category::findOrFail($request->id)->update([
             'sub_category_name'=>$request-> sub_category_name,
     		'category_id'=>$request-> category_id,
-    	]); 
+    	]);
 
         return redirect()->route('subCategory.view')->with('success','Successfully Update!!!');
     }
