@@ -62,10 +62,8 @@ Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
-
-    // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
-
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
+    Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
 
     Route::post('review/{prod_id}', 'Frontend\ReviewController@store')->name('store-review');
 });
