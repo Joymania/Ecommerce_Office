@@ -1,10 +1,21 @@
 //Filter by price or
 $(document).ready(function () {
-   $('#filterBtn').on('click', function () {
-        let amount = $('#amount').val();
+   $('.priceFilter').on('click', function () {
+       $(".priceFilter").css({
+           'backgroundColor':'#FFFFFF',
+           'color': 'black'
+       });
+       $(this).css({
+           'backgroundColor':'#666666',
+           'color': 'white'
+       });
+
+        let first = $(this).find('span[class="first"]').text();
+        let second = $(this).find('span[class="second"]').text();
+        /*let amount = $('#amount').val();
         let split = amount.split('-');
         let first =split[0].replace('$','');
-        let second = split[1].replace('$','');
+        let second = split[1].replace('$','');*/
         /*let search = $('#search').val();
         let category = $('#category').val();*/
         let shopArea = $('#shopArea');
@@ -22,29 +33,61 @@ $(document).ready(function () {
                 if (data.length > 0) {
                     $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
-                        shopArea.append('' +
-                            '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
-                            ' <div class="single-product-wrap mb-35">' +
-                            '<div class="product-img product-img-zoom mb-15">' +
-                            '<a href="/'+data[i].id+'/product-details">' +
-                            '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
-                            '<div class="product-action-2 tooltip-style-2">' +
-                            '<button title="Wishlist"><i class="icon-heart"></i></button>' +
-                            '</div> </div>' +
-                            ' <div class="product-content-wrap-2 text-center">' +
-                            '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
-                            '<div class="product-price-2">' +
-                            '<span class="price">'+data[i].price+'</span><span style="margin-left: -3px">Tk.</span>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="product-content-wrap-2 product-content-position text-center">' +
-                            '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
-                            '<div class="product-price-2">' +
-                            ' <span class="product-price">'+data[i].price+' Tk.</span>' +
-                            ' </div>' +
-                            '<div class="pro-add-to-cart">' +
-                            '<button title="Add to Cart">Add To Cart</button>' +
-                            ' </div> </div>  </div> </div>')
+                        if (data[i].promo_price === null) {
+                            shopArea.append('' +
+                                '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
+                                ' <div class="single-product-wrap mb-35">' +
+                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
+                                '<div class="product-action-2 tooltip-style-2">' +
+                                '<button title="Wishlist"><i class="icon-heart"></i></button>' +
+                                '</div> </div>' +
+                                ' <div class="product-content-wrap-2 text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                '<span class="price">' + data[i].price + '</span><span style="margin-left: -3px">Tk.</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="product-content-wrap-2 product-content-position text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                ' <span class="product-price">' + data[i].price + ' Tk.</span>' +
+                                ' </div>' +
+                                '<div class="pro-add-to-cart">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<button title="Add to Cart">Add To Cart</button>' +
+                                '</a>' +
+                                ' </div> </div>  </div> </div>')
+                        }else{
+                            shopArea.append('' +
+                                '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
+                                ' <div class="single-product-wrap mb-35">' +
+                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
+                                '<div class="product-action-2 tooltip-style-2">' +
+                                '<button title="Wishlist"><i class="icon-heart"></i></button>' +
+                                '</div> </div>' +
+                                ' <div class="product-content-wrap-2 text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                '<span class="new-price">' + data[i].promo_price + '</span><span style="margin-left: -3px">Tk.</span>' +
+                                '<span class="old-price">' + data[i].price + '</span><span style="margin-left: -3px">Tk.</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="product-content-wrap-2 product-content-position text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                ' <span class="new-price">' + data[i].promo_price + ' Tk.</span>' +
+                                ' <span class="old-price">' + data[i].price + ' Tk.</span>' +
+                                ' </div>' +
+                                '<div class="pro-add-to-cart">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<button title="Add to Cart">Add To Cart</button>' +
+                                '</a>' +
+                                ' </div> </div>  </div> </div>')
+                        }
                     }
                 }else {
                     $('#noResult').remove();
@@ -109,6 +152,8 @@ $(document).ready(function () {
                 if (data.length > 0) {
                     $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
+                        if (data[i].promo_price === null){
+                            console.log(data[i].promo_price);
                         shopArea.append('' +
                             '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                             ' <div class="single-product-wrap mb-35">' +
@@ -130,8 +175,39 @@ $(document).ready(function () {
                             ' <span class="product-price">'+data[i].price+' Tk.</span>' +
                             ' </div>' +
                             '<div class="pro-add-to-cart">' +
+                            '<a href="/'+data[i].id+'/product-details">'+
                             '<button title="Add to Cart">Add To Cart</button>' +
+                            '</a>'+
                             ' </div> </div>  </div> </div>')
+                        }else{
+                            shopArea.append('' +
+                                '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
+                                ' <div class="single-product-wrap mb-35">' +
+                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<a href="/'+data[i].id+'/product-details">' +
+                                '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
+                                '<div class="product-action-2 tooltip-style-2">' +
+                                '<button title="Wishlist"><i class="icon-heart"></i></button>' +
+                                '</div> </div>' +
+                                ' <div class="product-content-wrap-2 text-center">' +
+                                '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
+                                '<div class="product-price-2">' +
+                                '<span class="old-price">'+data[i].promo_price+'</span><span style="margin-left: -3px">Tk.</span>' +
+                                '<span class="new-price">'+data[i].price+'</span><span style="margin-left: -3px">Tk.</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="product-content-wrap-2 product-content-position text-center">' +
+                                '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
+                                '<div class="product-price-2">' +
+                                ' <span class="new-price">'+data[i].promo_price+' Tk.</span>' +
+                                ' <span class="old-price">'+data[i].price+' Tk.</span>' +
+                                ' </div>' +
+                                '<div class="pro-add-to-cart">' +
+                                '<a href="/'+data[i].id+'/product-details">'+
+                                '<button title="Add to Cart">Add To Cart</button>' +
+                                '</a>'+
+                                ' </div> </div>  </div> </div>')
+                        }
                     }
                 }else {
                     $('#noResult').remove();
@@ -159,29 +235,61 @@ $(document).ready(function () {
                 if (data.length > 0) {
                     $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
-                        shopArea.append('' +
-                            '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
-                            ' <div class="single-product-wrap mb-35">' +
-                            '<div class="product-img product-img-zoom mb-15">' +
-                            '<a href="/'+data[i].id+'/product-details">' +
-                            '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
-                            '<div class="product-action-2 tooltip-style-2">' +
-                            '<button title="Wishlist"><i class="icon-heart"></i></button>' +
-                            '</div> </div>' +
-                            ' <div class="product-content-wrap-2 text-center">' +
-                            '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
-                            '<div class="product-price-2">' +
-                            '<span class="price">'+data[i].price+'</span><span style="margin-left: -3px">Tk.</span>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="product-content-wrap-2 product-content-position text-center">' +
-                            '<h3><a href="/'+data[i].id+'/product-details">'+data[i].name+'</a></h3>' +
-                            '<div class="product-price-2">' +
-                            ' <span class="product-price">'+data[i].price+' Tk.</span>' +
-                            ' </div>' +
-                            '<div class="pro-add-to-cart">' +
-                            '<button title="Add to Cart">Add To Cart</button>' +
-                            ' </div> </div>  </div> </div>')
+                        if (data[i].promo_price === null) {
+                            shopArea.append('' +
+                                '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
+                                ' <div class="single-product-wrap mb-35">' +
+                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
+                                '<div class="product-action-2 tooltip-style-2">' +
+                                '<button title="Wishlist"><i class="icon-heart"></i></button>' +
+                                '</div> </div>' +
+                                ' <div class="product-content-wrap-2 text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                '<span class="price">' + data[i].price + '</span><span style="margin-left: -3px">Tk.</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="product-content-wrap-2 product-content-position text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                ' <span class="product-price">' + data[i].price + ' Tk.</span>' +
+                                ' </div>' +
+                                '<div class="pro-add-to-cart">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<button title="Add to Cart">Add To Cart</button>' +
+                                '</a>' +
+                                ' </div> </div>  </div> </div>')
+                        }else{
+                            shopArea.append('' +
+                                '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
+                                ' <div class="single-product-wrap mb-35">' +
+                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
+                                '<div class="product-action-2 tooltip-style-2">' +
+                                '<button title="Wishlist"><i class="icon-heart"></i></button>' +
+                                '</div> </div>' +
+                                ' <div class="product-content-wrap-2 text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                '<span class="new-price">' + data[i].promo_price + '</span><span style="margin-left: -3px">Tk.</span>' +
+                                '<span class="old-price">' + data[i].price + '</span><span style="margin-left: -3px">Tk.</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="product-content-wrap-2 product-content-position text-center">' +
+                                '<h3><a href="/' + data[i].id + '/product-details">' + data[i].name + '</a></h3>' +
+                                '<div class="product-price-2">' +
+                                ' <span class="new-price">' + data[i].promo_price + ' Tk.</span>' +
+                                ' <span class="new-price">' + data[i].price + ' Tk.</span>' +
+                                ' </div>' +
+                                '<div class="pro-add-to-cart">' +
+                                '<a href="/' + data[i].id + '/product-details">' +
+                                '<button title="Add to Cart">Add To Cart</button>' +
+                                '</a>' +
+                                ' </div> </div>  </div> </div>')
+                        }
                     }
                 }else {
                     $('#noResult').remove();

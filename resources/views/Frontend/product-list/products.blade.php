@@ -1,12 +1,12 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
-    <div>
+   {{-- <div>
         @if(!empty($_GET))
         <input type="text" id="search" value="{{$_GET['search']}}" hidden>
-       {{-- <input type="text" id="category" value="{{$_GET['category']}}" hidden>--}}
+       --}}{{-- <input type="text" id="category" value="{{$_GET['category']}}" hidden>--}}{{--
         @endif
-    </div>
+    </div>--}}
     <div class="shop-area pt-120 pb-120">
         <div class="container">
             <div class="row flex-row-reverse">
@@ -49,16 +49,28 @@
                                             <div class="product-content-wrap-2 text-center">
                                                 <h3><a href="{{route("product.details",$product->id)}}" class="productName">{{$product->name}}</a></h3>
                                                 <div class="product-price-2">
+                                                    @if(empty($product->promo_price))
                                                     <span class="price">{{$product->price}}</span><span style="margin-left: -3px">Tk.</span>
+                                                    @else
+                                                        <span class="new-price">{{$product->promo_price}}</span><span style="margin-left: -3px">Tk.</span>
+                                                        <span class="old-price">{{$product->price}}</span><span style="margin-left: -3px">Tk.</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-position text-center">
                                                 <h3><a href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
                                                 <div class="product-price-2">
-                                                    <span class="product-price">{{$product->price}} Tk.</span>
+                                                    @if(empty($product->promo_price))
+                                                        <span class="price">{{$product->price}}</span><span style="margin-left: -3px">Tk.</span>
+                                                    @else
+                                                        <span class="new-price">{{$product->promo_price}}</span><span style="margin-left: -3px">Tk.</span>
+                                                        <span class="old-price">{{$product->price}}</span><span style="margin-left: -3px">Tk.</span>
+                                                    @endif
                                                 </div>
                                                 <div class="pro-add-to-cart">
+                                                    <a href="{{route("product.details",$product->id)}}">
                                                     <button title="Add to Cart">Add To Cart</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -72,12 +84,6 @@
                         </div>
                         @if(count((array)$products) > 0)
                         <div class="text-center mt-10">
-                            {{--<ul>
-                                <li><a class="prev" href="#"><i class="icon-arrow-left"></i></a></li>
-                                <li><a class="active" href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a class="next" href="#"><i class="icon-arrow-right"></i></a></li>
-                            </ul>--}}
                             {{$products->links()}}
                         </div>
                         @endif
@@ -107,16 +113,40 @@
                             </div>
                         </div>
                         <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
-                            <h4 class="sidebar-widget-title">Price Filter </h4>
+                            <h4 class="sidebar-widget-title mb-2">Price Filter </h4>
+                            <div class="row">
+                                <div class="col-4 m-1 p-0 text-center priceFilter">
+                                    <span>&#2547</span><span class="first">0</span>-<span class="second">100</span>
+                                </div>
+                                <div class="col-4 m-1 p-0 text-center priceFilter">
+                                    <span>&#2547</span><span class="first">101</span>-<span class="second">500</span>
+                                </div>
+                                <div class="col-4 m-1 p-0 text-center priceFilter">
+                                    <span>&#2547</span><span class="first">501</span>-<span class="second">1000</span>
+                                </div>
+                                <div class="col-4 m-1 p-0 text-center priceFilter">
+                                    <span>&#2547</span><span class="first">1001</span>-<span class="second">2000</span>
+                                </div>
+                                <div class="col-4 m-1 p-0 text-center priceFilter">
+                                    <span>&#2547</span><span class="first">2001</span>-<span class="second">2500</span>
+                                </div>
+                                <div class="col-4 m-1 p-0 text-center priceFilter">
+                                    <span>&#2547</span> <span class="first">2501</span>-<span class="second">5000</span>
+                                </div>
+                                <div class="col-4 m-1 p-0 text-center priceFilter">
+                                    <span>&#2547</span><span class="first">5001</span> & <span class="second">over</span>
+                                </div>
+                            </div>
+
                             <div class="price-filter">
-                                <span>Range: 500.00Tk - 1.300.00 </span>
+                                {{--<span>Range: 500.00Tk - 1.300.00 </span>
                                 <div id="slider-range"></div>
                                 <div class="price-slider-amount">
                                     <div class="label-input">
                                         <input type="text" id="amount" name="price" placeholder="Add Your Price" />
                                     </div>
                                     <button id="filterBtn" type="button">Filter</button>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
 
@@ -140,5 +170,5 @@
     <script src="{{asset('js/searchFilter.js')}}"></script>
 @endsection
 @section('stylesheet')
-
+    <link rel="stylesheet" href="{{asset('css/products.css')}}">
 @endsection

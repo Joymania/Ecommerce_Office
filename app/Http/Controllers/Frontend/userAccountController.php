@@ -20,11 +20,11 @@ class userAccountController extends Controller
 {
     Public Function userAccount()
     {
-        $user = User::all()->find($id);
+        $user = User::all()->find(Auth::id());
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
-        $order = Order::all()->where('user_id' , $id);
+        $order = Order::all()->where('user_id' , Auth::id());
         $OrderProduct = OrderProduct::with('product')->find($id);
         return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'user' , 'order' , 'OrderProduct'));
     }

@@ -77,25 +77,29 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
-                                                <label for="single-selection">Select Colors</label>
-                                                {{--<select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">--}}
-                                                <select id="multiselect-size" name="color_id" class="form-control multiselect multiselect-custom" multiple="multiple">
-                                                    <option value="">Select Product Color</option>
-                                                    @foreach($colors as $row)
-                                                        <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <label for="single-selection">Select Sizes</label>
-                                                <select id="single-selection" name="size_id" class="form-control multiselect multiselect-custom">
-                                                    <option value="">Select Product Size</option>
-                                                    @foreach($sizes as $row)
-                                                        <option value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="colorMultiSelect">Select Colors</label>
+                                                        <select id="colorMultiSelect" class="form-control" name="color_id[]" multiple="multiple">
+                                                            @foreach($colors as $row)
+                                                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
 
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="sizeMultiSelect">Select Sizes</label>
+                                                        <select id="sizeMultiSelect" class="form-control" name="size_id[]" multiple="multiple">
+                                                            @foreach($sizes as $row)
+                                                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
 
                                         <div class="form-row">
@@ -215,4 +219,22 @@
 
 @stop
 
+@section('page-styles')
+    <link rel="stylesheet" href="{{asset('css/bootstrap-multiselect.min.css')}}">
+@endsection
 
+@section('page-script')
+    <script src="{{asset('js/bootstrap-multiselect.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $(function(){
+                $('#colorMultiSelect').multiselect();
+            });
+            $(function(){
+                $('#sizeMultiSelect').multiselect();
+            });
+        })
+    </script>
+
+
+@endsection

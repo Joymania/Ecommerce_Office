@@ -14,7 +14,6 @@ class OrderController extends Controller
     public function view(){
         $data['alldata']=Order::all();
         $data['admin']=Admin::where('role','0')->first();
-        //dd($data['alldata']);
         return view('admin.Order.order-view',$data);
     }
 

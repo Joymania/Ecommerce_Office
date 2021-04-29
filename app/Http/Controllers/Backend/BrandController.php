@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Admin;
 use App\Model\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

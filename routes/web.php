@@ -25,6 +25,7 @@ Route::get('/{id}/category/products','Frontend\ProductByCategoryController@produ
 
 //  Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
+Route::get('/{id}/product-details-all-reviews', 'Frontend\ProductDetailsController@reviewsWithoutLimit')->name('product.details.reviews');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
 Route::get('/category-products','Frontend\SearchController@categoryProducts')->name('category.products');

@@ -81,8 +81,6 @@
                                                         </form>
                                                         </div>
                                                     </td>
-
-
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -97,6 +95,5 @@
         </div>
 
     </div>
-
 @stop
 

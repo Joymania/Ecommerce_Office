@@ -77,11 +77,11 @@ class ProductsController extends Controller
 
         $product->save();
 
-        if ($request->color_id){
-            $product->colors()->sync([$request->color_id]);
+        if (count($request->color_id) > 0){
+            $product->colors()->attach($request->color_id);
         }
-        if ($request->size_id){
-            $product->sizes()->sync([$request->size_id]);
+        if (count($request->size_id) > 0){
+            $product->sizes()->attach($request->size_id);
         }
 
         if($request->hasfile('images'))
@@ -118,7 +118,7 @@ class ProductsController extends Controller
     {
         $this->validate($request,[
             'category_id' => 'required',
-            'brand_id' => 'required', 
+            'brand_id' => 'required',
             'tag_id' => 'required',
             'name' => 'required',
             'price' => 'required',
@@ -174,7 +174,8 @@ class ProductsController extends Controller
                 unlink("upload/products_images/sub_images/$row->image");
             }
         }
-
+        $product->colors()->detach();
+        $product->sizes()->detach();
         $product->delete();
         return redirect()->route('products.list')->with('delete','successfully deleted!!');
     }
