@@ -41,7 +41,8 @@ class userAccountController extends Controller
             // if the password field is blank, no validation applied
             'password' => ($request->password!=''?'min:6|confirmed':''),
             'address' => 'max:255',
-            'phone' => ''
+            'phone' => '',
+            'gender' => ''
         ]);
 
         //  if validation fails
@@ -60,6 +61,7 @@ class userAccountController extends Controller
           $user->email = $request->email;
           $user->address = $request->address;
           $user->phone = $request->phone;
+          $user->gender = $request->gender;
 
           // if there is password & not blank then insert password
         if($request->has('password') && !empty($request->password)) {

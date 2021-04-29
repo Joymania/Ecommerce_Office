@@ -168,6 +168,19 @@
                                                     <input name="phone" type="text" id="phone" value="{{$user->phone}}"/>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label class="fancy-radio">
+                                                            <input name="gender" value="male" type="radio" {{$user->gender == 'male'?"checked":null}}>
+                                                            <span><i></i>Male</span>
+                                                        </label>
+                                                        <label class="fancy-radio">
+                                                            <input name="gender" value="female" type="radio" {{ $user->gender == 'female'? "checked" : null}}>
+                                                            <span><i></i>Female</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
                                                 <fieldset>
                                                     <legend>Password change</legend>
                                                     
