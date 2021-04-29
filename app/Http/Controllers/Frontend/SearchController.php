@@ -47,7 +47,7 @@ class SearchController extends Controller
         $second = $request->second;
 
         $products = product::where('products.price','<=',$second)
-            ->where('products.price','>=',$first)->get();
+            ->where('products.price','>',$first)->get();
 
         return response()->json($products,200);
     }
@@ -62,7 +62,7 @@ class SearchController extends Controller
     {
         $products = product::join('categories','products.category_id','categories.id')
                         ->where('categories.name','=',$request->category)
-                        ->select('products.name','products.price','products.id','products.image')->get();
+                        ->select('products.name','products.price','products.id','products.image','products.promo_price')->get();
         return response()->json($products,200);
     }
 }

@@ -87,8 +87,8 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h3>{{$data['totalProducts']}} <i class="fa fa-archive float-right"></i></h3>
-                <span>Total Products</span>
+                <h3>{{$data['totalItems']}} <i class="fa fa-archive float-right"></i></h3>
+                <span>Total Items</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-green m-b-0">
                 <div class="progress-bar" data-transitiongoal="68"></div>
@@ -122,28 +122,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-12">
-        <div class="card">
-            <div class="header">
-                <h2>Income Analysis<small>8% High then last month</small></h2>
-            </div>
-            <div class="body">
-                <div class="sparkline-pie text-center">6,4,8</div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="header">
-                <h2>Sales Income</h2>
-            </div>
-            <div class="body">
-                <h6>Overall <b class="text-success">7,000</b></h6>
-                <div class="sparkline" data-type="line" data-spot-Radius="2" data-highlight-Spot-Color="#445771" data-highlight-Line-Color="#222"
-                    data-min-Spot-Color="#445771" data-max-Spot-Color="#445771" data-spot-Color="#445771"
-                    data-offset="90" data-width="100%" data-height="95px" data-line-Width="1" data-line-Color="#ffcd55"
-                    data-fill-Color="#ffcd55">2,4,3,1,5,7,3,2</div>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <div class="row clearfix">

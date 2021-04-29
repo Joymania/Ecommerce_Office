@@ -6,7 +6,7 @@
             <div class="breadcrumb-content text-center">
                 <ul>
                     <li>
-                        <a href="/">Home</a>
+                        <a href="{{url('/')}}">Home</a>
                     </li>
                     <li class="active">product details </li>
                 </ul>
@@ -72,15 +72,42 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <form action="{{ route('insert.cart') }}" method="post">
+                    <form id="addToCartForm" action="{{ route('insert.cart') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $product->id }}">
+                        <input type="number" id="colorInput" name="color_id" value="" hidden>
+                        <input type="number" id="sizeInput" name="size_id" value="" hidden>
                     <div class="product-details-content pro-details-content-mrg">
                         <h2>{{$product->name}}</h2>
                         <div class="product-ratting-review-wrap">
                             <div class="product-ratting-digit-wrap">
                                 <div class="product-ratting">
+<<<<<<< HEAD
                                     <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" data-step="0.1" value="{{ $rating }}">
+=======
+                                    {{--<input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" data-step="0.1" value="{{ $rating }}">--}}
+                                    @if($rating == 1)
+                                    <i class="icon_star"></i>
+                                    @elseif($rating == 2)
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    @elseif($rating == 3)
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    @elseif($rating == 4)
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                    @elseif($rating == 5)
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                    @endif
+>>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
                                 </div>
                                 <div class="product-digit">
                                     <span>{{$rating}}</span>
@@ -88,7 +115,7 @@
                             </div>
                             <div class="product-review-order">
                                 <span>{{count($product->reviews)}} Reviews</span>
-                                <span></span>
+                                <span>{{$orders}} orders</span>
                             </div>
                         </div>
                         <p>{{$product->short_descc}}</p>
@@ -100,13 +127,18 @@
                         <div class="pro-details-color-wrap">
                             <span>Colors:</span>
                             <div class="pro-details-color-content">
-                                <select class="js-select2" name="color_id">
+                                {{--<select class="js-select2" name="color_id">
                                     <option>Choose an option</option>
                                         @foreach ($colors as $color)
-                                        <option value=" {{ $color->color_id }}">{{ $color['color']['name'] }}</option>
+                                        <option id="selectColors" value="{{ $color->color_id }}">{{ $color['color']['name'] }}</option>
 
                                         @endforeach
-                                </select>
+                                </select>--}}
+                                <ul>
+                                    @foreach ($colors as $color)
+                                        <li class="colorLi" data-id="{{ $color->color_id}}"><a class="{{strtolower($color['color']['name'])}}" href="#">{{ $color['color']['name'] }}</a></li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                         @endif
@@ -115,13 +147,18 @@
                         <div class="pro-details-size">
                             <span>Sizes:</span>
                             <div class="pro-details-size-content">
-                                <select class="js-select2" name="size_id"  >
+                                {{--<select class="js-select2" name="size_id"  >
                                     <option>Choose an option</option>
                                     @foreach ($sizes as $size)
                                     <option value=" {{ $size->size_id }}">{{ $size['size']['name'] }}</option>
 
                                     @endforeach
-                            </select>
+                            </select>--}}
+                                <ul>
+                                    @foreach ($sizes as $size)
+                                    <li class="sizeLi" data-id="{{$size->size_id}}"><a class="productSizeContent" href="">{{ $size['size']['name'] }}</a></li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                         @endif
@@ -144,7 +181,8 @@
                         <div class="pro-details-action-wrap">
                             <div class="pro-details-add-to-cart">
                                 {{-- <a href="{{ route('insert.cart') }}">Add To Cart </a> --}}
-                                <input type="submit" value="Add To Cart">
+                                {{--<input id="submitBtn" type="submit" value="Add To Cart">--}}
+                                <input id="submitBtn" type="submit" value="Add To Cart"></a>
                             </div>
 
                             <div class="pro-details-action">
@@ -197,9 +235,11 @@
                                     @if(count($product->sizes) > 0)
                                     <tr>
                                         <td class="title width1">Size</td>
+                                        <td>
                                             @foreach($product->sizes as $size)
-                                                <td>{{$size->name}}</td>
+                                                {{$size->name}},
                                             @endforeach
+                                        </td>
                                     </tr>
                                     @endif
                                     <tr>
@@ -209,9 +249,11 @@
                                     @if(count($product->colors) > 0)
                                     <tr>
                                         <td class="title width1">Color</td>
-                                            @foreach($product->colors as $color)
-                                            <td>{{$color->name}} </td>
+                                        <td>
+                                        @foreach($product->colors as $color)
+                                            {{$color->name}} ,
                                             @endforeach
+                                        </td>
                                     </tr>
                                     @endif
                                     </tbody>
@@ -222,8 +264,7 @@
                         @if($reviews)
                         <div id="des-details4" class="tab-pane">
                             <div class="review-wrapper">
-                                <h2>{{$ratingCount}} review for {{$product->name}}</h2>
-                                @foreach($reviews as $review)
+                                @foreach($reviews1 as $review)
                                 <div class="single-review">
                                     <div class="review-img">
                                         <img src="{{ (!empty(auth()->user()->image)) ? url('upload/users/'.auth()->user()->image):url('upload/noImage60x60.jpg') }}" alt="user image" width="60px" height="60px">
@@ -243,6 +284,10 @@
                                     </div>
                                 </div>
                                 @endforeach
+
+                                @if($reviews->count() > 3)
+                                <a href="{{route('product.details.reviews',$product->id)}}"><h4 class="text-center">See All {{$reviews->count()}} Reviews</h4></a>
+                                @endif
                             </div>
 
                             @auth
@@ -300,6 +345,8 @@
         </div>
     </div>
     <script>
+        // // initialize with defaults
+        // $("#input-1").rating();
         $('.input-2').rating({displayOnly: true, step: 0.1});
         var checklimit = function (){
             if (document.getElementById('review').value.length >= 255) {
@@ -311,4 +358,5 @@
 
 @section('scripts')
     <script src="{{asset('js/product-details.js')}}"></script>
+
 @endsection

@@ -91,6 +91,36 @@
                                                 @enderror
                                             </div>
                                             <div class="col">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="colorMultiSelect">Select Colors</label>
+                                                        <select id="colorMultiSelect" placeholder="Select color" class="form-control" name="color_id[]" multiple="multiple">
+                                                            @foreach($colors as $row)
+                                                                @if($row->name == $product->colors[0]->name)
+                                                                    <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                                @endif
+                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="sizeMultiSelect">Select Sizes</label>
+                                                        <select id="sizeMultiSelect" class="form-control" name="size_id[]" multiple="multiple">
+                                                            @foreach($sizes as $row)
+                                                                @if($row->name == $product->sizes[0]->name)
+                                                                    <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                                @endif
+                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{--<div class="col">
                                                 <label for="single-selection">Select Colors</label>
                                                 <select id="single-selection" name="color_id" class="form-control multiselect multiselect-custom">
                                                     <option value="">Select Colors</option>
@@ -119,7 +149,7 @@
                                                         @endif
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div>--}}
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
@@ -245,3 +275,22 @@
     </div>
 
 @stop
+@section('page-styles')
+    <link rel="stylesheet" href="{{asset('css/bootstrap-multiselect.min.css')}}">
+@endsection
+
+@section('page-script')
+    <script src="{{asset('js/bootstrap-multiselect.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $(function(){
+                $('#colorMultiSelect').multiselect();
+            });
+            $(function(){
+                $('#sizeMultiSelect').multiselect();
+            });
+        })
+    </script>
+
+
+@endsection

@@ -1,4 +1,4 @@
-@extends('Frontend.layouts.master')
+@extends('Frontend.userProfile.master')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li class="active">my account </li>
             </ul>
@@ -18,7 +18,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
+            </div> 
         @endif
         @if(session()->has('errors'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -28,9 +28,7 @@
                 </button>
             </div>
         @endif
-        @if(session()->has('errors'))
-         {{--dd($errors['errors']--}}
-        @endif
+
     </div>
 </div>
 <!-- my account wrapper start -->
@@ -52,9 +50,9 @@
                                 <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i> address</a>
                                 <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
                                 <a href="{{route('logout')}}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout
+                                    document.getElementById('user-logout-form').submit();"><i class="fa fa-sign-out"></i> Logout
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="user-logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                                 </form>
 
@@ -69,7 +67,7 @@
                                     <div class="myaccount-content">
                                         <h3>Dashboard</h3>
                                         <div class="welcome">
-                                            <p>Hello, <strong></strong>{{$user->name}}<strong></strong><a href="" class="logout"> </a></p>
+                                            <p>Hello, <strong>{{$user->name}}</strong> <strong></strong><a href="" class="logout"> </a></p>
                                         </div>
 
                                         <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
@@ -82,30 +80,34 @@
                                         <h3>Orders</h3>
                                         <div class="myaccount-table table-responsive text-center">
                                             <table class="table table-bordered">
-                                                <thead class="thead-light">
+                                                <thead class="thead-light"> 
                                                     <tr>
                                                         <th>Order</th>
                                                          <th>Date</th>
                                                         <th>Status</th>
-                                                        <th>Product Name</th>
-                                                        <th>Quantity</th>
+                                                       
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($order as $orders)
+                                                    @foreach($orders as $order)
                                                     <tr>
-                                                        <td>{{$orders->id}}</td>
-                                                        <td>{{$orders->created_at}}</td>
-                                                        @if ($orders->status==0)
-                                                        <td>Pending</td>
-                                                        @elseif ($orders->status==1)
-                                                        <td>Accepted</td>
+                                                        <td>{{$order->id}}</td>
+                                                        <td>{{$order->created_at}}</td>
+                                                        @if ($order->status==0)
+                                                            <td>Pending</td>
+                                                        @elseif ($order->status==1)
+                                                            <td>Accepted</td>
+                                                        @elseif ($order->status==2)
+                                                            <td>Delivered</td>
+                                                        @else <td></td>
                                                         @endif
-
-
-                                                        <td>{{$OrderProduct->product->name}}</td>
-                                                        <td>{{$OrderProduct->qty}}</td>
-
+                                                        
+                                                        <td class="actions"><a href="{{ route('orderDetails',$order->id) }}">
+                                                            <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-"
+                                                            data-toggle="tooltip" data-original-title="Details"><i class="icon-eye" aria-hidden="true"></i></a>
+                                                        </td>
+                                                       
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -114,12 +116,12 @@
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
-
+                                
                                 <!-- Single Tab Content Start -->
                                 <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Payment Method</h3>
-                                        <p class="saved-message">You have used <strong>{{$orders->payment}}</strong> as your payment method.</p>
+                                        <p class="saved-message">You have used <strong>Bkash</strong> as your payment method.</p>
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
@@ -127,16 +129,15 @@
                                 <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Billing Address</h3>
-
+                                        
                                         <address>
                                             <p><strong>{{$user->name}}</strong></p>
-                                            @foreach($order as $ord)
-                                            <p>{{$ord->biling_address}}<br>
-                                                {{$ord->biling_city}}</p>
-                                            <p>Mobile: {{$ord->biling_phone}}</p>
-                                            @endforeach
+                                           
+                                            <p>{{$user->address}}</p>
+                                            <p>Mobile: {{$user->phone}}</p>
+                                            
                                         </address>
-
+                                        
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
@@ -145,25 +146,50 @@
                                     <div class="myaccount-content">
                                         <h3>Account Details</h3>
                                         <div class="account-details-form">
-                                            <form method="POST" action="{{ route('userUpdate', $user->id) }} " enctype="multipart/form-data">
-                                            @csrf
+                                            <form method="POST" action="{{ route('userUpdate') }}" enctype="multipart/form-data">
+                                                @csrf
 
                                                 <div class="single-input-item">
                                                     <label for="display-name" class="required">Full Name</label>
-                                                    <input name="name" type="text" id="display-name" value="{{$user->name}} "/>
+                                                    <input name="name" type="text" id="display-name" value="{{$user->name}}" required/>
                                                 </div>
                                                 <div class="single-input-item">
                                                     <label for="email" class="required">Email Addres</label>
-                                                    <input name="email" type="email" id="email" value="{{$user->email}}" />
+                                                    <input name="email" type="email" id="email" value="{{$user->email}}" required/>
                                                 </div>
+                                                
+                                                <div class="single-input-item">
+                                                    <label for="address" class="required">Address</label>
+                                                    <input name="address" type="text" id="address" value="{{$user->address}}"/>
+                                                </div>
+
+                                                <div class="single-input-item">
+                                                    <label for="phone" class="required">Mobile</label>
+                                                    <input name="phone" type="text" id="phone" value="{{$user->phone}}"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label class="fancy-radio">
+                                                            <input name="gender" value="male" type="radio" {{$user->gender == 'male'?"checked":null}}>
+                                                            <span><i></i>Male</span>
+                                                        </label>
+                                                        <label class="fancy-radio">
+                                                            <input name="gender" value="female" type="radio" {{ $user->gender == 'female'? "checked" : null}}>
+                                                            <span><i></i>Female</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
                                                 <fieldset>
                                                     <legend>Password change</legend>
-
+                                                    
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
                                                                 <label for="new-pwd" class="required">New Password</label>
                                                                 <input name="password" type="password" class="form-control" placeholder="New Password">
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -172,7 +198,7 @@
                                                                 <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm New Password">
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> 
                                                 </fieldset>
                                                 <div class="single-input-item">
                                                     <button class="check-btn sqr-btn ">Save Changes</button>
