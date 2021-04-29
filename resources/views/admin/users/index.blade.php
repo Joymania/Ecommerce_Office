@@ -60,7 +60,7 @@
                             <td>{{$user->gender}}</td>
                             <td>{{$user->status == '1' ? 'active' :''}}</td>
                             <td>{{ ($user->email_verified_at) ? 'yes' : null }}</td>
-                            <td>{{$user->Address}}</td>
+                            <td>{{$user->address}}</td>
                             <td class="actions">
                                 <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
