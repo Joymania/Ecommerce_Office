@@ -1,6 +1,80 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
+<div class="sidebar-cart-active">
+    <div class="sidebar-cart-all">
+        <a class="cart-close" href="#"><i class="icon_close"></i></a>
+        <div class="cart-content">
+            <h3>Shopping Cart</h3>
+
+            <ul>
+                @php
+                    $total=0;
+                @endphp
+                @if(Auth::user())
+                @foreach ($cartpage as $cart)
+                     <li class="single-product-cart">
+                     <div class="cart-img">
+                         <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
+                     </div>
+                     <div class="cart-title">
+                         <h4><a href="#">{{ $cart->product->name }}</a></h4>
+                         @if ($cart->product->promo_price)
+                         <span> {{ $cart->qty }} × {{ $cart->product->promo_price }} tk	</span>
+                         @else
+                         <span> {{ $cart->qty }} × {{ $cart->product->price }} tk	</span>
+                         @endif
+
+                     </div>
+                     <div class="cart-delete">
+                         <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
+                     </div>
+                 </li>
+                 @php
+                     $total+=$cart->subtotal;
+                 @endphp
+                @endforeach
+             </ul>
+             <div class="cart-total">
+                 <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+             </div>
+            @else
+            <ul>
+               @php
+                   $contents=Cart::content();
+                   $total=0;
+               @endphp
+               @foreach ($contents as $content)
+                    <li class="single-product-cart">
+                    <div class="cart-img">
+                        <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" alt=""></a>
+                    </div>
+                    <div class="cart-title">
+                        <h4><a href="#">{{ $content->name }}</a></h4>
+                        <span> {{ $content->qty }} × {{ $content->price }} tk	</span>
+                    </div>
+                    <div class="cart-delete">
+                        <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
+                    </div>
+                </li>
+                @php
+                    $total+=$content->subtotal;
+                @endphp
+               @endforeach
+
+
+            </ul>
+            <div class="cart-total">
+                <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+            </div>
+            @endif
+            <div class="cart-checkout-btn">
+                <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
+                <a class="no-mrg btn-hover cart-btn-style" href="{{ route('checkout') }}">checkout</a>
+            </div>
+        </div>
+    </div>
+</div>
             <div class="breadcrumb-area bg-gray">
             <div class="container">
                 <div class="breadcrumb-content text-center">
@@ -18,6 +92,16 @@
         @endphp
         <div class="checkout-main-area pt-120 pb-120">
             <div class="container">
+                <div class="customer-zone mb-20">
+                    <p class="cart-page-title">Have a coupon? <a class="checkout-click3" href="#">Click here to enter your code</a></p>
+                    <div class="checkout-login-info3">
+                        <form action="{{ route('apply.cuppon') }}" method="POST">
+                            @csrf
+                            <input type="text" placeholder="Coupon code" name="cupon">
+                            <input type="submit" value="Apply Coupon">
+                        </form>
+                    </div>
+                </div>
                 {{-- <div class="customer-zone mb-20">
                     <p class="cart-page-title">Returning customer? <a class="checkout-click1" href="#">Click here to login</a></p>
                     <div class="checkout-login-info">
@@ -178,8 +262,13 @@
                                             <div class="your-order-middle">
 
                                                 @foreach ($showCart as $show)
+                                                @if ($show['product']['promo_price'])
+                                                <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['promo_price'] }} )</span></li>
+                                                @else
+                                                <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['price'] }} )</span></li>
+                                                @endif
 
-                                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['price'] }} )</span></li>
+
                                                 @endforeach
                                             </div>
                                             @php
@@ -195,9 +284,17 @@
                                             </div>
 
                                             <div class="your-order-info order-total">
+
+                                                @if (Session::has('cartcupon-'.auth()->id()))
+                                                <ul>
+                                                    <li>Total <span>{{ ($subammount +20)- Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
+                                                </ul>
+                                                @else
                                                 <ul>
                                                     <li>Total <span>{{ $subammount +20}} tk </span></li>
                                                 </ul>
+                                                @endif
+
                                             </div>
                                             @else
                                             <div class="your-order-middle">
@@ -226,13 +323,23 @@
 
                                         </div>
                                         <div class="payment-method">
-                                            {{-- <div class="pay-top sin-payment">
-                                                <input id="payment_method_1" class="input-radio" type="radio" value="cheque" name="payment_method">
-                                                <label for="payment_method_1"> Direct Bank Transfer </label>
-                                                <div class="payment-box payment_method_bacs">
-                                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>
-                                                </div>
-                                            </div> --}}
+                                            <div class="pay-top sin-payment">
+                                                <input id="payment_method_1" class="input-radio" type="radio" value="Bkash" name="payment">
+                                                <label for="payment_method_1"> Bkash </label>
+                                                <input type="text" placeholder="Bkash Mobile No"  name="bkash_mobile">
+                                                <input type="text" placeholder="Transaction Id"  name="transaction">
+                                                {{--  <div class="payment-box">
+                                                    <input type="text" placeholder="Bkash Mobile No"  name="bkash_mobile">
+                                                    <br>
+                                                 </div>
+                                                 <div class="payment-box ">
+                                                <input type="text" placeholder="Transaction Id"  name="transaction">
+                                                <br><br>
+                                             </div>  --}}
+                                             <br><br><br>
+
+                                            </div>
+
 
                                             <div class="pay-top sin-payment">
                                                 <input id="payment-method-3" class="input-radio" type="radio" value="Handcash" name="payment">

@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Model\brand;
+use App\Model\CartShopping;
 use App\Model\category;
 use App\Model\product;
 use App\Model\review;
 use App\Model\size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use function PHPUnit\Framework\lessThanOrEqual;
 
@@ -16,6 +18,7 @@ class SearchController extends Controller
 {
     public function searchResults(Request $request)
     {
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $search = $request->search;
         $category = $request->category;
         $categories = category::all();
@@ -33,7 +36,7 @@ class SearchController extends Controller
                 ->where('categories.id',$category)
                 ->select('products.name','products.price','products.id')->paginate(12);
         }*/
-        return view('Frontend.product-list.products',compact('products','categories'));
+        return view('Frontend.product-list.products',compact('products','categories','cartpage'));
 }
 
 

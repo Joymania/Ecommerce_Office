@@ -13,6 +13,7 @@ use App\Model\logo;
 use App\Model\Order;
 use App\Model\product;
 use App\Model\size;
+use App\Model\wishlist;
 use Illuminate\Http\Request;
 use Cart;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,13 @@ class CartController extends Controller
         $product=product::where('id',$request->id)->first();
         $product_size=size::where('id',$request->size_id)->first();
         $product_color=color::where('id',$request->color_id)->first();
-        $subtotal=$request->qty * $product->price;
+        if($product->promo_price){
+            $subtotal=$request->qty * $product->promo_price;
+        }
+        else{
+            $subtotal=$request->qty * $product->price;
+        }
+
 
         if(Auth::user()){
 
@@ -61,10 +68,17 @@ class CartController extends Controller
 
         }
         else{
+            if(!empty($product->promo_price)){
+                $price=$product->promo_price;
+            }
+            else{
+                $price=$product->price;
+            }
              Cart::add([
             'id'=>$product->id,
             'qty'=>$request->qty,
-            'price'=>$product->price,
+            'price'=>$price,
+            'promo_price'=>$product->promo_price,
             'name'=>$product->name,
             'weight'=>550,
             'options'=>[
@@ -86,6 +100,7 @@ class CartController extends Controller
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
+
         // if(Auth::user()){
         //     $idauth=Auth::id();
         // }
@@ -106,6 +121,7 @@ class CartController extends Controller
         if($request->id){
             $id=$request->id;
             $cart_add=CartShopping::find($id);
+
             $cartprice=$cart_add->subtotal/$cart_add->qty;
             $cart_add->qty=$request->qty;
             $cart_add->subtotal=$request->qty * $cartprice;
@@ -123,6 +139,11 @@ class CartController extends Controller
 
         Cart::remove($rowId);
         return redirect()->route('show.cart')->with('success','Product removed Successfully.');
+    }
+    public function deletewishlist($id){
+        $data=wishlist::find($id);
+        $data->delete();
+        return redirect()->route('frontsite');
     }
     public function deleteAuthCart($id){
         $data=CartShopping::find($id);
@@ -143,20 +164,30 @@ class CartController extends Controller
 
     }
     public function applyCuppon(Request $request){
-        $check=cupon::where('cupon',$request->cupon)->first();
-        $cart=Cart::subtotal();
-
-        if($check){
-           Session::push('cupon', [
-               'cupon'=> $request->cupon,
-               'discount'=> $check->discount,
-               'blance'=>$cart-$check->discount,
-           ]);
-           return redirect()->back();
+        $id = Auth::id();
+            if($id){
+            $showCart=CartShopping::with('product')->where(function($querry)use($id) {
+                $querry->where('user_id',$id)->where('status','0');
+            })->get();
 
         }
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
+        $check=cupon::where('cupon',$request->cupon)->first();
+        //dd($check);
+        $discount=0;
+        if($check!=NULL){
+            $discount=$check->discount;
 
-        return redirect()->back()->with('error','Invalid Cupon!');
+        }
+        $key='cartcupon-'.auth()->id();
+
+        //Session::forget($key);
+        Session::push($key,$discount);
+        return redirect()->back();
+        // return view('Frontend.single_pages.checkout',compact('check','cartpage','showCart') );
+
+
+
     }
 
 

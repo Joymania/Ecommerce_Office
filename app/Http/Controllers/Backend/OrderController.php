@@ -21,10 +21,11 @@ class OrderController extends Controller
         public function details($id){
             $data['order']=Order::find($id);
             $data['admin']=Admin::where('role','0')->first();
-            $data['product']=Order::where('id',$id)->with('products','color','size')->first();
-            //return $data['product'];
-            return view('admin.Order.order-details',$data);
+            //$data['product']=Order::where('id',$id)->with('products')->first();
+            $data['product']=OrderProduct::where('order_id',$id)->with('color','size','order_detail','product')->get();
 
+            //dd($data['product']) ;
+            return view('admin.Order.order-details',$data);
         }
 
         public function delete($id){

@@ -154,7 +154,11 @@
                                         </div>
                                         <div class="same-style-2 same-style-2-font-inc header-cart">
                                             <a class="cart-active" href=" {{ route('show.cart') }} ">
-                                                <i class="icon-basket-loaded"></i>
+                                                @if (Auth::id())
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
+                                                @else
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::count() }} </span>
+                                                @endif
                                             </a>
                                         </div>
                                     @else
@@ -168,7 +172,12 @@
 
                                         <div class="same-style-2 same-style-2-font-inc header-cart">
                                             <a class="cart-active" href=" {{ route('show.cart') }} ">
+                                                @if (Auth::id())
                                                 <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
+                                                @else
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::count() }} </span>
+                                                @endif
+
                                                 <span class="cart-amount"></span>
                                             </a>
                                         </div>
@@ -300,8 +309,14 @@
 
                                     <div class="same-style-2 same-style-2-font-inc header-cart">
                                         <a class="cart-active" href=" {{ route('show.cart') }} ">
-                                            <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
+                                            @if (Auth::id())
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
                                             <span class="cart-amount"></span>
+                                            @else
+                                            <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::count() }} </span>
+                                            <span class="cart-amount"></span>
+                                            @endif
+
                                         </a>
                                     </div>
 
@@ -339,7 +354,7 @@
                         @php
                             $total=0;
                         @endphp
-                        @if(!empty($cartpage))
+                        @if(Auth::user())
                         @foreach ($cartpage as $cart)
                              <li class="single-product-cart">
                              <div class="cart-img">
@@ -347,7 +362,12 @@
                              </div>
                              <div class="cart-title">
                                  <h4><a href="#">{{ $cart->product->name }}</a></h4>
-                                 <span> {{ $cart->product->qty }} × {{ $cart->product->price }} tk	</span>
+                                 @if ($cart->product->promo_price)
+                                 <span> {{ $cart->qty }} × {{ $cart->product->promo_price }} tk	</span>
+                                 @else
+                                 <span> {{ $cart->qty }} × {{ $cart->product->price }} tk	</span>
+                                 @endif
+
                              </div>
                              <div class="cart-delete">
                                  <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
@@ -357,9 +377,6 @@
                              $total+=$cart->subtotal;
                          @endphp
                         @endforeach
-
-
-
                      </ul>
                      <div class="cart-total">
                          <h4>Subtotal: <span>{{ $total }}tk</span></h4>
@@ -401,6 +418,7 @@
                 </div>
             </div>
         </div>
+
         <!-- mini cart start -->
 
         <!-- mobile header start -->

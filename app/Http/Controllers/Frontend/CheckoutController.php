@@ -59,6 +59,13 @@ class CheckoutController extends Controller
              foreach($cartsubtotal as $cart){
                 $subtotal+=$cart['subtotal'];
              }
+             $key='cartcupon-'.auth()->id();
+             if(Session::has($key)){
+                //  dd(Session::get('cartcupon'));
+
+
+                 $subtotal=$subtotal-Session::get($key)[0];
+             }
          }
          else{
              $subtotal=Cart::subtotal();
@@ -75,11 +82,12 @@ class CheckoutController extends Controller
         'biling_notes'=>$request->notes,
         'payment'=>$request->payment,
         'subtotal'=>$subtotal,
+        'transaction'=>$request->transaction,
+        'bkash_mobile'=>$request->bkash_mobile,
        ]);
        if(Auth::user()){
         $idauth=Auth::id();
         $cartShop=CartShopping::where('user_id',$idauth)->where('status','0')->get();
-
 
         //dd($cartShop[0]->product_id);
         foreach($cartShop as $confirmOrder){
@@ -88,9 +96,10 @@ class CheckoutController extends Controller
                 'product_id'=>$confirmOrder->product_id,
                 'qty'=>$confirmOrder->qty,
                 'size_id'=>$confirmOrder->product_size,
-                'color_id'=>$confirmOrder->product_id,
+                'color_id'=>$confirmOrder->product_color,
             ]);
             $confirmOrder->delete();
+            Session::forget('cartcupon-'.auth()->id());
 
         }
 
@@ -108,16 +117,15 @@ class CheckoutController extends Controller
             ]);
         }
         Cart::destroy();
-        Session::flush();
-        Session::forget('cupon');
     }
     $name=$request->name;
     $admin=Admin::where('role','0')->get();
     Notification::send($admin, new OrderNotification($name));
 
-        return redirect()->back();
+        return redirect()->route('frontsite');
     }
     public function showTrack(){
+        $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
@@ -126,11 +134,11 @@ class CheckoutController extends Controller
 
     public function track(Request $request){
         $id=Auth::id();
+        $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
         $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();
-        //dd($data['orders']);
         return view('Frontend.single_pages.order_tracking',$data);
 
     }

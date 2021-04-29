@@ -50,6 +50,10 @@
                          <strong>Mobile:</strong>{{ $order->biling_phone }}&nbsp;&nbsp;
                          <strong>Payment:</strong>&nbsp;&nbsp;
                          {{ $order->payment }}
+                         @if ($order->payment=='Bkash')
+                         <span> (Bkash Mobile:{{ $order->bkash_mobile }})</span>
+                         <span> (Transaction No:{{ $order->transaction }})</span>
+                          @endif
                          </td>
                      </tr>
 
@@ -61,29 +65,37 @@
                          <td><strong>Color & Size</strong></td>
                          <td><strong>Quantity & Price</strong></td>
                      </tr>
-                     @foreach ($product->products as $details)
+                     @foreach ($product as $key=>$details)
                          <tr>
                              <td>
-                                 <img src="{{ asset('upload/products_images/'.$details['image']) }}" style="width: 50px; height: 50px;"> &nbsp; {{ $details['name'] }}
+                                 <img src="{{ asset('upload/products_images/'.$details->product['image']) }}" style="width: 50px; height: 50px;"> &nbsp; {{ $details->product['name'] }}
                              </td>
                              <td>
-                                 @foreach ($product->color as $item)
-                                      {{ $item['name'] }} <br>
-
-                                 @endforeach
-                                 @foreach ($product->size as $size)
-                                 {{ $size['name'] }} <br>
-
-                                 @endforeach
-
+                                  {{ $details->color['name']??'' }}<br>
+                                  {{ $details->size['name']??'' }}
                              </td>
 
                              <td>
-                                 {{ $details['pivot']['qty'] }} pieces<br>
-                                 {{ $details['price'] }} tk <br>
-                                 @php
-                                     $subtotal= $details['pivot']['qty']* $details['price'];
-                                 @endphp
+
+                                {{ $details['qty'] }} pieces<br>
+
+                                @if ($details->product['promo_price'])
+                                {{ $details->product['promo_price'] }} tk <br>
+                                @else
+                                {{ $details->product['price'] }} tk <br>
+                                @endif
+                                @if ($details->product['promo_price'])
+                                @php
+                                     $subtotal=$details['qty']* $details->product['promo_price'];
+                                @endphp
+                                @else
+                                @php
+                                    $subtotal= $details['qty']* $details->product['price'];
+                                @endphp
+
+                                @endif
+
+
                                  Total {{ $subtotal }}
 
                              </td>

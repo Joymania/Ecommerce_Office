@@ -28,6 +28,8 @@ class CreateOrdersTable extends Migration
             $table->tinyInteger('status')->default('0');
             $table->string('payment');
             $table->string('subtotal');
+            $table->string('transaction')->nullable();
+            $table->string('bkash_mobile')->nullable();
             $table->timestamps();
         });
     }

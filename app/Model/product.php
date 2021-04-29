@@ -32,7 +32,7 @@ class product extends Model
     }
 
     public function category()
-    { 
+    {
         return $this->belongsTo(category::class, 'category_id','id');
     }
     public function brand()
@@ -68,5 +68,6 @@ class product extends Model
     public function orders(){
         return $this->belongsToMany(Order::class)->withPivot('qty' );//'size', 'price'
     }
+
 
 }

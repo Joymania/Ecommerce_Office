@@ -20,13 +20,14 @@ class userAccountController extends Controller
 {
     Public Function userAccount()
     {
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $user = User::all()->find($id);
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
         $order = Order::all()->where('user_id' , $id);
         $OrderProduct = OrderProduct::with('product')->find($id);
-        return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'user' , 'order' , 'OrderProduct'));
+        return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'user' , 'order' , 'OrderProduct','cartpage'));
     }
 
     public function userUpdate(Request $request)

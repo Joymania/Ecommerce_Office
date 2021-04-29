@@ -1,8 +1,6 @@
 @extends('Frontend.layouts.master')
 @section('content')
     <!-- mini cart start -->
-    <div class="sidebar-cart-active">
-    </div>
     <div class="breadcrumb-area bg-gray">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -82,7 +80,7 @@
                         <div class="product-ratting-review-wrap">
                             <div class="product-ratting-digit-wrap">
                                 <div class="product-ratting">
-                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" data-step="0.1" value="{{ $rating }}">  
+                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" data-step="0.1" value="{{ $rating }}">
                                 </div>
                                 <div class="product-digit">
                                     <span>{{$rating}}</span>
@@ -236,9 +234,9 @@
                                                 <h5><span>{{$review->name}}</span> - {{$review->created_at}}</h5>
                                             </div>
                                             <div class="review-rating">
-                                            
+
                                                 <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5" data-size="xs" value=" {{ $review->rating }} ">
-                                               
+
                                             </div>
                                         </div>
                                         <p>{{$review->review}}</p>
@@ -249,16 +247,16 @@
 
                             @auth
                             <div class="ratting-form-wrapper">
-                                <span>Add a Review</span>                             
-                                                        
+                                <span>Add a Review</span>
+
                                 <div class="ratting-form">
                                     <form action=" {{ route('store-review', $product->id) }} " method="post">
                                         @csrf
                                         <div class="row">
-                                            
+
                                             <div class="col-lg-12">
-                                                <div class="star-box-wrap">                                      
-                                                    <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-size="xs" required data-step="0.5">                                   
+                                                <div class="star-box-wrap">
+                                                    <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-size="xs" required data-step="0.5">
                                                 </div>
 
                                                 @error('rating')
