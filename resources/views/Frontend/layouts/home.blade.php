@@ -4,7 +4,6 @@
     @include('Frontend.layouts.slider')
     @include('Frontend.layouts.service_area')
 
-<<<<<<< HEAD
     <div class="sidebar-cart-active">
         <div class="sidebar-cart-all">
             <a class="cart-close" href="#"><i class="icon_close"></i></a>
@@ -79,10 +78,7 @@
             </div>
         </div>
     </div>
-
-
-=======
->>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
+    
         <div class="product-area pb-110">
             <div class="container">
                 <!-- flash deal header -->
@@ -104,7 +100,6 @@
 
                 <!-- flash deal products start-->
                 <div class="product-slider-active-3 nav-style-3">
-<<<<<<< HEAD
 
                     @foreach($products as $product)
                     <div class="product-plr-1">
@@ -131,7 +126,6 @@
                                     @if($product->avg_rating >0)
                                     <div class="product-rating-4">
                                         <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->avg_rating , 1, '.' , ',') }}">
-=======
                         @foreach($products as $product)
                         <div class="product-plr-1">
                             <div class="single-product-wrap">
@@ -144,17 +138,15 @@
                                         <a href="{{ route('wishlist.add', $product->id) }}">
                                         <button title="Wishlist"><i class="icon-heart"></i></button>
                                         </a>
->>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
                                     </div>
                                 </div>
-<<<<<<< HEAD
+
                                 <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
                                     <div class="product-rating-4">
 
                                     <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->avg_rating , 1, '.' , ',') }}">
 
-=======
                                 <div class="product-content-wrap-3">
                                     <div class="product-content-categories">
                                         <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
@@ -188,7 +180,6 @@
                                     <div class="product-price-4">
                                         <span class="new-price">{{$product->promo_price}} Tk.</span>
                                         <span class="old-price">{{$product->price}} Tk.</span>
->>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
                                     </div>
                                 </div>
                                 <div class="product-content-wrap-3 product-content-position-2">
