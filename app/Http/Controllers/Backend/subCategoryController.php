@@ -49,9 +49,9 @@ class subCategoryController extends Controller
     // editSubCategory
     function editSubCategory($id)
     {
-    	$cats = category::all();
+    	$categories = category::all();
     	$edits = sub_category::findOrFail($id);
-    	return view('admin.subCategory.editSubCategory',compact('cats','edits'));
+    	return view('admin.subCategory.editSubCategory',compact('categories','edits'));
     }
 
     // updateSubCategory
