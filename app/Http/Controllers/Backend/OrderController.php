@@ -22,6 +22,7 @@ class OrderController extends Controller
             $data['admin']=Admin::where('role','0')->first();
             $data['product']=Order::where('id',$id)->with('products','color','size')->first();
             //return $data['product'];
+            //return view('admin.Order.order-details',$data);
             return view('admin.Order.order-details',$data);
 
         }
