@@ -59,7 +59,6 @@ Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
-<<<<<<< HEAD
 
 
     // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
@@ -67,9 +66,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
-
-=======
->>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
 
