@@ -45,7 +45,7 @@
                         <h4>Subtotal: <span>{{ $total }}</span></h4>
                     </div>
                     <div class="cart-checkout-btn">
-                        <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
+                        <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
                         <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="breadcrumb-content text-center">
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li class="active">Cart Page </li>
                     </ul>

@@ -302,6 +302,8 @@
         </div>
     </div>
     <script>
+        // // initialize with defaults
+        // $("#input-1").rating();
         $('.input-2').rating({displayOnly: true, step: 0.1});
         var checklimit = function (){
             if (document.getElementById('review').value.length >= 255) {
