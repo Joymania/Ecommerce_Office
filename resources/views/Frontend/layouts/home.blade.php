@@ -100,32 +100,6 @@
 
                 <!-- flash deal products start-->
                 <div class="product-slider-active-3 nav-style-3">
-
-                    @foreach($products as $product)
-                    <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-zoom mb-15">
-                                <a href="{{route('product.details',$product->id)}}">
-                                    <img style="width: 212px; height: 262px;" src="{{"/upload/products_images/$product->image"}}" alt="Product Image">
-                                </a>
-                                <!-- reduced price -->
-                                <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
-
-                                <!-- add to wishlist -->
-                                <div class="product-action-2 tooltip-style-2">
-                                    <a href="{{ route('wishlist.add', $product->id) }}"> <button title="Wishlist"><i class="icon-heart"></i></button> </a>
-                                </div>
-                            </div>
-
-                            <div class="product-content-wrap-3">
-                                <div class="product-content-categories">
-                                    <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
-                                </div>
-                                <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    @if($product->avg_rating >0)
-                                    <div class="product-rating-4">
-                                        <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->avg_rating , 1, '.' , ',') }}">
                         @foreach($products as $product)
                         <div class="product-plr-1">
                             <div class="single-product-wrap">
