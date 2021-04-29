@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
- 
+
     //category
     public function category()
     {
@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     }
 
     // insertCategory
-    public function insertCategory() 
+    public function insertCategory()
     {
         return view('admin.category.insertCategory');
     }
@@ -65,10 +65,10 @@ class CategoriesController extends Controller
         if($request->hasFile('image')) {
             // remove image
             $this->removeImage($category);
-            
+
             $file = $request->file('image');
             $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
-    
+
             $file->move(public_path('upload/categories'), $filename);
             $category->image = $filename;
         }
@@ -79,7 +79,7 @@ class CategoriesController extends Controller
     }
 
     // deleteCategory
- 
+
     public function deleteCategory($did)
     {
         $category = category::findOrFail($did);

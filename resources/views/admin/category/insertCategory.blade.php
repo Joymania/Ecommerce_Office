@@ -12,13 +12,10 @@
                      
             @csrf                      
 
-
             <div class="form-group row">
                 <label for="name" class="col-sm-3 text-right control-label col-form-label">Category Name</label>
                 <div class="col-sm-9">
                     <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Category Name Here" >
-
-                    {{-- validation --}}
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -30,8 +27,8 @@
                 <div class="col-sm-9">
                     <input name="image" type="file" class="form-control" id="image">
                 </div>
-            </div>                   
-            
+            </div>
+
             <div class="form-group row">
                 <label for="createdBy" class="col-sm-3 text-right control-label col-form-label">Created By</label>
                 <div class="col-sm-9">
@@ -48,9 +45,9 @@
                 <div class="card-body">
                     <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </div>      
+            </div>
             </form>
         </div>
     </div>
-</div>    
+</div>
 @stop
