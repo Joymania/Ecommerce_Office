@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-
+use App\Model\CartShopping;
 use App\Model\category;
 use App\Model\Order;
 use App\Model\OrderProduct;
@@ -15,18 +15,20 @@ use App\Model\logo;
 use App\Model\product_color;
 use App\Model\product_size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductDetailsController extends Controller
 {
     public function index($id)
     {
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $logos = logo::all()->last();
         $categories = category::with('sub_category')->get();
         $contacts = contacts::all()->last();
         $product = product::find($id);
         $reviews = review::where('product_id',$id)->get();
         $reviews1 = review::where('product_id',$id)->limit(3)->get();
-        $colors=product_color::where('product_id',$product->id)->get();
+        $colors= product_color::where('product_id',$product->id)->get();
         $sizes=product_size::where('product_id',$product->id)->get();
         $orders = OrderProduct::where('product_id',$id)->count();
       if (sizeof($reviews) > 0){
@@ -37,9 +39,9 @@ class ProductDetailsController extends Controller
             $ratingCount = 0;
             $rating = 0;
         }
-        return view('Frontend.single_pages.product-details' ,
-            compact('logos' , 'categories' , 'contacts' , 'product', 'rating',
-                'ratingCount','reviews','colors','sizes','orders','reviews1'));
+
+        return view('Frontend.single_pages.product-details' , compact('logos' , 'categories' , 'contacts' ,
+            'product', 'rating', 'ratingCount','reviews','colors','sizes','cartpage','orders','reviews1'));
 
     }
 

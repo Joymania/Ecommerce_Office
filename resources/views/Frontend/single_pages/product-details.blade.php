@@ -1,8 +1,6 @@
 @extends('Frontend.layouts.master')
 @section('content')
     <!-- mini cart start -->
-    <div class="sidebar-cart-active">
-    </div>
     <div class="breadcrumb-area bg-gray">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -77,8 +75,7 @@
                     <form id="addToCartForm" action="{{ route('insert.cart') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $product->id }}">
-                        <input type="number" id="colorInput" name="color_id" value="" hidden>
-                        <input type="number" id="sizeInput" name="size_id" value="" hidden>
+
                     <div class="product-details-content pro-details-content-mrg">
                         <h2>{{$product->name}}</h2>
                         <div class="product-ratting-review-wrap">
@@ -122,6 +119,7 @@
                             <span class="old-price"> {{ ($product->promo_price) ?  $product->price .'Tk.' : null}}</span>
                         </div>
                         @if(count($product->colors) > 0)
+                            <input type="number" id="colorInput" name="color_id" value="" hidden>
                         <div class="pro-details-color-wrap">
                             <span>Colors:</span>
                             <div class="pro-details-color-content">
@@ -142,6 +140,7 @@
                         @endif
 
                         @if(count($product->sizes) > 0)
+                            <input type="number" id="sizeInput" name="size_id" value="" hidden>
                         <div class="pro-details-size">
                             <span>Sizes:</span>
                             <div class="pro-details-size-content">
@@ -343,6 +342,8 @@
         </div>
     </div>
     <script>
+        // // initialize with defaults
+        // $("#input-1").rating();
         $('.input-2').rating({displayOnly: true, step: 0.1});
         var checklimit = function (){
             if (document.getElementById('review').value.length >= 255) {

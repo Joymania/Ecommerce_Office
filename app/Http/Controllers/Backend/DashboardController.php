@@ -24,7 +24,6 @@ class DashboardController extends Controller
         $orders = Order::count();
         session()->put('sales',$sales);
         session()->put('orders',$orders);
-
         $customers = User::count();
         $recentOrders = Order::with('products')->latest()->get();
         $data['pending'] = Order::where('status',0)->count();
@@ -37,7 +36,7 @@ class DashboardController extends Controller
         $data['totalPurchase'] = $totalPurchase->total_purchase;
 
         /*$data['totalSales'] = Order::sum('subtotal');*/
-        $a = Order::select('subtotal')->where('status',1)->get();
+        $a = Order::select('subtotal')->where('status',1)->orWhere('status',2)->get();
         $sum = 0;
         if (count($a) > 0){
             foreach ($a as $row){

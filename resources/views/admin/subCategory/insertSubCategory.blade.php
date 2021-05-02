@@ -1,7 +1,6 @@
 @extends('admin.layout.master')
-@section('title', 'Add Sub-Category')
-@section('pageTitle') <a href="{{route('subCategory.add')}}">Add Sub-Category</a> @endsection
-@section('parentPageTitle') <a href="{{route('subCategory.view')}}">Sub-Categories</a> @endsection
+@section('title', 'Insert Category')
+@section('parentPageTitle', 'Dashboard')
 
 
 @section('content')
@@ -46,5 +45,7 @@
                 </div>
 
             </div>
+</div>
+</div>
 
 @stop

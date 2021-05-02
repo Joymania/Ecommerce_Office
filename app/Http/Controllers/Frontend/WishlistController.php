@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Model\CartShopping;
 use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
@@ -33,14 +34,15 @@ class WishlistController extends Controller
     }
     public function index(){
         if(Auth::user()){
+        $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['logos']=logo::first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
         $id=Auth::id();
         $data['wishlist']=wishlist::with('product')->where(function ($querry) use($id){
             $querry->where('user_id',$id)->where('status','0');
-        })->get()->toArray();
-        
+        })->get();
+
         return view('Frontend.single_pages.wishlist',$data);
         }
         else{

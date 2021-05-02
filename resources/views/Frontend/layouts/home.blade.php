@@ -4,6 +4,81 @@
     @include('Frontend.layouts.slider')
     @include('Frontend.layouts.service_area')
 
+    <div class="sidebar-cart-active">
+        <div class="sidebar-cart-all">
+            <a class="cart-close" href="#"><i class="icon_close"></i></a>
+            <div class="cart-content">
+                <h3>Shopping Cart</h3>
+
+                <ul>
+                    @php
+                        $total=0;
+                    @endphp
+                    @if(Auth::user())
+                    @foreach ($cartpage as $cart)
+                         <li class="single-product-cart">
+                         <div class="cart-img">
+                             <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
+                         </div>
+                         <div class="cart-title">
+                             <h4><a href="#">{{ $cart->product->name }}</a></h4>
+                             @if ($cart->product->promo_price)
+                             <span> {{ $cart->qty }} × {{ $cart->product->promo_price }} tk	</span>
+                             @else
+                             <span> {{ $cart->qty }} × {{ $cart->product->price }} tk	</span>
+                             @endif
+
+                         </div>
+                         <div class="cart-delete">
+                             <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
+                         </div>
+                     </li>
+                     @php
+                         $total+=$cart->subtotal;
+                     @endphp
+                    @endforeach
+                 </ul>
+                 <div class="cart-total">
+                     <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                 </div>
+                @else
+                <ul>
+                   @php
+                       $contents=Cart::content();
+                       $total=0;
+                   @endphp
+                   @foreach ($contents as $content)
+                        <li class="single-product-cart">
+                        <div class="cart-img">
+                            <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" alt=""></a>
+                        </div>
+                        <div class="cart-title">
+                            <h4><a href="#">{{ $content->name }}</a></h4>
+                            <span> {{ $content->qty }} × {{ $content->price }} tk	</span>
+                        </div>
+                        <div class="cart-delete">
+                            <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
+                        </div>
+                    </li>
+                    @php
+                        $total+=$content->subtotal;
+                    @endphp
+                   @endforeach
+
+
+                </ul>
+                <div class="cart-total">
+                    <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                </div>
+                @endif
+                <div class="cart-checkout-btn">
+                    <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
+                    <a class="no-mrg btn-hover cart-btn-style" href="{{ route('checkout') }}">checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <div class="product-area pb-110">
             <div class="container">
                 <!-- flash deal header -->
@@ -25,7 +100,7 @@
 
                 <!-- flash deal products start-->
                 <div class="product-slider-active-3 nav-style-3">
-                        @foreach($products as $product)
+                    @foreach($products as $product)
                         <div class="product-plr-1">
                             <div class="single-product-wrap">
                                 <div class="product-img product-img-zoom mb-15">
@@ -35,7 +110,7 @@
                                     <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
                                     <div class="product-action-2 tooltip-style-2">
                                         <a href="{{ route('wishlist.add', $product->id) }}">
-                                        <button title="Wishlist"><i class="icon-heart"></i></button>
+                                            <button title="Wishlist"><i class="icon-heart"></i></button>
                                         </a>
                                     </div>
                                 </div>
@@ -47,14 +122,14 @@
                                     <div class="product-rating-wrap-2">
                                         <div class="product-rating-4">
                                             @if(ceil($product->avg_rating) == 1)
-                                            <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
                                             @elseif(ceil($product->avg_rating) == 2)
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
                                             @elseif(ceil($product->avg_rating) == 3)
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
                                             @elseif(ceil($product->avg_rating) == 4)
                                                 <i class="icon_star"></i>
                                                 <i class="icon_star"></i>
@@ -65,9 +140,9 @@
                                                 <i class="icon_star"></i>
                                                 <i class="icon_star"></i>
                                                 <i class="icon_star"></i>
-                                             @endif
+                                            @endif
                                         </div>
-                                        <span>(4)</span>
+                                        <span>({{$product->avg_rating}})</span>
                                     </div>
                                     <div class="product-price-4">
                                         <span class="new-price">{{$product->promo_price}} Tk.</span>
@@ -102,7 +177,7 @@
                                                 <i class="icon_star"></i>
                                             @endif
                                         </div>
-                                        <span>(4)</span>
+                                        <span>({{$product->avg_rating}})</span>
                                     </div>
                                     <div class="product-price-4">
                                         <span class="new-price">{{$product->promo_price}} Tk.  </span>
@@ -110,13 +185,13 @@
                                     </div>
                                     <div class="pro-add-to-cart-2">
                                         <a href="{{route('product.details',['id' => $product->id])}}">
-                                        <button title="Add to Cart">Add To Cart</button>
+                                            <button title="Add to Cart">Add To Cart</button>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                         @endforeach
+                    @endforeach
                 </div>
                 <!-- flash deal products end-->
 
@@ -145,7 +220,7 @@
                                     </a>
                                 </div>
                                 <div class="product-content-categories-2 text-center">
-                                    <h5><a href="#"> {{$cat->name}} </a></h5>
+                                    <h5><a href="{{ route('productByCategory', $cat->id) }}"> {{$cat->name}} </a></h5>
                                 </div>
                             </div>
                         </div>

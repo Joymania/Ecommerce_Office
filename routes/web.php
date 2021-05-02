@@ -19,7 +19,7 @@ Auth::routes();
 Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
 Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about_us');
 // without authentication
-Route::get('/','Frontend\FrontendController@index');
+Route::get('/','Frontend\FrontendController@index')->name('frontsite');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 
@@ -36,21 +36,18 @@ Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
 Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
+Route::get('delete-cwishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
-Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
 
-//Checkout
-Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
-Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
+
+
 
 //wishlist
 Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
 Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
 
-// tracking
-Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
-Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
+
 
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
@@ -63,11 +60,19 @@ Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
 
-    // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
 
+    // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
+    //Checkout
+    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+    Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
+    Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
+    Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
 
     Route::post('review/{prod_id}', 'Frontend\ReviewController@store')->name('store-review');
+    // tracking
+    Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
+    Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
 });
 
 /*Front end routing ends*/

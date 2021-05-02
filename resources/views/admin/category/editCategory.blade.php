@@ -1,10 +1,10 @@
 @extends('admin.layout.master')
-@section('title', 'Edit category')
-@section('pageTitle') <a href="#">Edit Category</a> @endsection
-@section('parentPageTitle') <a href="{{route('category.view')}}">Categories</a> @endsection
+@section('title', 'Update category')
+@section('parentPageTitle', 'Dashboard')
 
 
 @section('content')
+
     <div class="row clearfix">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="body">

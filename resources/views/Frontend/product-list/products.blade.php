@@ -36,7 +36,7 @@
                                     @foreach($products as $product)
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
                                         <div class="single-product-wrap mb-35">
-                                            <div class="product-img product-img-zoom mb-15">
+                                            <div class="product-img product-img-zoom mb-15 text-center">
                                                 <a href="{{route("product.details",$product->id)}}">
                                                     <img src="{{""}}/upload/products_images/{{$product->image}}" style="width: 266px; height: 320px;" alt="">
                                                 </a>
@@ -134,32 +134,12 @@
                                     <span>&#2547</span> <span class="first">2501</span>-<span class="second">5000</span>
                                 </div>
                                 <div class="col-4 m-1 p-0 text-center priceFilter">
-                                    <span>&#2547</span><span class="first">5001</span> & <span class="second">over</span>
+                                    <span>&#2547</span><span class="first">5001</span> & <span class="second"></span>over
                                 </div>
                             </div>
-
-                            <div class="price-filter">
-                                {{--<span>Range: 500.00Tk - 1.300.00 </span>
-                                <div id="slider-range"></div>
-                                <div class="price-slider-amount">
-                                    <div class="label-input">
-                                        <input type="text" id="amount" name="price" placeholder="Add Your Price" />
-                                    </div>
-                                    <button id="filterBtn" type="button">Filter</button>
-                                </div>--}}
-                            </div>
                         </div>
 
-                        <div class="sidebar-widget shop-sidebar-border pt-40">
-                            <h4 class="sidebar-widget-title">Popular Tags</h4>
-                            <div class="tag-wrap sidebar-widget-tag">
-                                <a href="#">Clothing</a>
-                                <a href="#">Accessories</a>
-                                <a href="#">For Men</a>
-                                <a href="#">Women</a>
-                                <a href="#">Fashion</a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

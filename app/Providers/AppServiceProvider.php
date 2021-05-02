@@ -39,5 +39,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories' , $this->categories);
 
         });
+        View::composer('Frontend.userProfile.master', function ($view) {
+            $view->with('wishlist_num' , $this->wishlist_num);
+            $view->with('cart_num' , $this->cart_num);
+            $view->with('categories' , $this->categories);
+        });
     }
 }
