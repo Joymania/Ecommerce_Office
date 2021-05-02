@@ -14,45 +14,44 @@ class OrderController extends Controller
     public function view(){
         $data['alldata']=Order::all();
         $data['admin']=Admin::where('role','0')->first();
+        //dd($data['alldata']);
         return view('admin.Order.order-view',$data);
     }
 
-        public function details($id){
-            $data['order']=Order::find($id);
-            $data['admin']=Admin::where('role','0')->first();
-            $data['product']=Order::where('id',$id)->with('products','color','size')->first();
-            //return $data['product'];
-            //return view('admin.Order.order-details',$data);
-            return view('admin.Order.order-details',$data);
+    public function details($id){
+        $data['order']=Order::find($id);
+        $data['admin']=Admin::where('role','0')->first();
+        //$data['product']=Order::where('id',$id)->with('products')->first();
+        $data['product']=OrderProduct::where('order_id',$id)->with('color','size','order_detail','product')->get();
 
-            //dd($data['product']) ;
-            return view('admin.Order.order-details',$data);
-        }
+        //dd($data['product']) ;
+        return view('admin.Order.order-details',$data);
+    }
 
-        public function delete($id){
-            $data=Order::find($id);
-            $data->delete();
-            return redirect()->route('order.view')->with('success', 'Data Deleted Successfully.');
-        }
+    public function delete($id){
+        $data=Order::find($id);
+        $data->delete();
+        return redirect()->route('order.view')->with('success', 'Data Deleted Successfully.');
+    }
 
-        public function status($id){
-            $order=Order::where('id',$id)->first();
-            $product=Order::with('products')->find($id);
-            $order->status=1;
-            foreach($product->products ?? [] as $delete){
-                $id=$delete->id;
-                $pro = product::find($id);
-                $delete['stock']=$delete['stock']-$delete['pivot']['qty'];
-                $pro->stock=$delete['stock'];
-                $pro->save();
-            }
-            $order->save();
-            return redirect()->back();
+    public function status($id){
+        $order=Order::where('id',$id)->first();
+        $product=Order::with('products')->find($id);
+        $order->status=1;
+        foreach($product->products ?? [] as $delete){
+            $id=$delete->id;
+            $pro = product::find($id);
+            $delete['stock']=$delete['stock']-$delete['pivot']['qty'];
+            $pro->stock=$delete['stock'];
+            $pro->save();
         }
-        public function deliveryStatus($id){
-            $order=Order::where('id',$id)->first();
-            $order->status=2;
-            $order->save();
-            return redirect()->back();
-        }
+        $order->save();
+        return redirect()->back();
+    }
+    public function deliveryStatus($id){
+        $order=Order::where('id',$id)->first();
+        $order->status=2;
+        $order->save();
+        return redirect()->back();
+    }
 }

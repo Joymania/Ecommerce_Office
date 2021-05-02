@@ -12,12 +12,6 @@ $(document).ready(function () {
 
         let first = $(this).find('span[class="first"]').text();
         let second = $(this).find('span[class="second"]').text();
-        /*let amount = $('#amount').val();
-        let split = amount.split('-');
-        let first =split[0].replace('$','');
-        let second = split[1].replace('$','');*/
-        /*let search = $('#search').val();
-        let category = $('#category').val();*/
         let shopArea = $('#shopArea');
         let singleProduct = $('.singleProduct');
 
@@ -37,7 +31,7 @@ $(document).ready(function () {
                             shopArea.append('' +
                                 '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                                 ' <div class="single-product-wrap mb-35">' +
-                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<div class="product-img product-img-zoom mb-15 text-center">' +
                                 '<a href="/' + data[i].id + '/product-details">' +
                                 '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
                                 '<div class="product-action-2 tooltip-style-2">' +
@@ -63,7 +57,7 @@ $(document).ready(function () {
                             shopArea.append('' +
                                 '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                                 ' <div class="single-product-wrap mb-35">' +
-                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<div class="product-img product-img-zoom mb-15 text-center">' +
                                 '<a href="/' + data[i].id + '/product-details">' +
                                 '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
                                 '<div class="product-action-2 tooltip-style-2">' +
@@ -94,6 +88,7 @@ $(document).ready(function () {
                     shopArea.append('' +
                         '<div id="noResult" class="col-12 text-center"><h3>No Result Found</h3></div>');
                 }
+                console.log(second);
             },
             error: function (error) {
 
@@ -157,7 +152,7 @@ $(document).ready(function () {
                         shopArea.append('' +
                             '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                             ' <div class="single-product-wrap mb-35">' +
-                            '<div class="product-img product-img-zoom mb-15">' +
+                            '<div class="product-img product-img-zoom mb-15 text-center">' +
                             '<a href="/'+data[i].id+'/product-details">' +
                             '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
                             '<div class="product-action-2 tooltip-style-2">' +
@@ -183,7 +178,7 @@ $(document).ready(function () {
                             shopArea.append('' +
                                 '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                                 ' <div class="single-product-wrap mb-35">' +
-                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<div class="product-img product-img-zoom mb-15 text-center">' +
                                 '<a href="/'+data[i].id+'/product-details">' +
                                 '<img src="../upload/products_images/'+data[i].image+'" style="width: 266px; height: 320px;"></a>' +
                                 '<div class="product-action-2 tooltip-style-2">' +
@@ -239,7 +234,7 @@ $(document).ready(function () {
                             shopArea.append('' +
                                 '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                                 ' <div class="single-product-wrap mb-35">' +
-                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<div class="product-img product-img-zoom mb-15 text-center">' +
                                 '<a href="/' + data[i].id + '/product-details">' +
                                 '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
                                 '<div class="product-action-2 tooltip-style-2">' +
@@ -265,7 +260,7 @@ $(document).ready(function () {
                             shopArea.append('' +
                                 '<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">' +
                                 ' <div class="single-product-wrap mb-35">' +
-                                '<div class="product-img product-img-zoom mb-15">' +
+                                '<div class="product-img product-img-zoom mb-15 text-center">' +
                                 '<a href="/' + data[i].id + '/product-details">' +
                                 '<img src="../upload/products_images/' + data[i].image + '" style="width: 266px; height: 320px;"></a>' +
                                 '<div class="product-action-2 tooltip-style-2">' +

@@ -18,7 +18,7 @@ class ProductBySubcatController extends Controller
         $logos = logo::all()->last();
         $categories = category::with('sub_category')->get();
         $contacts = contacts::all()->last();
-        $products = product::all()->where('sub_category_id' , $id);
+        $products = product::where('sub_category_id' , $id)->paginate(12);
         return view('Frontend.layouts.productByCat', compact('logos' , 'categories' , 'contacts' , 'products','cartpage'));
     }
 }

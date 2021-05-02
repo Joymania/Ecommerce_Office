@@ -28,7 +28,7 @@ class ProductDetailsController extends Controller
         $product = product::find($id);
         $reviews = review::where('product_id',$id)->get();
         $reviews1 = review::where('product_id',$id)->limit(3)->get();
-        $colors=product_color::where('product_id',$product->id)->get();
+        $colors= product_color::where('product_id',$product->id)->get();
         $sizes=product_size::where('product_id',$product->id)->get();
         $orders = OrderProduct::where('product_id',$id)->count();
       if (sizeof($reviews) > 0){
@@ -40,7 +40,8 @@ class ProductDetailsController extends Controller
             $rating = 0;
         }
 
-        return view('Frontend.single_pages.product-details' , compact('logos' , 'categories' , 'contacts' , 'product', 'rating', 'ratingCount','reviews','colors','sizes','cartpage'));
+        return view('Frontend.single_pages.product-details' , compact('logos' , 'categories' , 'contacts' ,
+            'product', 'rating', 'ratingCount','reviews','colors','sizes','cartpage','orders','reviews1'));
 
     }
 

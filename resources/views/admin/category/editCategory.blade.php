@@ -11,10 +11,7 @@
                 <form action="{{route('category.update')}}" method="post" class="form-horizontal" class="dropzone"
                       enctype="multipart/form-data">
                     @csrf
-
                     <div class="card-body">
-
-
                         <input name="id" type="hidden" class="form-control" id="fname" value="{{$edits->id}}">
 
                         <div class="form-group row">
@@ -35,6 +32,6 @@
             </div>
 
         </div>
-  
+
     </div>
 @stop

@@ -352,11 +352,8 @@
                         @php
                             $total=0;
                         @endphp
-<<<<<<< HEAD
-                        @if(Auth::user())
-=======
-                    @if(!empty($cartpage))                  
->>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
+
+                    @if(!empty($cartpage))
                         @foreach ($cartpage as $cart)
                              <li class="single-product-cart">
                              <div class="cart-img">

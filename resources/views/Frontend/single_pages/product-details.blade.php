@@ -75,16 +75,12 @@
                     <form id="addToCartForm" action="{{ route('insert.cart') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $product->id }}">
-                        <input type="number" id="colorInput" name="color_id" value="" hidden>
-                        <input type="number" id="sizeInput" name="size_id" value="" hidden>
+
                     <div class="product-details-content pro-details-content-mrg">
                         <h2>{{$product->name}}</h2>
                         <div class="product-ratting-review-wrap">
                             <div class="product-ratting-digit-wrap">
                                 <div class="product-ratting">
-<<<<<<< HEAD
-                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" data-step="0.1" value="{{ $rating }}">
-=======
                                     {{--<input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" data-step="0.1" value="{{ $rating }}">--}}
                                     @if($rating == 1)
                                     <i class="icon_star"></i>
@@ -107,7 +103,6 @@
                                         <i class="icon_star"></i>
                                         <i class="icon_star"></i>
                                     @endif
->>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
                                 </div>
                                 <div class="product-digit">
                                     <span>{{$rating}}</span>
@@ -124,6 +119,7 @@
                             <span class="old-price"> {{ ($product->promo_price) ?  $product->price .'Tk.' : null}}</span>
                         </div>
                         @if(count($product->colors) > 0)
+                            <input type="number" id="colorInput" name="color_id" value="" hidden>
                         <div class="pro-details-color-wrap">
                             <span>Colors:</span>
                             <div class="pro-details-color-content">
@@ -144,6 +140,7 @@
                         @endif
 
                         @if(count($product->sizes) > 0)
+                            <input type="number" id="sizeInput" name="size_id" value="" hidden>
                         <div class="pro-details-size">
                             <span>Sizes:</span>
                             <div class="pro-details-size-content">

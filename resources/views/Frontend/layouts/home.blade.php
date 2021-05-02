@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    
+
         <div class="product-area pb-110">
             <div class="container">
                 <!-- flash deal header -->
@@ -100,7 +100,7 @@
 
                 <!-- flash deal products start-->
                 <div class="product-slider-active-3 nav-style-3">
-                        @foreach($products as $product)
+                    @foreach($products as $product)
                         <div class="product-plr-1">
                             <div class="single-product-wrap">
                                 <div class="product-img product-img-zoom mb-15">
@@ -110,17 +110,10 @@
                                     <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
                                     <div class="product-action-2 tooltip-style-2">
                                         <a href="{{ route('wishlist.add', $product->id) }}">
-                                        <button title="Wishlist"><i class="icon-heart"></i></button>
+                                            <button title="Wishlist"><i class="icon-heart"></i></button>
                                         </a>
                                     </div>
                                 </div>
-
-                                <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
-                                <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
-
-                                    <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="md" required data-step="0.1" value="{{ number_format( $product->avg_rating , 1, '.' , ',') }}">
-
                                 <div class="product-content-wrap-3">
                                     <div class="product-content-categories">
                                         <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
@@ -129,14 +122,14 @@
                                     <div class="product-rating-wrap-2">
                                         <div class="product-rating-4">
                                             @if(ceil($product->avg_rating) == 1)
-                                            <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
                                             @elseif(ceil($product->avg_rating) == 2)
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
                                             @elseif(ceil($product->avg_rating) == 3)
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
                                             @elseif(ceil($product->avg_rating) == 4)
                                                 <i class="icon_star"></i>
                                                 <i class="icon_star"></i>
@@ -147,9 +140,9 @@
                                                 <i class="icon_star"></i>
                                                 <i class="icon_star"></i>
                                                 <i class="icon_star"></i>
-                                             @endif
+                                            @endif
                                         </div>
-                                        <span>(4)</span>
+                                        <span>({{$product->avg_rating}})</span>
                                     </div>
                                     <div class="product-price-4">
                                         <span class="new-price">{{$product->promo_price}} Tk.</span>
@@ -184,7 +177,7 @@
                                                 <i class="icon_star"></i>
                                             @endif
                                         </div>
-                                        <span>(4)</span>
+                                        <span>({{$product->avg_rating}})</span>
                                     </div>
                                     <div class="product-price-4">
                                         <span class="new-price">{{$product->promo_price}} Tk.  </span>
@@ -192,13 +185,13 @@
                                     </div>
                                     <div class="pro-add-to-cart-2">
                                         <a href="{{route('product.details',['id' => $product->id])}}">
-                                        <button title="Add to Cart">Add To Cart</button>
+                                            <button title="Add to Cart">Add To Cart</button>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                         @endforeach
+                    @endforeach
                 </div>
                 <!-- flash deal products end-->
 
@@ -227,7 +220,7 @@
                                     </a>
                                 </div>
                                 <div class="product-content-categories-2 text-center">
-                                    <h5><a href="#"> {{$cat->name}} </a></h5>
+                                    <h5><a href="{{ route('productByCategory', $cat->id) }}"> {{$cat->name}} </a></h5>
                                 </div>
                             </div>
                         </div>

@@ -17,7 +17,7 @@ class ProductByCategoryController extends Controller
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $logos = logo::all()->last();
         $contacts = contacts::all()->last();
-        $products = product::where('category_id' , $id)->get();
-        return view('Frontend.layouts.productByCat', compact('logos' , 'contacts' , 'products','cartpage'));
+        $products = product::where('category_id' , $id)->paginate(12);
+        return view('Frontend.layouts.productByCat', compact('products','logos' , 'contacts' ,'cartpage'));
     }
 }

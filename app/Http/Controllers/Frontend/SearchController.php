@@ -23,19 +23,6 @@ class SearchController extends Controller
         $category = $request->category;
         $categories = category::all();
         $products = product::where('name','LIKE','%'.$search.'%')->paginate(12);
-        /*if (empty($category)){
-            //$products = product::where('name','LIKE','%'.$search.'%')->paginate(12);
-            $products = product::where('name','LIKE','%'.$search.'%')->paginate(12);
-
-        }else if(empty($category) && empty($search)){
-            $products = product::all();
-        }else{
-            $products = DB::table('products')
-                ->join('categories','products.category_id','=','categories.id')
-                ->where('products.name','LIKE','%'.$search.'%')
-                ->where('categories.id',$category)
-                ->select('products.name','products.price','products.id')->paginate(12);
-        }*/
         return view('Frontend.product-list.products',compact('products','categories','cartpage'));
 }
 
@@ -45,9 +32,12 @@ class SearchController extends Controller
 
         $first = $request->first;
         $second = $request->second;
-
+        if ($second != ''){
         $products = product::where('products.price','<=',$second)
-            ->where('products.price','>',$first)->get();
+            ->where('products.price','>=',$first)->get();
+        }else{
+            $products = product::where('products.price','>=',$first)->get();
+        }
 
         return response()->json($products,200);
     }

@@ -21,21 +21,25 @@
             <h3>contact info</h3>
 
 
-          
+
 
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="single-contact-info-3 text-center mb-30">
                         <i class="icon-location-pin "></i>
                         <h4>our address</h4>
+                        @if(!empty($contacts))
                         <p>{{$contacts->address}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="single-contact-info-3 extra-contact-info text-center mb-30">
                         <ul>
+                            @if(!empty($contacts))
                             <li><i class="icon-screen-smartphone"></i>{{$contacts->mobile_no}}</li>
                             <li><i class="icon-envelope "></i> <a href="#"> {{$contacts->email}}</a></li>
+                             @endif
                         </ul>
                     </div>
                 </div>
@@ -48,7 +52,7 @@
                 </div>
             </div>
 
-            
+
 
         </div>
         <div class="get-in-touch-wrap">

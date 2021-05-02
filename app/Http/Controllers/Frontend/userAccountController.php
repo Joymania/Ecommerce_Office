@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Model\CartShopping;
 use App\Model\category;
+use App\Model\OrderProduct;
 use App\Model\sub_category;
 use App\Model\contacts;
 use App\Model\logo;
@@ -20,12 +22,13 @@ class userAccountController extends Controller
     Public Function userAccount()
     {
 
+        $id = Auth::id();
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $user = User::all()->find($id);
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
-        $order = Order::all()->where('user_id' , $id);
+        $orders = Order::all()->where('user_id' , $id);
         $OrderProduct = OrderProduct::with('product')->find($id);
 
         $id = Auth::id();
@@ -35,7 +38,7 @@ class userAccountController extends Controller
         $user = User::find(Auth::id());
         $orders = Order::all()->where('user_id' , $id);
 
-        return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'user' , 'order' , 'OrderProduct','cartpage'));
+        return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'user' , 'orders' , 'OrderProduct','cartpage'));
 
     }
 
