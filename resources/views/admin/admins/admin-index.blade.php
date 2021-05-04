@@ -11,7 +11,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
-                <h3>Admins</h3>
+                <h3>Admin List</h3>
                 <a href="{{ route('admin.create') }}">
                     <button id="addToTable" class="btn btn-primary m-b-15" type="button">
                         <i class="icon wb-plus" aria-hidden="true"></i> Add Admin
@@ -40,6 +40,7 @@
                             <th>Role</th>
                             <th>Status</th>
                             <th>Gender</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -52,6 +53,7 @@
                             <th>Role</th>
                             <th>Status</th>
                             <th>Gender</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
@@ -65,6 +67,11 @@
                             <td>{{$admin->role == '1' ? 'Super Admin': 'Admin'}}</td>
                             <td>{{$admin->status == '1' ? 'active' : '' }}</td>
                             <td>{{$admin->gender}}</td>
+                            <td>
+                                @if($admin->image)
+                                    <img style="width: 80px; height: 90px" src="{{""}}/upload/admins/{{$admin->image}}" alt="">
+                                @endif
+                            </td>
 
                             <td class="actions">
                                 <a href="{{route('admin.edit',$admin->id)}}" class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"

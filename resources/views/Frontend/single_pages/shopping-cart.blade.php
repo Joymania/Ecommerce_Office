@@ -61,15 +61,15 @@
                     <div class="cart-img">
                         <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" alt=""></a>
                     </div>
-<<<<<<< HEAD
+
                     <div class="cart-title">
                         <h4><a href="#">{{ $content->name }}</a></h4>
                         <span> {{ $content->qty }} × {{ $content->price }} tk	</span>
-=======
+
                     <div class="cart-checkout-btn">
                         <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
                         <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
->>>>>>> 9ea396b08a2ef21eeca622fd673969cf66929216
+
                     </div>
                     <div class="cart-delete">
                         <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
@@ -252,7 +252,7 @@
                                 <div class="col-lg-12">
                                     <div class="cart-shiping-update-wrapper">
                                         <div class="cart-shiping-update">
-                                            <a href="#">Continue Shopping</a>
+                                            <a href="/">Continue Shopping</a>
                                         </div>
                                         @if (Auth::user())
                                         <div class="cart-clear">

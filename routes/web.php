@@ -10,13 +10,12 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/test', 'Frontend\FrontendController@test');
 
 /*Front end routing Starts*/
 Auth::routes();
 
 // redirect verified user
-Route::get('/home','Frontend\FrontendController@index')->name('home')->middleware('verified');
+Route::get('/home','Frontend\FrontendController@index')->name('home');
 Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about_us');
 // without authentication
 Route::get('/','Frontend\FrontendController@index')->name('frontsite');
@@ -59,6 +58,8 @@ Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
+    Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
+    Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
 
     // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
@@ -66,7 +67,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
-    Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
 
     Route::post('review/{prod_id}', 'Frontend\ReviewController@store')->name('store-review');
@@ -97,6 +97,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('users/{user}/edit', 'Backend\UserController@edit')->name('users.edit');
     Route::put('users/{user}/update', 'Backend\UserController@update')->name('users.update');
     Route::delete('users/{user}/delete', 'Backend\UserController@destroy')->name('users.delete');
+    Route::delete('users/image/{user}/delete', 'Backend\UserController@deleteImage')->name('users.image.delete');
     // dashboard
     Route::get('dashboard', 'Backend\DashboardController@ecommerce')->name('admin.dashboard');
     // logout
@@ -254,6 +255,7 @@ Route::prefix('admin')->middleware('auth:admin', 'superAdmin')->group(function (
     Route::get('admins/{admin}/edit', 'Backend\AdminController@edit')->name('admin.edit');
     Route::put('admins/{admin}/update', 'Backend\AdminController@update')->name('admin.update');
     Route::delete('admins/{admin}/delete', 'Backend\AdminController@destroy')->name('admin.delete');
+    Route::delete('admins/image/{admin}/delete', 'Backend\AdminController@deleteImage')->name('admin.image.delete');
 });
 
 // admin routes without Authentication

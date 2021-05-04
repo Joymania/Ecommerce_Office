@@ -10,7 +10,7 @@
 <div class="col-lg-12">
 <div class="card">
     <div class="card-header">
-        <h3>Edit User</h3>
+        <h6>Edit User</h6>
         <a class=" float-right btn btn-success btn-sm" href="{{ route('users.index') }}"><i class="fa fa-list"></i> User List</a>
 
         @if(session()->has('success_msg'))
@@ -21,17 +21,7 @@
                 </button>
             </div>
         @endif
-        @if(session()->has('errors'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>{{ $errors['message'] }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-        @if(session()->has('errors'))
-         {{--dd($errors['errors']--}}
-        @endif
+
     </div>
 
     <div class="body">
@@ -54,9 +44,26 @@
                                         <br> <em>Image should be at least 140px x 140px</em></p>
                                     <!-- <button type="button" class="btn btn-default-dark" id="btn-upload-photo">Upload Photo</button> -->
 
-                                    <input name="image" type="file" id="filePhoto" >
+                                    <input name="image" type="file" id="filePhoto" class="@error('image') is-invalid @enderror">
+                                    <div>
+                                        @error('image')                            
+                                            <span class="" role="alert" style="color: red">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
+                            <div>
+                                <div hidden> {{$route = route('users.image.delete',$user->id)}}</div>
+                                <a class="btn-sm btn-danger" href="{{ route('users.image.delete',$user->id) }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('delete-form').setAttribute('action', '{{$route}}');
+                                    confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
+                                    Delete Image
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -67,15 +74,39 @@
                     <div class="body">
                         <h6>Basic Information</h6>
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" placeholder="Name" value="{{$user->name}}">
+                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" value="{{old('name',$user->name)}}">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <input name="email" type="email" class="form-control" placeholder="Email" value="{{$user->email}}">
+                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{old('email',$user->email)}}">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <input name="address" type="text" class="form-control" placeholder="Address" value="{{$user->address}}">
+                            <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" placeholder="Address" value="{{old('address', $user->address)}}">
+                            @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <input name="phone" type="number" class="form-control @error('phone') is-invalid @enderror" placeholder="Phone" value="{{ old('phone', $user->phone) }}">
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -100,7 +131,13 @@
                         <h6>Change Password</h6>
 
                         <div class="form-group">
-                            <input name="password" type="password" class="form-control" placeholder="New Password">
+                            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="New Password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                          
                         </div>
                         <div class="form-group">
                             <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm New Password">
@@ -111,7 +148,11 @@
 
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
-    </div>
+        <form id="delete-form" method="POST"  class="d-none">
+                @csrf
+                @method('DELETE')
+        </form>
+</div>
 </div>
 </div>
 </div>

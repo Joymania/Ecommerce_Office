@@ -24,7 +24,7 @@ class userAccountController extends Controller
 
         $id = Auth::id();
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $user = User::all()->find($id);
+        // $user = User::all()->find($id);
         $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
@@ -47,28 +47,19 @@ class userAccountController extends Controller
         // to update admin
         $user = User::find(Auth::id());
 
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'name' => 'required|max:100',
-            // if requested email and admin email same, no validation applied
+            // if requested email and user email same, no validation applied
             'email' => ($request->email != $user->email ? 'required|email|unique:users,email,':''),
             // if the password field is blank, no validation applied
-            'password' => ($request->password!=''?'min:6|confirmed':''),
+            'password' => ($request->password!=''?'min:8|confirmed':''),
+            'status' => '',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gender' => 'max:10',
             'address' => 'max:255',
-            'phone' => '',
-            'gender' => ''
+            'phone' => 'max:15'
         ]);
 
-        //  if validation fails
-        if($validator->fails()){
-            $erorrs = ['message' => 'Validation error!',
-                       'errors' => ['name' => $validator->errors()->get('name'),
-                                    'email' => $validator->errors()->get('email'),
-                                    'password' => $validator->errors()->get('password'),
-                                    'address' => $validator->errors()->get('address')
-                                    ]
-                    ];
-            return redirect()->route('userAccount')->withInput()->with(['errors' => $erorrs]);
-        }
           //  insert data ........
           $user->name = $request->name;
           $user->email = $request->email;
@@ -81,17 +72,48 @@ class userAccountController extends Controller
             $user->password = bcrypt($request->password);
         }
 
+        //  if there is image
+        if($request->hasFile('image')) {
+
+            // remove image
+            $this->removeImage($user);
+
+            $file = $request->file('image');
+
+            $filename = time().'-'.uniqid().'.'.$file->getClientOriginalExtension();
+
+            $file->move(public_path('upload/users'), $filename);
+
+            $user->image = $filename;
+        }
+
         $user->save();
 
         session()->flash('success_msg' , 'Updated successfully');
         return back();
 
     }
+    public function deleteImage(User $user)
+    {
+        // remove image
+        $this->removeImage($user);
+        $user->image = null;
+        $user->save();
+        return redirect()->back()->with("success_msg", ' Image Deleted successfully');
+    }
+
+    private function removeImage($user)
+    {
+        if($user->image != "" && \File::exists('upload/users/' . $user->image)) {
+            @unlink(public_path('upload/users/' . $user->image));
+        }
+    }
 
     public function orderDetails($id){
         $data['order']=Order::find($id);
-        $data['product']=Order::where('id',$id)->with('products','color','size')->first();
-        //return $data['product'];
+        // $data['product']=Order::where('id',$id)->with('products','color','size')->first();
+        $data['product']=OrderProduct::where('order_id',$id)->with('color','size','order_detail','product')->get();
         return view('Frontend.userProfile.orderDetails',$data);
     }
+
 }

@@ -51,6 +51,10 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $logos = logo::all()->last();
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
         return view('auth.login', compact('logos'));
     }
 

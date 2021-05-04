@@ -11,7 +11,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
-                <h3>Users</h3>
+                <h6>User List</h6>
             </div>
             @if(session()->has('success_msg'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -30,10 +30,12 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Image</th>
                             <th>Gender</th>
                             <th>Status</th>
                             <th>Verified</th>
-                            <th>Address</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -43,10 +45,12 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Image</th>
                             <th>Gender</th>
                             <th>Status</th>
                             <th>Verified</th>
-                            <th>Address</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
@@ -57,10 +61,16 @@
                             <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
+                            <td>{{$user->address}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td>
+                                @if($user->image)
+                                <img style="width: 80px; height: 90px" src="{{""}}/upload/users/{{$user->image}}" alt="">
+                                @endif
+                            </td>
                             <td>{{$user->gender}}</td>
                             <td>{{$user->status == '1' ? 'active' :''}}</td>
                             <td>{{ ($user->email_verified_at) ? 'yes' : null }}</td>
-                            <td>{{$user->address}}</td>
                             <td class="actions">
                                 <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>

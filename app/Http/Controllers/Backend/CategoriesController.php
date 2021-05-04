@@ -45,7 +45,7 @@ class CategoriesController extends Controller
         }
         $category->save();
 
-    	return redirect()->route('category.view')->with('success','Created successfully!!!');
+    	return redirect()->route('category.view')->with('success_msg','Created successfully!');
     }
 
     // editCategory
@@ -75,7 +75,7 @@ class CategoriesController extends Controller
 
         $category->save();
 
-        return redirect()->route('category.view')->with('success','Successfully Update!!!');
+        return redirect()->route('category.view')->with('success_msg','Successfully Updated!');
     }
 
     // deleteCategory
@@ -85,7 +85,7 @@ class CategoriesController extends Controller
         $category = category::findOrFail($did);
         $this->removeImage($category);
         $category->delete();
-    	return redirect()->route('category.view')->with('success','Successfully Deleted!!!');
+    	return redirect()->route('category.view')->with('success_msg','Successfully Deleted!');
     }
 
     private function removeImage($category)

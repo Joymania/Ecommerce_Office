@@ -23,7 +23,7 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <label for="productName">Product Name</label>
-                                                <input type="text" id="productName" name="name" class="form-control" placeholder="Product name">
+                                                <input type="text" id="productName" name="name" class="form-control" placeholder="Product name" value="{{old('name')}}">
                                                 @error('name')
                                                 <span style="color: red">{{$message}}</span>
                                                 @enderror

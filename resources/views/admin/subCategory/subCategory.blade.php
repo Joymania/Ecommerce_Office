@@ -1,15 +1,25 @@
 @extends('admin.layout.master')
 @section('title', 'Sub-Category')
-@section('parentPageTitle', 'Dashboard')
+@section('pageTitle') <a href="#">Sub Categories</a> @endsection
+@section('parentPageTitle', '')
 
 
 @section('content')
 <div class="row clearfix">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="header">
+            @if(session()->has('success_msg'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ session()->get('success_msg') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <a href="{{route('subCategory.add')}}">
                 <button type="button" class="btn btn-primary">Add new sub-category</button>  
-            </a>                          
+            </a>  
+
         </div>
         <br>
         <div class="card">

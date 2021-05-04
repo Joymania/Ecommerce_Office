@@ -2,7 +2,7 @@
         <div class="slider-banner-area">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col">
                          <div class="slider-area bg-gray mb-30">
                              <div class="hero-slider-active-3 dot-style-2 dot-style-2-position-4 dot-style-2-active-purple">
                                  @foreach ($sliders as $slider)
