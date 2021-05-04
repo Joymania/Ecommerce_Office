@@ -116,9 +116,9 @@
                                 <div class="main-menu main-menu-padding-1 main-menu-lh-2">
                                     <nav>
                                         <ul>
-                                            <li><a href="/">HOME </a>
+                                            <li><a href="{{url('/')}}">HOME </a>
                                             </li>
-                                            <li><a href="{{ route('search.result') }}">SHOP </a></li>
+                                            <li><a href="{{ route('products.shop') }}">SHOP </a></li>
 
                                             <li><a href="#">PAGES </a>
                                                 <ul class="sub-menu-style">
@@ -449,8 +449,8 @@
                         <!-- mobile menu start -->
                         <nav>
                             <ul class="mobile-menu">
-                                <li class="menu-item-has-children"><a href="/">Home</a> </li>
-                                <li class="menu-item-has-children "><a href="{{route('search.result')}}">shop</a> </li>
+                                <li class="menu-item-has-children"><a href="{{url('/')}}">Home</a> </li>
+                                <li class="menu-item-has-children "><a href="{{route('products.shop')}}">shop</a> </li>
                                 <li><a href="#">PAGES </a>
                                     <ul class="sub-menu-style">
                                         <li><a href="{{ route('about_us') }}">about us </a></li>

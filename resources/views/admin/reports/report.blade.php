@@ -39,7 +39,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card overflowhidden">
                     <div class="body">
-                        <h3>3000.00 <i class="fa fa-dollar float-right"></i></h3>
+                        <h3>{{$data['todaySellingAmount ']}}<i class="fa fa-dollar float-right"></i></h3>
                         <span>Total Selling Amount</span>
                     </div>
                     <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
@@ -81,7 +81,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card overflowhidden">
                         <div class="body">
-                            <h3>3000.00<i class="fa fa-dollar float-right"></i></h3>
+                            <h3>{{$data['last7daySellingAmount']}}<i class="fa fa-dollar float-right"></i></h3>
                             <span>Total Selling Amount</span>
                         </div>
                         <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
@@ -123,7 +123,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card overflowhidden">
                         <div class="body">
-                            <h3>3000.00 <i class="fa fa-dollar float-right"></i></h3>
+                            <h3>{{$data['last1monthSellingAmount']}} <i class="fa fa-dollar float-right"></i></h3>
                             <span>Total Selling Amount</span>
                         </div>
                         <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">

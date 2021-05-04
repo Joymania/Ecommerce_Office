@@ -22,15 +22,18 @@
             <ul class="row list-unstyled">
                 <li class="col-4">
                     <small>Sales</small>
-                    <h6>{{session('sales')}}</h6>
+                    {{--<h6>{{session('sales')}}</h6>--}}
+                    <h6>{{$sales}}</h6>
                 </li>
                 <li class="col-4">
                     <small>Order</small>
-                    <h6>{{session('orders')}}</h6>
+                    {{--<h6>{{session('orders')}}</h6>--}}
+                    <h6>{{$orders}}</h6>
                 </li>
                 <li class="col-4">
                     <small>Revenue</small>
-                    <h6>{{session('revenue')}}</h6>
+                    {{--<h6>{{session('revenue')}}</h6>--}}
+                    <h6>{{$totalSale}}</h6>
                 </li>
             </ul>
         </div>

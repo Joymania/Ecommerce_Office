@@ -90,7 +90,7 @@
                     </div>                 
                 </div>
                 <div class="btn-style-7">
-                    <a href="{{route('search.result')}}">All Offered Product</a>
+                    <a href="{{route('search.result')}}">All Offered Products</a>
                 </div>
             </div>
             <!-- flash deal header  end-->
@@ -198,7 +198,9 @@
     @endif
     <!-- Offered/flash deal products end-->
 
+
     <!-- Popular categories start -->
+
     <div class="product-categories-area pb-115">
         <div class="container">
             <div class="section-title-btn-wrap border-bottom-3 mb-50 pb-20">
@@ -206,9 +208,11 @@
                     <h2>Popular Categories</h2>
                 </div>
                 <div class="btn-style-7">
-                    <a href=" {{ route('search.result') }} ">All Product</a>
+                    <a href=" {{ route('products.shop') }} ">All Products</a>
                 </div>
+
             </div>
+            
             <div class="product-categories-slider-1 nav-style-3">
                 @if($popular_categories->isNotEmpty())
                     @foreach($popular_categories as $cat)
@@ -230,6 +234,7 @@
             </div>
         </div>
     </div>
+
     <!-- Popular categories end -->
 
 
@@ -249,44 +254,144 @@
                             <div id="product-9" class="tab-pane active">
                                 <div class="product-slider-active-5">
 
-                                    @foreach($cat->product as $prod)
-
-                                    <div class="product-plr-1">
-                                        <div class="single-product-wrap">
-                                            <div class="product-img product-img-zoom mb-15">
-                                                <a href="{{route('product.details',$prod->id)}}">
-                                                    <img src="{{""}}/upload/products_images/{{$prod->image}}" height="200px" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="{{route('product.details',$prod->id)}}">{{$prod->name}}</a></h3>
-                                                <div class="product-price-2">
-                                                    @if(empty($prod->promo_price))
-                                                    <span>{{$prod->price}} Tk</span>
-                                                    @else
-                                                        <span class="new-price">{{$prod->promo_price}} Tk</span>
-                                                        <span class="old-price">{{$prod->price}} Tk</span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="{{route('product.details',$prod->id)}}">{{$prod->name}}</a></h3>
-                                                <div class="product-price-2">
-                                                    @if(empty($prod->promo_price))
-                                                        <span>{{$prod->price}} Tk</span>
-                                                    @else
-                                                        <span class="new-price">{{$prod->promo_price}} Tk</span>
-                                                        <span class="old-price">{{$prod->price}} Tk</span>
-                                                    @endif
-                                                </div>
-                                                <div class="pro-add-to-cart">
-                                                    <a href="{{route('product.details',$prod->id)}}">
-                                                    <button title="Add to Cart">Add To Cart</button>
+                                    @foreach($cat->product as $product)
+                                        {{--<div class="product-plr-1">
+                                            <div class="single-product-wrap">
+                                                <div class="product-img product-img-zoom mb-15">
+                                                    <a href="{{route('product.details',$product->id)}}">
+                                                        <img src="{{"/upload/products_images/$product->image"}}" style="height: 178px; width: 178px" alt="Product Image">
                                                     </a>
+                                                    @if(!empty($product->promo_price))
+                                                    <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
+                                                    @endif
+                                                    <div class="product-action-2 tooltip-style-2">
+                                                        <a href="{{ route('wishlist.add', $product->id) }}">
+                                                            <button title="Wishlist"><i class="icon-heart"></i></button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap-3">
+                                                    <div class="product-content-categories">
+                                                        <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
+                                                    </div>
+                                                    <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
+                                                    <div class="product-rating-wrap-2">
+                                                        <div class="product-rating-4">
+                                                            @if(ceil($product->avg_rating) == 1)
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 2)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 3)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 4)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 5)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @endif
+                                                        </div>
+                                                        <span>({{$product->avg_rating}})</span>
+                                                    </div>
+                                                    <div class="product-price-4">
+                                                        @if(empty($product->promo_price))
+                                                            <span>{{$product->price}} Tk</span>
+                                                        @else
+                                                            <span class="new-price">{{$product->promo_price}} Tk</span>
+                                                            <span class="old-price">{{$product->price}} Tk</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap-3 product-content-position-2">
+                                                    <div class="product-content-categories">
+                                                        <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
+                                                    </div>
+                                                    <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
+                                                    <div class="product-rating-wrap-2">
+                                                        <div class="product-rating-4">
+                                                            @if(ceil($product->avg_rating) == 1)
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 2)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 3)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 4)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @elseif(ceil($product->avg_rating) == 5)
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
+                                                            @endif
+                                                        </div>
+                                                        <span>({{$product->avg_rating}})</span>
+                                                    </div>
+                                                    <div class="product-price-4">
+                                                        @if(empty($product->promo_price))
+                                                            <span>{{$product->price}} Tk</span>
+                                                        @else
+                                                            <span class="new-price">{{$product->promo_price}} Tk</span>
+                                                            <span class="old-price">{{$product->price}} Tk</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="pro-add-to-cart-2">
+                                                        <a href="{{route('product.details',['id' => $product->id])}}">
+                                                            <button title="Add to Cart">Add To Cart</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>--}}
+
+                                        <div class="product-plr-1">
+                                            <div class="single-product-wrap">
+                                                <div class="product-img product-img-zoom mb-15">
+                                                    <a href="{{route('product.details',$product->id)}}">
+                                                        <img src="{{"/upload/products_images/$product->image"}}" style="height: 178px; width: 178px" alt="Product Image">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content-wrap-2 text-center">
+                                                    <h3><a href="{{route('product.details',$product->id)}}">{{$product->name}}</a></h3>
+                                                    <div class="product-price-2">
+                                                        @if(empty($product->promo_price))
+                                                            <span>{{$product->price}} Tk</span>
+                                                        @else
+                                                            <span class="new-price">{{$product->promo_price}} Tk</span>
+                                                            <span class="old-price">{{$product->price}} Tk</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
+                                                    <h3><a href="{{route('product.details',$product->id)}}">{{$product->name}}</a></h3>
+                                                    <div class="product-price-2">
+                                                        @if(empty($product->promo_price))
+                                                            <span>{{$product->price}} Tk</span>
+                                                        @else
+                                                            <span class="new-price">{{$product->promo_price}} Tk</span>
+                                                            <span class="old-price">{{$product->price}} Tk</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="pro-add-to-cart">
+                                                        <a href="{{route('product.details',['id' => $product->id])}}">
+                                                            <button title="Add to Cart">Add To Cart</button>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
                                     @endforeach
 

@@ -1,16 +1,14 @@
-const base_url = $('#baseUrl').val();
-
-//Filter by price or
 $(document).ready(function () {
-   $('.priceFilter').on('click', function () {
-       $(".priceFilter").css({
-           'backgroundColor':'#FFFFFF',
-           'color': 'black'
-       });
-       $(this).css({
-           'backgroundColor':'#6F50A7',
-           'color': 'white'
-       });
+
+    $('.priceFilter').on('click', function () {
+        $(".priceFilter").css({
+            'backgroundColor':'#FFFFFF',
+            'color': 'black'
+        });
+        $(this).css({
+            'backgroundColor':'#666666',
+            'color': 'white'
+        });
 
         let first = $(this).find('span[class="first"]').text();
         let second = $(this).find('span[class="second"]').text();
@@ -19,7 +17,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'get',
-            url: '/search-filter',
+            url: '/priceFiltered-offer-products',
             data: {
                 first: first,
                 second: second
@@ -29,28 +27,7 @@ $(document).ready(function () {
                 if (data.length > 0) {
                     $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
-                        let price= '';
-                        let discount= '';
                         let rating = '';
-                        if (data[i].promo_price === null){
-                            price = `<span class="new-price product-price">${data[i].price}</span>Tk`
-                        }else{
-                            price = `
-                            <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price product-price">${data[i].promo_price}</span>Tk
-                            `
-                            discount =`<span class="pro-badge left bg-red">-
-                                ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
-                              %</span>`;
-                        }
-                        let avgRating = 0;
-                        if (data[i].avg_rating !== null){
-                            avgRating = Math.ceil(data[i].avg_rating)
-                        }else
-                        {
-                            avgRating = 0;
-                        }
-
                         if (Math.ceil(data[i].avg_rating) === 1){
                             rating = `<i class="icon_star"></i>`;
                         }else if (Math.ceil(data[i].avg_rating) === 2){
@@ -72,14 +49,17 @@ $(document).ready(function () {
                                       <i class="icon_star"></i>
                                       <i class="icon_star"></i>`;
                         }
-                        shopArea.append(`
+                        console.log(rating);
+                            shopArea.append(`
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
                                                 <div class="single-product-wrap mb-35">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
                                                         <a href="/${data[i].id}/product-details">
-                                                            <img src="${base_url}/upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
+                                                            <img src="./upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
                                                         </a>
-                                                        ${discount}
+
+
+                                                        <span class="pro-badge left bg-red">-${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}%</span>
                                                         <div class="product-action-2 tooltip-style-2">
 
                                                             <a href="/add-to-wishlist/${data[i].id}">
@@ -92,11 +72,12 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${avgRating})</span>
+                                                            <span>(${Math.ceil(data[i].avg_rating)})</span>
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details" class="productName">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
-                                                               ${price}
+                                                               <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                                                               <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap-2 product-content-position text-center">
@@ -104,11 +85,12 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${Math.ceil(data[i].avg_rating)})</span>
+                                                            <span>(${data[i].avg_rating})</span>
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
-                                                            ${price}
+                                                            <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                                                               <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                         <div class="pro-add-to-cart">
                                                             <a href="/${data[i].id}/product-details">
@@ -119,6 +101,7 @@ $(document).ready(function () {
                                                 </div>
                                             </div>
                             `);
+
                     }
                 }else {
                     $('#noResult').remove();
@@ -191,7 +174,7 @@ $(document).ready(function () {
         let searchText = $('#searchInput').val();
         $.ajax({
             type: 'get',
-            url: '/search-ajax',
+            url: '/offer-products-ajax-search',
             data: {
                 search: searchText
             },
@@ -199,29 +182,8 @@ $(document).ready(function () {
                 singleProduct.attr('hidden',true);
                 if (data.length > 0) {
                     $('#noResult').remove();
+
                     for (let i = 0; i < data.length; i++) {
-                        let price= '';
-                        let discount = '';
-                        if (data[i].promo_price === null){
-                            price = `<span class="new-price product-price">${data[i].price}</span>Tk`
-                        }else{
-                            price = `
-                            <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price product-price">${data[i].promo_price}</span>Tk
-                            `;
-                            discount =`<span class="pro-badge left bg-red">-
-                                ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
-                             %</span>`;
-                        }
-
-                        let avgRating = 0;
-                        if (data[i].avg_rating !== null){
-                            avgRating = Math.ceil(data[i].avg_rating)
-                        }else
-                        {
-                            avgRating = 0;
-                        }
-
                         let rating = '';
                         if (Math.ceil(data[i].avg_rating) === 1){
                             rating = `<i class="icon_star"></i>`;
@@ -249,9 +211,11 @@ $(document).ready(function () {
                                                 <div class="single-product-wrap mb-35">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
                                                         <a href="/${data[i].id}/product-details">
-                                                            <img src="${base_url}/upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
+                                                            <img src="./upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
                                                         </a>
-                                                        ${discount}
+
+
+                                                        <span class="pro-badge left bg-red">-${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}%</span>
                                                         <div class="product-action-2 tooltip-style-2">
 
                                                             <a href="/add-to-wishlist/${data[i].id}">
@@ -264,11 +228,12 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${avgRating})</span>
+                                                            <span>(${Math.ceil(data[i].avg_rating)})</span>
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details" class="productName">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
-                                                               ${price}
+                                                               <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                                                               <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap-2 product-content-position text-center">
@@ -280,7 +245,8 @@ $(document).ready(function () {
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
-                                                            ${price}
+                                                            <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                                                               <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                         <div class="pro-add-to-cart">
                                                             <a href="/${data[i].id}/product-details">
@@ -303,6 +269,7 @@ $(document).ready(function () {
     })
 });
 
+
 $(document).ready(function () {
     $(".categoryName").on('click', function (e) {
         e.preventDefault();
@@ -311,35 +278,13 @@ $(document).ready(function () {
         let singleProduct = $('.singleProduct');
         $.ajax({
             type: 'GET',
-            url: '/category-products',
+            url: '/offer-category-products',
             data: {category: categoryName},
             success: function (data) {
                 singleProduct.attr('hidden',true);
                 if (data.length > 0) {
                     $('#noResult').remove();
                     for (let i = 0; i < data.length; i++) {
-                        let price= '';
-                        let discount = '';
-                        if (data[i].promo_price === null){
-                            price = `<span class="new-price product-price">${data[i].price}</span>Tk`
-                        }else{
-                            price = `
-                            <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price product-price">${data[i].promo_price}</span>Tk
-                            `;
-                            discount =`<span class="pro-badge left bg-red">-
-                                ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
-                             %</span>`;
-                        }
-
-                        let avgRating = 0;
-                        if (data[i].avg_rating !== null){
-                            avgRating = Math.ceil(data[i].avg_rating)
-                        }else
-                        {
-                            avgRating = 0;
-                        }
-
                         let rating = '';
                         if (Math.ceil(data[i].avg_rating) === 1){
                             rating = `<i class="icon_star"></i>`;
@@ -362,14 +307,15 @@ $(document).ready(function () {
                                       <i class="icon_star"></i>
                                       <i class="icon_star"></i>`;
                         }
+
                         shopArea.append(`
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
                                                 <div class="single-product-wrap mb-35">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
                                                         <a href="/${data[i].id}/product-details">
-                                                            <img src="${base_url}/upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
+                                                            <img src="../upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
                                                         </a>
-                                                        ${discount}
+                                                        <span class="pro-badge left bg-red">-${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}%</span>
                                                         <div class="product-action-2 tooltip-style-2">
 
                                                             <a href="/add-to-wishlist/${data[i].id}">
@@ -382,11 +328,12 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${avgRating})</span>
+                                                            <span>(${Math.ceil(data[i].avg_rating)})</span>
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details" class="productName">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
-                                                               ${price}
+                                                               <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                                                               <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap-2 product-content-position text-center">
@@ -398,7 +345,8 @@ $(document).ready(function () {
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
-                                                            ${price}
+                                                            <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                                                               <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                         <div class="pro-add-to-cart">
                                                             <a href="/${data[i].id}/product-details">
@@ -420,4 +368,5 @@ $(document).ready(function () {
 
     });
 });
+
 

@@ -1,12 +1,12 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
-   {{-- <div>
-        @if(!empty($_GET))
-        <input type="text" id="search" value="{{$_GET['search']}}" hidden>
-       --}}{{-- <input type="text" id="category" value="{{$_GET['category']}}" hidden>--}}{{--
-        @endif
-    </div>--}}
+    {{-- <div>
+         @if(!empty($_GET))
+         <input type="text" id="search" value="{{$_GET['search']}}" hidden>
+        --}}{{-- <input type="text" id="category" value="{{$_GET['category']}}" hidden>--}}{{--
+         @endif
+     </div>--}}
     <div class="shop-area pt-120 pb-120">
         <div class="container">
             <div class="row flex-row-reverse">
@@ -33,7 +33,7 @@
                             <div id="shop-1" class="tab-pane active">
                                 <div class="row" id="shopArea">
                                     @if(count((array)$products) > 0)
-                                    @foreach($products as $product)
+                                        @foreach($products as $product)
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
                                                 <div class="single-product-wrap mb-35">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
@@ -69,6 +69,7 @@
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
                                                                 @elseif(ceil($product->avg_rating) == 5)
+                                                                    <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
@@ -109,6 +110,7 @@
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
+                                                                    <i class="icon_star"></i>
                                                                 @endif
                                                             </div>
                                                             <span>({{ceil($product->avg_rating)}})</span>
@@ -130,7 +132,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                    @endforeach
+                                        @endforeach
                                     @else
                                         <div class="col-12 text-center">No Result Found.</div>
                                     @endif
@@ -138,9 +140,9 @@
                             </div>
                         </div>
                         @if(count((array)$products) > 0)
-                        <div class="text-center mt-10">
-                            {{$products->links()}}
-                        </div>
+                            <div class="text-center mt-10">
+                                {{$products->links()}}
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -162,7 +164,7 @@
                             <div class="shop-catigory">
                                 <ul>
                                     @foreach($categories as $row)
-                                    <li><a href="" class="categoryName">{{$row->name}}</a></li>
+                                        <li><a href="" class="categoryName">{{$row->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -202,7 +204,8 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{asset('js/searchFilter.js')}}"></script>
+    {{--<script src="{{asset('js/searchFilter.js')}}"></script>--}}
+    <script src="{{asset('js/offer-products-filter.js')}}"></script>
 @endsection
 @section('stylesheet')
     <link rel="stylesheet" href="{{asset('css/products.css')}}">
