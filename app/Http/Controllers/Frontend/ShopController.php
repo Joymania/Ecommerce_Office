@@ -4,21 +4,22 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Model\CartShopping;
-use App\Model\product;
 use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
+use App\Model\product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProductByCategoryController extends Controller
+class ShopController extends Controller
 {
-    public function productByCategory($id)
+    public function index()
     {
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $logos = logo::all()->last();
         $contacts = contacts::all()->last();
-        $products = product::where('category_id' , $id)->paginate(12);
         $categories = category::with('sub_category')->get();
-        return view('Frontend.layouts.productByCat', compact('products','logos' , 'contacts' ,'cartpage','categories'));
+        $products = product::latest()->paginate(12);
+        return view('Frontend.single_pages.shop', compact('products','logos' , 'contacts' ,'cartpage','categories'));
     }
 }

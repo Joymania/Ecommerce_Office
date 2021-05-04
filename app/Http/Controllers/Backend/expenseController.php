@@ -40,13 +40,7 @@ class expenseController extends Controller
             'amount.required' => 'amount is required',
         ]);
 
-        $state = Expense::insert([
-    		'category_id'=>$request-> category_id,
-    		'amount'=>$request-> amount,
-            'note'=>$request-> note,
-    		'expense_by'=>$request-> expense_by,
-        
-    	]); 
+        Expense::create($request->all());
 
     	return back();
     }
@@ -78,7 +72,7 @@ class expenseController extends Controller
     		'amount'=>$request-> amount,
             'note'=>$request-> note,
     		'expense_by'=>$request-> expense_by,
-    	]); 
+    	]);
 
         return redirect()->route('expense.view')->with('success','Successfully Update!!!');
     }
@@ -92,7 +86,7 @@ class expenseController extends Controller
 
 
 
-    
+
 
 
 

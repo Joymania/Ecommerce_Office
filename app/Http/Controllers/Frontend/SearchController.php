@@ -24,12 +24,11 @@ class SearchController extends Controller
         $categories = category::all();
         $products = product::where('name','LIKE','%'.$search.'%')->paginate(12);
         return view('Frontend.product-list.products',compact('products','categories','cartpage'));
-}
+    }
 
 
     public function filteredResult(Request $request)
     {
-
         $first = $request->first;
         $second = $request->second;
         if ($second != ''){
@@ -52,7 +51,8 @@ class SearchController extends Controller
     {
         $products = product::join('categories','products.category_id','categories.id')
                         ->where('categories.name','=',$request->category)
-                        ->select('products.name','products.price','products.id','products.image','products.promo_price')->get();
+                        ->select('products.name','products.price','products.id','products.image','products.promo_price',
+                            'products.avg_rating')->get();
         return response()->json($products,200);
     }
 }

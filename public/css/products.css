@@ -1,10 +1,11 @@
 .priceFilter{
-    border: 1px solid #6F50A7;
+    border: 1px solid #d3cde8;
     cursor: pointer;
+    background-color: #f4f4f4;
 }
 
 .priceFilter:hover{
-    background-color: #666666;
+    background-color: #6F50A7;
     color: white;
 }
 

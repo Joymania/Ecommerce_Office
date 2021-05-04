@@ -23,6 +23,15 @@ Route::get('/','Frontend\FrontendController@index')->name('frontsite');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 
+//Shop page routing
+Route::get('/shop','Frontend\ShopController@index')->name('products.shop');
+
+//Offer products routing
+Route::get('/offer-products','Frontend\OfferProductsController@index')->name('offerProducts');
+Route::get('/priceFiltered-offer-products','Frontend\OfferProductsController@priceFilter');
+Route::get('/offer-products-ajax-search','Frontend\OfferProductsController@ajaxSearch');
+Route::get('/offer-category-products','Frontend\OfferProductsController@categoryProducts');
+
 //  Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/{id}/product-details-all-reviews', 'Frontend\ProductDetailsController@reviewsWithoutLimit')->name('product.details.reviews');
