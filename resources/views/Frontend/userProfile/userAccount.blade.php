@@ -1,6 +1,21 @@
 @extends('Frontend.userProfile.master')
 
 @section('content')
+<style type="text/css">
+    .media{
+        display: block;
+    }
+    .media-body>input{
+        background: none;
+        border: none;
+        margin: 10px 0;
+        padding: 0;
+    }
+    .delete-btn{
+        margin-bottom: 30px;
+    }
+</style>
+
 
 <div class="breadcrumb-area bg-gray">
     <div class="container">
@@ -22,13 +37,12 @@
         @endif
         @if(session()->has('errors'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>{{ $errors['message'] }}</strong>
+                <strong> Validation error </strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
+            </div> 
         @endif
-
     </div>
 </div>
 <!-- my account wrapper start -->
@@ -143,44 +157,109 @@
                                 <!-- Single Tab Content End -->
                                 <!-- Single Tab Content Start -->
                                 <div class="tab-pane fade" id="account-info" role="tabpanel">
-                                    <div class="myaccount-content">
+                                    <div class="myaccount-content" id="userUpdate">
                                         <h3>Account Details</h3>
-                                        <div class="account-details-form">
-                                            <form method="POST" action="{{ route('userUpdate') }}" enctype="multipart/form-data">
+                                        <div class="account-details-form" >
+
+                                            <form method="POST" action="{{ route('userUpdate') }}" enctype="multipart/form-data" >
                                                 @csrf
+
+                                                <!-- user img start-->            
+                                                <div class="row clearfix">                                
+                                                <div class="col-lg-12">
+                                                    <div class="">
+                                                        <div class="body">
+                                                            <h5>Profile Photo</h5>
+                                                            <div class="media photo">
+                                                                <div class="media-left m-r-15">
+                                                                    <img src="{{ (!empty($user->image)) ? url('upload/users/'.$user->image):url('upload/noImage.jpg') }}" class="user-photo media-object" alt="User" width="140px" height="140px">
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    
+                                                                    <input name="image" type="file" id="filePhoto" class="@error('image') is-invalid @enderror">
+                                                                    <div>
+                                                                        @error('image')                            
+                                                                            <span class="" role="alert" style="color: red">
+                                                                                <strong>{{ $message }}</strong>
+                                                                            </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <!-- delete image -->
+                                                                <div hidden> {{$route = route('userAccount.image.delete',$user->id)}}</div>
+                                                                <div class="delete-btn">
+                                                                <a class="btn-sm btn-danger" href="{{ route('userAccount.image.delete',$user->id) }}"
+                                                                    onclick="event.preventDefault();
+                                                                    document.getElementById('delete-form').setAttribute('action', '{{$route}}');
+                                                                    confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
+                                                                    Delete Image
+                                                                </a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                
+                                                <!-- user img end -->
 
                                                 <div class="single-input-item">
                                                     <label for="display-name" class="required">Full Name</label>
-                                                    <input name="name" type="text" id="display-name" value="{{$user->name}}" required/>
+                                                    <input name="name" class="@error('name') is-invalid @enderror" type="text" id="display-name" value="{{old('name',$user->name)}}" required/>
+                                                    
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="single-input-item">
                                                     <label for="email" class="required">Email Addres</label>
-                                                    <input name="email" type="email" id="email" value="{{$user->email}}" required/>
+
+                                                    <input name="email" type="email" id="email" class="@error('email') is-invalid @enderror"  value="{{old('email',$user->email)}}" required/>
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 
                                                 <div class="single-input-item">
                                                     <label for="address" class="required">Address</label>
-                                                    <input name="address" type="text" id="address" value="{{$user->address}}"/>
+                                                    <input name="address" type="text" id="address" class="@error('address') is-invalid @enderror"  value="{{old('address',$user->address)}}"/>
+                                                    @error('address')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="single-input-item">
-                                                    <label for="phone" class="required">Mobile</label>
-                                                    <input name="phone" type="text" id="phone" value="{{$user->phone}}"/>
+                                                    <label for="phone" class="required">Mobile/Phone</label>
+                                                    <input name="phone" type="text" id="phone" class="@error('phone') is-invalid @enderror"  value="{{old('phone',$user->phone)}}"/>
+                                                    @error('phone')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
-
-                                                <div class="form-group">
+                                                                               
+                                                <fieldset>
+                                                    <legend>Gender</legend>
                                                     <div>
-                                                        <label class="fancy-radio">
+                                                        <label class="">
                                                             <input name="gender" value="male" type="radio" {{$user->gender == 'male'?"checked":null}}>
                                                             <span><i></i>Male</span>
                                                         </label>
-                                                        <label class="fancy-radio">
+                                                        <label class="">
                                                             <input name="gender" value="female" type="radio" {{ $user->gender == 'female'? "checked" : null}}>
                                                             <span><i></i>Female</span>
                                                         </label>
                                                     </div>
-                                                </div>
-
+                                                </fieldset>
                                                 <fieldset>
                                                     <legend>Password change</legend>
                                                     
@@ -188,7 +267,12 @@
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
                                                                 <label for="new-pwd" class="required">New Password</label>
-                                                                <input name="password" type="password" class="form-control" placeholder="New Password">
+                                                                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="New Password">
+                                                                @error('password')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
                                                                 
                                                             </div>
                                                         </div>
@@ -203,6 +287,10 @@
                                                 <div class="single-input-item">
                                                     <button class="check-btn sqr-btn ">Save Changes</button>
                                                 </div>
+                                            </form>
+                                            <form id="delete-form" method="POST"  class="d-none">
+                                                    @csrf
+                                                    @method('DELETE')
                                             </form>
                                         </div>
                                     </div>

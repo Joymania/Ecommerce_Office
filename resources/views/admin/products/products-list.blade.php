@@ -15,7 +15,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="header">
-                                    <h2>Color List</h2>
+                                    <h2>Product List</h2>
                                 </div>
                                 <div class="body">
                                     <a class=" btn btn-primary m-b-15" href="{{route('products.create')}}"><i class="fa fa-plus-circle"></i> Add Product</a>

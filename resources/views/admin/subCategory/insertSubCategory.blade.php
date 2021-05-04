@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'Insert Category')
-@section('parentPageTitle', 'Dashboard')
+@section('title', 'Add Sub Category')
+@section('parentPageTitle') <a href="{{route('subCategory.view')}}">Sub Categories</a> @endsection
+@section('pageTitle') <a href="#">Add Sub Category</a> @endsection
 
 
 @section('content')
@@ -18,7 +19,7 @@
                                 <option value="">Select Category</option>
 
                                 @foreach($categories as $categorie)
-                                    <option value="{{$categorie->id}}">{{$categorie->name}}</option>
+                                    <option value="{{$categorie->id}}" required>{{$categorie->name}}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -31,10 +32,10 @@
                             <input type="text" id="sub_category_name"
                                    class="form-control @error('sub_category_name') is-invalid @enderror"
                                    name="sub_category_name" placeholder="Sub-category" required>
+                        </div>
                             @error('sub_category_name')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                        </div>
 
                         <div class="form-group col-md-6" style="padding-left: 10px;padding-top:30px">
                             <button name="submit" type="submit" class="btn btn-primary">Submit</button>

@@ -34,11 +34,11 @@
 
                 <div class="form-row col-md-6">
                     <label for="sub_category_name">Sub-category</label>
-                    <input type="text" id="sub_category_name" class="form-control @error('sub_category_name') is-invalid @enderror" name="sub_category_name" value="{{$edits->sub_category_name}}">
+                    <input type="text" id="sub_category_name" class="form-control @error('sub_category_name') is-invalid @enderror" name="sub_category_name" value="{{$edits->sub_category_name}}" required>
+                </div>
                     @error('sub_category_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                </div>
 
                 <div class="form-group col-md-6" style="padding-left: 10px;padding-top:30px">
                     <button name="submit" type="submit" class="btn btn-primary">Submit</button>

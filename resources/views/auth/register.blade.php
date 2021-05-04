@@ -38,7 +38,7 @@
                                                 </span>
                                             @enderror
 
-                                            <input type="password" name="password" placeholder="Password" class=" @error('password') is-invalid @enderror" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
+                                            <input type="password" name="password" placeholder="Password (minimum 8 characters)" class=" @error('password') is-invalid @enderror" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
 
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">

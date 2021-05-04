@@ -1,4 +1,4 @@
-@extends('admin.layout.authentication')
+z@extends('admin.layout.authentication')
 @section('title', 'Reset Password')
 @section('pageTitle') <a href="">Reset Password</a> @endsection
 
@@ -34,7 +34,7 @@
 
                         <div class="form-group">
                             <label for="password" class="control-label sr-only">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus  placeholder="Password" id="password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus  placeholder="Password (minimum 8 characters)" id="password">
 
                             @error('password')
                                     <span class="invalid-feedback" role="alert">
