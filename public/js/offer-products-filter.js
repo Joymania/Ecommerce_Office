@@ -112,7 +112,7 @@ $(document).ready(function () {
                     shopArea.append('' +
                         '<div id="noResult" class="col-12 text-center"><h3>No Result Found</h3></div>');
                 }
-                console.log(second);
+
             },
             error: function (error) {
 

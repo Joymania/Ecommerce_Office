@@ -29,18 +29,11 @@ class subCategoryController extends Controller
         $request->validate([
             'category_id' => 'required',
             'sub_category_name' => 'required',
-        ],
-        // error message
-        [
-            'sub_category_name.unique' => 'Sub-Category name must be unique',
-            'category_id.required' => 'Category is required',
         ]);
-
-        $state = sub_category::insert([
-    		'sub_category_name'=>$request-> sub_category_name,
-    		'category_id'=>$request-> category_id,
-
-
+  
+        sub_category::insert([
+    		'sub_category_name' => $request->sub_category_name,
+    		'category_id' => $request->category_id,
     	]);
 
     	return redirect()->route('subCategory.view')->with('success_msg','Created successfully!');
@@ -50,25 +43,18 @@ class subCategoryController extends Controller
     function editSubCategory($id)
     {
     	$categories = category::all();
-    	$edits = sub_category::findOrFail($id);
+    	$edits = sub_category::find($id);
     	return view('admin.subCategory.editSubCategory',compact('categories','edits'));
     }
 
     // updateSubCategory
     function updateSubCategory(Request $request)
-    {
+    {   
         // validation
-        $request->validate([
+        $this->validate($request,[
             'category_id' => 'required',
             'sub_category_name' => 'required',
-        ],
-        // error message
-        [
-            'sub_category_name.unique' => 'Sub-Category name must be unique',
-            'category_id.required' => 'Category is required',
         ]);
-
-
         sub_category::findOrFail($request->id)->update([
             'sub_category_name'=>$request-> sub_category_name,
     		'category_id'=>$request-> category_id,

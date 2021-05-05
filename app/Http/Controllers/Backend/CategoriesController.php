@@ -28,7 +28,7 @@ class CategoriesController extends Controller
         // validation
         $request->validate([
             'name' => 'required|unique:categories|max:255',
-            'image' => ''
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
       
         $category = new category();
@@ -58,6 +58,12 @@ class CategoriesController extends Controller
     // updateCategory
    function updateCategory(Request $request)
     {
+         // validation
+         $request->validate([
+            'name' => 'required|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]);
+
         $category = category::findOrFail($request->id);
         $category->name = $request-> name;
 

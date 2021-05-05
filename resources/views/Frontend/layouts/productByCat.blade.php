@@ -1,12 +1,14 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
-    {{-- <div>
-         @if(!empty($_GET))
-         <input type="text" id="search" value="{{$_GET['search']}}" hidden>
-        --}}{{-- <input type="text" id="category" value="{{$_GET['category']}}" hidden>--}}{{--
+     <div>
+         @if(isset($catId))
+         <input type="text" id="category" value="{{$catId}}" hidden>
          @endif
-     </div>--}}
+         @if(isset($subCatId))
+         <input type="text" id="subCategory" value="{{$subCatId}}" hidden>
+         @endif
+     </div>
     <input type="text" id="baseUrl" value="{{url('')}}" hidden>
     <div class="shop-area pt-120 pb-120">
         <div class="container">

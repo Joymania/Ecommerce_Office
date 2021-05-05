@@ -8,6 +8,7 @@ use App\Model\product;
 use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductByCategoryController extends Controller
@@ -19,6 +20,32 @@ class ProductByCategoryController extends Controller
         $contacts = contacts::all()->last();
         $products = product::where('category_id' , $id)->paginate(12);
         $categories = category::with('sub_category')->get();
-        return view('Frontend.layouts.productByCat', compact('products','logos' , 'contacts' ,'cartpage','categories'));
+        $catId = $id;
+        return view('Frontend.layouts.productByCat', compact('products','logos' , 'contacts' ,'cartpage','categories','catId'));
+    }
+
+    public function priceFilter(Request $request,$id)
+    {
+        $first = $request->first;
+        $second = $request->second;
+        if ($second != ''){
+            /*$products = product::with('reviews')->where('products.price','<=',$second)
+                ->where('products.price','>=',$first)->get();*/
+            $products = product::with('reviews')->join('categories','categories.id','=','products.category_id')
+                            ->where('products.price','<=',$second)
+                            ->where('products.price','>=',$first)
+                            ->where('categories.id',$id)
+                    ->select('products.id','products.name','products.price','products.image',
+                    'products.promo_price')->get();
+        }else{
+           //$products = product::with('reviews')->where('products.price','>=',$first)->get();
+            $products = product::with('reviews')->join('categories','categories.id','=','products.category_id')
+                ->where('products.price','>=',$first)
+                ->where('categories.id',$id)
+                ->select('products.id','products.name','products.price','products.image',
+                    'products.promo_price')->get();
+        }
+
+        return response()->json($products,200);
     }
 }

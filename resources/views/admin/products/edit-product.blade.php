@@ -12,6 +12,7 @@
             <div class="card planned_task">
                 <div class="header">
                     <h2>Edit Product</h2>
+                    {{--dd($product->sub_category_id)--}}
                 </div>
                 <div class="body">
                     <div class="row clearfix">
@@ -51,11 +52,9 @@
                                                 <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
                                                     <option value="">Select Sub Category</option>
                                                     @foreach($sub_category as $sub)
-                                                        @if($row->name == $product->category->name)
-                                                            <option value="{{$sub->id}}" selected>{{$sub->sub_category_name}}</option>
-                                                        @else
-                                                            <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
-                                                        @endif
+                                                        <option {{ $sub->id == $product->sub_category_id ? 'selected':null }} value="{{$sub->id}}">
+                                                            {{$sub->sub_category_name}}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -100,7 +99,13 @@
                                                         <label for="colorMultiSelect">Select Colors</label>
                                                         <select id="colorMultiSelect" placeholder="Select color" class="form-control" name="color_id[]" multiple="multiple">
                                                             @foreach($colors as $row)
-                                                                <option value="{{$row->id}}">{{$row->name}}</option>
+
+                                                                @if( $product->colors->contains($row->id))
+                                                                    <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                                @else
+                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                @endif
+
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -111,7 +116,11 @@
                                                         <label for="sizeMultiSelect">Select Sizes</label>
                                                         <select id="sizeMultiSelect" class="form-control" name="size_id[]" multiple="multiple">
                                                             @foreach($sizes as $row)
-                                                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                @if( $product->sizes->contains($row->id))
+                                                                    <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                                                @else
+                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
