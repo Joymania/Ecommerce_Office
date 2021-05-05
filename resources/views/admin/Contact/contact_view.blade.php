@@ -11,6 +11,14 @@
         <div class="card">
             <div class="header">
                 <h2>Contact List</h2>
+                @if(session()->has('success_msg'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ session()->get('success_msg') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
             </div>
             <div class="body">
                 {{--  <button id="addToTable" class="btn btn-primary m-b-15" type="button">

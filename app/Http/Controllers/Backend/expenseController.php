@@ -42,7 +42,7 @@ class expenseController extends Controller
 
         Expense::create($request->all());
 
-    	return back();
+        return redirect()->route('expense.view')->with('success_msg','Successfully Added!!!');
     }
 
     // editExpense
@@ -74,14 +74,14 @@ class expenseController extends Controller
     		'expense_by'=>$request-> expense_by,
     	]);
 
-        return redirect()->route('expense.view')->with('success','Successfully Update!!!');
+        return redirect()->route('expense.view')->with('success_msg','Successfully Updated!!!');
     }
 
     //  deleteexpense
     public function deleteexpense($did)
     {
         Expense::findOrFail($did)->delete();
-    	return redirect()->route('expense.view')->with('success','Successfully Deleted!!!');
+    	return redirect()->route('expense.view')->with('success_msg','Successfully Deleted!!!');
     }
 
 

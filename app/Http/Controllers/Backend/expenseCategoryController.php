@@ -25,29 +25,24 @@ class expenseCategoryController extends Controller
     }
     // storeExp
     public function storeExp(Request $request)
-    {
+    { 
         // validation
-        $request->validate([
-            'name' => 'required|unique:categories|max:255',
-        ],
-        // error message
-        [
-            'name.unique' => 'Category name must be unique',
-            'name.required' => 'category name is required',
+        $this->validate($request, [
+            'name' => 'required|unique:expense_categories|max:255',
         ]);
-    
-    // inserting into database
+            
+        // inserting into database
         expenseCategory::insert([
     		'name'=>$request-> name,
     	]);
-    	return back();
+    	return redirect()->route('expenseCategory.view')->with('success_msg','Successfully Added!');
     }
 
     // deleteExp
     public function deleteExp($did)
     {
         expenseCategory::findOrFail($did)->delete();
-    	return redirect()->route('expenseCategory.view')->with('success','Successfully Deleted!!!');
+    	return redirect()->route('expenseCategory.view')->with('success_msg','Successfully Deleted!');
     }
 
 
