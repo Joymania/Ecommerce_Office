@@ -87,10 +87,10 @@
                 <div class="section-title-deal-wrap">
                     <div class="section-title-3">
                         <h2>Offered Products</h2>
-                    </div>                 
+                    </div>
                 </div>
                 <div class="btn-style-7">
-                    <a href="{{route('search.result')}}">All Offered Products</a>
+                    <a href="{{route('offerProducts')}}">All Offered Products</a>
                 </div>
             </div>
             <!-- flash deal header  end-->
@@ -137,9 +137,12 @@
                                             <i class="icon_star"></i>
                                             <i class="icon_star"></i>
                                             <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
                                         @endif
                                     </div>
-                                    <span>({{$product->avg_rating}})</span>
+                                    @if(count($product->reviews) > 0)
+                                        <span>({{count($product->reviews)}})</span>
+                                    @endif
                                 </div>
                                 <div class="product-price-4">
                                     <span class="new-price">{{$product->promo_price}} Tk.</span>
@@ -172,9 +175,12 @@
                                             <i class="icon_star"></i>
                                             <i class="icon_star"></i>
                                             <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
                                         @endif
                                     </div>
-                                    <span>({{$product->avg_rating}})</span>
+                                    @if(count($product->reviews) > 0)
+                                        <span>({{count($product->reviews)}})</span>
+                                    @endif
                                 </div>
                                 <div class="product-price-4">
                                     <span class="new-price">{{$product->promo_price}} Tk.  </span>
@@ -212,7 +218,7 @@
                 </div>
 
             </div>
-            
+
             <div class="product-categories-slider-1 nav-style-3">
                 @if($popular_categories->isNotEmpty())
                     @foreach($popular_categories as $cat)
@@ -244,7 +250,7 @@
                 <div class="section-title-5 section-title-5-bg-1 mb-10">
                     <i class="red icon-screen-desktop"></i>
 
-                    <h5 class="red">{{$cat->name}}</h5>                
+                    <h5 class="red">{{$cat->name}}</h5>
 
                 </div>
                 <div class="row flex-row-reverse">
@@ -255,7 +261,7 @@
                                 <div class="product-slider-active-5">
 
                                     @foreach($cat->product as $product)
-                                        {{--<div class="product-plr-1">
+                                        <div class="product-plr-1">
                                             <div class="single-product-wrap">
                                                 <div class="product-img product-img-zoom mb-15">
                                                     <a href="{{route('product.details',$product->id)}}">
@@ -296,9 +302,12 @@
                                                                 <i class="icon_star"></i>
                                                                 <i class="icon_star"></i>
                                                                 <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
                                                             @endif
                                                         </div>
-                                                        <span>({{$product->avg_rating}})</span>
+                                                        @if(count($product->reviews) > 0)
+                                                        <span>({{count($product->reviews)}})</span>
+                                                        @endif
                                                     </div>
                                                     <div class="product-price-4">
                                                         @if(empty($product->promo_price))
@@ -337,7 +346,9 @@
                                                                 <i class="icon_star"></i>
                                                             @endif
                                                         </div>
-                                                        <span>({{$product->avg_rating}})</span>
+                                                        @if(count($product->reviews) > 0)
+                                                            <span>({{count($product->reviews)}})</span>
+                                                        @endif
                                                     </div>
                                                     <div class="product-price-4">
                                                         @if(empty($product->promo_price))
@@ -354,45 +365,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>--}}
-
-                                        <div class="product-plr-1">
-                                            <div class="single-product-wrap">
-                                                <div class="product-img product-img-zoom mb-15">
-                                                    <a href="{{route('product.details',$product->id)}}">
-                                                        <img src="{{"/upload/products_images/$product->image"}}" style="height: 178px; width: 178px" alt="Product Image">
-                                                    </a>
-                                                </div>
-                                                <div class="product-content-wrap-2 text-center">
-                                                    <h3><a href="{{route('product.details',$product->id)}}">{{$product->name}}</a></h3>
-                                                    <div class="product-price-2">
-                                                        @if(empty($product->promo_price))
-                                                            <span>{{$product->price}} Tk</span>
-                                                        @else
-                                                            <span class="new-price">{{$product->promo_price}} Tk</span>
-                                                            <span class="old-price">{{$product->price}} Tk</span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                    <h3><a href="{{route('product.details',$product->id)}}">{{$product->name}}</a></h3>
-                                                    <div class="product-price-2">
-                                                        @if(empty($product->promo_price))
-                                                            <span>{{$product->price}} Tk</span>
-                                                        @else
-                                                            <span class="new-price">{{$product->promo_price}} Tk</span>
-                                                            <span class="old-price">{{$product->price}} Tk</span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="pro-add-to-cart">
-                                                        <a href="{{route('product.details',['id' => $product->id])}}">
-                                                            <button title="Add to Cart">Add To Cart</button>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
-
                                     @endforeach
 
                                 </div>
@@ -411,7 +384,7 @@
                             </div>
                             <div class="btn-style-8">
                                 <!-- show all products related to this category -->
-                                <a href="#">View All </a>
+                                <a href="{{ route('productByCategory', $cat->id) }}">View All </a>
                             </div>
                         </div>
                     </div>

@@ -51,7 +51,11 @@
                                                 <select id="sub_category_id" name="sub_category_id" class="form-control multiselect multiselect-custom">
                                                     <option value="">Select Sub Category</option>
                                                     @foreach($sub_category as $sub)
-                                                        <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
+                                                        @if($row->name == $product->category->name)
+                                                            <option value="{{$sub->id}}" selected>{{$sub->sub_category_name}}</option>
+                                                        @else
+                                                            <option value="{{$sub->id}}">{{$sub->sub_category_name}}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -96,10 +100,7 @@
                                                         <label for="colorMultiSelect">Select Colors</label>
                                                         <select id="colorMultiSelect" placeholder="Select color" class="form-control" name="color_id[]" multiple="multiple">
                                                             @foreach($colors as $row)
-                                                                @if($row->name == $product->colors[0]->name)
-                                                                    <option value="{{$row->id}}" selected>{{$row->name}}</option>
-                                                                @endif
-                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                <option value="{{$row->id}}">{{$row->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -110,10 +111,7 @@
                                                         <label for="sizeMultiSelect">Select Sizes</label>
                                                         <select id="sizeMultiSelect" class="form-control" name="size_id[]" multiple="multiple">
                                                             @foreach($sizes as $row)
-                                                                @if($row->name == $product->sizes[0]->name)
-                                                                    <option value="{{$row->id}}" selected>{{$row->name}}</option>
-                                                                @endif
-                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                <option value="{{$row->id}}">{{$row->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

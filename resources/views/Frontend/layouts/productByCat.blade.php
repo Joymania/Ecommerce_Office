@@ -75,9 +75,12 @@
                                                                         <i class="icon_star"></i>
                                                                         <i class="icon_star"></i>
                                                                         <i class="icon_star"></i>
+                                                                        <i class="icon_star"></i>
                                                                     @endif
                                                                 </div>
-                                                                <span>({{ceil($product->avg_rating)}})</span>
+                                                                @if(count($product->reviews) > 0)
+                                                                    <span>({{count($product->reviews)}})</span>
+                                                                @endif
                                                             </div>
                                                             <h3><a href="{{route('product.details',$product->id)}}" class="productName">{{$product->name}}</a></h3>
                                                             <div class="product-price-2">
@@ -111,9 +114,12 @@
                                                                         <i class="icon_star"></i>
                                                                         <i class="icon_star"></i>
                                                                         <i class="icon_star"></i>
+                                                                        <i class="icon_star"></i>
                                                                     @endif
                                                                 </div>
-                                                                <span>({{ceil($product->avg_rating)}})</span>
+                                                                @if(count($product->reviews) > 0)
+                                                                    <span>({{count($product->reviews)}})</span>
+                                                                @endif
                                                             </div>
                                                             <h3><a href="{{route('product.details',$product->id)}}">{{$product->name}}</a></h3>
                                                             <div class="product-price-2">
@@ -204,7 +210,7 @@
        </div>
 @endsection
 @section('scripts')
-    <script src="{{asset('js/searchFilter.js')}}"></script>
+    <script src="{{asset('js/category-products-filter.js')}}"></script>
 @endsection
 @section('stylesheet')
     <link rel="stylesheet" href="{{asset('css/products.css')}}">

@@ -7,6 +7,7 @@
        --}}{{-- <input type="text" id="category" value="{{$_GET['category']}}" hidden>--}}{{--
         @endif
     </div>--}}
+   <input type="text" value="{{url('')}}" id="baseUrl"hidden>
     <div class="shop-area pt-120 pb-120">
         <div class="container">
             <div class="row flex-row-reverse">
@@ -73,9 +74,12 @@
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
+                                                                    <i class="icon_star"></i>
                                                                 @endif
                                                             </div>
-                                                            <span>({{ceil($product->avg_rating)}})</span>
+                                                            @if(count($product->reviews) > 0)
+                                                                <span>({{count($product->reviews)}})</span>
+                                                            @endif
                                                         </div>
                                                         <h3><a href="{{route('product.details',$product->id)}}" class="productName">{{$product->name}}</a></h3>
                                                         <div class="product-price-2">
@@ -109,9 +113,12 @@
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
                                                                     <i class="icon_star"></i>
+                                                                    <i class="icon_star"></i>
                                                                 @endif
                                                             </div>
-                                                            <span>({{ceil($product->avg_rating)}})</span>
+                                                            @if(count($product->reviews) > 0)
+                                                                <span>({{count($product->reviews)}})</span>
+                                                            @endif
                                                         </div>
                                                         <h3><a href="{{route('product.details',$product->id)}}">{{$product->name}}</a></h3>
                                                         <div class="product-price-2">

@@ -211,7 +211,7 @@
                                                 @if($cat->sub_category->isEmpty())
                                                 <li class="cr-dropdown @yield('category')"><a href="{{ route('productByCategory', $cat->id) }}">{{$cat->name}}</a></li>
                                                 @else
-                                                <li class="cr-dropdown @yield('category')"><a href="#">{{$cat->name}}<span class="icon-arrow-right"></span></a>
+                                                <li class="cr-dropdown @yield('category')"><a href="{{ route('productByCategory', $cat->id) }}">{{$cat->name}}<span class="icon-arrow-right"></span></a>
                                                     <div class="category-menu-dropdown ct-menu-res-height-1">
                                                         <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
 

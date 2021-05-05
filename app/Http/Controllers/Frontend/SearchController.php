@@ -32,10 +32,10 @@ class SearchController extends Controller
         $first = $request->first;
         $second = $request->second;
         if ($second != ''){
-        $products = product::where('products.price','<=',$second)
+        $products = product::with('reviews')->where('products.price','<=',$second)
             ->where('products.price','>=',$first)->get();
         }else{
-            $products = product::where('products.price','>=',$first)->get();
+            $products = product::with('reviews')->where('products.price','>=',$first)->get();
         }
 
         return response()->json($products,200);
@@ -43,16 +43,15 @@ class SearchController extends Controller
 
     public function ajaxSearch(Request $request)
     {
-        $products = product::where('name','LIKE','%'.$request->search.'%')->get();
+        $products = product::with('reviews')->where('name','LIKE','%'.$request->search.'%')->get();
         return response()->json($products, 200);
     }
 
     public function categoryProducts(Request $request)
     {
-        $products = product::join('categories','products.category_id','categories.id')
+        $products = product::with('reviews')->join('categories','products.category_id','categories.id')
                         ->where('categories.name','=',$request->category)
-                        ->select('products.name','products.price','products.id','products.image','products.promo_price',
-                            'products.avg_rating')->get();
+                        ->select('products.name','products.price','products.id','products.image','products.promo_price','avg_rating')->get();
         return response()->json($products,200);
     }
 }

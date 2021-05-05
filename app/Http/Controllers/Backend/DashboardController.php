@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $customers = User::count();
         $recentOrders = Order::with('products')->latest()->get();
         $data['pending'] = Order::where('status',0)->count();
-        $data['completed'] = $sales;
+        $data['completed'] = Order::where('status',2)->count();
         $data['processing'] = Order::where('status',1)->count();
         $data['customerSatisfaction'] = review::count();
         $data['totalItems'] = product::count();
