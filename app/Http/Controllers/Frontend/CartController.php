@@ -27,10 +27,10 @@ class CartController extends Controller
 
     public function addtoCart(Request $request){
 
-         $this->validate($request,[
+         /*$this->validate($request,[
              'size_id'=>'required',
              'color_id'=>'required'
-             ]);
+             ]);*/
 
         $product=product::where('id',$request->id)->first();
         $product_size=size::where('id',$request->size_id)->first();
@@ -107,7 +107,7 @@ class CartController extends Controller
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $id = Auth::id();
             if($id){
-            $data['showCart']=CartShopping::with('product')->where(function($querry)use($id) {
+            $data['showCart']=CartShopping::with('product','color','size')->where(function($querry)use($id) {
                 $querry->where('user_id',$id)->where('status','0');
             })->get();
 
