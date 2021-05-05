@@ -103,7 +103,7 @@ class ProductsController extends Controller
 
     public function edit(product $product)
     {
-
+        // dd($product);
         $categories = category::all();
         $brands = brand::all();
         $tags = tag::all();

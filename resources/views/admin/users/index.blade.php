@@ -77,23 +77,22 @@
 
                                 <!-- for deleting user using one form -->
                                 <div hidden> {{$route = route('users.delete',$user->id)}}</div>
-                                <a href="{{ route('users.delete',$user->id) }}"
+                                <a href="{{ route('users.delete',$user->id) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
+                                    data-toggle="tooltip" data-original-title="Remove"
                                     onclick="event.preventDefault();
                                     document.getElementById('delete-form').setAttribute('action', '{{$route}}');
                                     confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
-
-                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                    data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i>
+                                    <i class="icon-trash" aria-hidden="true"></i>
                                 </a>
                             </td>
                         </tr>
                     @endforeach
-                    <form id="delete-form" method="POST"  class="d-none">
-                            @csrf
-                            @method('DELETE')
-                    </form>
                     </tbody>
                 </table>
+                <form id="delete-form" method="POST"  class="d-none">
+                        @csrf
+                        @method('DELETE')
+                </form>
                 </div>
             </div>
         </div>

@@ -205,7 +205,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('insertcat','Backend\CategoriesController@insertcat')->name('category.store');
         Route::get('editCategory/{eid}', 'Backend\CategoriesController@editCategory')->name('category.edit');
         Route::post('updateCategory','Backend\CategoriesController@updateCategory')->name('category.update');
-        Route::get('deleteCategory/{did}','Backend\CategoriesController@deleteCategory')->name('category.delete');
+        Route::delete('deleteCategory/{did}','Backend\CategoriesController@deleteCategory')->name('category.delete');
     });
 
     // Sub category
@@ -215,7 +215,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('insertSubcat', 'Backend\subCategoryController@insertSubcat')->name('subCategory.store');
         Route::get('editSubCategory/{id}', 'Backend\subCategoryController@editSubCategory')->name('subCategory.edit');
         Route::post('updateSubCategory','Backend\subCategoryController@updateSubCategory')->name('subCategory.update');
-        Route::get('deleteSubCategory/{did}','Backend\subCategoryController@deleteSubCategory')->name('subCategory.delete');
+        Route::delete('deleteSubCategory/{did}','Backend\subCategoryController@deleteSubCategory')->name('subCategory.delete');
     });
 
     // expenseCategory
