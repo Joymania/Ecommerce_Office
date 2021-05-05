@@ -11,6 +11,14 @@
             <a href="{{route('expenseCategory.add')}}">
                 <button type="button" class="btn btn-primary">Add new Expense category</button>
             </a>
+            @if(session()->has('success_msg'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ session()->get('success_msg') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
         </div>
         <br>
         <div class="card">
@@ -38,6 +46,7 @@
                                         <a title="Delete" href="{{ route('expenseCategory.delete',$view_cat->id) }}">
                                             <span><i class="fa fa-trash"></i></span>
                                         </a>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach

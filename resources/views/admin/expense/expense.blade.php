@@ -11,6 +11,14 @@
             <a href="{{route('expense.add')}}">
                 <button type="button" class="btn btn-primary">Add New Expense</button>
             </a>
+            @if(session()->has('success_msg'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ session()->get('success_msg') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
         </div>
         <br>
         <div class="card">
@@ -30,7 +38,8 @@
                         </thead>
                         <tbody>
 
-                            @foreach($lists as $list) @if(!empty($list->expenseCategory))
+                            @foreach($lists as $list) 
+                            @if(!empty($list->expenseCategory))
                             <tr>
                                 <td>{{$list->id}}</td>
 
@@ -47,11 +56,13 @@
                                 <td class="action">
 
                                     <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('expense.edit',$list->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a>
+                                    </button>
 
                                     <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove">
                                     <a title="Move to trash" href="{{ route('expense.delete',$list->id) }}">
                                         <span><i class="fa fa-trash"></i></span>
                                     </a>
+                                    </button>
                                 </td>
                             </tr>
                             @else
@@ -62,13 +73,9 @@
 
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 @stop

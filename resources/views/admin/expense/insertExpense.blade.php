@@ -46,7 +46,7 @@
                         <div class="form-row col-md-6">
                             <label for="description">Note</label>
                             <input type="text" id="note" class="form-control @error('note') is-invalid @enderror"
-                                   name="note" placeholder="Note" required>
+                                   name="note" placeholder="Note" >
                             @error('note')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
