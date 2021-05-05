@@ -20,7 +20,9 @@ Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about_us');
 // without authentication
 Route::get('/','Frontend\FrontendController@index')->name('frontsite');
 Route::get('/{id}/products','Frontend\ProductBySubcatController@productByCat')->name('productByCat');
+Route::get('/{id}/products/subCat-priceFilter','Frontend\ProductBySubcatController@priceFilter');
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
+Route::get('/{id}/products/cat-priceFilter','Frontend\ProductByCategoryController@priceFilter');
 
 //Shop page routing
 Route::get('/shop','Frontend\ShopController@index')->name('products.shop');

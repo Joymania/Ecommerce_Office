@@ -99,12 +99,13 @@
                                                         <label for="colorMultiSelect">Select Colors</label>
                                                         <select id="colorMultiSelect" placeholder="Select color" class="form-control" name="color_id[]" multiple="multiple">
                                                             @foreach($colors as $row)
-                                                               
+
                                                                 @if( $product->colors->contains($row->id))
                                                                     <option value="{{$row->id}}" selected>{{$row->name}}</option>
                                                                 @else
                                                                     <option value="{{$row->id}}">{{$row->name}}</option>
                                                                 @endif
+
                                                             @endforeach
                                                         </select>
                                                     </div>

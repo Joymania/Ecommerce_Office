@@ -148,23 +148,26 @@
                         <tbody>
                         @if(count((array)$recentOrders) > 0)
                             @foreach($recentOrders as $orders)
-                                @php($name = $orders->biling_fname)
                                 @foreach($orders->products as $product)
-                                    <tr>
-                                        {{--<td><img src="http://via.placeholder.com/60x50" alt="Product img"></td>--}}
-                                        <td>{{$name}}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$orders->biling_address}}</td>
-                                        <td>{{$product->pivot->qty}}</td>
-                                        @if($orders->status == 0)
-                                            <td><span class="badge badge-success">PENDING</span></td>
-                                        @elseif($orders->status == 1)
-                                            <td><span class="badge badge-success">APPROVED</span></td>
-                                        @else
-                                            <td><span class="badge badge-success">APPROVED</span></td>
-                                        @endif
-                                        <td>{{(integer)$product->price * (integer)$product->pivot->qty}}Tk.</td>
-                                    </tr>
+                                <tr>
+                                    <td>{{$orders->biling_fname}}</td>
+                                    <td>{{$product->name}}</td>
+                                    <td>{{$orders->biling_address}}</td>
+                                    <td>{{$product->pivot->qty}}</td>
+                                    @if($orders->status == 0)
+                                        <td><span class="badge badge-success">PENDING</span></td>
+                                    @elseif($orders->status == 1)
+                                        <td><span class="badge badge-success">APPROVED</span></td>
+                                    @else
+                                        <td><span class="badge badge-success">APPROVED</span></td>
+                                    @endif
+
+                                    @if(empty($product->promo_price))
+                                    <td>{{(integer)$product->price * (integer)$product->pivot->qty}}Tk.</td>
+                                    @else
+                                        <td>{{(integer)$product->promo_price * (integer)$product->pivot->qty}}Tk.</td>
+                                    @endif
+                                </tr>
                                 @endforeach
                             @endforeach
                         @endif

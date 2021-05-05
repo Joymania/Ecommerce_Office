@@ -37,7 +37,7 @@ $(document).ready(function () {
                         }else{
                             price = `
                             <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price product-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].promo_price}</span>Tk
                             `
                             discount =`<span class="pro-badge left bg-red">-
                                 ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
@@ -49,6 +49,11 @@ $(document).ready(function () {
                         }else
                         {
                             avgRating = 0;
+                        }
+
+                        let reviews = '';
+                        if (data[i].reviews.length > 0){
+                            reviews = `<span>(${data[i].reviews.length})</span>`
                         }
 
                         if (Math.ceil(data[i].avg_rating) === 1){
@@ -92,7 +97,7 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${avgRating})</span>
+                                                            ${reviews}
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details" class="productName">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
@@ -104,7 +109,7 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${Math.ceil(data[i].avg_rating)})</span>
+                                                            ${reviews}
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
@@ -125,7 +130,6 @@ $(document).ready(function () {
                     shopArea.append('' +
                         '<div id="noResult" class="col-12 text-center"><h3>No Result Found</h3></div>');
                 }
-                console.log(second);
             },
             error: function (error) {
 
@@ -136,49 +140,6 @@ $(document).ready(function () {
 
 });
 
-
-//Sorting by name or price function
-$(document).ready(function () {
-    function SortByName() {
-        var sortedProducts = $('.singleProduct').sort(function(a, b) {
-            return $(a).find('.productName').text().localeCompare($(b).find('.productName').text())
-        });
-        $('#shopArea').remove('.singleProduct').append(sortedProducts)
-    }
-
-    function SortByPrice(){
-        var sortedProducts = $('.singleProduct').sort(function(a, b) {
-            return $(a).find('.product-price').text().localeCompare($(b).find('.product-price').text())
-        });
-        $('#shopArea').remove('.singleProduct').append(sortedProducts)
-    }
-    function sortProductsPriceAscending() {
-        // change variable name, so it's clear what it contains
-        var gridItems = $('.singleProduct');
-
-        gridItems.sort(function(a, b){
-            // we are sorting the gridItems, but we are sorting them on the nested
-            // product card prices.  So we have to find the nested product card
-            // to get the price off of
-            return $(a).find('.product-price').text() - $(b).find('.product-price').text();
-        });
-
-        // when you put the grid items back on the container, just append them rather
-        // than using html().  Append will just move them.
-        $("#shopArea").append(gridItems);
-    }
-
-    $('#sortBy').on('change', function () {
-        if ($(this).val() === 'name'){
-            SortByName();
-        }
-        if ($(this).val() === 'price')
-        {
-            //SortByPrice();
-            sortProductsPriceAscending();
-        }
-    });
-});
 
 //Newly Search products
 $(document).ready(function () {
@@ -207,7 +168,7 @@ $(document).ready(function () {
                         }else{
                             price = `
                             <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price product-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].promo_price}</span>Tk
                             `;
                             discount =`<span class="pro-badge left bg-red">-
                                 ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
@@ -220,6 +181,11 @@ $(document).ready(function () {
                         }else
                         {
                             avgRating = 0;
+                        }
+
+                        let reviews = '';
+                        if (data[i].reviews.length > 0){
+                            reviews = `<span>(${data[i].reviews.length})</span>`
                         }
 
                         let rating = '';
@@ -264,7 +230,7 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${avgRating})</span>
+                                                            ${reviews}
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details" class="productName">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
@@ -276,7 +242,7 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${Math.ceil(data[i].avg_rating)})</span>
+                                                            ${reviews}
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
@@ -325,7 +291,7 @@ $(document).ready(function () {
                         }else{
                             price = `
                             <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price product-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].promo_price}</span>Tk
                             `;
                             discount =`<span class="pro-badge left bg-red">-
                                 ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
@@ -338,6 +304,11 @@ $(document).ready(function () {
                         }else
                         {
                             avgRating = 0;
+                        }
+
+                        let reviews = '';
+                        if (data[i].reviews.length > 0){
+                            reviews = `<span>(${data[i].reviews.length})</span>`
                         }
 
                         let rating = '';
@@ -382,7 +353,7 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${avgRating})</span>
+                                                            ${reviews}
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details" class="productName">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
@@ -394,7 +365,7 @@ $(document).ready(function () {
                                                             <div class="product-rating">
                                                                 ${rating}
                                                             </div>
-                                                            <span>(${Math.ceil(data[i].avg_rating)})</span>
+                                                            ${reviews}
                                                         </div>
                                                         <h3><a href="/${data[i].id}/product-details">${data[i].name}</a></h3>
                                                         <div class="product-price-2">
@@ -418,6 +389,49 @@ $(document).ready(function () {
             }
         })
 
+    });
+});
+
+//Sorting by name or price function
+$(document).ready(function () {
+    function SortByName() {
+        var sortedProducts = $('.singleProduct').sort(function(a, b) {
+            return $(a).find('.productName').text().localeCompare($(b).find('.productName').text())
+        });
+        $('#shopArea').remove('.singleProduct').append(sortedProducts)
+    }
+
+    function SortByPrice(){
+        var sortedProducts = $('.singleProduct').sort(function(a, b) {
+            return $(a).find('.product-price').text().localeCompare($(b).find('.product-price').text())
+        });
+        $('#shopArea').remove('.singleProduct').append(sortedProducts)
+    }
+    function sortProductsPriceAscending() {
+        // change variable name, so it's clear what it contains
+        var gridItems = $('.singleProduct');
+
+        gridItems.sort(function(a, b){
+            // we are sorting the gridItems, but we are sorting them on the nested
+            // product card prices.  So we have to find the nested product card
+            // to get the price off of
+            return $(a).find('.product-price').text() - $(b).find('.product-price').text();
+        });
+
+        // when you put the grid items back on the container, just append them rather
+        // than using html().  Append will just move them.
+        $("#shopArea").append(gridItems);
+    }
+
+    $('#sortBy').on('change', function () {
+        if ($(this).val() === 'name'){
+            SortByName();
+        }
+        if ($(this).val() === 'price')
+        {
+            //SortByPrice();
+            sortProductsPriceAscending();
+        }
     });
 });
 

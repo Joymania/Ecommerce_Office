@@ -29,7 +29,7 @@ class OfferProductsController extends Controller
         $first = $request->first;
         $second = $request->second;
         if ($second != ''){
-            $products = product::where('promo_price','!=','null')
+            $products = product::with('reviews')->where('promo_price','!=','null')
                 ->where('price','<=',$second)
                 ->where('price','>=',$first)->get();
         }else{
@@ -42,14 +42,14 @@ class OfferProductsController extends Controller
 
     public function ajaxSearch(Request $request)
     {
-        $products = product::where('promo_price','!=','null')
+        $products = product::with('reviews')->where('promo_price','!=','null')
                     ->where('name','LIKE','%'.$request->search.'%')->get();
         return response()->json($products, 200);
     }
 
     public function categoryProducts(Request $request)
     {
-        $products = product::join('categories','products.category_id','categories.id')
+        $products = product::with('reviews')->join('categories','products.category_id','categories.id')
             ->where('products.promo_price','!=','null')
             ->where('categories.name','=',$request->category)
             ->select('products.name','products.price','products.id','products.image','products.promo_price')->get();

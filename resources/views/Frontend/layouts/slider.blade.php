@@ -3,7 +3,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                         <div class="slider-area bg-gray mb-30">
+                         <div class="slider-area bg-gray mb-30 ml-auto mr-auto" style="width: 80%; height: 90%">
                              <div class="hero-slider-active-3 dot-style-2 dot-style-2-position-4 dot-style-2-active-purple">
                                  @foreach ($sliders as $slider)
                                  <div class="single-hero-slider single-animation-wrap">
@@ -30,8 +30,8 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-8 col-md-6 col-sm-6">
-                                            <div class="hm6-hero-slider-img slider-animated-1">
-                                                <img class="animated" src="{{ asset('upload/products_images/'.$slider->image) }}" style="width: 300px; height: 420px" alt="">
+                                            <div class="hm6-hero-slider-img slider-animated-1 float-right">
+                                                <img class="animated m-5" src="{{ asset('upload/products_images/'.$slider->image) }}" style="width: 270px; height: 380px" alt="">
 
                                             </div>
                                         </div>

@@ -162,6 +162,12 @@ class ProductsController extends Controller
         }
 
         $product->save();
+        if (!empty($request->color_id) > 0){
+            $product->colors()->attach($request->color_id);
+        }
+        if (!empty($request->size_id) > 0){
+            $product->sizes()->attach($request->size_id);
+        }
         return redirect()->route('products.list');
     }
 

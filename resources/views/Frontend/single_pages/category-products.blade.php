@@ -1,12 +1,8 @@
 @extends('Frontend.layouts.master')
 
 @section('content')
-    <div>
-        @if(!empty($_GET))
-            <input type="text" id="search" value="{{$_GET['search']}}" hidden>
-            <input type="text" id="category" value="{{$_GET['category']}}" hidden>
-        @endif
-    </div>
+
+    <input type="text" value="{{url('')}}" id="baseUrl"hidden>
     <div class="shop-area pt-120 pb-120">
         <div class="container">
             <div class="row flex-row-reverse">
