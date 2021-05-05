@@ -46,17 +46,28 @@
                                 </td>
                                
                                 <td class="action">
-                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('category.edit',$view_cat->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a></button>                                   
-                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"> 
-                                        <a title="Delete" href="{{ route('category.delete',$view_cat->id) }}">
-                                            <span><i class="fa fa-trash"></i></span>
-                                        </a>
-                                    </button>
+                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('category.edit',$view_cat->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a></button> 
+                               
+                                    <!-- for deleting admin using one form -->
+                                    <div hidden> {{ $route = route('category.delete', $view_cat->id) }}</div>
+                                    <a href="{{ route('category.delete', $view_cat->id) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
+                                        data-toggle="tooltip" data-original-title="Remove"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('delete-form').setAttribute('action', '{{$route}}');
+                                        confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
+
+                                         <i class="fa fa-trash"></i>
+                                        
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach 
                         </tbody>
                     </table>
+                    <form id="delete-form" method="POST"  class="d-none">
+                        @csrf
+                        @method('DELETE')
+                    </form>
                     </div>
                 </div>
 

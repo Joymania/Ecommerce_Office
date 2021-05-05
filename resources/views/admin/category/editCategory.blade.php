@@ -19,15 +19,20 @@
                             <label for="name" class="col-sm-3 text-right control-label col-form-label">Category Name*</label>
                             <div class="col-sm-4">
                                 <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" value="{{$edits->name}}" required>
-                            </div>
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label for="image" class="col-sm-3 text-right control-label col-form-label">Category Image</label>
                             <div class="col-sm-4">
-                                <input name="image" type="file" class="form-control" id="image">
+                                <input name="image" type="file" class="form-control @error('image') is-invalid @enderror" id="image">
+                                @error('image')                            
+                                    <span class="" role="alert" style="color: red">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
