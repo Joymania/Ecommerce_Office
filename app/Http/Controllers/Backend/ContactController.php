@@ -18,6 +18,12 @@ class ContactController extends Controller
 
     public function store(Request $request){
 
+        $this->validate($request,[
+            'address' => 'required|max:255',
+            'mobile_no' => 'required|max:15',
+            'email' => 'required|max:100'
+        ]);
+          
         $data=new contacts();
         //$data->created_by=Auth::user()->id;
         $data->address=$request->address;
@@ -29,7 +35,7 @@ class ContactController extends Controller
         $data->instagram=$request->instagram;
         $data->pioneer=$request->pioneer;
         $data->save();
-        return redirect()->route('contact.view')->with('success', 'Data Store Successfully.');
+        return redirect()->route('contact.view')->with('success_msg', 'Contact Added Successfully.');
     }
 
     public function edit($id){
@@ -38,6 +44,12 @@ class ContactController extends Controller
 
     }
     public function update(Request $request, $id){
+        $this->validate($request,[
+            'address' => 'required|max:255',
+            'mobile_no' => 'required|max:15',
+            'email' => 'required|max:100'
+        ]);
+
         $data=contacts::find($id);
         //$data->updated_by=Auth::user()->id;
         $data->address=$request->address;
@@ -49,12 +61,12 @@ class ContactController extends Controller
         $data->instagram=$request->instagram;
         $data->pioneer=$request->pioneer;
         $data->save();
-        return redirect()->route('contact.view')->with('success', 'Data Updated Successfully.');
+        return redirect()->route('contact.view')->with('success_msg', 'Contact Updated Successfully.');
     }
 
     public function delete($id){
         $data=contacts::find($id);
         $data->delete();
-        return redirect()->route('contact.view')->with('success', 'Data Deleted Successfully.');
+        return redirect()->route('contact.view')->with('success_msg', 'Contact Deleted Successfully.');
     }
 }

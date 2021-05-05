@@ -22,7 +22,9 @@
                             <input type="text" id="name" class="form-control @error('name') is-invalid @enderror"
                                    name="name" placeholder="Write Category name" required>
                             @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 

@@ -24,18 +24,30 @@
           <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="address">Address</label>
-                <input type="text" name="address" class="form-control" id="address" value="{{ @$editdata->address }}">
-
+                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" id="address" value="{{ @$editdata->address }}" required>
+                @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="form-group col-md-4">
                 <label for="mobile_no">Mobile No</label>
-                <input type="text" name="mobile_no" class="form-control" id="mobile_no" value="{{ @$editdata->mobile_no }}">
-
+                <input type="tel" name="mobile_no" class="form-control @error('mobile_no') is-invalid @enderror" id="mobile_no" value="{{ @$editdata->mobile_no }}" required>
+                @error('mobile_no')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="form-group col-md-4">
                 <label for="address">Email</label>
-                <input type="email" name="email" class="form-control" id="email" value="{{ @$editdata->email }}">
-
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ @$editdata->email }}" required>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="form-group col-md-4">
                 <label for="facebook">Facebook</label>
