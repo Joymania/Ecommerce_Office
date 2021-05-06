@@ -46,8 +46,8 @@ $(document).ready(function () {
                             price = `<span class="new-price product-price">${data[i].price}</span>Tk`
                         }else{
                             price = `
-                            <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price">${data[i].promo_price}</span>Tk
+                            <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].price}</span>Tk
                             `
                             discount =`<span class="pro-badge left bg-red">-
                                 ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
@@ -181,12 +181,12 @@ $(document).ready(function () {
                             price2 = `<span class="new-price">${data[i].price}</span>Tk`;
                         }else{
                             price1 = `
-                            <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price">${data[i].promo_price}</span>Tk
+                            <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].price}</span>Tk
                             `;
                             price2 = `
-                            <span class="new-price">${data[i].price}</span>Tk
-                            <span class="old-price">${data[i].promo_price}</span>Tk
+                            <span class="new-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].price}</span>Tk
                             `;
                             discount =`<span class="pro-badge left bg-red">-
                                 ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
@@ -310,12 +310,12 @@ $(document).ready(function () {
                             price2 = `<span class="new-price">${data[i].price}</span>Tk`;
                         }else{
                             price1 = `
-                            <span class="new-price product-price">${data[i].price}</span>Tk
-                            <span class="old-price">${data[i].promo_price}</span>Tk
+                            <span class="new-price product-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].price}</span>Tk
                             `;
                             price2 = `
-                            <span class="new-price">${data[i].price}</span>Tk
-                            <span class="old-price">${data[i].promo_price}</span>Tk
+                            <span class="new-price">${data[i].promo_price}</span>Tk
+                            <span class="old-price">${data[i].price}</span>Tk
                             `;
                             discount =`<span class="pro-badge left bg-red">-
                                 ${(((parseInt(data[i].price) - parseInt(data[i].promo_price))*100)/data[i].price).toFixed(2)}
