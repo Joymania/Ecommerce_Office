@@ -56,7 +56,8 @@
 
                                 <li class="{{ Request::segment(4) === 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
                                 <li class="{{ Request::segment(4) === 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
-                                <li class="{{ Request::segment(4) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
+                                <li class="{{ Request::segment(2) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
+                                {{-- <li class="{{ Request::segment(3) === 'slider' ? 'active' : null }}"><a href="{{route('slider.view')}}">Slider</a></li> --}}
                                 <li><a href="{{route('sales.report')}}">Report</a></li>
 
                             </ul>
@@ -85,8 +86,8 @@
                         <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
                             <a href="#Users" class="has-arrow"><i class="icon-users"></i> <span>Users</span></a>
                             <ul>
-                                <li class="{{ Request::segment(3) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
-                                <li class="{{ Request::segment(3) === 'users' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
+                                <li class="{{ Request::segment(2) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
+                                <li class="{{ Request::segment(2) === 'users' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -50,6 +50,14 @@
 
 <body>
 
+    <style>
+        @media only screen and (max-width: 420px){
+            .header-action .same-style-2 {
+                margin-right: 8px;
+            }
+        }
+    </style>
+
     <div class="main-wrapper">
         <!-- Header start -->
         <header class="header-area">
@@ -106,7 +114,7 @@
                                 <div class="logo">
 
                                     @if(!empty($logos))
-                                    <a href="{{"/"}}"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+                                    <a href="{{"/"}}"><img src="{{asset($logos->image)}}" alt="logo"></a>
                                     @else
                                     <p>No logo</p>
                                    @endif
@@ -285,7 +293,7 @@
                         <div class="col-5">
                             <div class="mobile-logo">
                                 @if(!empty($logos))
-                                    <a href="/"><img height="50px" width="70px" src="{{asset($logos->image)}}" alt="logo"></a>
+                                    <a href="/"><img  src="{{asset($logos->image)}}" alt="logo"></a>
                                 @endif
                             </div>
                         </div>

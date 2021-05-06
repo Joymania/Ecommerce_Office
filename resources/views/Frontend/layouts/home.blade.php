@@ -4,6 +4,13 @@
     @include('Frontend.layouts.slider')
     @include('Frontend.layouts.service_area')
 
+    <style>
+        .center{
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+
     <div class="sidebar-cart-active">
         <div class="sidebar-cart-all">
             <a class="cart-close" href="#"><i class="icon_close"></i></a>
@@ -102,7 +109,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-zoom mb-15">
                                 <a href="{{route('product.details',$product->id)}}">
-                                    <img src="{{"/upload/products_images/$product->image"}}" style="height: 210px; width: 210px" alt="Product Image">
+                                    <img class="center" src="{{"/upload/products_images/$product->image"}}" alt="Product Image" width="210px" height="210px">
                                 </a>
                                 <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
                                 <div class="product-action-2 tooltip-style-2">
@@ -111,13 +118,13 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="product-content-wrap-3">
+                            <div class="product-content-wrap-3 center">
                                 <div class="product-content-categories">
                                     <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
                                 </div>
                                 <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
+                                    <div class="product-rating-4 center">
                                         @if(ceil($product->avg_rating) == 1)
                                             <i class="icon_star"></i>
                                         @elseif(ceil($product->avg_rating) == 2)
@@ -149,13 +156,13 @@
                                     <span class="old-price">{{$product->price}} Tk.</span>
                                 </div>
                             </div>
-                            <div class="product-content-wrap-3 product-content-position-2">
+                            <div class="product-content-wrap-3 product-content-position-2 center">
                                 <div class="product-content-categories">
                                     <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
                                 </div>
                                 <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
                                 <div class="product-rating-wrap-2">
-                                    <div class="product-rating-4">
+                                    <div class="product-rating-4 center">
                                         @if(ceil($product->avg_rating) == 1)
                                             <i class="icon_star"></i>
                                         @elseif(ceil($product->avg_rating) == 2)
@@ -226,7 +233,7 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-border mb-20">
                                 <a href="{{ route('productByCategory', $cat->id) }}">
-                                    <img src="{{ (!empty($cat->image)) ? url('upload/categories/'.$cat->image):url('upload/defaultCategory.jpg') }}" alt="{{ $cat->name }}">
+                                    <img src="{{ (!empty($cat->image)) ? url('upload/categories/'.$cat->image):url('upload/defaultCategory.jpg') }}" alt="{{ $cat->name }}" width="161px" height="161px">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
@@ -265,7 +272,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-img product-img-zoom mb-15">
                                                     <a href="{{route('product.details',$product->id)}}">
-                                                        <img src="{{"/upload/products_images/$product->image"}}" style="height: 178px; width: 178px" alt="Product Image">
+                                                        <img class="center" src="{{"/upload/products_images/$product->image"}}" style="height: 178px; width: 178px" alt="Product Image">
                                                     </a>
                                                     @if(!empty($product->promo_price))
                                                     <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
@@ -276,13 +283,13 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="product-content-wrap-3">
+                                                <div class="product-content-wrap-3 center">
                                                     <div class="product-content-categories">
                                                         <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
                                                     </div>
                                                     <h3><a class="purple" href="{{route("product.details",$product->id)}}">{{$product->name}}</a></h3>
                                                     <div class="product-rating-wrap-2">
-                                                        <div class="product-rating-4">
+                                                        <div class="product-rating-4 center">
                                                             @if(ceil($product->avg_rating) == 1)
                                                                 <i class="icon_star"></i>
                                                             @elseif(ceil($product->avg_rating) == 2)
@@ -318,13 +325,13 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="product-content-wrap-3 product-content-position-2">
+                                                <div class="product-content-wrap-3 product-content-position-2 center">
                                                     <div class="product-content-categories">
                                                         <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
                                                     </div>
                                                     <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
                                                     <div class="product-rating-wrap-2">
-                                                        <div class="product-rating-4">
+                                                        <div class="product-rating-4 center">
                                                             @if(ceil($product->avg_rating) == 1)
                                                                 <i class="icon_star"></i>
                                                             @elseif(ceil($product->avg_rating) == 2)

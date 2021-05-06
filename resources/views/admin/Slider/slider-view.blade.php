@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
-@section('title', 'jQuery Datatable')
-@section('parentPageTitle', 'Table')
+@section('title', 'Slider')
+@section('pageTitle') <a href="#">Slider List</a> @endsection
+@section('parentPageTitle', '')
 
 
 @section('content')
@@ -13,13 +14,13 @@
         <!-- Custom tabs (Charts with tabs)-->
         <div class="card">
           <div class="card-header">
-            <h3>
+            <h6>
               Slider List
-            </h3>
+            </h6>
             <a class=" btn btn-primary m-b-15" href="{{ route('slider.add') }}"><i class="fa fa-plus-circle"></i> Add Slider</a>
           </div>
-          <div class="card-body">
-            <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
+          <div class="card-body" style="overflow-x:auto;">
+            <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample" style="max-width:100%";>
                 <thead>
                     <tr>
                         <th>Sl.</th>
@@ -40,7 +41,9 @@
 
                             <a href="{{ route('slider.edit',$slider->id) }}">
                             <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
-                            data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
+                            data-toggle="tooltip" data-original-title="Edit">
+                            <i class="icon-pencil" aria-hidden="true"></i>
+                            </button></a>
 
                             <a href="{{ route('slider.delete',$slider->id) }}">
                             <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"

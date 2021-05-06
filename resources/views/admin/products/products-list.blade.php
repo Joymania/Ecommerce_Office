@@ -23,6 +23,7 @@
                                         <table id="myTable" class="table table-bordered table-hover js-basic-example dataTable table-custom">
                                             <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
                                                 <th>Brand Name</th>
@@ -37,6 +38,7 @@
                                             </thead>
                                             <tfoot>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Category Name</th>
                                                 <th>Brand Name</th>
@@ -52,6 +54,7 @@
                                             <tbody>
                                             @foreach($products as $product)
                                                 <tr>
+                                                    <td>{{$product->id}}</td>
                                                     <td>
                                                         @if(strlen($product->name) > 30)
                                                             {{substr($product->name,0,25) . ' ...'}}

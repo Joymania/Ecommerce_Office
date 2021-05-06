@@ -41,7 +41,7 @@ class ProductsController extends Controller
     {
         $this->validate($request,[
             'category_id' => 'required',
-            'brand_id' => 'required',
+            'brand_id' => '',
             'name' => 'required',
             'price' => 'required',
             'short_desc' => 'required|max:255',
@@ -118,7 +118,7 @@ class ProductsController extends Controller
     {
         $this->validate($request,[
             'category_id' => 'required',
-            'brand_id' => 'required',
+            'brand_id' => '',
             'tag_id' => 'required',
             'name' => 'required',
             'price' => 'required',
@@ -162,6 +162,30 @@ class ProductsController extends Controller
         }
 
         $product->save();
+
+        if($request->hasfile('images'))
+        {
+            // $product_id = $product->id;
+
+            $subImages = SubImage::where('product_id',$product->id)->get();
+            if (sizeof($subImages) > 0){
+                foreach ($subImages as $row){
+                    unlink("upload/products_images/sub_images/$row->image");
+                    $row->delete();
+                }
+            }
+
+            foreach($request->file('images') as $image)
+            {
+                $name = rand(10000,99999).time().'.'.$image->getClientOriginalExtension();
+                $image->move('upload/products_images/sub_images',$name);
+                $subImages = new SubImage();
+                $subImages->product_id = $product->id;
+                $subImages->image = $name;
+                $subImages->save();
+            }
+        }
+
         if (!empty($request->color_id) > 0){
             $product->colors()->attach($request->color_id);
         }
