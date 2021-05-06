@@ -22,6 +22,7 @@
                         $total=0;
                     @endphp
                     @if(Auth::user())
+                    
                     @foreach ($cartpage as $cart)
                          <li class="single-product-cart">
                          <div class="cart-img">
@@ -44,6 +45,7 @@
                          $total+=$cart->subtotal;
                      @endphp
                     @endforeach
+                 
                  </ul>
                  <div class="cart-total">
                      <h4>Subtotal: <span>{{ $total }}tk</span></h4>

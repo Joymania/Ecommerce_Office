@@ -11,7 +11,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header">
-                <h3>Admin List</h3>
+                <h6>Admin List</h6>
                 <a href="{{ route('admin.create') }}">
                     <button id="addToTable" class="btn btn-primary m-b-15" type="button">
                         <i class="icon wb-plus" aria-hidden="true"></i> Add Admin

@@ -41,7 +41,7 @@ class ProductsController extends Controller
     {
         $this->validate($request,[
             'category_id' => 'required',
-            'brand_id' => '',
+            'brand_id' => 'required',
             'name' => 'required',
             'price' => 'required',
             'short_desc' => 'required|max:255',
@@ -98,7 +98,7 @@ class ProductsController extends Controller
             }
         }
 
-        return redirect()->route('products.list');
+        return redirect()->route('products.list')->with('success_msg','successfully Added!');
     }
 
     public function edit(product $product)
@@ -118,7 +118,7 @@ class ProductsController extends Controller
     {
         $this->validate($request,[
             'category_id' => 'required',
-            'brand_id' => '',
+            'brand_id' => 'required',
             'tag_id' => 'required',
             'name' => 'required',
             'price' => 'required',
@@ -192,7 +192,7 @@ class ProductsController extends Controller
         if (!empty($request->size_id) > 0){
             $product->sizes()->attach($request->size_id);
         }
-        return redirect()->route('products.list');
+        return redirect()->route('products.list')->with('success_msg','successfully updated!');
     }
 
     public function destroy(product $product)
@@ -207,7 +207,7 @@ class ProductsController extends Controller
         $product->colors()->detach();
         $product->sizes()->detach();
         $product->delete();
-        return redirect()->route('products.list')->with('delete','successfully deleted!!');
+        return redirect()->route('products.list')->with('success_msg','successfully deleted!!');
     }
 
 }
