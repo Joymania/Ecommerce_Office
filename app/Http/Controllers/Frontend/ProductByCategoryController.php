@@ -36,14 +36,14 @@ class ProductByCategoryController extends Controller
                             ->where('products.price','>=',$first)
                             ->where('categories.id',$id)
                     ->select('products.id','products.name','products.price','products.image',
-                    'products.promo_price')->get();
+                    'products.promo_price','products.avg_rating')->get();
         }else{
            //$products = product::with('reviews')->where('products.price','>=',$first)->get();
             $products = product::with('reviews')->join('categories','categories.id','=','products.category_id')
                 ->where('products.price','>=',$first)
                 ->where('categories.id',$id)
                 ->select('products.id','products.name','products.price','products.image',
-                    'products.promo_price')->get();
+                    'products.promo_price','products.avg_rating')->get();
         }
 
         return response()->json($products,200);
