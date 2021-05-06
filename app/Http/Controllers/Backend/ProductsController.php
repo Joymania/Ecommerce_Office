@@ -98,7 +98,7 @@ class ProductsController extends Controller
             }
         }
 
-        return redirect()->route('products.list');
+        return redirect()->route('products.list')->with('success_msg','successfully Added!');
     }
 
     public function edit(product $product)
@@ -162,13 +162,37 @@ class ProductsController extends Controller
         }
 
         $product->save();
+
+        if($request->hasfile('images'))
+        {
+            // $product_id = $product->id;
+
+            $subImages = SubImage::where('product_id',$product->id)->get();
+            if (sizeof($subImages) > 0){
+                foreach ($subImages as $row){
+                    unlink("upload/products_images/sub_images/$row->image");
+                    $row->delete();
+                }
+            }
+
+            foreach($request->file('images') as $image)
+            {
+                $name = rand(10000,99999).time().'.'.$image->getClientOriginalExtension();
+                $image->move('upload/products_images/sub_images',$name);
+                $subImages = new SubImage();
+                $subImages->product_id = $product->id;
+                $subImages->image = $name;
+                $subImages->save();
+            }
+        }
+
         if (!empty($request->color_id) > 0){
             $product->colors()->attach($request->color_id);
         }
         if (!empty($request->size_id) > 0){
             $product->sizes()->attach($request->size_id);
         }
-        return redirect()->route('products.list');
+        return redirect()->route('products.list')->with('success_msg','successfully updated!');
     }
 
     public function destroy(product $product)
@@ -183,7 +207,7 @@ class ProductsController extends Controller
         $product->colors()->detach();
         $product->sizes()->detach();
         $product->delete();
-        return redirect()->route('products.list')->with('delete','successfully deleted!!');
+        return redirect()->route('products.list')->with('success_msg','successfully deleted!!');
     }
 
 }

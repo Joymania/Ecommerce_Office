@@ -2,14 +2,14 @@
         <div class="slider-banner-area">
             <div class="container">
                 <div class="row">
-                    <div class="col">
-                         <div class="slider-area bg-gray mb-30 ml-auto mr-auto" style="width: 80%; height: 90%">
+                    <div class="col-sm-12">
+                         <div class="slider-area bg-gray mb-30 ml-auto mr-auto" >
                              <div class="hero-slider-active-3 dot-style-2 dot-style-2-position-4 dot-style-2-active-purple">
                                  @foreach ($sliders as $slider)
                                  <div class="single-hero-slider single-animation-wrap">
 
                                      <div class="row">
-                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="col-lg-8 col-md-8 col-sm-6">
                                             <div class="hero-slider-content-1 slider-animated-1 hero-slider-content-1-padding1">
                                                 <h4 class="animated font-dec">New Arrivals</h4>
                                                 <h2 class="animated font-dec">{{$slider->name }}</h2>
@@ -29,7 +29,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-8 col-md-6 col-sm-6">
+                                        <div class="col-lg-4 col-md-4 col-sm-6">
                                             <div class="hm6-hero-slider-img slider-animated-1 float-right">
                                                 <img class="animated m-5" src="{{ asset('upload/products_images/'.$slider->image) }}" style="width: 270px; height: 380px" alt="">
 

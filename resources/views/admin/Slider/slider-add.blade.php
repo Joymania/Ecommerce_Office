@@ -1,13 +1,14 @@
 @extends('admin.layout.master')
-@section('title', 'Form Validation')
-@section('parentPageTitle', 'Forms')
+@section('title', 'Add Slider')
+@section('pageTitle') <a href="#">Add Slider</a> @endsection
+@section('parentPageTitle') <a href="{{route('slider.view')}}">All sliders</a> @endsection
 
 
 @section('content')
 
 <div class="card">
     <div class="card-header">
-      <h3>
+      <h6>
           @if (isset($editdata))
               Edit Slider
               @else
@@ -15,7 +16,7 @@
           @endif
 
         <a class=" float-right btn btn-success btn-sm" href="{{ route('slider.view') }}"><i class="fa fa-list"></i> Slider List</a>
-      </h3>
+      </h6>
     </div>
     <div class="card-body">
         <form method="post" action="{{ (@$editdata)? route('slider.update',$editdata->id): route('slider.store') }}"  id="myform" enctype="multipart/form-data">

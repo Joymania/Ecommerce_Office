@@ -171,7 +171,9 @@
                                     <a href="#">{{$product->category->name}},</a>
                                 </li>
                                 <li><span>Tag: </span>
+                                    @if(!empty($product->tag->name))
                                     <a href="#">{{$product->tag->name}},</a>
+                                    @endif
                                 </li>
                             </ul>
                         </div>

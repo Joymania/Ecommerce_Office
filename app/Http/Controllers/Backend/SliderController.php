@@ -53,8 +53,8 @@ class SliderController extends Controller
 
     public function delete($id){
         $data=slider::find($id);
-        if(file_exists('upload/Slider_images' . $data->image)AND !empty($data->image)){
-            unlink('upload/Slider_images/' . $data->image);
+        if(file_exists('upload/Slider_images/' . $data->image)AND !empty($data->image)){
+            @unlink(public_path('upload/Slider_images/' . $data->image));
         }
         $data->delete();
         return redirect()->route('slider.view')->with('success', 'Data Deleted Successfully.');
