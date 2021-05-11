@@ -28,7 +28,7 @@
                         $total=0;
                     @endphp
                     @if(Auth::user())
-                    
+
                     @foreach ($cartpage as $cart)
                          <li class="single-product-cart">
                          <div class="cart-img">
@@ -51,7 +51,7 @@
                          $total+=$cart->subtotal;
                      @endphp
                     @endforeach
-                 
+
                  </ul>
                  <div class="cart-total">
                      <h4>Subtotal: <span>{{ $total }}tk</span></h4>
@@ -154,10 +154,11 @@
                                             <i class="icon_star"></i>
                                             <i class="icon_star"></i>
                                         @endif
+
+                                            @if(count($product->reviews) > 0)
+                                                <span>({{count($product->reviews)}})</span>
+                                            @endif
                                     </div>
-                                    @if(count($product->reviews) > 0)
-                                        <span>({{count($product->reviews)}})</span>
-                                    @endif
                                 </div>
                                 <div class="product-price-4">
                                     <span class="new-price">{{$product->promo_price}} Tk.</span>
@@ -192,10 +193,12 @@
                                             <i class="icon_star"></i>
                                             <i class="icon_star"></i>
                                         @endif
+
+                                            @if(count($product->reviews) > 0)
+                                                <span>({{count($product->reviews)}})</span>
+                                            @endif
                                     </div>
-                                    @if(count($product->reviews) > 0)
-                                        <span>({{count($product->reviews)}})</span>
-                                    @endif
+
                                 </div>
                                 <div class="product-price-4">
                                     <span class="new-price">{{$product->promo_price}} Tk.  </span>
@@ -319,10 +322,11 @@
                                                                 <i class="icon_star"></i>
                                                                 <i class="icon_star"></i>
                                                             @endif
+
+                                                                @if(count($product->reviews) > 0)
+                                                                    <span>({{count($product->reviews)}})</span>
+                                                                @endif
                                                         </div>
-                                                        @if(count($product->reviews) > 0)
-                                                        <span>({{count($product->reviews)}})</span>
-                                                        @endif
                                                     </div>
                                                     <div class="product-price-4">
                                                         @if(empty($product->promo_price))
@@ -359,11 +363,13 @@
                                                                 <i class="icon_star"></i>
                                                                 <i class="icon_star"></i>
                                                                 <i class="icon_star"></i>
+                                                                <i class="icon_star"></i>
                                                             @endif
+                                                                @if(count($product->reviews) > 0)
+                                                                    <span>({{count($product->reviews)}})</span>
+                                                                @endif
                                                         </div>
-                                                        @if(count($product->reviews) > 0)
-                                                            <span>({{count($product->reviews)}})</span>
-                                                        @endif
+
                                                     </div>
                                                     <div class="product-price-4">
                                                         @if(empty($product->promo_price))

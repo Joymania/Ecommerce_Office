@@ -57,9 +57,13 @@
                                     <a href="{{ route('contact.delete',$contact->id) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"
                                         onclick="event.preventDefault();
                                         document.getElementById('delete-form').setAttribute('action', '{{$route}}');
-                                        confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">                                     
-                                        <i class="icon-trash" aria-hidden="true"></i>                               
+                                        confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
+                                        <i class="icon-trash" aria-hidden="true"></i>
                                     </a>
+
+                                {{--<a href="{{$route = route('contact.delete',$contact->id) }}" onclick="return confirm('Are you sure want to delete?')">
+                                    <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"><i class="icon-trash" aria-hidden="true"></i></button>
+                                </a>--}}
                             </td>
                         </tr>
                         @endforeach
