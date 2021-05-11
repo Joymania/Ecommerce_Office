@@ -25,7 +25,7 @@ class ColorController extends Controller
             $data=new color();
             $data->name=$request->name;
             $data->save();
-            return redirect()->route('color.view')->with('success', 'Data Store Successfully.');
+            return redirect()->route('color.view')->with('success', 'Data Stored Successfully.');
         }
 
         public function edit($id){

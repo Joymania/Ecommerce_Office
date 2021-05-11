@@ -11,27 +11,6 @@
         <div class="col-lg-12 col-md-12">
             <div class="card planned_task">
                 <div class="body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @if(session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ session()->get('success') }}</strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if(session()->has('delete'))
-                               <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                   <strong>{{ session()->get('delete') }}</strong>
-                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                       <span aria-hidden="true">&times;</span>
-                                   </button>
-                               </div>
-                            @endif
-                        </div>
-                    </div>
-
                     <div class="row clearfix">
                         <div class="col-lg-12">
                             <div class="card">
@@ -84,5 +63,15 @@
         </div>
 
     </div>
+@if(session()->has('success'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success')}}');
+    });
+@endsection
+@endif
 
 @stop

@@ -18,12 +18,14 @@
                     </button>
                 </a>
                 @if(session()->has('success_msg'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>{{ session()->get('success_msg') }}</strong>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                @section('page-script')
+                    $(document).ready(function(){
+                    toastr.options.timeOut = "3500";
+                    toastr.options.closeButton = true;
+                    toastr.options.positionClass = 'toast-top-right';
+                    toastr['success']('{{session('success_msg')}}');
+                    });
+                @endsection
                 @endif
             </div>
 
@@ -31,7 +33,7 @@
 
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
+                    <table class="table table-bordered table-hover table-striped js-basic-example dataTable table-custom" cellspacing="0" >
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -82,8 +84,8 @@
                                     <a href="{{ route('admin.delete',$admin->id) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"
                                         onclick="event.preventDefault();
                                         document.getElementById('delete-form').setAttribute('action', '{{$route}}');
-                                        confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">                                     
-                                        <i class="icon-trash" aria-hidden="true"></i>                               
+                                        confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
+                                        <i class="icon-trash" aria-hidden="true"></i>
                                     </a>
                                 </td>
                             </tr>

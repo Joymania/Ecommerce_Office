@@ -35,7 +35,6 @@
                             <td>{{ $cupon->cupon }}</td>
                             <td>{{ $cupon->discount }}</td>
                             <td class="actions">
-
                                 <!-- for deleting using one form -->
                                 <div hidden> {{$route = route('cupon.delete',$cupon->id) }}</div>
                                 <a href="{{ route('cupon.delete',$cupon->id) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"
@@ -44,7 +43,7 @@
                                     confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">                                     
                                     <i class="icon-trash" aria-hidden="true"></i>                               
                                 </a>
-                      
+                    
                             </td>
                         </tr>
                         @endforeach
@@ -61,5 +60,14 @@
     </div>
 
 </div>
-
+@if(session()->has('success'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success')}}');
+    });
+@endsection
+@endif
 @stop

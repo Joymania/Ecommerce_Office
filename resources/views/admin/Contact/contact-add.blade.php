@@ -81,11 +81,22 @@
                   <input type="submit" class="btn btn-primary" value="{{ (@$editdata)? "Update": "Submit" }}">
 
               </div>
-
+          </div>
           </form>
       </div>
-
     </div>
+
+@if(session()->has('success_msg'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "false";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success_msg')}}');
+    });
+@endsection
+@endif
+
 
 @stop
 

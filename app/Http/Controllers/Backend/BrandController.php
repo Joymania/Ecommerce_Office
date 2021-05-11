@@ -28,7 +28,7 @@ class BrandController extends Controller
             $data=new Brand();
             $data->name=$request->name;
             $data->save();
-            return redirect()->route('brand.view')->with('success', 'Data Store Successfully.');
+            return redirect()->route('brand.view')->with('success', 'Data Stored Successfully.');
         }
 
         public function edit($id){

@@ -48,19 +48,7 @@
                 <nav id="left-sidebar-nav" class="sidebar-nav">
                     <ul id="main-menu" class="metismenu">
                         <li class="{{ Request::segment(1) === 'dashboard' ? 'active' : null }}">
-                            <a href="#Dashboard" class="has-arrow"><i class="icon-home"></i> <span>Dashboard</span></a>
-                            <ul>
-                                <li class="{{ Request::segment(2) === 'ecommerce' ? 'active' : null }}"><a href="{{route('admin.dashboard')}}">eCommerce</a></li>
-                                <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
-                                <li class=""><a href="{{route('cupon.view')}}">Cupon</a></li>
-
-                                <li class="{{ Request::segment(4) === 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
-                                <li class="{{ Request::segment(4) === 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
-                                <li class="{{ Request::segment(2) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
-                                {{-- <li class="{{ Request::segment(3) === 'slider' ? 'active' : null }}"><a href="{{route('slider.view')}}">Slider</a></li> --}}
-                                <li><a href="{{route('sales.report')}}">Report</a></li>
-
-                            </ul>
+                            <a href="{{route('admin.dashboard')}}"><i class="icon-home"></i> <span>Dashboard</span></a>
                         </li>
 
                         <li class="{{ Request::segment(1) === 'products' ? 'active' : null }}">
@@ -73,6 +61,7 @@
                                 <li class="{{ Request::segment(4) === 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
                                 <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
                                 <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
+                                <li class=""><a href="{{route('cupon.view')}}">Cupon</a></li>
                             </ul>
                         </li>
 
@@ -88,6 +77,29 @@
                             <ul>
                                 <li class="{{ Request::segment(2) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
                                 <li class="{{ Request::segment(2) === 'users' ? 'active' : null }}"><a href="{{route('users.index')}}">Users</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                            <a href="#Users" class="has-arrow"><i class="fa fa-money"></i> <span>Expense</span></a>
+                            <ul>
+                                <li class="{{ Request::segment(4) === 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
+                                <li class="{{ Request::segment(4) === 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                            <a href="#Users" class="has-arrow"><i class="icon-calculator"></i> <span>Reports</span></a>
+                            <ul>
+                                <li><a href="{{route('sales.report')}}">Report</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                            <a href="#Users" class="has-arrow"><i class="icon-settings"></i> <span>Settings</span></a>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
+                                <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
                             </ul>
                         </li>
                     </ul>

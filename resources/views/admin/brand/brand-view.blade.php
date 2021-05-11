@@ -33,7 +33,6 @@
                             <td>{{ $key+1 }}</td>
                             <td>{{ $brand->name }}</td>
                             <td class="actions">
-
                                 <a href="{{ route('brand.edit',$brand->id) }}"
                                  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
                                 data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
@@ -46,7 +45,6 @@
                                     confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">                                     
                                     <i class="icon-trash" aria-hidden="true"></i>                               
                                 </a>
-                            
                             </td>
                         </tr>
                         @endforeach
@@ -63,5 +61,15 @@
     </div>
 
 </div>
+@if(session()->has('success'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success')}}');
+    });
+@endsection
+@endif
 
 @stop

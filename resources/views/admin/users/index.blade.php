@@ -24,7 +24,7 @@
 
             <div class="body">
                 <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
+                <table class="table table-bordered table-hover table-striped js-basic-example dataTable table-custom" cellspacing="0">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -99,3 +99,4 @@
     </div>
 </div>
 @stop
+

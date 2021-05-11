@@ -30,13 +30,13 @@ class subCategoryController extends Controller
             'category_id' => 'required',
             'sub_category_name' => 'required',
         ]);
-  
+
         sub_category::insert([
     		'sub_category_name' => $request->sub_category_name,
     		'category_id' => $request->category_id,
     	]);
 
-    	return redirect()->route('subCategory.view')->with('success_msg','Created successfully!');
+    	return redirect()->route('subCategory.view')->with('success_msg','Sub-Category Created successfully!');
     }
 
     // editSubCategory
@@ -49,7 +49,7 @@ class subCategoryController extends Controller
 
     // updateSubCategory
     function updateSubCategory(Request $request)
-    {   
+    {
         // validation
         $this->validate($request,[
             'category_id' => 'required',
@@ -60,14 +60,14 @@ class subCategoryController extends Controller
     		'category_id'=>$request-> category_id,
     	]);
 
-        return redirect()->route('subCategory.view')->with('success_msg','Updated Successfully!');
+        return redirect()->route('subCategory.view')->with('success_msg','Sub-Category Updated Successfully!');
     }
 
     // deleteSubCategory
     public function deleteSubCategory($did)
     {
         sub_category::findOrFail($did)->delete();
-    	return redirect()->route('subCategory.view')->with('success_msg','Successfully deleted!');
+    	return redirect()->route('subCategory.view')->with('success_msg','Sub-Category Successfully deleted!');
     }
 
 
