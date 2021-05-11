@@ -8,7 +8,7 @@
 
 <div class="card">
     <div class="card-header">
-      <h3>
+      <h6>
           @if (isset($editdata))
               Edit Color
               @else
@@ -16,7 +16,7 @@
           @endif
 
         <a class=" float-right btn btn-success btn-sm" href="{{ route('color.view') }}"><i class="fa fa-list"></i> Color List</a>
-      </h3>
+      </h6>
     </div>
     <div class="card-body">
       <form method="post" action="{{ (@$editdata)? route('color.update',$editdata->id): route('color.store') }}" id="myform" enctype="multipart/form-data">

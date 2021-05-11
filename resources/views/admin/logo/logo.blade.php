@@ -40,7 +40,7 @@
                             <tr>
                                 <td>{{$view_logo->id}}</td>
                                 <td>
-                                    <img width="150px" height='70px' src="{{asset($view_logo->image)}}">
+                                    <img max-width="150px" max-height='100px' src="{{asset($view_logo->image)}}">
                                 </td>
                                 <td class="actions">
 

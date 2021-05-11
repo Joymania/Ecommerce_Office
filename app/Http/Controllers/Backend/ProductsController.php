@@ -98,7 +98,7 @@ class ProductsController extends Controller
             }
         }
 
-        return redirect()->route('products.list')->with('success_msg','Product added Successfully!!!');
+        return redirect()->route('products.list')->with('success_msg','Product added Successfully');
     }
 
     public function edit(product $product)
@@ -194,7 +194,7 @@ class ProductsController extends Controller
             $product->sizes()->detach();
             $product->sizes()->attach($request->size_id);
         }
-        return redirect()->route('products.list')->with('success_msg','Product Successfully updated!!!');
+        return redirect()->route('products.list')->with('success_msg','Product Successfully updated');
     }
 
     public function destroy(product $product)
@@ -209,7 +209,7 @@ class ProductsController extends Controller
         $product->colors()->detach();
         $product->sizes()->detach();
         $product->delete();
-        return redirect()->route('products.list')->with('success_msg','Product Successfully deleted!!!');
+        return redirect()->route('products.list')->with('success_msg','Product Successfully deleted!');
     }
 
 }

@@ -26,7 +26,7 @@ class SizeController extends Controller
             'name' => 'required|unique:sizes,name'
         ]);
         size::create($request->all());
-        return redirect()->route('products.sizes')->with('success','Size Successfully Added!!!');
+        return redirect()->route('products.sizes')->with('success','Size Successfully Added');
     }
 
     public function editSize(size $size)
@@ -41,13 +41,13 @@ class SizeController extends Controller
         ]);
         $size->update($request->all());
 
-        return redirect()->route('products.sizes')->with('success',"Size Successfully Updated!!!");
+        return redirect()->route('products.sizes')->with('success',"Size Successfully Updated");
     }
 
     public function destroySize(size $size)
     {
         $size->delete();
-        return redirect()->route('products.sizes')->with('success',"Size Successfully Deleted!!!");
+        return redirect()->route('products.sizes')->with('success',"Size Successfully Deleted!");
 
     }
 }
