@@ -54,13 +54,20 @@
                             <td>{{ $order->payment }}</td>
                             <td class="actions">
 
-                                <a href="{{ route('order.details',$order->id) }}">
-                                <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-"
-                                data-toggle="tooltip" data-original-title="Details"><i class="icon-eye" aria-hidden="true"></i></a>
+                                <a href="{{ route('order.details',$order->id) }}" 
+                                 class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-"
+                                data-toggle="tooltip" data-original-title="Details">
+                                    <i class="icon-eye" aria-hidden="true"></i>
+                                </a>
 
-                                <a href="{{ route('order.delete',$order->id) }}">
-                                <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
+                                <!-- for deleting using one form -->
+                                <div hidden> {{$route = route('order.delete',$order->id) }}</div>
+                                <a href="{{ route('order.delete',$order->id) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('delete-form').setAttribute('action', '{{$route}}');
+                                    confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">                                     
+                                    <i class="icon-trash" aria-hidden="true"></i>                               
+                                </a>
 
                             </td>
                         </tr>
@@ -68,6 +75,10 @@
 
                     </tbody>
                 </table>
+                <form id="delete-form" method="POST"  class="d-none">
+                            @csrf
+                            @method('DELETE')
+                    </form>
                 </div>
             </div>
         </div>

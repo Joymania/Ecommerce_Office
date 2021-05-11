@@ -23,7 +23,7 @@
           </div>
           <div class="form-row col-md-6">
             <label for="description">Disscount</label>
-            <input type="text" class="form-control" name="discount" placeholder="Discount Price"  value="{{ (@$editdata->discount) }}" required>
+            <input type="number" class="form-control" name="discount" placeholder="Discount Price"  value="{{ (@$editdata->discount) }}" required>
             <font color="red">{{ ($errors->has('discount'))?($errors->first('discount')): '' }}</font>
         </div>
 

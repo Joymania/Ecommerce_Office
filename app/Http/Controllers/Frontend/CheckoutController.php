@@ -122,7 +122,7 @@ class CheckoutController extends Controller
     $admin=Admin::where('role','0')->get();
     Notification::send($admin, new OrderNotification($name));
 
-        return redirect()->route('frontsite');
+        return redirect()->route('frontsite')->with('success', 'Your Order has been placed Successfully.');
     }
     public function showTrack(){
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();

@@ -23,7 +23,7 @@
                                 <label for="image" class="col-sm-3 text-right control-label col-form-label">Logo Image</label>
                                 <div class="col-md-6">
 
-                                    <img style="height: 100px; width: 100px" src="{{asset($edits->image)}}"> <br>
+                                    <img src="{{asset($edits->image)}}"> <br>
                                     <br>
                                     <input name="image" type="file" class="form-control @error('image') is-invalid @enderror" id="image" autofocus>
                                     @error('image')
