@@ -149,7 +149,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/store','Backend\BrandController@store')->name('brand.store');
         Route::get('/edit/{id}','Backend\BrandController@edit')->name('brand.edit');
         Route::post('/update/{id}','Backend\BrandController@update')->name('brand.update');
-        Route::get('/delete/{id}','Backend\BrandController@delete')->name('brand.delete');
+        Route::delete('/delete/{id}','Backend\BrandController@delete')->name('brand.delete');
     });
 
      // cupon
@@ -159,14 +159,14 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/store','Backend\CuponController@store')->name('cupon.store');
         Route::get('/edit/{id}','Backend\CuponController@edit')->name('cupon.edit');
         Route::post('/update/{id}','Backend\CuponController@update')->name('cupon.update');
-        Route::get('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
+        Route::delete('/delete/{id}','Backend\CuponController@delete')->name('cupon.delete');
     });
 
     // Order
     Route::prefix('order')->group(function () {
         Route::get('/view','Backend\OrderController@view')->name('order.view');
         Route::get('/details/{id}','Backend\OrderController@details')->name('order.details');
-        Route::get('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
+        Route::delete('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
         Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
         Route::get('deliver/{id}','Backend\OrderController@deliveryStatus')->name('order.delivarystatus');
     });
@@ -177,7 +177,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/store','Backend\ColorController@store')->name('color.store');
         Route::get('/edit/{id}','Backend\ColorController@edit')->name('color.edit');
         Route::post('/update/{id}','Backend\ColorController@update')->name('color.update');
-        Route::get('/delete/{id}','Backend\ColorController@delete')->name('color.delete');
+        Route::delete('/delete/{id}','Backend\ColorController@delete')->name('color.delete');
     });
 
     Route::prefix('admin')->group(function () {
@@ -197,7 +197,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
             Route::post('/store', 'Backend\ContactController@store')->name('contact.store');
             Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('contact.edit');
             Route::post('/update/{id}', 'Backend\ContactController@update')->name('contact.update');
-            Route::get('/delete/{id}', 'Backend\ContactController@delete')->name('contact.delete');
+            Route::delete('/delete/{id}', 'Backend\ContactController@delete')->name('contact.delete');
         });
     });
     // category
@@ -224,8 +224,10 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 Route::prefix('expenseCategory')->group(function(){
     Route::get('/', 'Backend\expenseCategoryController@expenseCategory')->name('expenseCategory.view');
     Route::get('insertExpCat', 'Backend\expenseCategoryController@insertExpCat')->name('expenseCategory.add');
-    Route::post('storeExp', 'Backend\expenseCategoryController@storeExp')->name('expenseCategory.store');
-    Route::get('deleteExp/{did}','Backend\expenseCategoryController@deleteExp')->name('expenseCategory.delete');
+    Route::post('storeExpCat', 'Backend\expenseCategoryController@storeExp')->name('expenseCategory.store');
+    Route::get('editExpCat/{id}', 'Backend\expenseCategoryController@editExpCat')->name('expenseCategory.edit');
+    Route::put('updateExpCat/{id}', 'Backend\expenseCategoryController@updateExpCat')->name('expenseCategory.update');
+    Route::delete('deleteExp/{did}','Backend\expenseCategoryController@deleteExp')->name('expenseCategory.delete');
 });
 
 // expense
@@ -235,7 +237,7 @@ Route::prefix('expense')->group(function(){
     Route::post('storeExpense', 'Backend\expenseController@storeExpense')->name('expense.store');
     Route::get('editExpense/{id}', 'Backend\expenseController@editExpense')->name('expense.edit');
     Route::post('updateExpense','Backend\expenseController@updateExpense')->name('updateExpense');
-    Route::get('deleteexpense/{did}','Backend\expenseController@deleteexpense')->name('expense.delete');
+    Route::delete('deleteExpense/{did}','Backend\expenseController@deleteexpense')->name('expense.delete');
 });
 
     // logo
@@ -245,7 +247,7 @@ Route::prefix('expense')->group(function(){
         Route::post('insertlog', 'Backend\LogoController@insertlog')->name('logo.store');
         Route::get('editLogo/{id}', 'Backend\LogoController@editLogo')->name('logo.edit');
         Route::post('updateLogo','Backend\LogoController@updateLogo')->name('logo.update');
-        Route::get('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
+        Route::delete('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
     });
 
 

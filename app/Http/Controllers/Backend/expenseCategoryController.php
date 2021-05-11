@@ -38,6 +38,28 @@ class expenseCategoryController extends Controller
     	return redirect()->route('expenseCategory.view')->with('success_msg','Successfully Added!');
     }
 
+     // edit Expense Category
+     public function editExpCat($id)
+     {
+        $expCat = expenseCategory::find($id);
+        return view('admin.expense.editExpCat', compact('expCat'));
+     }
+
+     // update expense category
+     public function updateExpCat(Request $request, $id)
+     { 
+        $expenseCategory = expenseCategory::find($id);
+        // validation
+        $this->validate($request, [
+            'name' => $request->name == $expenseCategory->name ? '' : 'required|unique:expense_categories|max:255',
+        ]);
+        
+        $expenseCategory->name = $request->name;
+        $expenseCategory->save();
+
+    	return redirect()->route('expenseCategory.view')->with('success_msg','Successfully updated!');
+    }
+
     // deleteExp
     public function deleteExp($did)
     {
