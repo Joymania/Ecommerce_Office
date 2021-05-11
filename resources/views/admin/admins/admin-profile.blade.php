@@ -13,12 +13,14 @@
         <h6>Admin Profile</h6>
 
         @if(session()->has('success_msg'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session()->get('success_msg') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        @section('page-script')
+            $(document).ready(function(){
+            toastr.options.timeOut = "3500";
+            toastr.options.closeButton = true;
+            toastr.options.positionClass = 'toast-top-right';
+            toastr['success']('{{session('success_msg')}}');
+            });
+        @endsection
         @endif
     </div>
 

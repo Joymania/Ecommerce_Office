@@ -7,7 +7,7 @@
 
 <div class="card">
     <div class="card-header">
-      <h3>
+      <h6>
           @if (isset($editdata))
               Edit Brand
               @else
@@ -15,7 +15,7 @@
           @endif
 
         <a class=" float-right btn btn-success btn-sm" href="{{ route('brand.view') }}"><i class="fa fa-list"></i> Brand List</a>
-      </h3>
+      </h6>
     </div>
     <div class="card-body">
       <form method="post" action="{{ (@$editdata)? route('brand.update',$editdata->id): route('brand.store') }}" id="myform" enctype="multipart/form-data">
