@@ -57,11 +57,17 @@
 
                                 <a href="{{ route('contact.edit',$contact->id) }}">
                                 <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
-                                data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
+                                data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i>
+                                </button></a>
 
-                                <a href="{{ route('contact.delete',$contact->id) }}">
-                                <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
+                                <!-- for deleting using one form -->
+                                    <div hidden> {{$route = route('contact.delete',$contact->id) }}</div>
+                                    <a href="{{ route('contact.delete',$contact->id) }}" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove" data-toggle="tooltip" data-original-title="Remove"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('delete-form').setAttribute('action', '{{$route}}');
+                                        confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">                                     
+                                        <i class="icon-trash" aria-hidden="true"></i>                               
+                                    </a>
 
                             </td>
                         </tr>
@@ -69,6 +75,10 @@
 
                     </tbody>
                 </table>
+                <form id="delete-form" method="POST"  class="d-none">
+                            @csrf
+                            @method('DELETE')
+                    </form>
                 </div>
             </div>
         </div>

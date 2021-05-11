@@ -119,7 +119,7 @@ class ProductsController extends Controller
         $this->validate($request,[
             'category_id' => 'required',
             'brand_id' => 'required',
-            'tag_id' => 'required',
+            'tag_id' => '',
             'name' => 'required',
             'price' => 'required',
             'short_desc' => 'required|max:255',
