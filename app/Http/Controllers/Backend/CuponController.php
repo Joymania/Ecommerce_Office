@@ -25,12 +25,12 @@ class CuponController extends Controller
             $data->cupon=$request->cupon;
             $data->discount=$request->discount;
             $data->save();
-            return redirect()->route('cupon.view')->with('success', 'Data Store Successfully.');
+            return redirect()->route('cupon.view')->with('success', 'Cupon Stored Successfully.');
         }
 
         public function delete($id){
             $data=cupon::find($id);
             $data->delete();
-            return redirect()->route('cupon.view')->with('success', 'Data Deleted Successfully.');
+            return redirect()->route('cupon.view')->with('success', 'Cupon Deleted Successfully.');
         }
 }

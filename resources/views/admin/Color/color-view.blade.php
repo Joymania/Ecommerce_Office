@@ -55,4 +55,15 @@
 
 </div>
 
+@if(session()->has('success'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success')}}');
+    });
+@endsection
+@endif
+
 @stop

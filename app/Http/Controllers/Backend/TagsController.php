@@ -25,7 +25,7 @@ class TagsController extends Controller
            'name' => 'required|unique:tags,name'
         ]);
         tag::create($request->all());
-        return redirect()->route('tags.list');
+        return redirect()->route('tags.list')->with('success','Successfully Added!!!');
     }
 
     public function edit(tag $tag)
@@ -46,6 +46,6 @@ class TagsController extends Controller
     public function destroy(tag $tag)
     {
         $tag->delete();
-        return redirect()->route('tags.list')->with('delete','Successfully deleted!!!');
+        return redirect()->route('tags.list')->with('success','Successfully deleted!!!');
     }
 }

@@ -36,11 +36,11 @@
 
                                 <a href="{{ route('brand.edit',$brand->id) }}">
                                 <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"
-                                data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></a>
+                                         data-toggle="tooltip" data-original-title="Edit"><i class="icon-pencil" aria-hidden="true"></i></button></a>
 
                                 <a href="{{ route('brand.delete',$brand->id) }}">
                                 <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
+                                        data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button></a>
 
                             </td>
                         </tr>
@@ -54,5 +54,15 @@
     </div>
 
 </div>
+@if(session()->has('success'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success')}}');
+    });
+@endsection
+@endif
 
 @stop

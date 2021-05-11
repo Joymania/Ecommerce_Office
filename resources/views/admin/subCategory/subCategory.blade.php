@@ -9,16 +9,18 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="header">
             @if(session()->has('success_msg'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('success_msg') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+            @section('page-script')
+                $(document).ready(function(){
+                toastr.options.timeOut = "3500";
+                toastr.options.closeButton = true;
+                toastr.options.positionClass = 'toast-top-right';
+                toastr['success']('{{session('success_msg')}}');
+                });
+            @endsection
             @endif
             <a href="{{route('subCategory.add')}}">
-                <button type="button" class="btn btn-primary">Add new sub-category</button>  
-            </a>  
+                <button type="button" class="btn btn-primary">Add new sub-category</button>
+            </a>
 
         </div>
         <br>
@@ -36,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
 
 
                             @foreach($list as $li)
@@ -57,13 +59,13 @@
                                         confirm('Are you sure to delete?') ? document.getElementById('delete-form').submit() : null;">
 
                                          <i class="icon-trash" aria-hidden="true"></i>
-                                        
-                                    </a>                                 
+
+                                    </a>
                                 </td>
                             </tr>
-                                                   
-                            @endforeach 
-                            
+
+                            @endforeach
+
                         </tbody>
                     </table>
                     <form id="delete-form" method="POST"  class="d-none">
@@ -72,7 +74,7 @@
                     </form>
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 </div>
 

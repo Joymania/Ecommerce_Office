@@ -17,18 +17,20 @@
                                 <div class="header">
                                     <h2>Product List</h2>
                                     @if(session()->has('success_msg'))
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <strong>{{ session()->get('success_msg') }}</strong>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                    @section('page-script')
+                                        $(document).ready(function(){
+                                        toastr.options.timeOut = "3500";
+                                        toastr.options.closeButton = true;
+                                        toastr.options.positionClass = 'toast-top-right';
+                                        toastr['success']('{{session('success_msg')}}');
+                                        });
+                                    @endsection
                                     @endif
                                 </div>
                                 <div class="body">
                                     <a class=" btn btn-primary m-b-15" href="{{route('products.create')}}"><i class="fa fa-plus-circle"></i> Add Product</a>
                                     <div class="table-responsive">
-                                        <table id="myTable" class="table table-bordered table-hover js-basic-example dataTable table-custom">
+                                        <table id="myTable" class="table table-bordered table-hover table-striped js-basic-example dataTable table-custom">
                                             <thead>
                                             <tr>
                                                 <th>ID</th>

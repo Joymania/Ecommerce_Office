@@ -19,7 +19,7 @@
                 </button>  --}}
                 {{-- <a class=" btn btn-primary m-b-15" href="{{ route('brand.add') }}"><i class="fa fa-plus-circle"></i> Add Brand</a> --}}
                 <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
+                <table class="table table-bordered table-hover table-striped js-basic-example dataTable table-custom" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -74,5 +74,14 @@
     </div>
 
 </div>
-
+@if(session()->has('success'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success')}}');
+    });
+@endsection
+@endif
 @endsection

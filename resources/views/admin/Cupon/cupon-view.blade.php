@@ -36,8 +36,9 @@
                             <td>{{ $cupon->discount }}</td>
                             <td class="actions">
                                 <a href="{{ route('cupon.delete',$cupon->id) }}">
-                                <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
+                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default"
+                                            data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button>
+                                </a>
 
                             </td>
                         </tr>
@@ -51,5 +52,14 @@
     </div>
 
 </div>
-
+@if(session()->has('success'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success')}}');
+    });
+@endsection
+@endif
 @stop

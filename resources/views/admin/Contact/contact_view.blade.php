@@ -11,14 +11,6 @@
         <div class="card">
             <div class="header">
                 <h2>Contact List</h2>
-                @if(session()->has('success_msg'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('success_msg') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
             </div>
             <div class="body">
                 {{--  <button id="addToTable" class="btn btn-primary m-b-15" type="button">
@@ -26,7 +18,7 @@
                 </button>  --}}
                 <a class=" btn btn-primary m-b-15" href="{{ route('contact.add') }}"><i class="fa fa-plus-circle"></i> Add contact</a>
                 <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample">
+                <table class="table table-bordered table-hover table-striped js-basic-example dataTable table-custom" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Sl.</th>
@@ -61,7 +53,7 @@
 
                                 <a href="{{ route('contact.delete',$contact->id) }}">
                                 <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></a>
+                                        data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button></a>
 
                             </td>
                         </tr>
@@ -75,5 +67,17 @@
     </div>
 
 </div>
+
+
+@if(session()->has('success_msg'))
+@section('page-script')
+    $(document).ready(function(){
+    toastr.options.timeOut = "3500";
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = 'toast-top-right';
+    toastr['success']('{{session('success_msg')}}');
+    });
+@endsection
+@endif
 
 @stop

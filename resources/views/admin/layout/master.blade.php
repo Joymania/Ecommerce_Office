@@ -83,6 +83,7 @@
         @if (Request::segment(2) === 'notifications' )
 			<link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}"/>
         @endif
+        <link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}"/>
 
         @if (Request::segment(2) === 'range-sliders' )
 			<link rel="stylesheet" href="{{ asset('assets/vendor/rangeslider/css/ion.rangeSlider.css') }}"/>
@@ -363,6 +364,7 @@
         @if (Request::segment(2) === 'notifications' )
 			<script src="{{ asset('assets/vendor/toastr/toastr.js') }}"></script>
         @endif
+        <script src="{{ asset('assets/vendor/toastr/toastr.js') }}"></script>
 
         @if (Request::segment(2) === 'nestable' )
             <script src="{{ asset('assets/vendor/nestable/jquery.nestable.js') }}"></script>
