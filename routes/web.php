@@ -96,8 +96,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('profile', 'Backend\AdminController@showProfile')->name('admin.profile');
     Route::put('profile/update', 'Backend\AdminController@updateProfile')->name('admin.profile-update');
     Route::get('markasread',function(){
-        $admin=Admin::where('role','0')->first();
-        $admin->unreadNotifications->markAsRead();
+        Auth::user()->unreadNotifications->markAsRead();
         return redirect()->back();
 
     })->name('markasRead');
