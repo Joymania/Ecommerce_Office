@@ -119,7 +119,7 @@ class CheckoutController extends Controller
         Cart::destroy();
     }
     $name=$request->name;
-    $admin=Admin::where('role','0')->get();
+    $admin = Admin::all();
     Notification::send($admin, new OrderNotification($name));
 
         return redirect()->route('frontsite')->with('success', 'Your Order has been placed Successfully.');
