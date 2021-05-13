@@ -19,7 +19,7 @@
                         @csrf
                         <div class="form-row col-md-6">
                             <label for="description">Expense Category Name</label>
-                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror"
+                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" value=" {{ old('name') }} "
                                    name="name" placeholder="Write Category name" required>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">

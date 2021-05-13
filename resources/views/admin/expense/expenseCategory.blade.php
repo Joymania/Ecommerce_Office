@@ -43,9 +43,11 @@
                                 <td>{{$view_cat->name}}</td>
                                 <td>{{$admins->name}}</td>
                                 <td class="action">
-
-                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('expenseCategory.edit', $view_cat->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a>
+                                    <a href="{{ route('expenseCategory.edit', $view_cat->id) }}">
+                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> 
+                                        <i class="icon-pencil" aria-hidden="true"></i>
                                     </button>
+                                    </a>
 
                                     <!-- for deleting using one form -->
                                     <div hidden> {{$route = route('expenseCategory.delete',$view_cat->id) }}</div>

@@ -12,11 +12,12 @@
         <div class="card">
             <div class="header">
                 <h6>Admin List</h6>
-                <a href="{{ route('admin.create') }}">
+                <a class=" btn btn-primary m-b-15" href="{{ route('admin.create') }}"><i class="fa fa-plus-circle"></i> Add Admin</a>
+                {{-- <a href="{{ route('admin.create') }}">
                     <button id="addToTable" class="btn btn-primary m-b-15" type="button">
                         <i class="icon wb-plus" aria-hidden="true"></i> Add Admin
                     </button>
-                </a>
+                </a> --}}
                 @if(session()->has('success_msg'))
                 @section('page-script')
                     $(document).ready(function(){

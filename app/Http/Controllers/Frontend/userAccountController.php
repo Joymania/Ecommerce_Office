@@ -25,14 +25,14 @@ class userAccountController extends Controller
         $id = Auth::id();
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         // $user = User::all()->find($id);
-        $logos = logo::all()->last();
+        $logos = logo::orderByDesc('id')->first();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contacts = contacts::all()->last();
         $orders = Order::all()->where('user_id' , $id);
         $OrderProduct = OrderProduct::with('product')->find($id);
 
         $id = Auth::id();
-        $logo = logo::all()->last();
+        $logo = logo::orderByDesc('id')->first();
         $categories = category::with('sub_category','product')->take(-4)->get();
         $contact = contacts::all()->last();
         $user = User::find(Auth::id());
@@ -113,6 +113,7 @@ class userAccountController extends Controller
         $data['order']=Order::find($id);
         // $data['product']=Order::where('id',$id)->with('products','color','size')->first();
         $data['product']=OrderProduct::where('order_id',$id)->with('color','size','order_detail','product')->get();
+        $data['logos'] = logo::orderByDesc('id')->first();
         return view('Frontend.userProfile.orderDetails',$data);
     }
 

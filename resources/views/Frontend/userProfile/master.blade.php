@@ -105,8 +105,7 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
-                                <div class="logo">
-
+                                <div class="logo">                                
                                     @if(!empty($logos))
                                     <a href="{{"/"}}"><img src="{{asset($logos->image)}}" alt="logo"></a>
                                     @else

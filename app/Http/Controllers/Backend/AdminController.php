@@ -127,8 +127,7 @@ class AdminController extends Controller
 
         $admin->save();
 
-        session()->flash('success_msg' , 'Updated successfully');
-        return back();
+        return redirect()->route('admin.index')->with(['success_msg' => 'Updated successfully']);
     }
 
     public function showProfile()
@@ -189,7 +188,7 @@ class AdminController extends Controller
         $this->removeImage($admin);
         $admin->delete();
 
-        return redirect()->route('admin.index')->with("success_msg", 'Deleted successfully');
+        return redirect()->route('admin.index')->with("success_msg", 'Deleted successfully!');
     }
 
     public function deleteImage(Admin $admin)
@@ -198,7 +197,7 @@ class AdminController extends Controller
         $this->removeImage($admin);
         $admin->image = null;
         $admin->save();
-        return redirect()->back()->with("success_msg", ' Image Deleted successfully');
+        return redirect()->back()->with("success_msg", ' Image Deleted successfully!');
     }
 
     private function removeImage($admin)

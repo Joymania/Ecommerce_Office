@@ -6,7 +6,7 @@
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
-            <img src="{{ (!empty(auth()->user()->image)) ? url('upload/admins/'.auth()->user()->image):url('upload/noImage.jpg') }}" class="rounded-circle user-photo" alt="User Profile Picture">
+            <img src="{{ (!empty(auth()->user()->image)) ? url('upload/admins/'.auth()->user()->image):url('upload/noImage.jpg') }}" class="rounded-circle user-photo" alt="User Profile Picture" height="50px" width="50px">
             <div class="dropdown">
                 <span>Welcome,</span>
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ auth()->user()->name }}</strong></a>
@@ -47,32 +47,39 @@
             <div class="tab-pane active" id="menu">
                 <nav id="left-sidebar-nav" class="sidebar-nav">
                     <ul id="main-menu" class="metismenu">
-                        <li class="{{ Request::segment(1) === 'dashboard' ? 'active' : null }}">
+                        <li class="{{ Request::segment(2) === 'dashboard' ? 'active' : null }}">
                             <a href="{{route('admin.dashboard')}}"><i class="icon-home"></i> <span>Dashboard</span></a>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'products' ? 'active' : null }}">
+                        <li class="{{ ( Request::segment(2) === 'products' or Request::segment(2) === 'size' or Request::segment(2) === 'tags' or Request::segment(2) === 'category' or Request::segment(2) === 'subCategory' or Request::segment(2) === 'brand' or Request::segment(2) === 'color' or Request::segment(2) === 'cupon' ) ? 'active' : null }}">
                             <a href="#Products" class="has-arrow"><i class="icon-basket-loaded"></i> <span>Products</span></a>
                             <ul>
-                                <li class=""><a href="{{route('products.list')}}">Products List</a></li>
-                                <li class=""><a href="{{route('products.sizes')}}">Size List</a></li>
-                                <li class=""><a href="{{route('tags.list')}}">Tags</a></li>
-                                <li class="{{ Request::segment(4) === 'category' ? 'active' : null }}"><a href="{{route('category.view')}}">Category</a></li>
-                                <li class="{{ Request::segment(4) === 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
-                                <li class="{{ Request::segment(3) === 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
-                                <li class="{{ Request::segment(4) === 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
-                                <li class=""><a href="{{route('cupon.view')}}">Cupon</a></li>
+                                <li class="{{ Request::segment(2) == 'products' ? 'active' : null }}"><a href="{{route('products.list')}}">Products List</a></li>
+
+                                <li class="{{ Request::segment(2) == 'size' ? 'active' : null }}"><a href="{{route('products.sizes')}}">Size List</a></li>
+
+                                <li class="{{ Request::segment(2) == 'tags' ? 'active' : null }}"><a href="{{route('tags.list')}}">Tags</a></li>
+
+                                <li class="{{ Request::segment(2) == 'category' ? 'active' : null }}"><a href="{{route('category.view')}}">Category</a></li>
+
+                                <li class="{{ Request::segment(2) == 'subCategory' ? 'active' : null }}"><a href="{{route('subCategory.view')}}">Sub-Category</a></li>
+
+                                <li class="{{ Request::segment(2) == 'brand' ? 'active' : null }}"><a href="{{route('brand.view')}}">Brands</a></li>
+
+                                <li class="{{ Request::segment(2) == 'color' ? 'active' : null }}"><a href="{{route('color.view')}}">Colors</a></li>
+
+                                <li class="{{ Request::segment(2) == 'cupon' ? 'active' : null }}"><a href="{{route('cupon.view')}}">Cupon</a></li>
                             </ul>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'orders' ? 'active' : null }}">
+                        <li class="{{ Request::segment(2) == 'order' ? 'active' : null }}">
                             <a href="#Orders" class="has-arrow"><i class="icon-notebook"></i> <span>Orders</span></a>
                             <ul>
-                                <li class=""><a href="{{route('order.view')}}">Order</a></li>
+                                <li class="{{ Request::segment(2) == 'order' ? 'active' : null }}"><a href="{{route('order.view')}}">Order</a></li>
                             </ul>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                        <li class="{{ (Request::segment(2) === 'users' or Request::segment(2) === 'admins') ? 'active' : null }}">
                             <a href="#Users" class="has-arrow"><i class="icon-users"></i> <span>Users</span></a>
                             <ul>
                                 <li class="{{ Request::segment(2) === 'admins' ? 'active' : null }}"><a href="{{route('admin.index')}}">Admins</a></li>
@@ -80,26 +87,27 @@
                             </ul>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                        <li class="{{ (Request::segment(2) == 'expenseCategory' or Request::segment(2) == 'expense') ? 'active' : null }}">
                             <a href="#Users" class="has-arrow"><i class="fa fa-money"></i> <span>Expense</span></a>
                             <ul>
-                                <li class="{{ Request::segment(4) === 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
-                                <li class="{{ Request::segment(4) === 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
+                                <li class="{{ Request::segment(2) == 'expenseCategory' ? 'active' : null }}"><a href="{{route('expenseCategory.view')}}">Expense Category</a></li>
+
+                                <li class="{{ Request::segment(2) == 'expense' ? 'active' : null }}"><a href="{{route('expense.view')}}">Expense</a></li>
                             </ul>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
+                        <li class="{{ Request::segment(2) == 'report' ? 'active' : null }}">
                             <a href="#Users" class="has-arrow"><i class="icon-calculator"></i> <span>Reports</span></a>
                             <ul>
-                                <li><a href="{{route('sales.report')}}">Report</a></li>
+                                <li class="{{ Request::segment(2) === 'report' ? 'active' : null }}"><a href="{{route('sales.report')}}">Report</a></li>
                             </ul>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'users' ? 'active' : null }}">
-                            <a href="#Users" class="has-arrow"><i class="icon-settings"></i> <span>Settings</span></a>
+                        <li class="{{ (Request::segment(2) == 'logo' or Request::segment(2) == 'contact') ? 'active' : null }}">
+                            <a href="#" class="has-arrow"><i class="icon-settings"></i> <span>Settings</span></a>
                             <ul>
                                 <li class="{{ Request::segment(2) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
-                                <li class=""><a href="{{route('contact.view')}}">Contact</a></li>
+                                <li class="{{ Request::segment(2) === 'contact' ? 'active' : null }}"><a href="{{route('contact.view')}}">Contact</a></li>
                             </ul>
                         </li>
                     </ul>

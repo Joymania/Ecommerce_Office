@@ -82,7 +82,7 @@
                                                 <select id="single-selection" name="tag_id" class="multiselect multiselect-custom form-control">
                                                     <option value="">Select Tag</option>
                                                     @foreach($tags as $row)
-                                                        @if($row->name == $product->tag->name)
+                                                        @if( !empty($product->tag->name) && $row->name == $product->tag->name)
                                                             <option value="{{$row->id}}" selected>{{$row->name}}</option>
                                                         @else
                                                             <option value="{{$row->id}}">{{$row->name}}</option>

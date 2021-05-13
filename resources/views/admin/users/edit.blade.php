@@ -14,12 +14,14 @@
         <a class=" float-right btn btn-success btn-sm" href="{{ route('users.index') }}"><i class="fa fa-list"></i> User List</a>
 
         @if(session()->has('success_msg'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session()->get('success_msg') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        @section('page-script')
+            $(document).ready(function(){
+            toastr.options.timeOut = "3500";
+            toastr.options.closeButton = true;
+            toastr.options.positionClass = 'toast-top-right';
+            toastr['success']('{{session('success_msg')}}');
+            });
+        @endsection
         @endif
 
     </div>
@@ -74,7 +76,7 @@
                     <div class="body">
                         <h6>Basic Information</h6>
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" value="{{old('name',$user->name)}}">
+                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" value="{{old('name',$user->name)}}" required>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -83,7 +85,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{old('email',$user->email)}}">
+                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{old('email',$user->email)}}" required>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

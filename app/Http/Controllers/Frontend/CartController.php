@@ -31,7 +31,6 @@ class CartController extends Controller
              'size_id'=>'required',
              'color_id'=>'required'
              ]);*/
-
         $product=product::where('id',$request->id)->first();
         $product_size=size::where('id',$request->size_id)->first();
         $product_color=color::where('id',$request->color_id)->first();
@@ -74,18 +73,22 @@ class CartController extends Controller
             else{
                 $price=$product->price;
             }
+
+            $subtotal=$request->qty * $price;
+            
              Cart::add([
             'id'=>$product->id,
             'qty'=>$request->qty,
             'price'=>$price,
+            'subtotal'=>$subtotal,
             'promo_price'=>$product->promo_price,
             'name'=>$product->name,
             'weight'=>550,
             'options'=>[
                  'size_id' =>$request->size_id,
-                 'size_name' =>$product_size->name,
+                 'size_name' => $product_size ? $product_size->name : null,
                  'color_id' =>$request->color_id,
-                 'color_name' =>$product_color->name,
+                 'color_name' => $product_color ? $product_color->name :null,
                 'image'=>$product->image
             ]
 
@@ -97,7 +100,7 @@ class CartController extends Controller
     }
 
     public function showCart(){
-        $data['logos']=logo::first();
+        $data['logos']=logo::orderByDesc('id')->first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
 

@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Cart;
+use App\Model\CartShopping;
 
 class LoginController extends Controller
 {
@@ -71,6 +73,25 @@ class LoginController extends Controller
         $user = User::where('email',$email)->first();
         $user->status = '1';
         $user->save();
+
+        $carts = Cart::content();
+        foreach($carts as $cart){
+            $idauth = Auth::id();
+            $identity= $cart->id;
+            $sizeID= $request->size_id;
+            $colorId= $request->color_id;
+            $cartCheck= CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+            if($cartCheck==NULL){
+            $cart_add= new CartShopping();
+            $cart_add->user_id = Auth::id();
+            $cart_add->product_id = $cart->id;
+            $cart_add->product_size = $cart->options->size_id;
+            $cart_add->product_color= $cart->options->color_id;
+            $cart_add->qty= $cart->qty;
+            $cart_add->subtotal= $cart->subtotal;
+            $cart_add->save();
+            }
+        }
     }
 
     /**

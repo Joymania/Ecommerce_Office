@@ -16,7 +16,7 @@ class ShopController extends Controller
     public function index()
     {
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $logos = logo::all()->last();
+        $logos = logo::orderByDesc('id')->first();
         $contacts = contacts::all()->last();
         $categories = category::with('sub_category')->get();
         $products = product::latest()->paginate(12);

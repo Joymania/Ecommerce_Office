@@ -163,7 +163,7 @@
                                                 @if (Auth::id())
                                                 <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
                                                 @else
-                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::count() }} </span>
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::content()->count() }} </span>
                                                 @endif
                                             </a>
                                         </div>

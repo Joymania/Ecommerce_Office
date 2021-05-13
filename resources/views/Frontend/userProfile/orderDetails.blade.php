@@ -15,12 +15,10 @@
     .mytable tr td{
         padding: 15px;
     }
-    .card-body{
-        margin: 30px;
-    }
 
     </style>
 
+<div class="container">
 <div class="row clearfix">
 
     <div class="col-lg-12">
@@ -113,6 +111,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 @endsection

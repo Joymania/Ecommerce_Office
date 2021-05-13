@@ -185,13 +185,13 @@ class ProductsController extends Controller
                 $subImages->save();
             }
         }
-
+     
+        $product->colors()->detach();
         if (!empty($request->color_id) > 0){
-            $product->colors()->detach();
             $product->colors()->attach($request->color_id);
         }
+        $product->sizes()->detach();
         if (!empty($request->size_id) > 0){
-            $product->sizes()->detach();
             $product->sizes()->attach($request->size_id);
         }
         return redirect()->route('products.list')->with('success_msg','Product Successfully updated');

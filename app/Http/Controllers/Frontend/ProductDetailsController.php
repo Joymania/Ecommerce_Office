@@ -22,7 +22,7 @@ class ProductDetailsController extends Controller
     public function index($id)
     {
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $logos = logo::all()->last();
+        $logos = logo::orderByDesc('id')->first();
         $categories = category::with('sub_category')->get();
         $contacts = contacts::all()->last();
         $product = product::find($id);
@@ -47,7 +47,7 @@ class ProductDetailsController extends Controller
 
     public function reviewsWithoutLimit($id)
     {
-        $logos = logo::all()->last();
+        $logos = logo::orderByDesc('id')->first();
         $categories = category::with('sub_category')->get();
         $contacts = contacts::all()->last();
         $product = product::find($id);

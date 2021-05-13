@@ -43,9 +43,10 @@
                                     <img max-width="150px" max-height='100px' src="{{asset($view_logo->image)}}">
                                 </td>
                                 <td class="actions">
-
-                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('logo.edit',$view_logo->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a>
-                                    </button>
+                                    <a href="{{ route('logo.edit',$view_logo->id) }}">
+                                        <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <i class="icon-pencil" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
 
                                     <!-- for deleting using one form -->
                                     <div hidden> {{$route = route('logo.delete',$view_logo->id) }}</div>
