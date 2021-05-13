@@ -35,7 +35,7 @@ class WishlistController extends Controller
     public function index(){
         if(Auth::user()){
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $data['logos']=logo::first();
+        $data['logos']=logo::orderByDesc('id')->first();
         $data['categories']=category::all();
         $data['contacts']=contacts::first();
         $id=Auth::id();

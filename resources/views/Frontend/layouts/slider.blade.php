@@ -1,6 +1,12 @@
 
         <div class="slider-banner-area">
             <div class="container">
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
                 <div class="row">
                     <div class="col-sm-11 ml-auto mr-auto">
                          <div class="slider-area bg-gray mb-30 ml-auto mr-auto" >

@@ -16,7 +16,7 @@ class ProductByCategoryController extends Controller
     public function productByCategory($id)
     {
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $logos = logo::all()->last();
+        $logos = logo::orderByDesc('id')->first();
         $contacts = contacts::all()->last();
         $products = product::where('category_id' , $id)->paginate(12);
         $categories = category::with('sub_category')->get();

@@ -51,7 +51,7 @@ class expenseCategoryController extends Controller
         $expenseCategory = expenseCategory::find($id);
         // validation
         $this->validate($request, [
-            'name' => $request->name == $expenseCategory->name ? '' : 'required|unique:expense_categories|max:255',
+            'name' => strtolower($request->name) == strtolower($expenseCategory->name) ? '' : 'required|unique:expense_categories|max:255',
         ]);
         
         $expenseCategory->name = $request->name;

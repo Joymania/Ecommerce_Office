@@ -57,8 +57,11 @@
 
                                 <td class="action">
 
-                                    <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"> <a href="{{ route('expense.edit',$list->id) }}"><i class="icon-pencil" aria-hidden="true"></i></a>
-                                    </button>
+                                    <a  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit" data-toggle="tooltip" data-original-title="Edit"
+                                    href="{{ route('expense.edit',$list->id) }}">
+                                        <i class="icon-pencil" aria-hidden="true"></i>
+                                    </a>
+                                    
 
                                     <!-- for deleting using one form -->
                                     <div hidden> {{$route = route('expense.delete',$list->id) }}</div>

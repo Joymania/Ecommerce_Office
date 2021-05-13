@@ -5,7 +5,11 @@
         </div>
 
         <div class="navbar-brand">
-            <a href="{{--{{route('dashboard.ecommerce')}}--}}"><img src="{{ asset('assets/img/logo.svg') }}" alt="Lucid Logo" class="img-responsive logo"></a>
+            @if(!empty($logo))
+                <a href="{{ route('admin.dashboard') }}"><img src="{{ asset($logo->image) }}" alt="Lucid Logo" class="img-responsive logo" style=" max-width:200px; max-height:50px; " ></a>
+            @else
+                <a href="{{--{{route('dashboard.ecommerce')}}--}}"><img src="{{ asset('assets/img/logo.svg') }}" alt="Lucid Logo" class="img-responsive logo"></a>
+            @endif
         </div>
 
         <div class="navbar-right">
@@ -24,19 +28,19 @@
                         <ul class="dropdown-menu notifications">
                             <li class="header"><strong>You have {{ session('admin')->unreadNotifications->count() }} new Notifications</strong></li>
                                 @foreach (session('admin')->unreadNotifications as $notification)
-                                 <li>
-                                <a href="javascript:void(0);">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <i class="icon-info text-warning"></i>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <i class="icon-info text-warning"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="text"><strong>{{ $notification->data['name'] }}</strong> {{ $notification->data['text'] }}</p>
+                                                <span class="timestamp">{{ $notification->created_at }}</span>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <p class="text"><strong>{{ $notification->data['name'] }}</strong> {{ $notification->data['text'] }}</p>
-                                            <span class="timestamp">{{ $notification->created_at }}</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
                                 @endforeach
 
 

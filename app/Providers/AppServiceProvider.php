@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\View;
 use App\Model\wishlist;
 use App\Model\CartShopping;
 use App\Model\category;
-use App\Model\contacts;
+use App\Model\logo;
+use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Schema;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -50,5 +51,10 @@ class AppServiceProvider extends ServiceProvider
            $view->with('totalSale', Order::where('status',1)->orWhere('status',2)->sum('subtotal'));
         });
 
+        View::composer('admin.layout.navbar',function ($view){
+            $view->with('logo', logo::orderByDesc('id')->first());
+            $admin = Admin::find(Auth::id());
+            session()->put('admin',$admin);
+        });
     }
 }

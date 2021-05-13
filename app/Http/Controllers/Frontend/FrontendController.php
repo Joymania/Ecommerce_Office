@@ -64,7 +64,8 @@ class FrontendController extends Controller
         $popular_categories = $popular_categories['0'];
 
         $data['sliders']=DB::table('products')->orderBy('created_at','desc')->take(2)->get();
-        $logos = logo::all()->last();
+        $logos = logo::orderByDesc('id')->first();
+        // $logos = logo::all()->last();
         $categories = category::with('sub_category','product')->take(4)->get();
         $contacts = contacts::all()->last();
 
@@ -81,7 +82,7 @@ class FrontendController extends Controller
 
     public function contact()
     {
-        $logos = logo::all()->last();
+        $logos = logo::orderByDesc('id')->first();
         $categories = category::with('sub_category')->get();
         $contacts = contacts::all()->last();
         $products = product::all();

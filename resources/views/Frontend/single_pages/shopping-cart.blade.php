@@ -19,73 +19,66 @@
         <div class="cart-content">
             <h3>Shopping Cart</h3>
 
-            <ul>
-                @php
-                $total=0;
-                @endphp
-                @if(Auth::user())
-                @foreach ($cartpage as $cart)
-                <li class="single-product-cart">
-                    <div class="cart-img">
-                        <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
-                    </div>
-                    <div class="cart-title">
-                        <h4><a href="#">{{ $cart->product->name }}</a></h4>
-                        @if ($cart->product->promo_price)
-                        <span> {{ $cart->qty }} × {{ $cart->product->promo_price }} tk </span>
-                        @else
-                        <span> {{ $cart->qty }} × {{ $cart->product->price }} tk </span>
-                        @endif
-
-                    </div>
-                    <div class="cart-delete">
-                        <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
-                    </div>
-                </li>
-                @php
-                $total+=$cart->subtotal;
-                @endphp
-                @endforeach
-            </ul>
-            <div class="cart-total">
-                <h4>Subtotal: <span>{{ $total }}tk</span></h4>
-            </div>
-            @else
-            <ul>
-                @php
-                $contents=Cart::content();
-                $total=0;
-                @endphp
-                @foreach ($contents as $content)
-                <li class="single-product-cart">
-                    <div class="cart-img">
-                        <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}"
-                                alt=""></a>
-                    </div>
-
-                    <div class="cart-title">
-                        <h4><a href="#">{{ $content->name }}</a></h4>
-                        <span> {{ $content->qty }} × {{ $content->price }} tk </span>
-
-                        <div class="cart-checkout-btn">
-                            <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
-                            <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
+            @php
+            $total=0;
+            @endphp
+            @if(Auth::user())
+                <ul>
+                    @foreach ($cartpage as $cart)
+                    <li class="single-product-cart">
+                        <div class="cart-img">
+                            <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
+                        </div>
+                        <div class="cart-title">
+                            <h4><a href="#">{{ $cart->product->name }}</a></h4>
+                            @if ($cart->product->promo_price)
+                            <span> {{ $cart->qty }} × {{ $cart->product->promo_price }} tk </span>
+                            @else
+                            <span> {{ $cart->qty }} × {{ $cart->product->price }} tk </span>
+                            @endif
 
                         </div>
                         <div class="cart-delete">
-                            <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
+                            <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
                         </div>
-                </li>
-                @php
-                $total+=$content->subtotal;
-                @endphp
-                @endforeach
+                    </li>
+                    @php
+                    $total+=$cart->subtotal;
+                    @endphp
+                    @endforeach
+                </ul>
+                <div class="cart-total">
+                    <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                </div>
+            @else
+                <ul>
+                    @php
+                    $contents=Cart::content();
+                    $total=0;
+                    @endphp
+                    @foreach ($contents as $content)
+                    <li class="single-product-cart">
+                        <div class="cart-img">
+                            <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}"
+                                    alt=""></a>
+                        </div>
 
-
-            </ul>
-            <div class="cart-total">
-                <h4>Subtotal: <span>{{ $total }}tk</span></h4>
-            </div>
+                        <div class="cart-title">
+                            <h4><a href="#">{{ $content->name }}</a></h4>
+                            <span> {{ $content->qty }} × {{ $content->price }} tk </span>                
+                            <div class="cart-delete">
+                                <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
+                            </div>
+                        </div>
+                    </li>
+                    @php
+                    $total+=$content->subtotal;
+                    @endphp
+                    @endforeach
+                </ul>
+                <div class="cart-total">
+                    <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                </div>
             @endif
             <div class="cart-checkout-btn">
                 <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
@@ -130,6 +123,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {{-- dd($showCart) --}}
                             {{-- @php
                             dd($showCart);
                             @endphp --}}
@@ -142,8 +136,15 @@
                                             width="80px" height="100px" alt=""></a>
                                 </td>
                                 <td class="product-name"><a href="#">{{ $show['product']['name'] }}</a></td>
+                                @if(!empty($show['color']))
                                 <td class="product-color">{{$show['color']['name']}}</td>
+                                @else <td> </td>
+                                @endif
+
+                                @if(!empty($show['size']))
                                 <td class="product-size">{{$show['size']['name']}}</td>
+                                @else <td> </td>
+                                @endif
                                 <td class="product-price-cart">
                                     @if ($show['product']['promo_price'])
                                     <span class="amount">{{ $show['product']['promo_price'] }}</span>

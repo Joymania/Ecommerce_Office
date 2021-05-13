@@ -38,17 +38,17 @@
                                                     <td>{{$row->name}}</td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                        <a href="{{route('tags.edit',['tag'=>$row->id])}}" class="editLink" data-toggle="tooltip" title="Edit Tag!">
-                                                            <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit">
+                                                            <a href="{{route('tags.edit',['tag'=>$row->id])}}" class="editLink" data-toggle="tooltip" title="Edit Tag!">
+                                                                <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit">
                                                                 <i class="icon-pencil" aria-hidden="true"></i></button>
-                                                        </a>
-                                                        <form action="{{route('tags.delete',['tag'=>$row->id])}}" class="deleteForm"
-                                                              onsubmit="return confirm('Are you sure want to delete this item?')" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
-                                                                    data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button></a>
-                                                        </form>
+                                                            </a>
+                                                            <form action="{{route('tags.delete',['tag'=>$row->id])}}" class="deleteForm"
+                                                                onsubmit="return confirm('Are you sure want to delete this item?')" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove"
+                                                                        data-toggle="tooltip" data-original-title="Remove"><i class="icon-trash" aria-hidden="true"></i></button></a>
+                                                            </form>
                                                         </div>
                                                     </td>
                                                 </tr>

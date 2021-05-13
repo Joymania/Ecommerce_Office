@@ -40,19 +40,6 @@ Route::get('/search-result','Frontend\SearchController@searchResults')->name('se
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
 Route::get('/category-products','Frontend\SearchController@categoryProducts')->name('category.products');
 
-//Shopping-Cart
-Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
-Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
-Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
-Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
-Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
-Route::get('delete-cwishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
-Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
-Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
-
-
-
-
 //wishlist
 Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
 Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
@@ -67,13 +54,21 @@ Route::get('/search-ajax','Frontend\SearchController@ajaxSearch')->name('search.
 // contact
 Route::get('/contact','Frontend\FrontendController@contact')->name('contact');
 
+//Shopping-Cart
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
+Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/userAccount','Frontend\userAccountController@userAccount')->name('userAccount');
     Route::post('/user/userUpdate','Frontend\userAccountController@userUpdate')->name('userUpdate');
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
-
-    // Route::get('/user/userAccount/{id}','Frontend\userAccountController@userAccount')->name('userAccount');
     //Checkout
     Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
@@ -121,15 +116,15 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/{product}/edit','Backend\ProductsController@edit')->name('product.edit');
         Route::patch('/{product}/update','Backend\ProductsController@update')->name('product.update');
         Route::delete('/{product}/delete','Backend\ProductsController@destroy')->name('product.destroy');
-
-        //Size CRUD Routes
-        Route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
-        Route::get('/size/create','Backend\SizeController@createSize')->name('products.size.create');
-        Route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
-        Route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
-        Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
-        Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
     });
+
+    //Size CRUD Routes
+    Route:: get('/size/list','Backend\SizeController@productSizeList')->name('products.sizes');
+    Route::get('/size/create','Backend\SizeController@createSize')->name('products.size.create');
+    Route::post('/size/create','Backend\SizeController@storeSize')->name('product.size.store');
+    Route::get('/size/{size}/edit','Backend\SizeController@editSize')->name('products.size.edit');
+    Route::patch('/size/{size}/update','Backend\SizeController@updateSize')->name('products.size.update');
+    Route::delete('/size/{size}/delete','Backend\SizeController@destroySize')->name('products.size.delete');
 
     // Tags
     Route::prefix('/tags')->group(function (){
@@ -178,6 +173,15 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/update/{id}','Backend\ColorController@update')->name('color.update');
         Route::delete('/delete/{id}','Backend\ColorController@delete')->name('color.delete');
     });
+    // contacts
+    Route::prefix('contact')->group(function () {
+        Route::get('/view', 'Backend\ContactController@view')->name('contact.view');
+        Route::get('/add', 'Backend\ContactController@add')->name('contact.add');
+        Route::post('/store', 'Backend\ContactController@store')->name('contact.store');
+        Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('contact.edit');
+        Route::post('/update/{id}', 'Backend\ContactController@update')->name('contact.update');
+        Route::delete('/delete/{id}', 'Backend\ContactController@delete')->name('contact.delete');
+    });
 
     Route::prefix('admin')->group(function () {
         // slider
@@ -188,15 +192,6 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
             Route::get('/edit/{id}', 'Backend\SliderController@edit')->name('slider.edit');
             Route::post('/update/{id}', 'Backend\SliderController@update')->name('slider.update');
             Route::get('/delete/{id}', 'Backend\SliderController@delete')->name('slider.delete');
-        });
-        // contacts
-        Route::prefix('contact')->group(function () {
-            Route::get('/view', 'Backend\ContactController@view')->name('contact.view');
-            Route::get('/add', 'Backend\ContactController@add')->name('contact.add');
-            Route::post('/store', 'Backend\ContactController@store')->name('contact.store');
-            Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('contact.edit');
-            Route::post('/update/{id}', 'Backend\ContactController@update')->name('contact.update');
-            Route::delete('/delete/{id}', 'Backend\ContactController@delete')->name('contact.delete');
         });
     });
     // category
