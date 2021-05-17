@@ -55,8 +55,6 @@ Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->nam
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 
-
-
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
