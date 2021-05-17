@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
     // tracking
     Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
     Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
-    
+
 });
 
 /*Front end routing ends*/
@@ -165,6 +165,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::delete('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
         Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
         Route::get('deliver/{id}','Backend\OrderController@deliveryStatus')->name('order.delivarystatus');
+        Route::get('returnpending/{id}', 'Backend\OrderController@returnPending')->name('order.returnPending');
     });
     // Color
     Route::prefix('color')->group(function () {
