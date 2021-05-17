@@ -44,8 +44,6 @@ Route::get('/category-products','Frontend\SearchController@categoryProducts')->n
 Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
 Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
 
-
-
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
