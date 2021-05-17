@@ -40,9 +40,20 @@ Route::get('/search-result','Frontend\SearchController@searchResults')->name('se
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
 Route::get('/category-products','Frontend\SearchController@categoryProducts')->name('category.products');
 
+
 //wishlist
 Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
 Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
+
+ //Shopping-Cart
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
+Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 
 
 
@@ -72,15 +83,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
     Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
     
-    //Shopping-Cart
-    Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
-    Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
-    Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
-    Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
-    Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
-    Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
-    Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
-    Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 });
 
 /*Front end routing ends*/
