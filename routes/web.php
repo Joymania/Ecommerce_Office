@@ -40,11 +40,20 @@ Route::get('/search-result','Frontend\SearchController@searchResults')->name('se
 Route::get('/search-filter','Frontend\SearchController@filteredResult')->name('search.filter');
 Route::get('/category-products','Frontend\SearchController@categoryProducts')->name('category.products');
 
+
 //wishlist
 Route::get('wishlist','Frontend\WishlistController@index')->name('wishlist.view');
 Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->name('wishlist.add');
 
-
+ //Shopping-Cart
+Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
+Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
+Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
+Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
+Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
+Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
+Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
@@ -71,16 +80,6 @@ Route::middleware(['auth'])->group(function () {
     // tracking
     Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
     Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
-
-    //Shopping-Cart
-    Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
-    Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
-    Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
-    Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
-    Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')->name('delete.authcart');
-    Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
-    Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
-    Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
 });
 
 /*Front end routing ends*/
@@ -165,6 +164,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::delete('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
         Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
         Route::get('deliver/{id}','Backend\OrderController@deliveryStatus')->name('order.delivarystatus');
+        Route::get('returnpending/{id}', 'Backend\OrderController@returnPending')->name('order.returnPending');
     });
     // Color
     Route::prefix('color')->group(function () {
