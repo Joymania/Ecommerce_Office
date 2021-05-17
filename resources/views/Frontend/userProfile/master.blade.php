@@ -35,7 +35,8 @@
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/jquery-ui.css">
     <link rel="stylesheet" href="{{""}}/assets/css/style.css">
 
-    <!-- Use the minified version files listed below for better performance and remove the files listed above
+@yield('stylesheet')
+<!-- Use the minified version files listed below for better performance and remove the files listed above
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
@@ -105,7 +106,7 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
-                                <div class="logo">                                
+                                <div class="logo">
                                     @if(!empty($logos))
                                     <a href="{{"/"}}"><img src="{{asset($logos->image)}}" alt="logo"></a>
                                     @else
@@ -338,7 +339,7 @@
                         @php
                             $total=0;
                         @endphp
-                    @if(!empty($cartpage))                  
+                    @if(!empty($cartpage))
                         @foreach ($cartpage as $cart)
                              <li class="single-product-cart">
                              <div class="cart-img">
@@ -537,19 +538,19 @@
                     <div class="footer-widget mb-40">
                         <h3 class="footer-title">Quick Shop</h3>
                         <div class="footer-info-list info-list-50-parcent">
-                            <ul>                              
-                                @foreach($categories as $i => $cat)                               
+                            <ul>
+                                @foreach($categories as $i => $cat)
                                     @if( $i >= 5 )
                                         @break
                                     @endif
                                     <li><a href="{{ route('search.result') }}">{{ $cat->name }}</a></li>
-                                
+
                                 @endforeach
                             </ul>
                         </div>
                     </div>
                 </div>
-                @else                    
+                @else
                 @endif
 
                 <div class="col-lg-4 col-md-4 col-sm-6 col-12">
@@ -563,7 +564,7 @@
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="{{ route('track.show') }}">Track Order</a></li>
                                 <li><a href="{{ route('search.result') }}">Shop</a></li>
-                                <li><a href="{{ route('about_us') }}">About Us</a></li>                           
+                                <li><a href="{{ route('about_us') }}">About Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -627,7 +628,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="copyright copyright-center">
-                        <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by HasThemes</a>.</p>
+{{--                        <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by HasThemes</a>.</p>--}}
+                        <p>{{$copyright->title}}</p>
                     </div>
                 </div>
             </div>

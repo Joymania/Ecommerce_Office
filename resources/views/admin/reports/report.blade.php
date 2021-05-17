@@ -94,7 +94,7 @@
     </div>
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
-            <h5>Last 30 Days Sales Report</h5>
+            <h5>Last Month's Sales Report</h5>
             <hr>
 
             <div class="row">

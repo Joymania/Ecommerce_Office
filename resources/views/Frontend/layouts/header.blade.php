@@ -40,12 +40,14 @@
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/magnific-popup.css">
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/jquery-ui.css">
     <link rel="stylesheet" href="{{""}}/assets/css/style.css">
+    @yield('stylesheet')
 
-    <!-- Use the minified version files listed below for better performance and remove the files listed above
+
+
+<!-- Use the minified version files listed below for better performance and remove the files listed above
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
-    @yield('stylesheet')
 </head>
 
 <body>

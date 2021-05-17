@@ -36,19 +36,19 @@
                     <div class="footer-widget mb-40">
                         <h3 class="footer-title">Quick Shop</h3>
                         <div class="footer-info-list info-list-50-parcent">
-                            <ul>                              
-                                @foreach($categories as $i => $cat)                               
+                            <ul>
+                                @foreach($categories as $i => $cat)
                                     @if( $i >= 6 )
                                         @break
                                     @endif
                                     <li><a href="{{ route('search.result') }}">{{ $cat->name }}</a></li>
-                                
+
                                 @endforeach
                             </ul>
                         </div>
                     </div>
                 </div>
-                @else                    
+                @else
                 @endif
 
                 <div class="col-lg-4 col-md-4 col-sm-6 col-12">
@@ -62,7 +62,7 @@
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="{{ route('track.show') }}">Track Order</a></li>
                                 <li><a href="{{ route('search.result') }}">Shop</a></li>
-                                <li><a href="{{ route('about_us') }}">About Us</a></li>                           
+                                <li><a href="{{ route('about_us') }}">About Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -126,7 +126,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="copyright copyright-center">
-                        <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by HasThemes</a>.</p>
+{{--                        <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by HasThemes</a>.</p>--}}
+                        <p>{{$copyright->title}}</p>
                     </div>
                 </div>
             </div>
@@ -154,6 +155,7 @@
 <script src="{{""}}/assets/js/plugins/scrollup.js"></script>
 <script src="{{""}}/assets/js/plugins/ajax-mail.js"></script>
 
+
 <!-- Use the minified version files listed below for better performance and remove the files listed above
 <script src="assets/js/vendor/vendor.min.js"></script>
 <script src="assets/js/plugins/plugins.min.js"></script>  -->
@@ -162,6 +164,7 @@
 <script src="{{""}}/js/search.js"></script>
 <script src="{{asset('js/search.js')}}"></script>
 @yield('scripts')
+
 </body>
 
 </html>

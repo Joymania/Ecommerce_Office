@@ -20,7 +20,10 @@ class DashboardController extends Controller
     {
         $admin = Admin::find(Auth::id());
         session()->put('admin',$admin);
-        $sales = Order::where('status',2)->orWhere('status',1)->count();
+        //$sales = Order::where('status',2)->orWhere('status',1)->count();
+        $sales = Order::join('order_product','orders.id','order_product.order_id')
+                    ->whereIn('orders.status',[1,2])
+                    ->sum('order_product.qty');
         $orders = Order::count();
        /* session()->put('sales',$sales);
         session()->put('orders',$orders);
@@ -52,13 +55,12 @@ class DashboardController extends Controller
            ->select('product_id',DB::raw('SUM(qty) as total_sales'))
            ->groupBy('product_id')
            ->orderByRaw('total_sales DESC')->limit(5)->get();
-
-       $b = array();
+        $b = array();
         foreach ($a as $row)
         {
             array_push($b,$row->product_id);
         }
-        $tsp = product::find($b);
+        $tsp = product::orderBy('id','desc')->find($b);
         return view('admin.dashboard.ecommerce',
             compact('admin','sales','orders','customers','recentOrders','tsp','a','data'));
     }

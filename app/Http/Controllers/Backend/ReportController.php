@@ -19,37 +19,34 @@ class ReportController extends Controller
 
         $lastDayofPreviousMonth = Carbon::now()->subMonthsNoOverflow()->endOfMonth();
         $data['sale7Days'] = Order::join('order_product','order_product.order_id','orders.id')
-                        ->whereDate('orders.created_at','<',$dateToday)
+                        ->whereDate('orders.created_at','<=',$dateToday)
                         ->whereDate('orders.created_at','>=',$date7days)
-                        ->where('orders.status',1)
-                        ->orWhere('orders.status',2)
+                        ->whereIn('orders.status',[1,2])
                         ->sum('qty');
         $data['sale30Days'] = Order::join('order_product','order_product.order_id','orders.id')
                         ->whereBetween('orders.created_at',[$firstDayofPreviousMonth,$lastDayofPreviousMonth])
-                        ->where('orders.status',1)
-                        ->orWhere('orders.status',2)
+                        ->whereIn('orders.status',[1,2])
                         ->sum('qty');
         $data['saleToday'] = Order::join('order_product','order_product.order_id','orders.id')
             ->whereDate('orders.created_at',$dateToday)
-            ->where('orders.status',1)
-            ->orWhere('orders.status',2)
+            ->whereIn('orders.status',[1,2])
             ->sum('qty');
         $data['expenseToday'] = Expense::whereDate('created_at', $dateToday)->sum('amount');
-        $data['expense7Day'] = Expense::whereDate('created_at','<',$dateToday)->whereDate('created_at','>=',$date7days)->sum('amount');
+        $data['expense7Day'] = Expense::whereDate('created_at','<=',$dateToday)->whereDate('created_at','>=',$date7days)->sum('amount');
         $data['expense30Day'] = Expense::whereBetween('created_at',[$firstDayofPreviousMonth,$lastDayofPreviousMonth])->sum('amount');
 
         $data['todaySellingAmount '] = Order::whereDate('created_at',$dateToday)
-                                    ->where('status',1)
-                                    ->orWhere('status',2)->sum('subtotal');
-        $data['last7daySellingAmount'] = Order::whereDate('created_at','<',$dateToday)
+                                    ->whereIn('status',[1,2])
+                                    ->sum('subtotal');
+        $data['last7daySellingAmount'] = Order::whereDate('created_at','<=',$dateToday)
                                         ->whereDate('created_at','>=',$date7days)
-                                        ->where('status',1)
-                                        ->orWhere('status',2)->sum('subtotal');
+                                        ->whereIn('status',[1,2])
+                                        ->sum('subtotal');
         $data['last1monthSellingAmount'] = Order::whereBetween('created_at',[$firstDayofPreviousMonth,$lastDayofPreviousMonth])
-                                            ->where('status',1)
-                                            ->orWhere('status',2)
+                                            ->whereIn('status',[1,2])
                                             ->sum('subtotal');
 
+        //return $lastDayofPreviousMonth;
         return view('admin.reports.report',compact('data'));
     }
 }
