@@ -57,9 +57,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('logo', logo::orderByDesc('id')->first());
             $admin = Admin::find(Auth::id());
             session()->put('admin',$admin);
-            // foreach(session('admin')->Notifications as $not){
-            //     dd($not);
-            // }
             $today = Carbon::today()->toDateTimeString();
             $admin->notifications()->where('read_at', '<', $today)->delete();
         });
