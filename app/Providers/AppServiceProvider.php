@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Model\Copyright;
 use App\Model\Order;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -33,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {     
-       
+    {
+
         View::composer('Frontend.layouts.master', function ($view) {
             $view->with('wishlist_num' , wishlist::all()->count());
             $view->with('cart_num' , CartShopping::all()->count());
@@ -48,9 +49,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('admin.layout.sidebar',function ($view){
-           $view->with('sales', Order::where('status',2)->orWhere('status',1)->count());
+            $sales = Order::join('order_product','orders.id','order_product.order_id')
+                ->whereIn('orders.status',[1,2])
+                ->sum('order_product.qty');
+           $view->with('sales', $sales);
            $view->with('orders', Order::count());
-           $view->with('totalSale', Order::where('status',1)->orWhere('status',2)->sum('subtotal'));
+           $view->with('totalSale', Order::whereIn('status',[1,2])->sum('subtotal'));
         });
 
         View::composer('admin.layout.navbar',function ($view){
@@ -59,6 +63,16 @@ class AppServiceProvider extends ServiceProvider
             session()->put('admin',$admin);
             $today = Carbon::today()->toDateTimeString();
             $admin->notifications()->where('read_at', '<', $today)->delete();
+        });
+
+        View::composer('Frontend.layouts.footer',function ($view){
+           $copyright = Copyright::first();
+           $view->with('copyright',$copyright);
+        });
+
+        View::composer('Frontend.userProfile.master',function ($view){
+            $copyright = Copyright::first();
+            $view->with('copyright',$copyright);
         });
     }
 }

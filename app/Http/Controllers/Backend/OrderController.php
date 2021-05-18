@@ -54,4 +54,10 @@ class OrderController extends Controller
         $order->save();
         return redirect()->back();
     }
+    public function returnPending($id){
+        $order = Order::where('id', $id)->first();
+        $order->status = 0;
+        $order->save();
+        return redirect()->back();
+    }
 }

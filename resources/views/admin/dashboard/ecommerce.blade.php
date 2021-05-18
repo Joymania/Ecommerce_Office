@@ -155,11 +155,11 @@
                                     <td>{{$orders->biling_address}}</td>
                                     <td>{{$product->pivot->qty}}</td>
                                     @if($orders->status == 0)
-                                        <td><span class="badge badge-success">PENDING</span></td>
+                                        <td><span class="badge badge-danger">PENDING</span></td>
                                     @elseif($orders->status == 1)
-                                        <td><span class="badge badge-success">APPROVED</span></td>
-                                    @else
-                                        <td><span class="badge badge-success">APPROVED</span></td>
+                                        <td><span class="badge badge-warning">APPROVED</span></td>
+                                    @elseif($orders->status == 2)
+                                        <td><span class="badge badge-success">DELIVERED</span></td>
                                     @endif
 
                                     @if(empty($product->promo_price))

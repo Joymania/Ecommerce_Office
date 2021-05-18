@@ -108,6 +108,7 @@
                             <ul>
                                 <li class="{{ Request::segment(2) === 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
                                 <li class="{{ Request::segment(2) === 'contact' ? 'active' : null }}"><a href="{{route('contact.view')}}">Contact</a></li>
+                                <li class="{{ Request::segment(2) === 'contact' ? 'active' : null }}"><a href="{{route('copyright.view')}}">Copyright</a></li>
                             </ul>
                         </li>
                     </ul>

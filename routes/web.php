@@ -80,7 +80,6 @@ Route::middleware(['auth'])->group(function () {
     // tracking
     Route::get('track-show','Frontend\CheckoutController@showTrack')->name('track.show');
     Route::post('tracking','Frontend\CheckoutController@track')->name('order.track');
-    
 });
 
 /*Front end routing ends*/
@@ -165,6 +164,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::delete('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
         Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
         Route::get('deliver/{id}','Backend\OrderController@deliveryStatus')->name('order.delivarystatus');
+        Route::get('returnpending/{id}', 'Backend\OrderController@returnPending')->name('order.returnPending');
     });
     // Color
     Route::prefix('color')->group(function () {
@@ -244,6 +244,16 @@ Route::prefix('expense')->group(function(){
         Route::get('editLogo/{id}', 'Backend\LogoController@editLogo')->name('logo.edit');
         Route::post('updateLogo','Backend\LogoController@updateLogo')->name('logo.update');
         Route::delete('deleteLogo/{did}','Backend\LogoController@deleteLogo')->name('logo.delete');
+    });
+
+    //copyright
+    Route::prefix('copyright')->group(function (){
+        Route::get('/','Backend\CopyrightController@index')->name('copyright.view');
+        Route::get('/add','Backend\CopyrightController@create')->name('copyright.add');
+        Route::post('/add','Backend\CopyrightController@store')->name('copyright.store');
+        Route::get('/edit','Backend\CopyrightController@edit')->name('copyright.edit');
+        Route::post('/edit','Backend\CopyrightController@update')->name('copyright.update');
+        Route::get('/{copyright}/destroy','Backend\CopyrightController@delete')->name('copyright.delete');
     });
 
 

@@ -33,7 +33,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div> 
+            </div>
         @endif
         @if(session()->has('errors'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -41,7 +41,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div> 
+            </div>
         @endif
     </div>
 </div>
@@ -93,13 +93,12 @@
                                     <div class="myaccount-content">
                                         <h3>Orders</h3>
                                         <div class="myaccount-table table-responsive text-center">
-                                            <table class="table table-bordered">
-                                                <thead class="thead-light"> 
+                                            <table class="table table-bordered js-basic-example dataTable" id="DataTables_Table_0">
+                                                <thead class="thead-light">
                                                     <tr>
                                                         <th>Order</th>
                                                          <th>Date</th>
                                                         <th>Status</th>
-                                                       
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -116,12 +115,12 @@
                                                             <td>Delivered</td>
                                                         @else <td></td>
                                                         @endif
-                                                        
+
                                                         <td class="actions"><a href="{{ route('orderDetails',$order->id) }}">
                                                             <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-"
                                                             data-toggle="tooltip" data-original-title="Details"><i class="icon-eye" aria-hidden="true"></i></a>
                                                         </td>
-                                                       
+
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -130,7 +129,7 @@
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
-                                
+
                                 <!-- Single Tab Content Start -->
                                 <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                     <div class="myaccount-content">
@@ -143,15 +142,15 @@
                                 <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Billing Address</h3>
-                                        
+
                                         <address>
                                             <p><strong>{{$user->name}}</strong></p>
-                                           
+
                                             <p>{{$user->address}}</p>
                                             <p>Mobile: {{$user->phone}}</p>
-                                            
+
                                         </address>
-                                        
+
                                     </div>
                                 </div>
                                 <!-- Single Tab Content End -->
@@ -164,8 +163,8 @@
                                             <form method="POST" action="{{ route('userUpdate') }}" enctype="multipart/form-data" >
                                                 @csrf
 
-                                                <!-- user img start-->            
-                                                <div class="row clearfix">                                
+                                                <!-- user img start-->
+                                                <div class="row clearfix">
                                                 <div class="col-lg-12">
                                                     <div class="">
                                                         <div class="body">
@@ -175,10 +174,10 @@
                                                                     <img src="{{ (!empty($user->image)) ? url('upload/users/'.$user->image):url('upload/noImage.jpg') }}" class="user-photo media-object" alt="User" width="140px" height="140px">
                                                                 </div>
                                                                 <div class="media-body">
-                                                                    
+
                                                                     <input name="image" type="file" id="filePhoto" class="@error('image') is-invalid @enderror">
                                                                     <div>
-                                                                        @error('image')                            
+                                                                        @error('image')
                                                                             <span class="" role="alert" style="color: red">
                                                                                 <strong>{{ $message }}</strong>
                                                                             </span>
@@ -203,13 +202,13 @@
                                                     </div>
                                                 </div>
                                                 </div>
-                                                
+
                                                 <!-- user img end -->
 
                                                 <div class="single-input-item">
                                                     <label for="display-name" class="required">Full Name</label>
                                                     <input name="name" class="@error('name') is-invalid @enderror" type="text" id="display-name" value="{{old('name',$user->name)}}" required/>
-                                                    
+
                                                     @error('name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -226,7 +225,7 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                
+
                                                 <div class="single-input-item">
                                                     <label for="address" class="required">Address</label>
                                                     <input name="address" type="text" id="address" class="@error('address') is-invalid @enderror"  value="{{old('address',$user->address)}}"/>
@@ -246,7 +245,7 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                                               
+
                                                 <fieldset>
                                                     <legend>Gender</legend>
                                                     <div>
@@ -262,7 +261,7 @@
                                                 </fieldset>
                                                 <fieldset>
                                                     <legend>Password change</legend>
-                                                    
+
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
@@ -273,7 +272,7 @@
                                                                         <strong>{{ $message }}</strong>
                                                                     </span>
                                                                 @enderror
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -282,7 +281,7 @@
                                                                 <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm New Password">
                                                             </div>
                                                         </div>
-                                                    </div> 
+                                                    </div>
                                                 </fieldset>
                                                 <div class="single-input-item">
                                                     <button class="check-btn sqr-btn ">Save Changes</button>
@@ -303,5 +302,17 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('stylesheet')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}">
+
+@endsection
+
+@section('scripts')
+    {{--jquery Data table assest--}}
+    <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
 
 @endsection
