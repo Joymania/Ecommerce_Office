@@ -11,6 +11,8 @@ use App\Model\category;
 use App\Model\logo;
 use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
+use Notification;
+use Carbon\Carbon;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -55,6 +57,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with('logo', logo::orderByDesc('id')->first());
             $admin = Admin::find(Auth::id());
             session()->put('admin',$admin);
+            // foreach(session('admin')->Notifications as $not){
+            //     dd($not);
+            // }
+            $today = Carbon::today()->toDateTimeString();
+            $admin->notifications()->where('read_at', '<', $today)->delete();
         });
     }
 }

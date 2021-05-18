@@ -146,7 +146,7 @@ class CartController extends Controller
     public function deletewishlist($id){
         $data=wishlist::find($id);
         $data->delete();
-        return redirect()->route('frontsite');
+        return redirect()->back();
     }
     public function deleteAuthCart($id){
         $data=CartShopping::find($id);
