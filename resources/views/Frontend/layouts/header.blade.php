@@ -372,6 +372,7 @@
                     @endphp
                     @if(Auth::user())
 
+                    @if(!empty($cartpage))
                     @foreach ($cartpage as $cart)
                          <li class="single-product-cart">
                          <div class="cart-img">
@@ -394,6 +395,7 @@
                          $total+=$cart->subtotal;
                      @endphp
                     @endforeach
+                    @endif
 
                  </ul>
                  <div class="cart-total">
