@@ -3,6 +3,13 @@ const base_url = $('#baseUrl').val();
 //Filter by price or
 $(document).ready(function () {
     $('.priceFilter').on('click', function () {
+        //IF the device is mobile then it will scroll up
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            $('#scrollUp').click();
+        }
+        //end
+
         $(".priceFilter").css({
             'backgroundColor':'#FFFFFF',
             'color': 'black'
@@ -158,6 +165,12 @@ $(document).ready(function () {
 
     $('#search2').on('submit', function (e) {
         e.preventDefault();
+        //IF the device is mobile then it will scroll up
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            $('#scrollUp').click();
+        }
+        //end
 
         let shopArea = $('#shopArea');
         let singleProduct = $('.singleProduct');
@@ -290,6 +303,14 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".categoryName").on('click', function (e) {
         e.preventDefault();
+
+        //IF the device is mobile then it will scroll up
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            $('#scrollUp').click();
+        }
+        //end
+
         let shopArea = $('#shopArea');
         let categoryName = $(this).text();
         let singleProduct = $('.singleProduct');
