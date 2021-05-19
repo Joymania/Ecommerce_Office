@@ -9,6 +9,7 @@
             margin: auto;
             text-align: center;
         }
+
     </style>
 
     <div class="sidebar-cart-active">
@@ -111,9 +112,9 @@
                         <div class="single-product-wrap">
                             <div class="product-img product-img-zoom mb-15">
                                 <a href="{{route('product.details',$product->id)}}">
-                                    <img class="center" src="{{"/upload/products_images/$product->image"}}" alt="Product Image" width="210px" height="210px">
+                                    <img class="center adjust-height" src="{{"/upload/products_images/$product->image"}}" alt="Product Image" style=" width:210px; height:210px;">
                                 </a>
-                                <span class="pro-badge left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
+                                <span class="pro-badge center left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
                                 <div class="product-action-2 tooltip-style-2">
                                     <a href="{{ route('wishlist.add', $product->id) }}">
                                         <button title="Wishlist"><i class="icon-heart"></i></button>
