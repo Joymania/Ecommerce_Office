@@ -64,10 +64,9 @@ class FrontendController extends Controller
         $popular_categories = $popular_categories['0'];
 
         $data['sliders']=DB::table('products')->orderBy('created_at','desc')->take(2)->get();
-        $logos = logo::orderByDesc('id')->first();
         // $logos = logo::all()->last();
+        // home categories 
         $categories = category::with('sub_category','product')->take(4)->get();
-        $contacts = contacts::all()->last();
 
         // flash deal/offer products
         $date = Carbon::today()->toDateString();
@@ -76,23 +75,23 @@ class FrontendController extends Controller
         // update offered products which expired
         product::where('end_date', '<', $date)->update(['promo_price' => null , 'start_date' => null , 'end_date' => null]);
 
-        return view('Frontend.layouts.home', $data, compact('categories' , 'logos' , 'contacts' ,'products', 'popular_categories','cartpage' ));
+        return view('Frontend.layouts.home', $data, compact('categories' ,'products', 'popular_categories','cartpage' ));
     }
 
 
     public function contact()
     {
-        $logos = logo::orderByDesc('id')->first();
-        $categories = category::with('sub_category')->get();
-        $contacts = contacts::all()->last();
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
+        $contacts = contacts::orderByDesc('id')->first();
         $products = product::all();
-        return view('Frontend.layouts.contact' , compact('logos' , 'categories' , 'contacts' , 'products'));
+        return view('Frontend.layouts.contact' , compact( 'cartpage','contacts' , 'products'));
     }
 
     public function aboutUs()
     {
-        $logos = logo::all()->last();
-        return view('Frontend.single_pages.about_us', compact('logos'));
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
+        $logos = logo::orderByDesc('id')->first();
+        return view('Frontend.single_pages.about_us', compact('cartpage','logos'));
     }
 
 

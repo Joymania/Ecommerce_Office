@@ -24,22 +24,19 @@ class userAccountController extends Controller
 
         $id = Auth::id();
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        // $user = User::all()->find($id);
-        $logos = logo::orderByDesc('id')->first();
-        $categories = category::with('sub_category','product')->take(-4)->get();
-        $contacts = contacts::all()->last();
+        $user = User::all()->find($id);
+        // $categories = category::with('sub_category','product')->take(-4)->get();
         $orders = Order::all()->where('user_id' , $id);
         $OrderProduct = OrderProduct::with('product')->find($id);
 
-        $id = Auth::id();
-        $logo = logo::orderByDesc('id')->first();
-        $categories = category::with('sub_category','product')->take(-4)->get();
-        $contact = contacts::all()->last();
-        $user = User::find(Auth::id());
-        $orders = Order::all()->where('user_id' , $id);
+        // $id = Auth::id();
+        // $logo = logo::orderByDesc('id')->first();
+        // $categories = category::with('sub_category','product')->take(-4)->get();
+        // $contact = contacts::all()->last();
+        // $user = User::find(Auth::id());
+        // $orders = Order::all()->where('user_id' , $id);
 
-        return view('Frontend.userProfile.userAccount', compact('categories' , 'logos' , 'contacts' , 'user' , 'orders' , 'OrderProduct','cartpage'));
-
+        return view('Frontend.userProfile.userAccount', compact('user' , 'orders' , 'OrderProduct','cartpage'));
     }
 
     public function userUpdate(Request $request)
@@ -114,6 +111,7 @@ class userAccountController extends Controller
         // $data['product']=Order::where('id',$id)->with('products','color','size')->first();
         $data['product']=OrderProduct::where('order_id',$id)->with('color','size','order_detail','product')->get();
         $data['logos'] = logo::orderByDesc('id')->first();
+        $data['cartpage'] = CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         return view('Frontend.userProfile.orderDetails',$data);
     }
 

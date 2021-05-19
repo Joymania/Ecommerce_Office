@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use App\Model\logo;
+use Cart;
+use App\Model\CartShopping;
 
 class RegisterController extends Controller
 {
@@ -53,8 +53,11 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $logos = logo::all()->last();
-        return view('auth.register', compact('logos'));
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.register');
     }
 
 
@@ -106,6 +109,27 @@ class RegisterController extends Controller
         $user = User::find(Auth::id());
         $user->status = '1';
         $user->save();
+
+        $carts = Cart::content();
+        foreach($carts as $cart){
+            $idauth = Auth::id();
+            $identity= $cart->id;
+            $sizeID= $cart->options['size_id'];
+            $colorId= $cart->options['color_id'];
+
+            $cartCheck= CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+
+            if($cartCheck==NULL){
+            $cart_add= new CartShopping();
+            $cart_add->user_id = Auth::id();
+            $cart_add->product_id = $cart->id;
+            $cart_add->product_size = $cart->options->size_id;
+            $cart_add->product_color= $cart->options->color_id;
+            $cart_add->qty= $cart->qty;
+            $cart_add->subtotal= $cart->subtotal;
+            $cart_add->save();
+            }
+        }
 
         if ($response = $this->registered($request, $user)) {
             return $response;

@@ -11,16 +11,16 @@
                     <li class="active">product details </li>
                 </ul>
             </div>
+            @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            @endif
         </div>
     </div>
-    @if (session('status'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('status') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-    @endif
     <div class="product-details-area pt-120 pb-115">
         <div class="container">
             <div class="row">

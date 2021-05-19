@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Model\brand;
 use App\Model\CartShopping;
 use App\Model\category;
 use App\Model\product;
-use App\Model\review;
-use App\Model\size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use function PHPUnit\Framework\lessThanOrEqual;
+
 
 class SearchController extends Controller
 {

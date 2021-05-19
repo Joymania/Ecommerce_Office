@@ -11,8 +11,8 @@ use App\Model\CartShopping;
 use App\Model\category;
 use App\Model\logo;
 use App\Model\Admin;
+use App\Model\contacts;
 use Illuminate\Support\Facades\Auth;
-use Notification;
 use Carbon\Carbon;
 
 
@@ -37,15 +37,19 @@ class AppServiceProvider extends ServiceProvider
     {
 
         View::composer('Frontend.layouts.master', function ($view) {
-            $view->with('wishlist_num' , wishlist::all()->count());
-            $view->with('cart_num' , CartShopping::all()->count());
+            $view->with('wishlist_num' , wishlist::where('user_id', Auth::id())->count());
+            $view->with('cart_num' , CartShopping::where('user_id', Auth::id())->count());
             $view->with('categories' , category::with('sub_category')->get());
-
+            $view->with('logos' , logo::orderByDesc('id')->first());
+            $view->with('contacts', contacts::orderByDesc('id')->first());
         });
+
         View::composer('Frontend.userProfile.master', function ($view) {
-            $view->with('wishlist_num' , wishlist::all()->count());
-            $view->with('cart_num' , CartShopping::all()->count());
+            $view->with('wishlist_num' , wishlist::where('user_id', Auth::id())->count());
+            $view->with('cart_num' , CartShopping::where('user_id', Auth::id())->count());
             $view->with('categories' , category::with('sub_category')->get());
+            $view->with('logos' , logo::orderByDesc('id')->first());
+            $view->with('contacts', contacts::orderByDesc('id')->first());
         });
 
         View::composer('admin.layout.sidebar',function ($view){
@@ -68,6 +72,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('Frontend.layouts.footer',function ($view){
            $copyright = Copyright::first();
            $view->with('copyright',$copyright);
+           $view->with('contacts', contacts::orderByDesc('id')->first());
         });
 
         View::composer('Frontend.userProfile.master',function ($view){

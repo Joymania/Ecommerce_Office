@@ -137,7 +137,7 @@
                                                     <li><a href="{{ route('checkout') }}" >checkout </a></li>
                                                     <li><a href="{{ route('userAccount') }}">my account</a></li>
                                                     <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
-                                                    <li><a href="#contact">contact us </a></li>
+                                                    <li><a href="{{route('contact')}}">contact us </a></li>
                                                     <li><a href="{{ route('track.show') }}">order tracking</a></li>
                                                     <li><a href="{{route('login')}}">login / register </a></li>
                                                 </ul>
@@ -158,7 +158,7 @@
                                             <a href="{{route('login')}}"><i class="icon-user"></i></a>
                                         </div>
                                         <div class="same-style-2 same-style-2-font-inc">
-                                            <a href="{{ route('wishlist.view') }}"><i class="icon-heart"></i></a>
+                                            <a href="{{ route('wishlist.view') }}"><i class="icon-heart"></i><span class="pro-count purple">{{ $wishlist_num }}</span></a>
                                         </div>
                                         <div class="same-style-2 same-style-2-font-inc header-cart">
                                             <a class="cart-active" href=" {{ route('show.cart') }} ">
@@ -307,11 +307,12 @@
                                         <a href="{{route('login')}}"><i class="icon-user"></i></a>
                                     </div>
                                     <div class="same-style-2 same-style-2-font-inc">
-                                        <a href="{{ route('wishlist.view') }}"><i class="icon-heart"></i></a>
+                                        <a href="{{ route('wishlist.view') }}"><i class="icon-heart"></i><span class="pro-count purple">{{ $wishlist_num }}</span></a>
                                     </div>
                                     <div class="same-style-2 same-style-2-font-inc header-cart">
                                         <a class="cart-active" href=" {{ route('show.cart') }} ">
-                                            <i class="icon-basket-loaded"></i>
+                                            <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::content()->count() }} </span>
+                                            <span class="cart-amount"></span>
                                         </a>
                                     </div>
                                 @else
@@ -359,176 +360,175 @@
         <!-- Header start end-->
 
         <!-- mini cart start -->
-        <!-- not complete -->
-        <div class="sidebar-cart-active">
-            <div class="sidebar-cart-all">
-                <a class="cart-close" href="#"><i class="icon_close"></i></a>
-                <div class="cart-content">
-                    <h3>Shopping Cart</h3>
+    <div class="sidebar-cart-active">
+        <div class="sidebar-cart-all">
+            <a class="cart-close" href="#"><i class="icon_close"></i></a>
+            <div class="cart-content">
+                <h3>Shopping Cart</h3>
 
-                    <ul>
-                        @php
-                            $total=0;
-                        @endphp
+                <ul>
+                    @php
+                        $total=0;
+                    @endphp
+                    @if(Auth::user())
 
-                    @if(!empty($cartpage))
-                        @foreach ($cartpage as $cart)
-                             <li class="single-product-cart">
-                             <div class="cart-img">
-                                 <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
-                             </div>
-                             <div class="cart-title">
-                                 <h4><a href="#">{{ $cart->product->name }}</a></h4>
-                                 @if ($cart->product->promo_price)
-                                 <span> {{ $cart->qty }} × {{ $cart->product->promo_price }} tk	</span>
-                                 @else
-                                 <span> {{ $cart->qty }} × {{ $cart->product->price }} tk	</span>
-                                 @endif
+                    @foreach ($cartpage as $cart)
+                         <li class="single-product-cart">
+                         <div class="cart-img">
+                             <a href="#"><img src="{{ asset('upload/products_images/'.$cart->product->image) }}" alt=""></a>
+                         </div>
+                         <div class="cart-title">
+                             <h4><a href="#">{{ $cart->product->name }}</a></h4>
+                             @if ($cart->product->promo_price)
+                             <span> {{ $cart->qty }} × {{ $cart->product->promo_price }} tk	</span>
+                             @else
+                             <span> {{ $cart->qty }} × {{ $cart->product->price }} tk	</span>
+                             @endif
 
-                             </div>
-                             <div class="cart-delete">
-                                 <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
-                             </div>
-                         </li>
-                         @php
-                             $total+=$cart->subtotal;
-                         @endphp
-                        @endforeach
-                     </ul>
-                     <div class="cart-total">
-                         <h4>Subtotal: <span>{{ $total }}tk</span></h4>
-                     </div>
-                    @else
-                        <ul>
-                       @php
-                           $contents=Cart::content();
-                           $total=0;
-                       @endphp
-                       @foreach ($contents as $content)
-                            <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h4><a href="#">{{ $content->name }}</a></h4>
-                                <span> {{ $content->qty }} × {{ $content->price }} tk	</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
-                            </div>
-                        </li>
-                        @php
-                            $total+=$content->subtotal;
-                        @endphp
-                       @endforeach
+                         </div>
+                         <div class="cart-delete">
+                             <a href="{{ route('delete.authcart',$cart->id) }}">×</a>
+                         </div>
+                     </li>
+                     @php
+                         $total+=$cart->subtotal;
+                     @endphp
+                    @endforeach
 
-
-                        </ul>
-                        <div class="cart-total">
-                            <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                 </ul>
+                 <div class="cart-total">
+                     <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                 </div>
+                @else
+                <ul>
+                   @php
+                       $contents=Cart::content();
+                       $total=0;
+                   @endphp
+                   @foreach ($contents as $content)
+                        <li class="single-product-cart">
+                        <div class="cart-img">
+                            <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" alt=""></a>
                         </div>
-                    @endif
-                    <div class="cart-checkout-btn">
-                        <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
-                        <a class="no-mrg btn-hover cart-btn-style" href="{{ route('checkout') }}">checkout</a>
-                    </div>
+                        <div class="cart-title">
+                            <h4><a href="#">{{ $content->name }}</a></h4>
+                            <span> {{ $content->qty }} × {{ $content->price }} tk	</span>
+                        </div>
+                        <div class="cart-delete">
+                            <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
+                        </div>
+                    </li>
+                    @php
+                        $total+=$content->subtotal;
+                    @endphp
+                   @endforeach
+
+
+                </ul>
+                <div class="cart-total">
+                    <h4>Subtotal: <span>{{ $total }}tk</span></h4>
+                </div>
+                @endif
+                <div class="cart-checkout-btn">
+                    <a class="btn-hover cart-btn-style" href="{{ route('show.cart') }}">view cart</a>
+                    <a class="no-mrg btn-hover cart-btn-style" href="{{ route('checkout') }}">checkout</a>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- mini cart end -->
 
-        <!-- mini cart start -->
+    <!-- mobile header start -->
+    <div class="mobile-header-active mobile-header-wrapper-style">
+        <div class="clickalbe-sidebar-wrap">
+            <a class="sidebar-close"><i class="icon_close"></i></a>
+            <div class="mobile-header-content-area">
+                <div class="header-offer-wrap-2 mrg-none mobile-header-padding-border-4">
+                    <p><span>FREE SHIPPING</span> for all orders over 4999 TK.</p>
+                </div>
+                <!-- search -->
+                <div class="mobile-search mobile-header-padding-border-1">
+                    <form class="search-form" action="{{ route('search.result') }}">
+                        <input name="search" id="searchText2" placeholder="Search Products..." type="text">
+                        <input name="category" id="categoryInput2" type="text" hidden>
+                        <button id="searchBtn2" type="submit"><i class="lnr lnr-magnifier"></i></button>
+                    </form>
+                </div>
 
-        <!-- mobile header start -->
-        <div class="mobile-header-active mobile-header-wrapper-style">
-            <div class="clickalbe-sidebar-wrap">
-                <a class="sidebar-close"><i class="icon_close"></i></a>
-                <div class="mobile-header-content-area">
-                    <div class="header-offer-wrap-2 mrg-none mobile-header-padding-border-4">
-                        <p><span>FREE SHIPPING</span> for all orders over 4999 TK.</p>
-                    </div>
-                    <!-- search -->
-                    <div class="mobile-search mobile-header-padding-border-1">
-                        <form class="search-form" action="{{ route('search.result') }}">
-                            <input name="search" id="searchText2" placeholder="Search Products..." type="text">
-                            <input name="category" id="categoryInput2" type="text" hidden>
-                            <button id="searchBtn2" type="submit"><i class="lnr lnr-magnifier"></i></button>
-                        </form>
-                    </div>
+                <div class="mobile-menu-wrap mobile-header-padding-border-2">
+                    <!-- mobile menu start -->
+                    <nav>
+                        <ul class="mobile-menu">
+                            <li class="menu-item-has-children"><a href="{{url('/')}}">Home</a> </li>
+                            <li class="menu-item-has-children "><a href="{{route('products.shop')}}">shop</a> </li>
+                            <li><a href="#">PAGES </a>
+                                <ul class="sub-menu-style">
+                                    <li><a href="{{ route('about_us') }}">about us </a></li>
+                                    <li><a href="{{ route('show.cart') }}" >cart page</a></li>
+                                    <li><a href="{{ route('checkout') }}" >checkout </a></li>
+                                    <li><a href="{{ route('userAccount') }}">my account</a></li>
+                                    <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
+                                    <li><a href="{{route('contact')}}">contact us </a></li>
+                                    <li><a href="{{ route('track.show') }}">order tracking</a></li>
+                                    <li><a href="{{route('login')}}">login / register </a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children "><a href="#">Blog</a></li>
+                            <li><a href="{{route('contact')}}">Contact </a></li>
+                        </ul>
+                    </nav>
+                    <!-- mobile menu end -->
+                </div>
 
-                    <div class="mobile-menu-wrap mobile-header-padding-border-2">
-                        <!-- mobile menu start -->
+                <div class="main-categori-wrap mobile-menu-wrap mobile-header-padding-border-3">
+                    <a class="categori-show purple" href="#">
+                        <i class="lnr lnr-menu"></i> All Department <i class="icon-arrow-down icon-right"></i>
+                    </a>
+                    <div class="categori-hide-2">
                         <nav>
                             <ul class="mobile-menu">
-                                <li class="menu-item-has-children"><a href="{{url('/')}}">Home</a> </li>
-                                <li class="menu-item-has-children "><a href="{{route('products.shop')}}">shop</a> </li>
-                                <li><a href="#">PAGES </a>
-                                    <ul class="sub-menu-style">
-                                        <li><a href="{{ route('about_us') }}">about us </a></li>
-                                        <li><a href="{{ route('show.cart') }}" >cart page</a></li>
-                                        <li><a href="{{ route('checkout') }}" >checkout </a></li>
-                                        <li><a href="{{ route('userAccount') }}">my account</a></li>
-                                        <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
-                                        <li><a href="#contact">contact us </a></li>
-                                        <li><a href="{{ route('track.show') }}">order tracking</a></li>
-                                        <li><a href="{{route('login')}}">login / register </a></li>
+                                @foreach($categories as $cat)
+                                <li class="menu-item-has-children "><a href="#"> {{ $cat->name }} </a>
+                                    <ul class="dropdown">
+                                        @foreach( $cat->sub_category as $subcat)
+                                        <li class="menu-item-has-children"><a href="{{route('productByCat',$subcat->id)}}">{{$subcat->sub_category_name}}</a> </li>
+                                        @endforeach
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children "><a href="#">Blog</a></li>
-                                <li><a href="{{route('contact')}}">Contact </a></li>
+                                @endforeach
                             </ul>
                         </nav>
-                        <!-- mobile menu end -->
+                    </div>
+                </div>
+
+                <div class="mobile-header-info-wrap mobile-header-padding-border-3">
+                    <div class="single-mobile-header-info">
+                        <a class="mobile-language-active" href="#">English</a>
                     </div>
 
-                    <div class="main-categori-wrap mobile-menu-wrap mobile-header-padding-border-3">
-                        <a class="categori-show purple" href="#">
-                            <i class="lnr lnr-menu"></i> All Department <i class="icon-arrow-down icon-right"></i>
-                        </a>
-                        <div class="categori-hide-2">
-                            <nav>
-                                <ul class="mobile-menu">
-                                    @foreach($categories as $cat)
-                                    <li class="menu-item-has-children "><a href="#"> {{ $cat->name }} </a>
-                                        <ul class="dropdown">
-                                            @foreach( $cat->sub_category as $subcat)
-                                            <li class="menu-item-has-children"><a href="{{route('productByCat',$subcat->id)}}">{{$subcat->sub_category_name}}</a> </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </nav>
-                        </div>
+                    <div class="single-mobile-header-info">
+                        <a class="mobile-currency-active" href="#">BDT <span><i class="icon-arrow-down"></i></span></a>
                     </div>
 
-                    <div class="mobile-header-info-wrap mobile-header-padding-border-3">
-                        <div class="single-mobile-header-info">
-                            <a class="mobile-language-active" href="#">English</a>
-                        </div>
-
-                        <div class="single-mobile-header-info">
-                            <a class="mobile-currency-active" href="#">BDT <span><i class="icon-arrow-down"></i></span></a>
-                        </div>
-
-                        <div class="mobile-contact-info mobile-header-padding-border-4">
-                            @if(!empty($contacts))
-                            <ul>
-                                <li><i class="icon-phone "></i> {{$contacts->mobile_no}} </li>
-                                <li><i class="icon-envelope-open "></i> {{$contacts->email}} </li>
-                                <li><i class="icon-home"></i> {{$contacts->address}} </li>
-                            </ul>
-                            @else
-                            <p>No contact data</p>
-                            @endif
-                        </div>
-                        <div class="mobile-social-icon">
-                            <a class="facebook" href="#"><i class="icon-social-facebook"></i></a>
-                            <a class="twitter" href="#"><i class="icon-social-twitter"></i></a>
-                            <a class="pinterest" href="#"><i class="icon-social-pinterest"></i></a>
-                            <a class="instagram" href="#"><i class="icon-social-instagram"></i></a>
-                        </div>
+                    <div class="mobile-contact-info mobile-header-padding-border-4">
+                        @if(!empty($contacts))
+                        <ul>
+                            <li><i class="icon-phone "></i> {{$contacts->mobile_no}} </li>
+                            <li><i class="icon-envelope-open "></i> {{$contacts->email}} </li>
+                            <li><i class="icon-home"></i> {{$contacts->address}} </li>
+                        </ul>
+                        @else
+                        <p>No contact data</p>
+                        @endif
+                    </div>
+                    <div class="mobile-social-icon">
+                        <a class="facebook" href="#"><i class="icon-social-facebook"></i></a>
+                        <a class="twitter" href="#"><i class="icon-social-twitter"></i></a>
+                        <a class="pinterest" href="#"><i class="icon-social-pinterest"></i></a>
+                        <a class="instagram" href="#"><i class="icon-social-instagram"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>

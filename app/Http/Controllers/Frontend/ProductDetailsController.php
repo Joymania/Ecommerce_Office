@@ -4,14 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Model\CartShopping;
-use App\Model\category;
-use App\Model\Order;
 use App\Model\OrderProduct;
 use App\Model\product;
 use App\Model\review;
-use App\Model\sub_category;
-use App\Model\contacts;
-use App\Model\logo;
 use App\Model\product_color;
 use App\Model\product_size;
 use Illuminate\Http\Request;
@@ -22,9 +17,6 @@ class ProductDetailsController extends Controller
     public function index($id)
     {
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $logos = logo::orderByDesc('id')->first();
-        $categories = category::with('sub_category')->get();
-        $contacts = contacts::all()->last();
         $product = product::find($id);
         $reviews = review::where('product_id',$id)->get();
         $reviews1 = review::where('product_id',$id)->limit(3)->get();
@@ -40,16 +32,13 @@ class ProductDetailsController extends Controller
             $rating = 0;
         }
 
-        return view('Frontend.single_pages.product-details' , compact('logos' , 'categories' , 'contacts' ,
-            'product', 'rating', 'ratingCount','reviews','colors','sizes','cartpage','orders','reviews1'));
+        return view('Frontend.single_pages.product-details' , compact('product', 'rating', 'ratingCount','reviews','colors','sizes','cartpage','orders','reviews1'));
 
     }
 
     public function reviewsWithoutLimit($id)
     {
-        $logos = logo::orderByDesc('id')->first();
-        $categories = category::with('sub_category')->get();
-        $contacts = contacts::all()->last();
+        $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $product = product::find($id);
         $reviews = review::where('product_id',$id)->get();
         $reviews1 = review::where('product_id',$id)->get();
@@ -65,7 +54,7 @@ class ProductDetailsController extends Controller
             $rating = 0;
         }
         return view('Frontend.single_pages.product-details' ,
-            compact('logos' , 'categories' , 'contacts' , 'product',
+            compact( 'cartpage', 'product',
                 'rating', 'ratingCount','reviews','colors','sizes','orders','reviews1'));
     }
 }
