@@ -4,20 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Model\CartShopping;
-use App\Model\CartShoppingProduct;
-use App\Model\category;
 use App\Model\color;
-use App\Model\contacts;
 use App\Model\cupon;
-use App\Model\logo;
-use App\Model\Order;
 use App\Model\product;
 use App\Model\size;
 use App\Model\wishlist;
 use Illuminate\Http\Request;
 use Cart;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Session;
 
 
@@ -100,10 +94,7 @@ class CartController extends Controller
     }
 
     public function showCart(){
-        $data['logos']=logo::orderByDesc('id')->first();
-        $data['categories']=category::all();
-        $data['contacts']=contacts::first();
-
+       
         // if(Auth::user()){
         //     $idauth=Auth::id();
         // }
@@ -146,7 +137,7 @@ class CartController extends Controller
     public function deletewishlist($id){
         $data=wishlist::find($id);
         $data->delete();
-        return redirect()->route('frontsite');
+        return redirect()->back();
     }
     public function deleteAuthCart($id){
         $data=CartShopping::find($id);

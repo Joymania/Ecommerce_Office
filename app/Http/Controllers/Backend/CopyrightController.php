@@ -30,7 +30,7 @@ class CopyrightController extends Controller
         $data->title = $request->title;
         $data->created_by = Auth::id();
         $data->save();
-        return redirect()->route('copyright.view')->with('success','Successfully Added!!');
+        return redirect()->route('copyright.view')->with('success','Successfully Added');
     }
 
     public function edit()
@@ -48,12 +48,12 @@ class CopyrightController extends Controller
         $data->title = $request->title;
         $data->created_by = Auth::id();
         $data->save();
-        return redirect()->route('copyright.view')->with('success','Successfully Updated!!!');
+        return redirect()->route('copyright.view')->with('success','Successfully Updated');
     }
 
     public function delete(Copyright $copyright)
     {
         $copyright->delete();
-        return redirect()->route('copyright.view')->with('success','Successfully Deleted!!!');
+        return redirect()->route('copyright.view')->with('success','Successfully Deleted!');
     }
 }

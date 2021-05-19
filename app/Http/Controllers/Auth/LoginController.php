@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Model\logo;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use Illuminate\Http\Request;
@@ -52,12 +50,11 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $logos = logo::all()->last();
         if(!session()->has('url.intended'))
         {
             session(['url.intended' => url()->previous()]);
         }
-        return view('auth.login', compact('logos'));
+        return view('auth.login');
     }
 
     /**
@@ -78,9 +75,11 @@ class LoginController extends Controller
         foreach($carts as $cart){
             $idauth = Auth::id();
             $identity= $cart->id;
-            $sizeID= $request->size_id;
-            $colorId= $request->color_id;
+            $sizeID= $cart->options['size_id'];
+            $colorId= $cart->options['color_id'];
+
             $cartCheck= CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+
             if($cartCheck==NULL){
             $cart_add= new CartShopping();
             $cart_add->user_id = Auth::id();

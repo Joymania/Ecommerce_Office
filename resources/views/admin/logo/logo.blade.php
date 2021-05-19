@@ -40,7 +40,7 @@
                             <tr>
                                 <td>{{$view_logo->id}}</td>
                                 <td>
-                                    <img max-width="150px" max-height='100px' src="{{asset($view_logo->image)}}">
+                                    <img style="max-width:150px; max-height:100px"  src="{{asset($view_logo->image)}}">
                                 </td>
                                 <td class="actions">
                                     <a href="{{ route('logo.edit',$view_logo->id) }}">

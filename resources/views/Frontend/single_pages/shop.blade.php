@@ -152,6 +152,7 @@
                         @endif
                     </div>
                 </div>
+                
                 <div class="col-lg-3">
                     <div class="sidebar-wrapper sidebar-wrapper-mrg-right">
                         <div class="sidebar-widget mb-40">
@@ -169,6 +170,7 @@
                             <h4 class="sidebar-widget-title">Categories </h4>
                             <div class="shop-catigory">
                                 <ul>
+                                    <li><a href="{{ route('products.shop') }}" class=""> All </a></li>
                                     @foreach($categories as $row)
                                         <li><a href="" class="categoryName">{{$row->name}}</a></li>
                                     @endforeach

@@ -116,9 +116,13 @@
                                                         @else <td></td>
                                                         @endif
 
-                                                        <td class="actions"><a href="{{ route('orderDetails',$order->id) }}">
-                                                            <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-"
-                                                            data-toggle="tooltip" data-original-title="Details"><i class="icon-eye" aria-hidden="true"></i></a>
+                                                        <td class="actions">
+                                                            <a href="{{ route('orderDetails',$order->id) }}">
+                                                                <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-"
+                                                                data-toggle="tooltip" data-original-title="Details">
+                                                                    <i class="icon-eye" aria-hidden="true"></i>
+                                                                </button>
+                                                            </a>
                                                         </td>
 
                                                     </tr>

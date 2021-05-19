@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Colors')
+@section('title', 'Copyright')
 @section('pageTitle') <a href="{{route('copyright.view')}}">Copyright</a> @endsection
 @section('parentPageTitle', '')
 
@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="header">
-                    <h2>Copyright</h2>
+                    <h2></h2>
                 </div>
                 <div class="body">
                     {{--  <button id="addToTable" class="btn btn-primary m-b-15" type="button">

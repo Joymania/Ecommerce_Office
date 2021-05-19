@@ -150,12 +150,13 @@
                                             <a href="{{route('login')}}"><i class="icon-user"></i></a>
                                         </div>
                                         <div class="same-style-2 same-style-2-font-inc">
-                                            <a href="{{ route('wishlist.view') }}"><i class="icon-heart"></i></a>
+                                            <a href="{{ route('wishlist.view') }}"><i class="icon-heart"></i><span class="pro-count purple">{{ $wishlist_num }}</span></a>
                                         </div>
                                         <div class="same-style-2 same-style-2-font-inc header-cart">
-                                            <a class="cart-active" href=" {{ route('show.cart') }} ">
-                                                <i class="icon-basket-loaded"></i>
-                                            </a>
+                                        <a class="cart-active" href=" {{ route('show.cart') }} ">
+                                            <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::count() }} </span>
+                                            <span class="cart-amount"></span>
+                                        </a>
                                         </div>
                                     @else
                                         <div class="same-style-2 same-style-2-font-inc">
@@ -328,7 +329,6 @@
         <!-- Header start end-->
 
         <!-- mini cart start -->
-        <!-- not complete -->
         <div class="sidebar-cart-active">
             <div class="sidebar-cart-all">
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
@@ -559,8 +559,8 @@
                         <div class="footer-info-list">
                             <ul>
                                 <li><a href="{{ route('userAccount') }}">My Account</a></li>
-                                <li><a href="{{ route('wishlist.view') }}">My Wishlish</a></li>
-                                <li><a href="#">Term & Conditions</a></li>
+                                <li><a href="{{ route('wishlist.view') }}">My Wishlist</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="{{ route('track.show') }}">Track Order</a></li>
                                 <li><a href="{{ route('search.result') }}">Shop</a></li>
@@ -628,8 +628,10 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="copyright copyright-center">
-{{--                        <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by HasThemes</a>.</p>--}}
-                        <p>{{$copyright->title}}</p>
+                        {{-- <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by HasThemes</a>.</p>--}}
+                        @if(!empty($copyright))
+                            <p>{!! $copyright->title !!}</p>
+                        @endif
                     </div>
                 </div>
             </div>

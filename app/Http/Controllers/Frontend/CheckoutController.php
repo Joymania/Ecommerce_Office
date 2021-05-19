@@ -24,9 +24,7 @@ Use Session;
 class CheckoutController extends Controller
 {
     public function index(){
-        $data['logos']=logo::orderByDesc('id')->first();
-        $data['categories']=category::all();
-        $data['contacts']=contacts::first();
+
         $data['users']=Auth::user();
 
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
@@ -126,18 +124,12 @@ class CheckoutController extends Controller
     }
     public function showTrack(){
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $data['logos']=logo::orderByDesc('id')->first();
-        $data['categories']=category::all();
-        $data['contacts']=contacts::first();
         return view('Frontend.single_pages.tracking',$data);
     }
 
     public function track(Request $request){
         $id=Auth::id();
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
-        $data['logos']=logo::orderByDesc('id')->first();
-        $data['categories']=category::all();
-        $data['contacts']=contacts::first();
         $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();
         return view('Frontend.single_pages.order_tracking',$data);
 
