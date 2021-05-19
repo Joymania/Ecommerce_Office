@@ -38,7 +38,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay float-right">
                                     <a href="{{"/upload/products_images/$product->image"}}">
-                                        <img src="{{"/upload/products_images/$product->image"}}" style="width: 400px; height: 500px;" alt="">
+                                        <img src="{{"/upload/products_images/$product->image"}}" style="" alt="Product Image">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/$product->image"}}"><i class="icon-size-fullscreen"></i></a>
@@ -48,7 +48,7 @@
                                 <div class="easyzoom-style">
                                     <div class="easyzoom easyzoom--overlay float-right">
                                         <a href="{{"/upload/products_images/sub_images/$image->image"}}">
-                                            <img src="{{"/upload/products_images/sub_images/$image->image"}}" style="width: 400px; height: 500px;" alt="">
+                                            <img src="{{"/upload/products_images/sub_images/$image->image"}}" style="" alt="Product Image">
                                         </a>
                                     </div>
                                     <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/sub_images/$image->image"}}"><i class="icon-size-fullscreen"></i></a>
