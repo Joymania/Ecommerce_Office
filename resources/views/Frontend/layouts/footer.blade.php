@@ -41,7 +41,7 @@
                                     @if( $i >= 6 )
                                         @break
                                     @endif
-                                    <li><a href="{{ route('search.result') }}">{{ $cat->name }}</a></li>
+                                    <li><a href="{{ route('productByCategory', $cat->id) }}">{{ $cat->name }}</a></li>
 
                                 @endforeach
                             </ul>
