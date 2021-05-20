@@ -62,12 +62,24 @@ class OrderController extends Controller
         $order=Order::where('id',$id)->first();
         $order->status=2;
         $order->save();
+
         return redirect()->back();
     }
     public function returnPending($id){
         $order = Order::where('id', $id)->first();
         $order->status = 0;
         $order->save();
+
+        /*Adding Ordered product quantity to  the stock*/
+        $order1 = Order::with('products')->find($id);
+        foreach ($order1->products as $row)
+        {
+            $pro = product::find($row->id);
+            $pro->stock = $pro->stock + $row->pivot->qty;
+            $pro->save();
+        }
+        /*end*/
+
         return redirect()->back();
     }
 }
