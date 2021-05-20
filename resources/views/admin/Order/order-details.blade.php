@@ -19,6 +19,9 @@
         .mytable tr td{
             padding: 15px;
         }
+        .not-found{
+            text-align: center;
+        }
 
     </style>
 
@@ -26,6 +29,7 @@
 
         <div class="col-lg-12">
             <div class="card-body">
+            @if(!empty($order->id))
                 <div class="row">
                     <table class="txt-center table table-bordered mytable" width="100%" border="1">
                         <tr>
@@ -112,6 +116,8 @@
                     </table>
 
                 </div>
+            @else <div class="not-found center alert alert-danger">Product Not found!</div>
+            @endif
             </div>
         </div>
 
