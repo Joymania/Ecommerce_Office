@@ -54,8 +54,15 @@ class CheckoutController extends Controller
              $idauth=Auth::id();
              $cartsubtotal=CartShopping::where('user_id',$idauth)->get();
              $subtotal=0;
+
              foreach($cartsubtotal as $cart){
-                $subtotal+=$cart['subtotal'];
+                if($cart->product->promo_price){
+                    $total = $cart->product->promo_price * $cart->qty;
+                }
+                else  
+                    $total = $cart->product->price * $cart->qty;
+
+                $subtotal+=$total;
              }
              $key='cartcupon-'.auth()->id();
              if(Session::has($key)){

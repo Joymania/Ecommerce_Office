@@ -1,6 +1,5 @@
 @extends('Frontend.layouts.master')
 @section('content')
-    <!-- mini cart start -->
     <div class="breadcrumb-area bg-gray">
         <div class="container">
             <div class="breadcrumb-content text-center">
