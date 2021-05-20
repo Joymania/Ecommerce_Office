@@ -511,7 +511,7 @@
             </div>
             <div class="col-lg-7 col-md-7">
                 <div id="mc_embed_signup" class="subscribe-form">
-                    <form id="mc-embedded-subscribe-form" class="validate subscribe-form-style" novalidate="" target="_blank" name="mc-embedded-subscribe-form" method="post" action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
+                    <form id="mc-embedded-subscribe-form" class="validate subscribe-form-style" novalidate="" target="_blank" name="mc-embedded-subscribe-form" method="" action="#">
                         <div id="mc_embed_signup_scroll" class="mc-form">
                             <input class="email" type="email" required="" placeholder="Enter your email address" name="EMAIL" value="">
                             <div class="mc-news" aria-hidden="true">
