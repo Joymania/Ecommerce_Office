@@ -30,6 +30,16 @@ class OrderController extends Controller
 
     public function delete($id){
         $data=Order::find($id);
+        if ($data->status == 1){
+            $order = Order::with('products')->find($id);
+
+            foreach ($order->products as $row)
+            {
+                $pro = product::find($row->id);
+                $pro->stock = $pro->stock + $row->pivot->qty;
+                $pro->save();
+            }
+        }
         $data->delete();
         return redirect()->route('order.view')->with('success', 'Data Deleted Successfully.');
     }

@@ -54,13 +54,13 @@ class DashboardController extends Controller
         $a = DB::table('order_product')
            ->select('product_id',DB::raw('SUM(qty) as total_sales'))
            ->groupBy('product_id')
-           ->orderByRaw('total_sales DESC')->limit(5)->get();
+           ->orderByRaw('product_id DESC')->limit(5)->get();
         $b = array();
         foreach ($a as $row)
         {
             array_push($b,$row->product_id);
         }
-        $tsp = product::orderBy('id','desc')->find($b);
+        $tsp = product::orderBy('id','DESC')->find($b);
         return view('admin.dashboard.ecommerce',
             compact('admin','sales','orders','customers','recentOrders','tsp','a','data'));
     }
