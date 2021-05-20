@@ -13,7 +13,7 @@
 
     </style> --}}
 
-<div class="sidebar-cart-active">
+{{-- <div class="sidebar-cart-active">
     <div class="sidebar-cart-all">
         <a class="cart-close" href="#"><i class="icon_close"></i></a>
         <div class="cart-content">
@@ -43,7 +43,12 @@
                         </div>
                     </li>
                     @php
-                    $total+=$cart->subtotal;
+                        if($cart->product->promo_price){
+                            $subtotal = $cart->product->promo_price * $cart->qty;
+                        }
+                        else  
+                            $subtotal = $cart->product->price * $cart->qty;
+                        $total+=$subtotal;
                     @endphp
                     @endforeach
                 </ul>
@@ -86,7 +91,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="breadcrumb-area bg-gray">
     <div class="container">
@@ -116,7 +121,7 @@
                                 <th>Product Name</th>
                                 <th>Color</th>
                                 <th>Size</th>
-                                <th>Until Price</th>
+                                <th>Unit Price</th>
                                 <th>Qty</th>
                                 <th>Subtotal</th>
                                 <th>action</th>
@@ -174,7 +179,14 @@
 
 
                                 </td>
-                                <td class="product-subtotal">{{ $show['subtotal'] }}</td>
+                                {{-- <td class="product-subtotal">{{ $show['subtotal'] }}</td> --}}
+                                <td class="product-subtotal">
+                                    @if ($show['product']['promo_price'])
+                                    <span class="amount">{{ $show['product']['promo_price'] * $show->qty }}</span>
+                                    @else
+                                    <span class="amount">{{ $show['product']['price'] * $show->qty}}</span>
+                                    @endif
+                                </td>
                                 <td class="product-remove">
                                     <a href="{{ route('delete.authcart',$show['id']) }}"><i class="icon_close"></i></a>
 
@@ -198,7 +210,7 @@
                                 <th>Product Name</th>
                                 <th>Color</th>
                                 <th>Size</th>
-                                <th>Until Price</th>
+                                <th>Unit Price</th>
                                 <th>Qty</th>
                                 <th>Subtotal</th>
                                 <th>action</th>
@@ -308,16 +320,22 @@
                                     <h5>Total products <span>{{ Session::get('cupon')['blance']}}</span></h5> --}}
 
                 @if(Auth::user())
-                @php
-                $subammount=0;
-                foreach ($showCart as $show) {
-                $subammount+=$show->subtotal;
-                }
-                @endphp
-                <h5>Total products <span>{{ $subammount }}</span></h5>
+                    @php
+                        $subammount=0;
+                        foreach ($showCart as $cart) {
+                            if($cart->product->promo_price){
+                                $subtotal = $cart->product->promo_price * $cart->qty;
+                            }
+                            else  
+                                $subtotal = $cart->product->price * $cart->qty;
+                            $subammount+=$subtotal;
+                        }
+                    @endphp
+
+                    <h5>Total products <span>{{ $subammount }}</span></h5>
 
                 @else
-                <h5>Total products <span>{{ Cart::subtotal() }}</span></h5>
+                    <h5>Total products <span>{{ Cart::subtotal() }}</span></h5>
 
 
                 @endif
