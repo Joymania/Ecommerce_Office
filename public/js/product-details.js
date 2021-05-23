@@ -11,12 +11,17 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".colorLi").on('click',function () {
         $("#colorInput").val($(this).attr("data-id"));
+        $("#colorPtag").attr('hidden',false);
+        $("#color_desc").text($(this).attr("data-desc"));
     });
 });
 
 $(document).ready(function () {
     $(".sizeLi").on('click',function () {
+        let size_desc = $('#size_desc');
         $("#sizeInput").val($(this).attr("data-id"));
+        $('#sizePtag').attr('hidden',false);
+        size_desc.text($(this).attr('data-desc'))
     })
 
 });

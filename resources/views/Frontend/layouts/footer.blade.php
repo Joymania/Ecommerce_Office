@@ -100,11 +100,12 @@
                             </div>
                         </div>
                         <div class="social-style-1 social-style-1-font-inc social-style-1-mrg-2">
-                            <a href="{{$contacts->twitter}}"><i class="icon-social-twitter"></i></a>
-                            <a href="{{$contacts->facebook}}"><i class="icon-social-facebook"></i></a>
-                            <a href="{{$contacts->instagram}}"><i class="icon-social-instagram"></i></a>
-                            <a href="{{$contacts->youtube}}"><i class="icon-social-youtube"></i></a>
-                            <a href="{{$contacts->pioneer}}"><i class="icon-social-pinterest"></i></a>
+                            <a target="_blank" href="{{$contacts->twitter}}"><i class="icon-social-twitter"></i></a>
+                            <a target="_blank" href="{{$contacts->facebook}}"><i class="icon-social-facebook"></i></a>
+                            <a target="_blank" href="{{$contacts->instagram}}"><i class="icon-social-instagram"></i></a>
+                            <a target="_blank" href="{{\Illuminate\Support\Facades\URL::to($contacts->youtube)}}"><i class="icon-social-youtube"></i></a>
+                            <a target="_blank" href="{{\Illuminate\Support\Facades\URL::to($contacts->pioneer)}}"><i class="icon-social-pinterest"></i></a>
+                            <a href="www.facebook.com"><i class="icon-social-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
