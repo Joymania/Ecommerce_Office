@@ -105,7 +105,7 @@
                             <a target="_blank" href="{{$contacts->instagram}}"><i class="icon-social-instagram"></i></a>
                             <a target="_blank" href="{{$contacts->youtube}}"><i class="icon-social-youtube"></i></a>
                             <a target="_blank" href="{{$contacts->pioneer}}"><i class="icon-social-pinterest"></i></a>
-                      
+
                         </div>
                     </div>
                 </div>
@@ -158,6 +158,11 @@
 <script src="{{""}}/assets/js/plugins/scrollup.js"></script>
 <script src="{{""}}/assets/js/plugins/ajax-mail.js"></script>
 
+<script !src="">
+    $('#exampleModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+</script>
 
 <!-- Use the minified version files listed below for better performance and remove the files listed above
 <script src="assets/js/vendor/vendor.min.js"></script>
@@ -166,8 +171,9 @@
 <script src="{{""}}/assets/js/main.js"></script>
 <script src="{{""}}/js/search.js"></script>
 <script src="{{asset('js/search.js')}}"></script>
-@yield('scripts')
+<script src="{{asset('js/order_tracking.js')}}"></script>
 
+@yield('scripts')
 </body>
 
 </html>
