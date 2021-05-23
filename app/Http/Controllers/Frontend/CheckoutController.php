@@ -138,7 +138,15 @@ class CheckoutController extends Controller
         $id=Auth::id();
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();
-        return view('Frontend.single_pages.order_tracking',$data);
+        if($data['orders']==NULL){
+            $notification = array(
+                'message' => 'Data not Found!',
+                'alert-type' => 'warning'
+            );
+            return redirect()->back()->with($notification);
+        }
+        else
+        return view('Frontend.single_pages.order_tracking', $data);
 
     }
 
