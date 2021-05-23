@@ -60,14 +60,13 @@
                 <!-- header top start -->
                 <div class="header-top header-top-ptb-6 bg-gray-6">
                     <div class="container">
-                    @if (session('status'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('status') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
+                        <div class="slider-banner-area">
+                            <div class="container">
+                                @if(Session::get('success'))
+                                <div class="alert text-white container" style="background: #6f50a7;">
+                                   {{ Session::get('success') }}
+                                </div>
+                              @endif
                     <div class="row">
                             <div class="col-xl-4 col-lg-5">
                                 <div class="header-offer-wrap">
