@@ -107,6 +107,16 @@
 </div>
 <div class="cart-main-area pt-115 pb-120">
     <div class="container">
+           @if(Session::get('success2'))
+            <div class="alert text-white container" style="background: #6f50a7;">
+               {{ Session::get('success2') }}
+            </div>
+          @endif
+          @if(Session::get('success1'))
+          <div class="alert text-white container" style="background: #da1630;">
+             {{ Session::get('success1') }}
+          </div>
+        @endif
         <h3 class="cart-page-title">Your cart items</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
