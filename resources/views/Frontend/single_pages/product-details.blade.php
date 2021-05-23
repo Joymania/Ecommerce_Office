@@ -134,19 +134,19 @@
 
                         @if(count($product->sizes) > 0)
                             <input type="number" id="sizeInput" name="size_id" value="" hidden>
-                        <div class="pro-details-size">
-                            <span>Sizes:</span>
-                            <div class="pro-details-size-content">
-                                <ul>
-                                    @foreach ($sizes as $size)
-                                    <li class="sizeLi" data-desc="{{$size['size']['desc']}}" data-id="{{$size->size_id}}" data-toggle="tooltip" title="{{$size['size']['desc']}}">
-                                        <strong><a class="productSizeContent" href="">{{ $size['size']['size'] }}</a></strong>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                                <p id="sizePtag" hidden>Size Desc: <span id="size_desc"></span></p>
+                            <div class="pro-details-size">
+                                <span>Sizes:</span>
+                                <div class="pro-details-size-content">
+                                    <ul>
+                                        @foreach ($sizes as $size)
+                                        <li class="sizeLi" data-desc="{{$size['size']['desc']}}" data-id="{{$size->size_id}}" data-toggle="tooltip" title="{{$size['size']['desc']}}">
+                                            <strong><a class="productSizeContent" href="">{{ $size['size']['size'] }}</a></strong>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    <p id="sizePtag" hidden>Size Desc: <span id="size_desc"></span></p>
+                                </div>
                             </div>
-                        </div>
                         @endif
                         <div class="pro-details-quality">
                             <span>Quantity:</span>
