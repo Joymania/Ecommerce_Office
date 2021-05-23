@@ -67,14 +67,11 @@
                 <!-- header top start -->
                 <div class="header-top header-top-ptb-6 bg-gray-6">
                     <div class="container">
-                    @if (session('status'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('status') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        {{-- @if(Session::get('success'))
+                        <div class="alert text-white container" style="background: #6f50a7;">
+                           {{ Session::get('success') }}
                         </div>
-                    @endif
+                      @endif --}}
                     <div class="row">
                             <div class="col-xl-4 col-lg-5">
                                 <div class="header-offer-wrap">
@@ -85,8 +82,37 @@
                                 <div class="header-top-right">
                                     <div class="same-style-wrap">
                                         <div class="same-style same-style-border track-order">
-                                            <a href="{{route('track.show')}}">Track Your Order</a>
+                                            <a  type="button" data-toggle="modal" data-target="#orderTrackModal">Track Your Order</a>
                                         </div>
+
+                                        <!-- The Modal -->
+                                        <div class="modal" id="orderTrackModal">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">                                               
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Track Your Order</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="sin-order-tracking">
+                                                            <label>Order ID</label>
+                                                            <input type="text" name="order_id" placeholder="Order id">                                                             
+                                                            <button class="btn btn-primary">Track</button>                                                    
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="same-style same-style-border language-wrap">
                                             <a class="language-dropdown-active" href="#">English</a>
                                         </div>
@@ -283,14 +309,11 @@
             </div>
             <div class="header-small-device small-device-ptb-1">
                 <div class="container">
-                    @if (session('status'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('status') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
+                    @if(Session::get('success'))
+                <div class="alert text-white container" style="background: #6f50a7;">
+                   {{ Session::get('success') }}
+                </div>
+              @endif
                     <div class="row align-items-center">
                         <div class="col-5">
                             <div class="mobile-logo">

@@ -27,22 +27,24 @@
                 <li class="active">my account </li>
             </ul>
         </div>
-        @if(session()->has('success_msg'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session()->get('success_msg') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-        @if(session()->has('errors'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong> Validation error </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
+        @if(Session::get('success'))
+        <div class="alert text-white container" style="background: #6f50a7;">
+           {{ Session::get('success') }}
+        </div>
+      @endif
+
+      @if(Session::get('error'))
+      <div class="alert text-white container" style="background: #eb1034;">
+         {{ Session::get('success') }}
+      </div>
+    @endif
+
+      {{-- @if(Session::get('error'))
+      <div class="alert bg-danger">
+         {{ Session::get('success') }}
+      </div>
+    @endif --}}
+      
     </div>
 </div>
 <!-- my account wrapper start -->
