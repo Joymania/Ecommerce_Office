@@ -135,6 +135,35 @@ class CheckoutController extends Controller
     }
 
     public function track(Request $request){
+        // function generateRandomString($length = 25) {
+        //     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        //     $charactersLength = strlen($characters);
+        //     $randomString = '';
+        //     for ($i = 0; $i < $length; $i++) {
+        //         $randomString .= $characters[rand(0, $charactersLength - 1)];
+        //     }
+        //     return $randomString;
+        // }
+        
+        //  unique order code
+        $count = 0;
+        $order_code = uniqid();
+
+        while(true){
+            $same = Order::where('order_code', $order_code)->first();
+            if($same){
+                $order_code = $order_code.(++$count);
+            }
+            else{ 
+                break;
+            }
+        }
+
+        // store order_code to db
+        $order = new Order();
+        $order->order_code = $order_code;
+        $order->save();
+
         $id=Auth::id();
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();

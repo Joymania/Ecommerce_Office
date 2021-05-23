@@ -76,9 +76,38 @@
                             <div class="col-xl-8 col-lg-7">
                                 <div class="header-top-right">
                                     <div class="same-style-wrap">
-                                        <div class="same-style same-style-border track-order">
-                                            <a href="{{route('track.show')}}">Track Your Order</a>
+                                    <div class="same-style same-style-border track-order">
+                                            <a  type="button" data-toggle="modal" data-target="#orderTrackModal">Track Your Order</a>
                                         </div>
+
+                                        <!-- The Modal -->
+                                        <div class="modal fade" id="orderTrackModal">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">                                               
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Track Your Order</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="sin-order-tracking">
+                                                            <label>Order ID</label>
+                                                            <input type="text" name="order_id" placeholder="Order id">                                                             
+                                                            <button class="btn btn-primary">Track</button>                                                    
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="same-style same-style-border language-wrap">
                                             <a class="language-dropdown-active" href="#">English</a>
                                         </div>
