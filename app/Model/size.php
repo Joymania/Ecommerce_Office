@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class size extends Model
 {
-    protected $fillable = ['name','created_by','updated_by'];
+    protected $fillable = ['name','desc','size','created_by','updated_by'];
 
     public function products()
     {

@@ -26,9 +26,9 @@
         }
     }
     .modal-body {
-        padding: 35px 15px; 
+        padding: 35px 15px;
         @media #{$sm-layout} {
-            padding: 35px 30px; 
+            padding: 35px 30px;
         }
     }
     .quickview-big-img {
@@ -58,7 +58,7 @@
             font-size: 22px;
         }
     }
-    .product-ratting-review-wrap { 
+    .product-ratting-review-wrap {
         display: flex;
         flex-wrap: wrap;
         margin: 16px 0 10px;
@@ -469,7 +469,7 @@
                     background-color: #BED4A5;
                 }
                 &.five {
-                    background-color: #C4BB6C; 
+                    background-color: #C4BB6C;
                 }
                 &.six {
                     background-color: #A0D1B7;
@@ -585,7 +585,7 @@
             img {
                 width: 100%;
                 transition: none;
-            } 
+            }
         }
     }
     .easyzoom-popup > a img {
@@ -672,7 +672,7 @@
         }
     }
 }
-.product-dec-small-style1 .slick-slide , 
+.product-dec-small-style1 .slick-slide ,
 .product-dec-small-style2 .slick-slide {
 	border: 1px solid transparent;
 }

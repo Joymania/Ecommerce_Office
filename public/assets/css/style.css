@@ -16212,13 +16212,15 @@ textarea:focus {
 }
 
 .product-details-content .pro-details-size .pro-details-size-content ul li a {
-    width: 40px;
-    height: 31px;
+    width: 60px;
+    height: 50px;
     display: inline-block;
     border: 1px solid #E3E4E9;
     /*line-height: 28px;*/
     text-align: center;
     position: relative;
+    padding-top: 20%;
+    font-size: 140%;
 }
 
 .product-details-content .pro-details-size .pro-details-size-content ul li a:hover {
@@ -16543,8 +16545,8 @@ textarea:focus {
 }
 
 .pro-details-color-content ul li a {
-  width: 31px;
-  height: 31px;
+  width: 50px;
+  height: 50px;
   font-size: 0;
   display: inline-block;
   border: 1px solid #E3E4E9;

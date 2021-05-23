@@ -24,12 +24,16 @@
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Size</th>
+                                                <th>Desc</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
                                             <tfoot>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Size</th>
+                                                <th>Desc</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </tfoot>
@@ -37,6 +41,8 @@
                                              @foreach($sizes as $row)
                                              <tr>
                                                  <td>{{$row->name}}</td>
+                                                 <td>{{$row->size}}</td>
+                                                 <td>{{$row->desc}}</td>
                                                  <td>
                                                      <a href="{{route('products.size.edit',['size'=>$row->id])}}" class="float-left">
                                                          <button  class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit"

@@ -116,18 +116,12 @@
                         <div class="pro-details-color-wrap">
                             <span>Colors:</span>
                             <div class="pro-details-color-content">
-                                {{--<select class="js-select2" name="color_id">
-                                    <option>Choose an option</option>
-                                        @foreach ($colors as $color)
-                                        <option id="selectColors" value="{{ $color->color_id }}">{{ $color['color']['name'] }}</option>
-
-                                        @endforeach
-                                </select>--}}
                                 <ul>
                                     @foreach ($colors as $color)
-                                        <li class="colorLi" data-id="{{ $color->color_id}}"><a class="{{strtolower($color['color']['name'])}}" href="#">{{ $color['color']['name'] }}</a></li>
+                                        <li class="colorLi" data-desc="{{$color['color']['name']}}" data-id="{{ $color->color_id}}"><a class="{{strtolower($color['color']['name'])}}" href="#">{{ $color['color']['name'] }}</a></li>
                                     @endforeach
                                 </ul>
+                                <p id="colorPtag" hidden>Color Desc: <span id="color_desc"></span></p>
                             </div>
                         </div>
                         @endif
@@ -137,18 +131,14 @@
                         <div class="pro-details-size">
                             <span>Sizes:</span>
                             <div class="pro-details-size-content">
-                                {{--<select class="js-select2" name="size_id"  >
-                                    <option>Choose an option</option>
-                                    @foreach ($sizes as $size)
-                                    <option value=" {{ $size->size_id }}">{{ $size['size']['name'] }}</option>
-
-                                    @endforeach
-                            </select>--}}
                                 <ul>
                                     @foreach ($sizes as $size)
-                                    <li class="sizeLi" data-id="{{$size->size_id}}"><a class="productSizeContent" href="">{{ $size['size']['name'] }}</a></li>
+                                    <li class="sizeLi" data-desc="{{$size['size']['desc']}}" data-id="{{$size->size_id}}" data-toggle="tooltip" title="{{$size['size']['desc']}}">
+                                        <strong><a class="productSizeContent" href="">{{ $size['size']['size'] }}</a></strong>
+                                    </li>
                                     @endforeach
                                 </ul>
+                                <p id="sizePtag" hidden>Size Desc: <span id="size_desc"></span></p>
                             </div>
                         </div>
                         @endif
@@ -229,7 +219,7 @@
                                         <td class="title width1">Size</td>
                                         <td>
                                             @foreach($product->sizes as $size)
-                                                {{$size->name}},
+                                                {{$size->size}},
                                             @endforeach
                                         </td>
                                     </tr>
@@ -350,5 +340,9 @@
 
 @section('scripts')
     <script src="{{asset('js/product-details.js')}}"></script>
-
+    <script !src="">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 @endsection
