@@ -41,3 +41,10 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function (e) {
+    $('.single-ratting-star').on('click',function () {
+        $('.single-ratting-star').children().css('color','#535353');
+        $(this).children().css('color','#f5b223')
+        $('#rating').val($(this).children().length);
+    });
+});

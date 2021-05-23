@@ -2,7 +2,7 @@
 @section('content')
     <div class="breadcrumb-area bg-gray">
         <div class="container">
-         
+
             <div class="breadcrumb-content text-center">
                 <ul>
                     <li>
@@ -11,7 +11,7 @@
                     <li class="active">product details </li>
                 </ul>
             </div>
-        
+
         </div>
     </div>
     <div class="product-details-area pt-120 pb-115">
@@ -128,19 +128,19 @@
 
                         @if(count($product->sizes) > 0)
                             <input type="number" id="sizeInput" name="size_id" value="" hidden>
-                        <div class="pro-details-size">
-                            <span>Sizes:</span>
-                            <div class="pro-details-size-content">
-                                <ul>
-                                    @foreach ($sizes as $size)
-                                    <li class="sizeLi" data-desc="{{$size['size']['desc']}}" data-id="{{$size->size_id}}" data-toggle="tooltip" title="{{$size['size']['desc']}}">
-                                        <strong><a class="productSizeContent" href="">{{ $size['size']['size'] }}</a></strong>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                                <p id="sizePtag" hidden>Size Desc: <span id="size_desc"></span></p>
+                            <div class="pro-details-size">
+                                <span>Sizes:</span>
+                                <div class="pro-details-size-content">
+                                    <ul>
+                                        @foreach ($sizes as $size)
+                                        <li class="sizeLi" data-desc="{{$size['size']['desc']}}" data-id="{{$size->size_id}}" data-toggle="tooltip" title="{{$size['size']['desc']}}">
+                                            <strong><a class="productSizeContent" href="">{{ $size['size']['size'] }}</a></strong>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    <p id="sizePtag" hidden>Size Desc: <span id="size_desc"></span></p>
+                                </div>
                             </div>
-                        </div>
                         @endif
                         <div class="pro-details-quality">
                             <span>Quantity:</span>
@@ -252,14 +252,32 @@
                                         <img src="{{ (!empty(auth()->user()->image)) ? url('upload/users/'.auth()->user()->image):url('upload/noImage60x60.jpg') }}" alt="user image" width="60px" height="60px">
                                     </div>
                                     <div class="review-content">
-                                        <div class="review-top-wrap">
+                                        <div class="review-top-wrap d-flex">
                                             <div class="review-name">
                                                 <h5><span>{{$review->name}}</span> - {{$review->created_at}}</h5>
                                             </div>
-                                            <div class="review-rating">
-
-                                                <input class="input-2" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5" data-size="xs" value=" {{ $review->rating }} ">
-
+                                            <div class="review-rating float-right">
+                                                @if($review->rating == 1)
+                                                    <i class="yellow icon_star"></i>
+                                                @elseif($review->rating == 2)
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                @elseif($review->rating == 3)
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                @elseif($review->rating == 4)
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                @elseif($review->rating == 5)
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                    <i class="yellow icon_star"></i>
+                                                @endif
                                             </div>
                                         </div>
                                         <p>{{$review->review}}</p>
@@ -282,10 +300,34 @@
                                         <div class="row">
 
                                             <div class="col-lg-12">
-                                                <div class="star-box-wrap">
-                                                    <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-size="xs" required data-step="0.5">
-                                                </div>
-
+                                                    <div class="star-box-wrap">
+                                                        <div class="single-ratting-star">
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                        </div>
+                                                        <div class="single-ratting-star">
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                        </div>
+                                                        <div class="single-ratting-star">
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                        </div>
+                                                        <div class="single-ratting-star">
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                        </div>
+                                                        <div class="single-ratting-star">
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                            <a href="#/"><i class="icon_star"></i></a>
+                                                        </div>
+                                                    </div>
+                                                <input type="number" id="rating" name="rating" value="" hidden>
                                                 @error('rating')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
