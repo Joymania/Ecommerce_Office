@@ -7,8 +7,8 @@
     }
 
     .social-btn {
-        font-size: 1.3rem;
-        font-weight: 100;
+        font-size: 15px;
+        font-weight: 50;
         color: white;
         width: 200px;
         height: 35px;
