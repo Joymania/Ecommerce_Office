@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Model\CartShopping;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -100,14 +101,14 @@ class LoginController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     public function logout(Request $request, User $user)
-    {   
+    {
         // update user->status to 0 just before logout
         $user = User::find(Auth::id());
         $user->status = '0';
         $user->save();
 
         $this->guard()->logout();
-    
+
         /***  to prevent admin/user logout to logout both admin and user at the same time ***/
         // $request->session()->invalidate();
 
