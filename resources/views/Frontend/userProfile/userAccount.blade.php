@@ -27,22 +27,24 @@
                 <li class="active">my account </li>
             </ul>
         </div>
-        @if(session()->has('success_msg'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session()->get('success_msg') }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-        @if(session()->has('errors'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong> Validation error </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
+        @if(Session::get('success'))
+        <div class="alert text-white container" style="background: #6f50a7;">
+           {{ Session::get('success') }}
+        </div>
+      @endif
+
+      @if(Session::get('error'))
+      <div class="alert text-white container" style="background: #eb1034;">
+         {{ Session::get('success') }}
+      </div>
+    @endif
+
+      {{-- @if(Session::get('error'))
+      <div class="alert bg-danger">
+         {{ Session::get('success') }}
+      </div>
+    @endif --}}
+
     </div>
 </div>
 <!-- my account wrapper start -->
@@ -96,7 +98,7 @@
                                             <table class="table table-bordered js-basic-example dataTable" id="DataTables_Table_0">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th>Order</th>
+                                                        <th>Order Code</th>
                                                          <th>Date</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
@@ -105,7 +107,7 @@
                                                 <tbody>
                                                     @foreach($orders as $order)
                                                     <tr>
-                                                        <td>{{$order->id}}</td>
+                                                        <td>{{$order->order_code}}</td>
                                                         <td>{{$order->created_at}}</td>
                                                         @if ($order->status==0)
                                                             <td>Pending</td>

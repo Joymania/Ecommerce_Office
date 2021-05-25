@@ -91,7 +91,7 @@ class CartController extends Controller
 
         }
 
-        return redirect()->route('show.cart')->with('success','Product added Successfully.');
+        return redirect()->route('show.cart')->with('success2','Product added Successfully.');
     }
 
     public function showCart(){
@@ -134,7 +134,7 @@ class CartController extends Controller
     public function deleteCart($rowId){
 
         Cart::remove($rowId);
-        return redirect()->route('show.cart')->with('success','Product removed Successfully.');
+        return redirect()->route('show.cart')->with('success1','Product removed Successfully.');
     }
     public function deletewishlist($id){
         $data=wishlist::find($id);
@@ -144,7 +144,7 @@ class CartController extends Controller
     public function deleteAuthCart($id){
         $data=CartShopping::find($id);
         $data->delete();
-        return redirect()->route('show.cart')->with('success','Product removed Successfully.');
+        return redirect()->route('show.cart')->with('success1','Product removed Successfully.');
     }
 
     public function destroyCart(){
@@ -156,7 +156,7 @@ class CartController extends Controller
         foreach($cart as $cart){
             $cart->delete();
         }
-        return redirect()->route('show.cart')->with('success','Product removed Successfully.');
+        return redirect()->route('show.cart')->with('success1','Product removed Successfully.');
 
     }
     public function applyCuppon(Request $request){

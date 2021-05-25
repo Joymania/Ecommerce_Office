@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 /*Front end routing Starts*/
 Auth::routes();
 
+//google login
+Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
+//Facebook login
+Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebook');
+Route::get('/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home');
 Route::get('about-us', 'Frontend\FrontendController@aboutUs')->name('about_us');

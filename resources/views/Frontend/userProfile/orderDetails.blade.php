@@ -39,7 +39,7 @@
 
                         </td>
                         <td width="30%">
-                            <strong>Order NO: #{{ $order->id }}</strong>
+                            <strong>Order Code: #{{ $order->order_code }}</strong>
                         </td>
                     </tr>
                     <tr>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Model\CartShopping;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -100,14 +101,14 @@ class LoginController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     public function logout(Request $request, User $user)
-    {   
+    {
         // update user->status to 0 just before logout
         $user = User::find(Auth::id());
         $user->status = '0';
         $user->save();
 
         $this->guard()->logout();
-    
+
         /***  to prevent admin/user logout to logout both admin and user at the same time ***/
         // $request->session()->invalidate();
 
@@ -121,4 +122,60 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect('/');
     }
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->stateless()->user();
+        $check = User::where('email', $user->email)->first();
+
+        if ($check) {
+            Auth::login($check);
+            if (!session()->has('url.intended')) {
+                session(['url.intended' => url()->previous()]);
+            }
+          return redirect()->to('/');
+        } else {
+            $data = new User();
+            $data->name = $user->name;
+            $data->email = $user->email;
+            $data->image = $user->avatar;
+            //$data->remember_token = $user->token;
+            $data->password=12345;
+            $data->save();
+            Auth::login($data);
+            if (!session()->has('url.intended')) {
+                session(['url.intended' => url()->previous()]);
+            }
+            return redirect()->to('/');
+
+        }
+    }
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->stateless()->user();
+        $check = User::where('email', $user->email)->first();
+
+        if ($check) {
+            Auth::login($check);
+            return redirect()->to('/');
+        } else {
+            $data = new User();
+            $data->name = $user->name;
+            $data->email = $user->email;
+            $data->image = $user->avatar;
+            $data->save();
+            Auth::login($data);
+            return redirect()->to('/');
+        }
+    }
+
 }
