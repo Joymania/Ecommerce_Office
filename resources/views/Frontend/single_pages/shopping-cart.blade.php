@@ -349,17 +349,32 @@
 
 
                 @endif
+                
+                <form action="{{route('checkout')}}" method="post" id="form">
+                    @csrf
+                    <div class="total-shipping">
+                        <h5>Select Shipping Method</h5>
+                        <ul>
+                            @if($shipping->isNotEmpty())
+                            @foreach($shipping as $key => $shipping)
+                                <li>
+                                    <level class="fancy-radio">
+                                    <input type="radio" name="shipping_method" value="{{ $shipping->id }}" {{ $key == 0 ? 'checked':null }}> {{ $shipping->name }} <span>{{ $shipping->cost }}</span>
+                                    </level>
+                                </li>
+                            @endforeach
+                            @else   
+                            <li><input type="radio" name="check" checked> Standard Shipping <span>0.00</span></li> 
+                            @endif                   
+                            {{--  <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>  --}}                     
+                        </ul>
+                    </div>
 
-                <div class="total-shipping">
-                    <h5>Total shipping</h5>
-                    <ul>
-                        <li><input type="radio" name="check" value="1" checked> Standard <span>20.00</span></li>
-                        {{--  <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>  --}}
-                    </ul>
-                </div>
-
-                {{-- <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4> --}}
-                <a href="{{ route('checkout') }}">Proceed to Checkout</a>
+                    {{-- <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4> --}}
+                    <a href="#" onclick="event.preventDefault();
+                                        document.getElementById('form').submit();
+                    ">Proceed to Checkout</a>
+                </form>
             </div>
         </div>
     </div>

@@ -42,7 +42,7 @@
 
                             </td>
                             <td width="30%">
-                                <strong>Order NO: #{{ $order->id }}</strong>
+                                <strong>Order Code: #{{ $order->order_code }}</strong>
                             </td>
                         </tr>
                         <tr>
@@ -58,6 +58,9 @@
                                     <span> (Bkash Mobile:{{ $order->bkash_mobile }})</span>
                                     <span> (Transaction No:{{ $order->transaction }})</span>
                                 @endif
+                                <br>
+                                <strong>Shipping Method: </strong>{{ $order->shippingMethod->name }}&nbsp;&nbsp;
+                                <strong>Shipping Cost: </strong>{{ $order->shippingMethod->cost }} tk&nbsp;&nbsp;
                             </td>
                         </tr>
 
@@ -106,11 +109,11 @@
 
                             </tr>
                         @endforeach
-                        {{-- <tr>
+                        <tr>
                             <td colspan="2" style="text-align: right;"><strong>Grand Total</strong></td>
-                            <td><strong>{{ $order->order_total }}</strong></td>
+                            <td><strong>{{ $order->subtotal }}</strong></td>
 
-                        </tr> --}}
+                        </tr>
 
 
                     </table>

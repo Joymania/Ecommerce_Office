@@ -7,6 +7,7 @@ use App\Model\CartShopping;
 use App\Model\color;
 use App\Model\cupon;
 use App\Model\product;
+use App\Model\ShippingMethods;
 use App\Model\size;
 use App\Model\wishlist;
 use Illuminate\Http\Request;
@@ -98,6 +99,7 @@ class CartController extends Controller
         // if(Auth::user()){
         //     $idauth=Auth::id();
         // }
+        $data['shipping'] = ShippingMethods::all();
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $id = Auth::id();
             if($id){
