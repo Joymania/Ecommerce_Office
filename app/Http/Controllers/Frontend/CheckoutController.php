@@ -101,7 +101,7 @@ class CheckoutController extends Controller
                  $subtotal=$subtotal-Session::get($key)[0];
              }
             //  add shipping cost
-             $subtotal+= $cartsubtotal['0']->shippingMethod->cost;
+             $subtotal+= $cartsubtotal['0']->shippingMethod ? $cartsubtotal['0']->shippingMethod->cost : 0;
          }
          else{
              $subtotal=Cart::subtotal();
@@ -118,7 +118,7 @@ class CheckoutController extends Controller
         'biling_notes'=>$request->notes,
         'payment'=>$request->payment,
         'subtotal'=>$subtotal,
-        'shipping_method_id'=>$cartsubtotal['0']->shippingMethod->id,
+        'shipping_method_id'=> $cartsubtotal['0']->shippingMethod ? $cartsubtotal['0']->shippingMethod->id : null,
         'transaction'=>$request->transaction,
         'bkash_mobile'=>$request->bkash_mobile,
            'order_code' => $order_code

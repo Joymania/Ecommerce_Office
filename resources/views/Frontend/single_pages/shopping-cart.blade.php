@@ -355,6 +355,7 @@
                     <div class="total-shipping">
                         <h5>Select Shipping Method</h5>
                         <ul>
+                            @if($shipping->isNotEmpty())
                             @foreach($shipping as $key => $shipping)
                                 <li>
                                     <level class="fancy-radio">
@@ -362,6 +363,9 @@
                                     </level>
                                 </li>
                             @endforeach
+                            @else   
+                            <li><input type="radio" name="check" checked> Standard Shipping <span>0.00</span></li> 
+                            @endif                   
                             {{--  <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>  --}}                     
                         </ul>
                     </div>

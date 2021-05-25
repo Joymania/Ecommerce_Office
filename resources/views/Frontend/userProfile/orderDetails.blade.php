@@ -45,16 +45,19 @@
                     <tr>
                         <td><strong>Shipping Information</strong></td>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Name:</strong>{{ $order->biling_fname.' '.$order->biling_lname }} &nbsp;&nbsp;&nbsp&nbsp;&nbsp;
-                            <strong>Email:</strong>{{ $order->biling_email }}&nbsp;&nbsp;&nbsp&nbsp;&nbsp;
-                            <strong>Address:</strong>{{ $order->biling_address }}&nbsp;&nbsp&nbsp;&nbsp;<br>
-                            <strong>Mobile:</strong>{{ $order->biling_phone }}&nbsp;&nbsp;
-                            <strong>Payment:</strong>&nbsp;&nbsp;
+                            <strong>Name: </strong>{{ $order->biling_fname.' '.$order->biling_lname }} &nbsp;&nbsp;&nbsp&nbsp;&nbsp;
+                            <strong>Email: </strong>{{ $order->biling_email }}&nbsp;&nbsp;&nbsp&nbsp;&nbsp;
+                            <strong>Address: </strong>{{ $order->biling_address }}&nbsp;&nbsp&nbsp;&nbsp;<br>
+                            <strong>Mobile: </strong>{{ $order->biling_phone }}&nbsp;&nbsp;
+                            <strong>Payment: </strong>&nbsp;&nbsp;
                             {{ $order->payment }}
                             @if ($order->payment=='Bkash')
                                 <span> (Bkash Mobile:{{ $order->bkash_mobile }})</span>
                                 <span> (Transaction No:{{ $order->transaction }})</span>
                             @endif
+                            <br>
+                            <strong>Shipping Method: </strong>{{ $order->shippingMethod->name }}&nbsp;&nbsp;
+                            <strong>Shipping Cost: </strong>{{ $order->shippingMethod->cost }} tk&nbsp;&nbsp;
                           
                         </td>
                     </tr>
@@ -104,11 +107,11 @@
 
                         </tr>
                     @endforeach
-                    {{-- <tr>
+                    <tr>
                         <td colspan="2" style="text-align: right;"><strong>Grand Total</strong></td>
-                        <td><strong>{{ $order->order_total }}</strong></td>
+                        <td><strong>{{ $order->subtotal }}</strong></td>
 
-                    </tr> --}}
+                    </tr>
 
 
                 </table>

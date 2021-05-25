@@ -220,14 +220,24 @@
                                                 </div>
 
                                                 <div class="your-order-info order-total">
-
+                                                    @if(!empty($showCart['0']->shippingMethod))
+                                                        @if (Session::has('cartcupon-'.auth()->id()))
+                                                            <ul>
+                                                                <li>Total <span>{{ ($subammount + $showCart['0']->shippingMethod->cost) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
+                                                            </ul>
+                                                        @else
+                                                            <ul>
+                                                                <li>Total <span>{{ $subammount + $showCart['0']->shippingMethod->cost}} tk </span></li>
+                                                            </ul>
+                                                        @endif
+                                                    @endif
                                                     @if (Session::has('cartcupon-'.auth()->id()))
                                                         <ul>
-                                                            <li>Total <span>{{ ($subammount + $showCart['0']->shippingMethod->cost) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
+                                                            <li>Total <span>{{ ($subammount) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
                                                         </ul>
                                                     @else
                                                         <ul>
-                                                            <li>Total <span>{{ $subammount + $showCart['0']->shippingMethod->cost}} tk </span></li>
+                                                            <li>Total <span>{{ $subammount}} tk </span></li>
                                                         </ul>
                                                     @endif
 

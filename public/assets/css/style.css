@@ -16624,6 +16624,10 @@ textarea:focus {
   background-color: #F5A8DE;
 }
 
+.pro-details-color-content ul li a.green {
+  background-color: #00ff00;
+}
+
 .pro-details-color-content ul li a.one {
   background-color: #D0CCF8;
 }
