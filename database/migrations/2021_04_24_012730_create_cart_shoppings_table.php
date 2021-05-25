@@ -22,6 +22,7 @@ class CreateCartShoppingsTable extends Migration
             $table->double('subtotal');
             $table->tinyInteger('status')->default('0');
             $table->integer('product_id')->nullable();
+            $table->integer('shipping_method_id')->nullable();
             $table->timestamps();
         });
     }

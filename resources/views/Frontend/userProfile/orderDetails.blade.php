@@ -55,6 +55,7 @@
                                 <span> (Bkash Mobile:{{ $order->bkash_mobile }})</span>
                                 <span> (Transaction No:{{ $order->transaction }})</span>
                             @endif
+                          
                         </td>
                     </tr>
 

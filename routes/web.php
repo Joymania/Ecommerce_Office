@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
-    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
@@ -253,6 +253,16 @@ Route::prefix('expense')->group(function(){
         Route::get('/edit','Backend\CopyrightController@edit')->name('copyright.edit');
         Route::post('/edit','Backend\CopyrightController@update')->name('copyright.update');
         Route::get('/{copyright}/destroy','Backend\CopyrightController@delete')->name('copyright.delete');
+    });
+
+     //shipping methods
+     Route::prefix('shipping-methods')->group(function (){
+        Route::get('/','Backend\ShippingMethodsController@index')->name('shipping.methods.view');
+        Route::get('/add','Backend\ShippingMethodsController@create')->name('shipping.method.add');
+        Route::post('/add','Backend\ShippingMethodsController@store')->name('shipping.method.store');
+        Route::get('/{shipping}/edit','Backend\ShippingMethodsController@edit')->name('shipping.method.edit');
+        Route::post('/{shipping}/edit','Backend\ShippingMethodsController@update')->name('shipping.method.update');
+        Route::get('/{shipping}/destroy','Backend\ShippingMethodsController@delete')->name('shipping.method.delete');
     });
 
 

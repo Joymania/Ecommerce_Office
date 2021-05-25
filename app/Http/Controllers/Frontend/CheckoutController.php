@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Model\Admin;
 use App\Model\CartShopping;
+use App\Model\ShippingMethods;
 use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
@@ -23,7 +24,11 @@ Use Session;
 
 class CheckoutController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        
+        $cart = CartShopping::where('user_id',Auth::id())->where('status','0')->update(['shipping_method_id' => $request->shipping_method]);
+        // $cart->shipping_method_id = $request->shipping_method;
+        // $cart->save();
 
         $data['users']=Auth::user();
 
@@ -71,6 +76,8 @@ class CheckoutController extends Controller
 
                  $subtotal=$subtotal-Session::get($key)[0];
              }
+            //  add shipping cost
+             $subtotal+= $cartsubtotal['0']->shippingMethod->cost;
          }
          else{
              $subtotal=Cart::subtotal();
@@ -87,6 +94,7 @@ class CheckoutController extends Controller
         'biling_notes'=>$request->notes,
         'payment'=>$request->payment,
         'subtotal'=>$subtotal,
+        'shipping_method_id'=>$cartsubtotal['0']->shippingMethod->id,
         'transaction'=>$request->transaction,
         'bkash_mobile'=>$request->bkash_mobile,
        ]);
@@ -135,35 +143,6 @@ class CheckoutController extends Controller
     }
 
     public function track(Request $request){
-        // function generateRandomString($length = 25) {
-        //     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        //     $charactersLength = strlen($characters);
-        //     $randomString = '';
-        //     for ($i = 0; $i < $length; $i++) {
-        //         $randomString .= $characters[rand(0, $charactersLength - 1)];
-        //     }
-        //     return $randomString;
-        // }
-        
-        //  unique order code
-        $count = 0;
-        $order_code = uniqid();
-
-        while(true){
-            $same = Order::where('order_code', $order_code)->first();
-            if($same){
-                $order_code = $order_code.(++$count);
-            }
-            else{ 
-                break;
-            }
-        }
-
-        // store order_code to db
-        $order = new Order();
-        $order->order_code = $order_code;
-        $order->save();
-
         $id=Auth::id();
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();
