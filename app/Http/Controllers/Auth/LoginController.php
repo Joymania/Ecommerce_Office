@@ -134,10 +134,8 @@ class LoginController extends Controller
 
         if ($check) {
             Auth::login($check);
-            if (!session()->has('url.intended')) {
-                session(['url.intended' => url()->previous()]);
-            }
-          return redirect()->to('/');
+            //return '/';//
+           return redirect()->to('/');
         } else {
             $data = new User();
             $data->name = $user->name;
@@ -147,10 +145,8 @@ class LoginController extends Controller
             $data->password=12345;
             $data->save();
             Auth::login($data);
-            if (!session()->has('url.intended')) {
-                session(['url.intended' => url()->previous()]);
-            }
-            return redirect()->to('/');
+
+            // return redirect()->to('/');
 
         }
     }
@@ -166,12 +162,13 @@ class LoginController extends Controller
 
         if ($check) {
             Auth::login($check);
-            return redirect()->to('/');
+            return '/';
         } else {
             $data = new User();
             $data->name = $user->name;
             $data->email = $user->email;
             $data->image = $user->avatar;
+            $data->password = 12345;
             $data->save();
             Auth::login($data);
             return redirect()->to('/');
