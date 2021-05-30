@@ -289,6 +289,10 @@ Route::prefix('expense')->group(function(){
 
     //Report page route
     Route::get('/report','Backend\ReportController@index')->name('sales.report');
+    Route::post('/dateby','Backend\ReportController@dateBy');
+
+
+
 
     // fallback route
     Route::fallback(function () {
