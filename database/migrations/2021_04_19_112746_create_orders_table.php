@@ -32,6 +32,8 @@ class CreateOrdersTable extends Migration
             $table->string('transaction')->nullable();
             $table->string('bkash_mobile')->nullable();
             $table->integer('shipping_method_id')->nullable();
+            $table->date('date')->nullable();
+
             $table->timestamps();
         });
     }
