@@ -20,6 +20,22 @@
         <div class="row">
             <div class="col-lg-7 col-md-12 ml-auto mr-auto">
                 <div class="login-register-wrapper">
+                    @if(session()->has('reg_successful'))
+                        <div class="alert not_hide alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session()->get('reg_successful') }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session()->has('reset_successful'))
+                        <div class="alert not_hide alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session()->get('reset_successful') }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <div class="login-register-tab-list nav">
                         <a href="{{route('login')}}">
                             <h4> login </h4>
@@ -36,11 +52,11 @@
                                     <form action="{{ route('login') }}" method="post">
                                         @csrf
 
-                                        <input name="email" placeholder="Email" type="email"
-                                            class=" @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                                            required autocomplete="email" autofocus>
+                                        <input name="phone" placeholder="Mobile No." type="number"
+                                            class=" @error('phone') is-invalid @enderror" value="{{ old('phone') }}"
+                                            required autocomplete="phone" autofocus>
 
-                                        @error('email')
+                                        @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -61,7 +77,7 @@
                                                 <input type="checkbox" name="remember" id="remember"
                                                     {{ old('remember') ? 'checked' : '' }}>
                                                 <label for="remember">Remember me</label>
-                                                <a href="{{ route('password.request') }}">Forgot Password?</a>
+                                                <a href="{{ route('forgot.password') }}">Forgot Password?</a>
                                             </div>
 
                                             <button type="submit">Login</button>
