@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/jquery-ui.css">
     <link rel="stylesheet" href="{{""}}/assets/css/style.css">
     @yield('stylesheet')
+    
 
 
 
