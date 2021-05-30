@@ -20,6 +20,7 @@ use Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
 Use Session;
+use Carbon\Carbon;
 
 class CheckoutController extends Controller
 {
@@ -75,6 +76,7 @@ class CheckoutController extends Controller
          else{
              $subtotal=Cart::subtotal();
          }
+         $dateToday = Carbon::today()->toDateString();
 
        $order=Order::create([
         'user_id'=>auth()->user()? auth()->user()->id : null,
@@ -89,6 +91,10 @@ class CheckoutController extends Controller
         'subtotal'=>$subtotal,
         'transaction'=>$request->transaction,
         'bkash_mobile'=>$request->bkash_mobile,
+        'date'=>$dateToday,
+       
+
+
        ]);
        if(Auth::user()){
         $idauth=Auth::id();

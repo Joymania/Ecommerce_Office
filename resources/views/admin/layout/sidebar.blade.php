@@ -100,6 +100,7 @@
                             <a href="#Users" class="has-arrow"><i class="icon-calculator"></i> <span>Reports</span></a>
                             <ul>
                                 <li class="{{ Request::segment(2) == 'report' ? 'active' : null }}"><a href="{{route('sales.report')}}">Report</a></li>
+                                
                             </ul>
                         </li>
 
