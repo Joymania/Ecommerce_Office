@@ -17,6 +17,71 @@
     </div>
 <div class="row">
         <div class="col-md-12">
+
+            <div class="row clearfix">
+                <div id="all" class="col-lg-12 col-md-12">
+                        <h5>Total Sales Report</h5>
+                        <hr>
+                <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card overflowhidden">
+                        <div class="body">
+                            <h3>{{$data['allp']}} <i class="icon-basket float-right"></i></h3>
+                            <span>Products Sold</span>
+                        </div>
+                        <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                            <div class="progress-bar" data-transitiongoal="64"></div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card overflowhidden">
+                            <div class="body">
+                                <h3>{{$data['alle']}} <i class="fa fa-dollar float-right"></i></h3>
+                                <span>Expense</span>
+                            </div>
+                            <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                                <div class="progress-bar" data-transitiongoal="64"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card overflowhidden">
+                            <div class="body">
+                                <h3>{{$data['all']}}<i class="fa fa-dollar float-right"></i></h3>
+                                <span>Total Selling Amount</span>
+                            </div>
+                            <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                                <div class="progress-bar" data-transitiongoal="64"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="row clearfix">
         <div id="today" class="col-lg-12 col-md-12">
                 <h5>Today's Sales Report</h5>
@@ -170,7 +235,7 @@
       <br>
       
      <div  class="table ">
-        <table id="d" class="table ml-3">
+        <table id="d" class="table">
 
             <thead>
                 <tr>
@@ -369,6 +434,8 @@ $('#filter').click(function(){
     $("#sevenr").hide();
     $("#lastr").hide();
     $("#date").hide();
+    $("#all").hide();
+
 
 
 
@@ -380,6 +447,8 @@ $('#filter').click(function(){
         $("#sevenr").hide();
         $("#lastr").hide();
         $("#date").hide();
+        $("#all").hide();
+
 
 
         });
@@ -392,6 +461,8 @@ $('#filter').click(function(){
         $("#sevenr").show();
         $("#lastr").hide();
         $("#date").hide();
+        $("#all").hide();
+
 
 
         });
@@ -404,6 +475,8 @@ $('#filter').click(function(){
         $("#sevenr").hide();
         $("#lastr").show();
         $("#date").hide();
+        $("#all").hide();
+
 
         });
         $(".date").on("click", function() {
@@ -414,6 +487,8 @@ $('#filter').click(function(){
         $("#sevenr").hide();
         $("#lastr").hide();
         $("#date").show();
+        $("#all").show();
+
 
         });
 

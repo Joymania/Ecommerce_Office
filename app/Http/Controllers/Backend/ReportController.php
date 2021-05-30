@@ -104,6 +104,14 @@ class ReportController extends Controller
                                             ->whereIn('status',[1,2])
                                             ->sum('subtotal');
 
+         $data['all'] = Order::whereIn('status',[1,2])
+                        ->sum('subtotal');
+        $data['alle'] = Expense::sum('amount');
+
+        $data['allp'] = Order::join('order_product','order_product.order_id','orders.id')
+        ->whereIn('orders.status',[1,2])
+        ->sum('qty');
+
         //return $lastDayofPreviousMonth;
         return view('admin.reports.report',compact('data','today','seven','last'));
 
