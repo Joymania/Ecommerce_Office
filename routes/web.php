@@ -12,7 +12,20 @@ use Illuminate\Support\Facades\Route;
 
 /*Front end routing Starts*/
 Auth::routes();
+// OTP
+Route::middleware('guest')->group(function(){
+    Route::post('send_otp', 'Auth\VonageSmsController@send')->name('send.otp');
+    Route::get('mobile_verification', 'Auth\VonageSmsController@verifyForm')->name('verify.form');
+    Route::post('mobile_verification', 'Auth\VonageSmsController@verifyOtp')->name('verify.otp');
 
+    Route::get('forgot_password', 'Auth\VonageSmsController@forgotPasswordForm')->name('forgot.password');
+    Route::post('forgot_password/send_otp', 'Auth\VonageSmsController@sendOtpForgotPass')->name('send.otp.forgot.pass');
+    Route::get('forgot_password/verify', 'Auth\VonageSmsController@verifyFormForgotPass')->name('verify.form.forgot.pass');
+    Route::post('forgot_password/verify', 'Auth\VonageSmsController@verifyOtpForgotPass')->name('verify.otp.forgot.pass');
+    Route::post('password_reset', 'Auth\VonageSmsController@resetPassword')->name('reset.password');
+
+});
+   
 //google login
 Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');
 Route::get('/google/callback', 'Auth\LoginController@handleGoogleCallback');

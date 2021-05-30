@@ -6,6 +6,22 @@
             <div class="row">
                 <div class="col-lg-7 col-md-12 ml-auto mr-auto">
                     <div class="login-register-wrapper">
+                        @if(session()->has('reg_error'))
+                            <div class="alert not_hide alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('reg_error') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if(session()->has('message'))
+                            <div class="alert not_hide alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('message') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <div class="login-register-tab-list nav">
                             <a href="{{route('login')}}">
                                 <h4> login </h4>
@@ -19,7 +35,7 @@
                                 <div class="login-form-container">
                                     <div class="login-register-form">
 
-                                        <form  method="post" action="{{ route('register') }}" >
+                                        <form  method="post" action="{{ route('send.otp') }}" >
                                             @csrf
 
                                             <input name="name" placeholder="Name" type="text" class=" @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -30,9 +46,9 @@
                                                 </span>
                                             @enderror
 
-                                            <input name="email" placeholder="Email" type="email" class=" @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            <input name="phone" placeholder="Mobile no." type="number" id="phone" pattern="[0-9]{11}" class=" @error('phobe') is-invalid @enderror" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
-                                            @error('email')
+                                            @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
