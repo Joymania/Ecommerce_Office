@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_code')->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')
                   ->onUpdate('cascade')->onDelete('set null');
@@ -30,6 +31,7 @@ class CreateOrdersTable extends Migration
             $table->string('subtotal');
             $table->string('transaction')->nullable();
             $table->string('bkash_mobile')->nullable();
+            $table->integer('shipping_method_id')->nullable();
             $table->date('date')->nullable();
 
             $table->timestamps();
