@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Model\Admin;
 use App\Model\CartShopping;
+use App\Model\ShippingMethods;
 use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
@@ -24,7 +25,11 @@ use Carbon\Carbon;
 
 class CheckoutController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        
+        $cart = CartShopping::where('user_id',Auth::id())->where('status','0')->update(['shipping_method_id' => $request->shipping_method]);
+        // $cart->shipping_method_id = $request->shipping_method;
+        // $cart->save();
 
         $data['users']=Auth::user();
 
@@ -51,6 +56,30 @@ class CheckoutController extends Controller
             'payment'=>'required'
         ]);
 
+        //  unique order code
+        // function generateRandomString($length = 25) {
+        //     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        //     $charactersLength = strlen($characters);
+        //     $randomString = '';
+        //     for ($i = 0; $i < $length; $i++) {
+        //         $randomString .= $characters[rand(0, $charactersLength - 1)];
+        //     }
+        //     return $randomString;
+        // }
+        $count = 0;
+        $order_code = uniqid();
+
+        while(true){
+            $same = Order::where('order_code', $order_code)->first();
+            if($same){
+                $order_code = $order_code.(++$count);
+            }
+            else{
+                break;
+            }
+        }
+
+
          if(Auth::user()){
              $idauth=Auth::id();
              $cartsubtotal=CartShopping::where('user_id',$idauth)->get();
@@ -60,7 +89,7 @@ class CheckoutController extends Controller
                 if($cart->product->promo_price){
                     $total = $cart->product->promo_price * $cart->qty;
                 }
-                else  
+                else
                     $total = $cart->product->price * $cart->qty;
 
                 $subtotal+=$total;
@@ -72,11 +101,14 @@ class CheckoutController extends Controller
 
                  $subtotal=$subtotal-Session::get($key)[0];
              }
+            //  add shipping cost
+             $subtotal+= $cartsubtotal['0']->shippingMethod ? $cartsubtotal['0']->shippingMethod->cost : 0;
          }
          else{
              $subtotal=Cart::subtotal();
          }
-         $dateToday = Carbon::today()->toDateString();
+                 $dateToday = Carbon::today()->toDateString();
+
 
        $order=Order::create([
         'user_id'=>auth()->user()? auth()->user()->id : null,
@@ -89,9 +121,12 @@ class CheckoutController extends Controller
         'biling_notes'=>$request->notes,
         'payment'=>$request->payment,
         'subtotal'=>$subtotal,
+        'shipping_method_id'=> $cartsubtotal['0']->shippingMethod ? $cartsubtotal['0']->shippingMethod->id : null,
         'transaction'=>$request->transaction,
         'bkash_mobile'=>$request->bkash_mobile,
-        'date'=>$dateToday,
+                   'date'=>$dateToday,
+
+           'order_code' => $order_code
        ]);
        if(Auth::user()){
         $idauth=Auth::id();
@@ -128,17 +163,21 @@ class CheckoutController extends Controller
     }
     $name=$request->name;
     $admin = Admin::all();
+
+
     Notification::send($admin, new OrderNotification($name));
 
         return redirect()->route('frontsite')->with('success', 'Your Order has been placed Successfully.');
     }
+
+
     public function showTrack(){
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         return view('Frontend.single_pages.tracking',$data);
     }
 
     public function track(Request $request){
-        $id=Auth::id();
+        /*$id=Auth::id();
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();
         if($data['orders']==NULL){
@@ -148,8 +187,11 @@ class CheckoutController extends Controller
             );
             return redirect()->back()->with($notification);
         }
-        else
-        return view('Frontend.single_pages.order_tracking', $data);
+
+        return view('Frontend.single_pages.order_tracking', $data);*/
+        $data = Order::select('status')->where('user_id',Auth::id())
+                            ->where('order_code',$request->order_code)->first();
+        return response()->json($data,200);
 
     }
 
