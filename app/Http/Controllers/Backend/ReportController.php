@@ -17,15 +17,20 @@ class ReportController extends Controller
     {
      if($request->ajax())
      {
+        
       if($request->from_date != '' && $request->to_date != '')
       {
-       $data = Order::join('order_product','order_product.order_id','orders.id')
-       ->select('orders.*','order_product.qty')
+
+       $data = Order::join('users','orders.user_id','users.id')
+       ->join('order_product','order_product.order_id','orders.id')
+       ->select('orders.*','users.name','users.email','order_product.qty')     
        ->whereBetween('date',array($request->from_date, $request->to_date))     
+
        ->whereIn('orders.status',[1,2])
        ->get();
 
       }
+  
       else
       {
         $data = Order::join('users','orders.user_id','users.id')
@@ -35,8 +40,10 @@ class ReportController extends Controller
         ->get();
 
       }
+
       return response($data);
      }
+
     }
 
 

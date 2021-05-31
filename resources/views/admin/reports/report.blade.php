@@ -62,26 +62,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="row clearfix">
         <div id="today" class="col-lg-12 col-md-12">
                 <h5>Today's Sales Report</h5>
@@ -230,11 +210,8 @@
        </div>
       </div>
      </div>
-     
-    
-      <br>
-      
-     <div  class="table ">
+     <a href="/admin/export" id="e" class="btn btn-success ">Export Excel All</a>    
+     <div  class="table mt-1">
         <table id="d" class="table">
 
             <thead>
@@ -248,6 +225,7 @@
                 <th>Payment Number</th>
                 <th>Transaction ID</th>
                 <th>Total</th>
+
          </tr>
         </thead>
         <tbody id="tbody">        
@@ -412,9 +390,12 @@ function fetch_data(from_date = '', to_date = '')
 $('#filter').click(function(){
   var from_date = $('#from_date').val();
   var to_date = $('#to_date').val();
+  
   if(from_date != '' &&  to_date != '')
   {
    fetch_data(from_date, to_date);
+   $('#e').hide();
+
   }
   else
   {
@@ -423,6 +404,8 @@ $('#filter').click(function(){
  });
 
  $('#refresh').click(function(){
+    $('#e').show();
+
   $('#from_date').val('');
   $('#to_date').val('');
   fetch_data();
@@ -498,6 +481,9 @@ $('#filter').click(function(){
    "iDisplayLength": 5,        
        });
 });
+
+
+
 
 $(document).ready(function() {
     $('#s').dataTable({
