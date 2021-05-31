@@ -23,7 +23,8 @@ class SizeController extends Controller
     public function storeSize(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:sizes,name'
+            'name' => 'required',
+            'size' => 'required'
         ]);
         size::create($request->all());
         return redirect()->route('products.sizes')->with('success','Size Successfully Added');
@@ -38,6 +39,7 @@ class SizeController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:sizes,name,'.$size->id,
+            'size' => 'required'
         ]);
         $size->update($request->all());
 

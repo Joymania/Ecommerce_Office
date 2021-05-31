@@ -14,12 +14,12 @@ use App\Model\review;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
 
     public function index(){
-        
         $cartpage=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         // dd($cartpage->product->image);
         

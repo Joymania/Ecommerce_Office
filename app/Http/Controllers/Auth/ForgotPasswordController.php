@@ -28,7 +28,6 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        $logos = logo::all()->last();
-        return view('auth.passwords.email', compact('logos'));
+        return view('auth.passwords.forgot-password');
     }
 }

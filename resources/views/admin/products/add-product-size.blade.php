@@ -26,6 +26,18 @@
                                                 <input type="text" id="sizeName" name="name" class="form-control" placeholder="Product Size name">
                                             </div>
                                         </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label for="size">Product Size</label>
+                                                <input type="text" id="size" name="size" class="form-control" placeholder="Size">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label for="sizeDesc">Size Description</label>
+                                                <input type="text" id="sizeDesc" name="desc" class="form-control" placeholder="Product Size Description">
+                                            </div>
+                                        </div>
                                         @foreach($errors->all() as $error)
                                         <p class="ml-1" style="color: red">{{$error}}</p>
                                         @endforeach

@@ -1,6 +1,5 @@
 <?php
 
-use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +12,27 @@ use Illuminate\Support\Facades\Route;
 
 /*Front end routing Starts*/
 Auth::routes();
+// OTP
+Route::middleware('guest')->group(function(){
+    Route::post('send_otp', 'Auth\VonageSmsController@send')->name('send.otp');
+    Route::get('mobile_verification', 'Auth\VonageSmsController@verifyForm')->name('verify.form');
+    Route::post('mobile_verification', 'Auth\VonageSmsController@verifyOtp')->name('verify.otp');
+
+    Route::get('forgot_password', 'Auth\VonageSmsController@forgotPasswordForm')->name('forgot.password');
+    Route::post('forgot_password/send_otp', 'Auth\VonageSmsController@sendOtpForgotPass')->name('send.otp.forgot.pass');
+    Route::get('forgot_password/verify', 'Auth\VonageSmsController@verifyFormForgotPass')->name('verify.form.forgot.pass');
+    Route::post('forgot_password/verify', 'Auth\VonageSmsController@verifyOtpForgotPass')->name('verify.otp.forgot.pass');
+    Route::post('password_reset', 'Auth\VonageSmsController@resetPassword')->name('reset.password');
+
+});
+   
+//google login
+Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
+//Facebook login
+Route::get('/login/facebook', 'Auth\LoginController@redirectToFacebook');
+Route::get('/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
 
 // redirect verified user
 Route::get('/home','Frontend\FrontendController@index')->name('home');
@@ -71,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
-    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
@@ -254,6 +274,16 @@ Route::prefix('expense')->group(function(){
         Route::get('/edit','Backend\CopyrightController@edit')->name('copyright.edit');
         Route::post('/edit','Backend\CopyrightController@update')->name('copyright.update');
         Route::get('/{copyright}/destroy','Backend\CopyrightController@delete')->name('copyright.delete');
+    });
+
+     //shipping methods
+     Route::prefix('shipping-methods')->group(function (){
+        Route::get('/','Backend\ShippingMethodsController@index')->name('shipping.methods.view');
+        Route::get('/add','Backend\ShippingMethodsController@create')->name('shipping.method.add');
+        Route::post('/add','Backend\ShippingMethodsController@store')->name('shipping.method.store');
+        Route::get('/{shipping}/edit','Backend\ShippingMethodsController@edit')->name('shipping.method.edit');
+        Route::post('/{shipping}/edit','Backend\ShippingMethodsController@update')->name('shipping.method.update');
+        Route::get('/{shipping}/destroy','Backend\ShippingMethodsController@delete')->name('shipping.method.delete');
     });
 
 

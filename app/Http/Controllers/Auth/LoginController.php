@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Model\CartShopping;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -58,6 +59,16 @@ class LoginController extends Controller
     }
 
     /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'phone';
+    }
+
+    /**
      * The user has been authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -100,14 +111,14 @@ class LoginController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     public function logout(Request $request, User $user)
-    {   
+    {
         // update user->status to 0 just before logout
         $user = User::find(Auth::id());
         $user->status = '0';
         $user->save();
 
         $this->guard()->logout();
-    
+
         /***  to prevent admin/user logout to logout both admin and user at the same time ***/
         // $request->session()->invalidate();
 
@@ -121,4 +132,95 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect('/');
     }
+
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        $check = User::where('email', $user->email)->first();
+
+        if ($check) {
+            Auth::login($check);
+            $this->authenticatedSocial();
+            return redirect()->intended($this->redirectPath());
+        } else {
+            $data = new User();
+            $data->name = $user->name;
+            $data->email = $user->email;
+            $data->image = $user->avatar;
+            $data->password= bcrypt(uniqid());
+            $data->save();
+            Auth::login($data);
+            $this->authenticatedSocial();
+            return redirect()->intended($this->redirectPath());
+        }
+    }
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $check = User::where('email', $user->email)->first();
+
+        if ($check) {
+            Auth::login($check);
+            $this->authenticatedSocial();
+            return redirect()->intended($this->redirectPath());
+        } else {
+            $data = new User();
+            $data->name = $user->name;
+            $data->email = $user->email;
+            $data->image = $user->avatar;
+            $data->password= bcrypt(uniqid());
+            $data->save();
+            Auth::login($data);
+            $this->authenticatedSocial();
+            return redirect()->intended($this->redirectPath());
+        }
+    }
+
+    /**
+     * The user has been authenticated by soicialite
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticatedSocial()
+    {
+        $user = User::where('id', Auth::id())->first();
+        $user->status = '1';
+        $user->save();
+
+        $carts = Cart::content();
+        foreach($carts as $cart){
+            $idauth = Auth::id();
+            $identity= $cart->id;
+            $sizeID= $cart->options['size_id'];
+            $colorId= $cart->options['color_id'];
+
+            $cartCheck= CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+
+            if($cartCheck==NULL){
+            $cart_add= new CartShopping();
+            $cart_add->user_id = Auth::id();
+            $cart_add->product_id = $cart->id;
+            $cart_add->product_size = $cart->options->size_id;
+            $cart_add->product_color= $cart->options->color_id;
+            $cart_add->qty= $cart->qty;
+            $cart_add->subtotal= $cart->subtotal;
+            $cart_add->save();
+            }
+        }
+    }
+
+
 }

@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Norda - Minimal eCommerce HTML Template</title>
     <meta name="robots" content="noindex, follow" />
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
@@ -20,10 +21,10 @@
     <!-- All CSS is here
 	============================================ -->
     <!-- for star rating -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+    {{--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">--}}
+	{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>--}}
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>--}}
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
@@ -41,6 +42,7 @@
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/jquery-ui.css">
     <link rel="stylesheet" href="{{""}}/assets/css/style.css">
     @yield('stylesheet')
+    
 
 
 
@@ -82,8 +84,34 @@
                                 <div class="header-top-right">
                                     <div class="same-style-wrap">
                                         <div class="same-style same-style-border track-order">
-                                            <a href="{{route('track.show')}}">Track Your Order</a>
+                                            <a  type="button" data-toggle="modal" data-target="#exampleModal">Track Your Order</a>
                                         </div>
+
+                                        {{--Modal Starts here--}}
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content m-auto" style="width: 50%">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Track Your Order</h5>
+                                                    </div>
+                                                    <div class="modal-body m-0" style="margin-top: -10% !important;">
+                                                        <label for="order_code"></label>
+                                                        <input type="text" class="form-control" name="order_code" id="order_code" placeholder="Give your order code!!" autocomplete="off">
+                                                        <button type="button" id="tracking-button" class="btn btn-primary mt-2">Track Order</button>
+
+                                                        <div style="background: #FFF3CD" id="status" hidden>
+                                                        <h4 class="text-center mt-2" id="status-text" style="padding: 10px 0"></h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{--Modal ends here--}}
+
+
                                         <div class="same-style same-style-border language-wrap">
                                             <a class="language-dropdown-active" href="#">English</a>
                                         </div>
@@ -388,7 +416,7 @@
                                     if($cart->product->promo_price){
                                         $subtotal = $cart->product->promo_price * $cart->qty;
                                     }
-                                    else  
+                                    else
                                         $subtotal = $cart->product->price * $cart->qty;
                                     $total+=$subtotal;
                                 @endphp
