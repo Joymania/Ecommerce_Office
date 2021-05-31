@@ -17,6 +17,51 @@
     </div>
 <div class="row">
         <div class="col-md-12">
+
+            <div class="row clearfix">
+                <div id="all" class="col-lg-12 col-md-12">
+                        <h5>Total Sales Report</h5>
+                        <hr>
+                <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card overflowhidden">
+                        <div class="body">
+                            <h3>{{$data['allp']}} <i class="icon-basket float-right"></i></h3>
+                            <span>Products Sold</span>
+                        </div>
+                        <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                            <div class="progress-bar" data-transitiongoal="64"></div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card overflowhidden">
+                            <div class="body">
+                                <h3>{{$data['alle']}} <i class="fa fa-dollar float-right"></i></h3>
+                                <span>Expense</span>
+                            </div>
+                            <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                                <div class="progress-bar" data-transitiongoal="64"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card overflowhidden">
+                            <div class="body">
+                                <h3>{{$data['all']}}<i class="fa fa-dollar float-right"></i></h3>
+                                <span>Total Selling Amount</span>
+                            </div>
+                            <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                                <div class="progress-bar" data-transitiongoal="64"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
     <div class="row clearfix">
         <div id="today" class="col-lg-12 col-md-12">
                 <h5>Today's Sales Report</h5>
@@ -165,12 +210,9 @@
        </div>
       </div>
      </div>
-     
-    
-      <br>
-      
-     <div  class="table ">
-        <table id="d" class="table ml-3">
+     <a href="/admin/export" id="e" class="btn btn-success ">Export Excel All</a>    
+     <div  class="table mt-1">
+        <table id="d" class="table">
 
             <thead>
                 <tr>
@@ -183,6 +225,7 @@
                 <th>Payment Number</th>
                 <th>Transaction ID</th>
                 <th>Total</th>
+
          </tr>
         </thead>
         <tbody id="tbody">        
@@ -347,9 +390,12 @@ function fetch_data(from_date = '', to_date = '')
 $('#filter').click(function(){
   var from_date = $('#from_date').val();
   var to_date = $('#to_date').val();
+  
   if(from_date != '' &&  to_date != '')
   {
    fetch_data(from_date, to_date);
+   $('#e').hide();
+
   }
   else
   {
@@ -358,6 +404,8 @@ $('#filter').click(function(){
  });
 
  $('#refresh').click(function(){
+    $('#e').show();
+
   $('#from_date').val('');
   $('#to_date').val('');
   fetch_data();
@@ -369,6 +417,8 @@ $('#filter').click(function(){
     $("#sevenr").hide();
     $("#lastr").hide();
     $("#date").hide();
+    $("#all").hide();
+
 
 
 
@@ -380,6 +430,8 @@ $('#filter').click(function(){
         $("#sevenr").hide();
         $("#lastr").hide();
         $("#date").hide();
+        $("#all").hide();
+
 
 
         });
@@ -392,6 +444,8 @@ $('#filter').click(function(){
         $("#sevenr").show();
         $("#lastr").hide();
         $("#date").hide();
+        $("#all").hide();
+
 
 
         });
@@ -404,6 +458,8 @@ $('#filter').click(function(){
         $("#sevenr").hide();
         $("#lastr").show();
         $("#date").hide();
+        $("#all").hide();
+
 
         });
         $(".date").on("click", function() {
@@ -414,6 +470,8 @@ $('#filter').click(function(){
         $("#sevenr").hide();
         $("#lastr").hide();
         $("#date").show();
+        $("#all").show();
+
 
         });
 
@@ -423,6 +481,9 @@ $('#filter').click(function(){
    "iDisplayLength": 5,        
        });
 });
+
+
+
 
 $(document).ready(function() {
     $('#s').dataTable({

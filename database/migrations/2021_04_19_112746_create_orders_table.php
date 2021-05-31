@@ -31,9 +31,15 @@ class CreateOrdersTable extends Migration
             $table->string('subtotal');
             $table->string('transaction')->nullable();
             $table->string('bkash_mobile')->nullable();
+<<<<<<< HEAD:database/migrations/2021_04_20_043948_create_orders_table.php
+            $table->date('date')->nullable();
+
+
+=======
             $table->integer('shipping_method_id')->nullable();
             $table->date('date')->nullable();
 
+>>>>>>> fe87901281295620bd22065275b56ad42398416e:database/migrations/2021_04_19_112746_create_orders_table.php
             $table->timestamps();
         });
     }

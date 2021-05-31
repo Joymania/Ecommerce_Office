@@ -290,6 +290,7 @@ Route::prefix('expense')->group(function(){
     //Report page route
     Route::get('/report','Backend\ReportController@index')->name('sales.report');
     Route::post('/dateby','Backend\ReportController@dateBy');
+    Route::get('/export', 'excelFile@export');
 
 
 
@@ -320,6 +321,15 @@ Route::prefix('admin')->group(function () {
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
+
+
+
+
+
+// export
+
+
+
 
 //Admin Routing Ends
 
