@@ -1962,7 +1962,6 @@
             "time": "2021-01-18T20:58:21+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "maatwebsite/excel",
             "version": "3.1.30",
             "source": {
@@ -1974,7 +1973,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/aa5d2e4d25c5c8218ea0a15103da95f5f8728953",
                 "reference": "aa5d2e4d25c5c8218ea0a15103da95f5f8728953",
-=======
             "name": "league/oauth1-client",
             "version": "v1.9.0",
             "source": {
@@ -1986,12 +1984,10 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/1e7e6be2dc543bf466236fb171e5b20e1b06aee6",
                 "reference": "1e7e6be2dc543bf466236fb171e5b20e1b06aee6",
->>>>>>> fe87901281295620bd22065275b56ad42398416e
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-<<<<<<< HEAD
                 "illuminate/support": "5.8.*|^6.0|^7.0|^8.0",
                 "php": "^7.0|^8.0",
                 "phpoffice/phpspreadsheet": "1.16.*"
