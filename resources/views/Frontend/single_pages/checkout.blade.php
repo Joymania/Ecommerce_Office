@@ -185,15 +185,14 @@
                                                 </ul>
                                             </div>
                                             @if (Auth::user())
-                                            <div class="your-order-middle">
+                                                <div class="your-order-middle">
 
-                                                @foreach ($showCart as $show)
-                                                @if ($show['product']['promo_price'])
-                                                <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['promo_price'] }} )</span></li>
-                                                @else
-                                                <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['price'] }} )</span></li>
-                                                @endif
-
+                                                    @foreach ($showCart as $show)
+                                                    @if ($show['product']['promo_price'])
+                                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['promo_price'] }} )</span></li>
+                                                    @else
+                                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['price'] }} )</span></li>
+                                                    @endif
 
                                                 @endforeach
                                             </div>
@@ -213,20 +212,54 @@
                                                     <li>Subtotal <span> {{ $subammount }} tk</span></li>
                                                 </ul>
                                             </div>
+                                                    @endforeach
+                                                </div>
 
-                                            <div class="your-order-info order-total">
 
-                                                @if (Session::has('cartcupon-'.auth()->id()))
-                                                <ul>
-                                                    <li>Total <span>{{ ($subammount +20)- Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
-                                                </ul>
-                                                @else
-                                                <ul>
-                                                    <li>Total <span>{{ $subammount +20}} tk </span></li>
-                                                </ul>
-                                                @endif
 
-                                            </div>
+                                                {{-- dd($showCart['0']->shippingMethod->cost) --}}
+
+
+                                                @php
+                                                $subammount=0;
+                                                    foreach ($showCart as $show) {
+                                                        if($show->product->promo_price){
+                                                            $subtotal = $show->product->promo_price * $show->qty;
+                                                        }
+                                                        else
+                                                            $subtotal = $show->product->price * $show->qty;
+                                                        $subammount+=$subtotal;
+                                                    }
+                                                @endphp
+                                                <div class="your-order-info order-subtotal">
+                                                    <ul>
+                                                        <li>Subtotal <span> {{ $subammount }} tk</span></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="your-order-info order-total">
+                                                    @if(!empty($showCart['0']->shippingMethod))
+                                                        @if (Session::has('cartcupon-'.auth()->id()))
+                                                            <ul>
+                                                                <li>Total <span>{{ ($subammount + $showCart['0']->shippingMethod->cost) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
+                                                            </ul>
+                                                        @else
+                                                            <ul>
+                                                                <li>Total <span>{{ $subammount + $showCart['0']->shippingMethod->cost}} tk </span></li>
+                                                            </ul>
+                                                        @endif
+                                                    @endif
+                                                    @if (Session::has('cartcupon-'.auth()->id()))
+                                                        <ul>
+                                                            <li>Total <span>{{ ($subammount) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
+                                                        </ul>
+                                                    @else
+                                                        <ul>
+                                                            <li>Total <span>{{ $subammount}} tk </span></li>
+                                                        </ul>
+                                                    @endif
+
+                                                </div>
                                             @else
                                             <div class="your-order-middle">
                                                 @foreach ($contents as $content)

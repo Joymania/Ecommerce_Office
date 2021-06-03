@@ -47,14 +47,15 @@ class userAccountController extends Controller
         $this->validate($request, [
             'name' => 'required|max:100',
             // if requested email and user email same, no validation applied
-            'email' => ($request->email != $user->email ? 'required|email|unique:users,email,':''),
+            'email' => ($request->email != $user->email ? 'email|unique:users,email,':''),
+            // if requested phone and user phoe same, no validation applied
+            'phone' => ($request->phone != $user->phone ? 'unique:users,phone|digits:11,':''),
             // if the password field is blank, no validation applied
             'password' => ($request->password!=''?'min:8|confirmed':''),
             'status' => '',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gender' => 'max:10',
             'address' => 'max:255',
-            'phone' => 'max:15'
         ]);
 
           //  insert data ........
