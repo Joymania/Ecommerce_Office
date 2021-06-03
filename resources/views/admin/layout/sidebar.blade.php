@@ -100,7 +100,7 @@
                             <a href="#Users" class="has-arrow"><i class="icon-calculator"></i> <span>Reports</span></a>
                             <ul>
                                 <li class="{{ Request::segment(2) == 'report' ? 'active' : null }}"><a href="{{route('sales.report')}}">Report</a></li>
-                                
+
                             </ul>
                         </li>
 
@@ -110,7 +110,11 @@
                                 <li class="{{ Request::segment(2) == 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
                                 <li class="{{ Request::segment(2) == 'contact' ? 'active' : null }}"><a href="{{route('contact.view')}}">Contact</a></li>
                                 <li class="{{ Request::segment(2) == 'copyright' ? 'active' : null }}"><a href="{{route('copyright.view')}}">Copyright</a></li>
+
+                                <li class="{{ Request::segment(2) == 'Facebook Pixel' ? 'active' : null }}"><a href="{{route('facebook.pixel')}}">Facebook Pixel</a></li>
+
                                 <li class="{{ Request::segment(2) == 'shipping-methods' ? 'active' : null }}"><a href="{{route('shipping.methods.view')}}">shipping Methods</a></li>
+
                             </ul>
                         </li>
                     </ul>

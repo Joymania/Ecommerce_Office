@@ -38,7 +38,7 @@
                             </div>
                             @if($product->sub_images)
                                 @foreach($product->sub_images as $image)
-                                <div class="easyzoom-style">
+                                <div class="easyzoom-style" data-id="{{$image->color_id}}">
                                     <div class="easyzoom easyzoom--overlay float-right">
                                         <a href="{{"/upload/products_images/sub_images/$image->image"}}">
                                             <img src="{{"/upload/products_images/sub_images/$image->image"}}" style="" alt="Product Image">
@@ -56,7 +56,7 @@
                             </div>
                             @if($product->sub_images)
                             @foreach($product->sub_images as $image)
-                            <div class="product-dec-small active">
+                            <div class="product-dec-small active subImage" data-id="{{$image->color_id}}">
                                 <img src="{{"/upload/products_images/sub_images/$image->image"}}" alt="">
                             </div>
                             @endforeach

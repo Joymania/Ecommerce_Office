@@ -43,7 +43,8 @@ class ProductDetailsController extends Controller
         $reviews = review::where('product_id',$id)->get();
         $reviews1 = review::where('product_id',$id)->get();
         $colors=product_color::where('product_id',$product->id)->get();
-        $sizes=product_size::where('product_id',$product->id)->get();
+        $sizes=product_size::join('sizes','sizes.id','product_sizes.id')
+                    ->where('product_sizes.product_id',$product->id)->get();
         $orders = OrderProduct::where('product_id',$id)->count();
         if (sizeof($reviews) > 0){
             $ratingCount = $reviews->count();

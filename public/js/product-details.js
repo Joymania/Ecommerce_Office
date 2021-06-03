@@ -10,9 +10,11 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $(".colorLi").on('click',function () {
+        const colorId = $(this).attr('data-id');
         $("#colorInput").val($(this).attr("data-id"));
         $("#colorPtag").attr('hidden',false);
         $("#color_desc").text($(this).attr("data-desc"));
+        $('.subImage[data-id='+colorId+']').click();
     });
 });
 

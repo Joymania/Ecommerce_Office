@@ -255,17 +255,32 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col">
+                                            <div class="col-4">
                                                 <label for="image">Upload Cover Image</label>
                                                 <input type="file" id="image" class="form-control" name="image">
                                                 <input type="text" name="old_image" value="{{$product->image}}" hidden>
                                             </div>
-                                            <div class="col">
-                                                <label for="image">Upload Sub Images</label>
-                                                <input type="file" id="image" class="form-control" name="images[]">
-                                                <input type="file" id="image" class="form-control" name="images[]">
-                                                <input type="file" id="image" class="form-control" name="images[]">
-                                                <input type="file" id="image" class="form-control" name="images[]">
+                                        </div>
+
+                                        <div class="form-row mt-2">
+                                            <div class="col-8">
+                                                <div class="d-flex justify-content-between">
+                                                    <label for="image">Upload Sub Images</label> <i style="height: 140%; cursor: pointer" id="plusIcon" class="fa fa-plus-circle"></i>
+                                                </div>
+                                                <div id="sub-image-field">
+                                                    <div class="form-inline d-flex justify-content-between">
+                                                        <input type="file" id="image" class="form-control" name="images[]">
+                                                        <div class="color form-inline">
+                                                            <label for="colorMultiSelect1" class="mr-2">Select Image Color</label>
+                                                            <select id="colorMultiSelect1" class="form-control" name="color[]">
+                                                                <option value="">Select Color</option>
+                                                                @foreach($colors as $row)
+                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -298,6 +313,6 @@
             });
         })
     </script>
-
+    <script src="{{asset('/js/add-product.js')}}"></script>
 
 @endsection
