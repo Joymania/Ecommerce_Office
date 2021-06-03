@@ -25,7 +25,7 @@ Route::middleware('guest')->group(function(){
     Route::post('password_reset', 'Auth\VonageSmsController@resetPassword')->name('reset.password');
 
 });
-   
+
 //google login
 Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');
 Route::get('/google/callback', 'Auth\LoginController@handleGoogleCallback');
@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
-    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
+    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
