@@ -53,10 +53,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        if(!session()->has('url.intended'))
-        {
-            session(['url.intended' => url()->previous()]);
-        }
+    
         return view('auth.register');
     }
 
@@ -71,7 +68,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'digits:11', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -86,7 +84,8 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            // 'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -97,46 +96,46 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function register(Request $request, User $user)
+    public function register(Request $request)
     {
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
 
-        $this->guard()->login($user);
+        // $this->guard()->login($user);
 
-        // update user->status to 1 after login
-        $user = User::find(Auth::id());
-        $user->status = '1';
-        $user->save();
+        // // update user->status to 1 after login
+        // $user = User::find(Auth::id());
+        // $user->status = '1';
+        // $user->save();
 
-        $carts = Cart::content();
-        foreach($carts as $cart){
-            $idauth = Auth::id();
-            $identity= $cart->id;
-            $sizeID= $cart->options['size_id'];
-            $colorId= $cart->options['color_id'];
+        // $carts = Cart::content();
+        // foreach($carts as $cart){
+        //     $idauth = Auth::id();
+        //     $identity= $cart->id;
+        //     $sizeID= $cart->options['size_id'];
+        //     $colorId= $cart->options['color_id'];
 
-            $cartCheck= CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+        //     $cartCheck= CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
 
-            if($cartCheck==NULL){
-            $cart_add= new CartShopping();
-            $cart_add->user_id = Auth::id();
-            $cart_add->product_id = $cart->id;
-            $cart_add->product_size = $cart->options->size_id;
-            $cart_add->product_color= $cart->options->color_id;
-            $cart_add->qty= $cart->qty;
-            $cart_add->subtotal= $cart->subtotal;
-            $cart_add->save();
-            }
-        }
+        //     if($cartCheck==NULL){
+        //     $cart_add= new CartShopping();
+        //     $cart_add->user_id = Auth::id();
+        //     $cart_add->product_id = $cart->id;
+        //     $cart_add->product_size = $cart->options->size_id;
+        //     $cart_add->product_color= $cart->options->color_id;
+        //     $cart_add->qty= $cart->qty;
+        //     $cart_add->subtotal= $cart->subtotal;
+        //     $cart_add->save();
+        //     }
+        // }
 
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
-
+        // dd(session('url.intended'));
         return $request->wantsJson()
                     ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());
+                    : redirect()->intended($this->redirectPath());
     }
 }

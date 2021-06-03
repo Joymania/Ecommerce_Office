@@ -40,5 +40,8 @@ return [
         'client_secret' => env('Facebook_CLIENT_SECRET'),
         'redirect' => 'http://127.0.0.1:8000/facebook/callback',
     ],
+    'nexmo' => [
+        'sms_from' => '15556666666',
+    ],
 
 ];
