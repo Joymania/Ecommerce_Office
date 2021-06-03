@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Model\Copyright;
+use App\Model\FacebookPixel;
 use App\Model\Order;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -42,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories' , category::with('sub_category')->get());
             $view->with('logos' , logo::orderByDesc('id')->first());
             $view->with('contacts', contacts::orderByDesc('id')->first());
+            $view->with('pixel',FacebookPixel::first());
         });
 
         View::composer('Frontend.userProfile.master', function ($view) {
@@ -50,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories' , category::with('sub_category')->get());
             $view->with('logos' , logo::orderByDesc('id')->first());
             $view->with('contacts', contacts::orderByDesc('id')->first());
+            $view->with('pixel',FacebookPixel::first());
         });
 
         View::composer('admin.layout.sidebar',function ($view){

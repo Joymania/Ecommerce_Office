@@ -42,6 +42,24 @@
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
 
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '{{$pixel->pixel_id}}');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id={{$pixel->pixel_id}}&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Facebook Pixel Code -->
+
 </head>
 
 <body>
@@ -80,30 +98,6 @@
                                     <div class="same-style same-style-border track-order">
                                             <a  type="button" data-toggle="modal" data-target="#exampleModal">Track Your Order</a>
                                         </div>
-
-                                        {{--Modal Starts here--}}
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content m-auto" style="width: 50%">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Track Your Order</h5>
-                                                    </div>
-                                                    <div class="modal-body m-0" style="margin-top: -10% !important;">
-                                                        <label for="order_code"></label>
-                                                        <input type="text" class="form-control" name="order_code" id="order_code" placeholder="Give your order code!!" autocomplete="off">
-                                                        <button type="button" id="tracking-button" class="btn btn-primary mt-2">Track Order</button>
-
-                                                        <div style="background: #FFF3CD" id="status" hidden>
-                                                            <h4 class="text-center mt-2" id="status-text" style="padding: 10px 0"></h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{--Modal ends here--}}
 
                                         <div class="same-style same-style-border language-wrap">
                                             <a class="language-dropdown-active" href="#">English</a>
@@ -155,7 +149,7 @@
                                                     <li><a href="{{ route('userAccount') }}">my account</a></li>
                                                     <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
                                                     <li><a href="#contact">contact us </a></li>
-                                                    <li><a href="{{ route('track.show') }}">order tracking</a></li>
+                                                    <li><a id="mobileViewOrderTrackingBtn" data-toggle="modal" href="#exampleModal">order tracking</a></li>
                                                     <li><a href="{{route('login')}}">login / register </a></li>
                                                 </ul>
                                             </li>
@@ -469,7 +463,7 @@
                                         <li><a href="{{ route('userAccount') }}">my account</a></li>
                                         <li><a href="{{ route('wishlist.view') }}">wishlist </a></li>
                                         <li><a href="#contact">contact us </a></li>
-                                        <li><a href="{{ route('track.show') }}">order tracking</a></li>
+                                        <li><a id="footerOrderTrackingBtn" href="#exampleModal">Track Order</a></li>
                                         <li><a href="{{route('login')}}">login / register </a></li>
                                     </ul>
                                 </li>
@@ -478,6 +472,27 @@
                             </ul>
                         </nav>
                         <!-- mobile menu end -->
+                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content m-auto" style="width: 100%">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Track Your Order</h5>
+                                    </div>
+                                    <div class="modal-body m-0" style="margin-top: -10% !important;">
+                                        <label for="order_code"></label>
+                                        <input type="text" class="form-control" name="order_code" id="order_codeMobile" placeholder="Give your order code!!" autocomplete="off">
+                                        <button type="button" id="tracking-buttonMobile" class="btn btn-primary mt-2">Track Order</button>
+
+                                        <div style="background: #FFF3CD" id="statusMobile" hidden>
+                                            <h4 class="text-center mt-2" id="status-textMobile" style="padding: 10px 0"></h4>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="closeBtnMobile" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="main-categori-wrap mobile-menu-wrap mobile-header-padding-border-3">
@@ -597,13 +612,14 @@
                                 <li><a href="{{ route('wishlist.view') }}">My Wishlist</a></li>
                                 <li><a href="#">Terms & Conditions</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="{{ route('track.show') }}">Track Order</a></li>
+                                <li><a id="trackOrderFooterLink" data-toggle="modal" href="#exampleModal">Track Order</a></li>
                                 <li><a href="{{ route('search.result') }}">Shop</a></li>
                                 <li><a href="{{ route('about_us') }}">About Us</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
 
                 @if(!empty($contacts))
                 <div id="contact" class="col-lg-4 col-md-4 col-sm-12 col-12">
@@ -672,6 +688,32 @@
             </div>
         </div>
     </div>
+
+    {{--Modal Starts here--}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div id="modal-content" class="modal-content m-auto" style="width: 100%">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Track Your Order</h5>
+                </div>
+                <div class="modal-body m-0" style="margin-top: -10% !important;">
+                    <label for="order_code"></label>
+                    <input type="text" class="form-control" name="order_code" id="order_code" placeholder="Give your order code!!" autocomplete="off">
+                    <button type="button" id="tracking-button" class="btn btn-primary mt-2">Track Order</button>
+
+                    <div style="background: #FFF3CD" id="status" hidden>
+                        <h4 class="text-center mt-2" id="status-text" style="padding: 10px 0"></h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--Modal ends here--}}
+
+
 </footer>
 
 <!-- All JS is here
@@ -702,6 +744,17 @@
 <script src="{{""}}/js/search.js"></script>
 <script src="{{asset('js/search.js')}}"></script>
 <script src="{{asset('js/order_tracking.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $('#trackOrderFooterLink').on('click',function () {
+            if(window.matchMedia("(max-width: 767px)").matches){
+                $('#modal-content').css('width','100%');
+            }else{
+                $('#modal-content').css('width','45%');
+            }
+        })
+    });
+</script>
 @yield('scripts')
 </body>
 

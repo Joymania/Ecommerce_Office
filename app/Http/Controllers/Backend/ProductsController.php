@@ -87,6 +87,7 @@ class ProductsController extends Controller
         if($request->hasfile('images'))
         {
            $product_id = product::select('id')->latest('id')->first();
+            $i = 0;
             foreach($request->file('images') as $image)
             {
                 $name = rand(10000,99999).time().'.'.$image->getClientOriginalExtension();
@@ -94,7 +95,11 @@ class ProductsController extends Controller
                 $subImages = new SubImage();
                 $subImages->product_id = $product_id->id;
                 $subImages->image = $name;
+                if (!empty($request->color[$i])){
+                    $subImages->color_id = $request->color[$i];
+                }
                 $subImages->save();
+                $i++;
             }
         }
 
@@ -175,6 +180,7 @@ class ProductsController extends Controller
                 }
             }
 
+            $i = 0;
             foreach($request->file('images') as $image)
             {
                 $name = rand(10000,99999).time().'.'.$image->getClientOriginalExtension();
@@ -182,10 +188,14 @@ class ProductsController extends Controller
                 $subImages = new SubImage();
                 $subImages->product_id = $product->id;
                 $subImages->image = $name;
+                if (!empty($request->color[$i])){
+                    $subImages->color_id = $request->color[$i];
+                }
                 $subImages->save();
+                $i++;
             }
         }
-     
+
         $product->colors()->detach();
         if (!empty($request->color_id) > 0){
             $product->colors()->attach($request->color_id);
@@ -206,6 +216,7 @@ class ProductsController extends Controller
                 unlink("upload/products_images/sub_images/$row->image");
             }
         }
+        SubImage::where('product_id',$product->id)->delete();
         $product->colors()->detach();
         $product->sizes()->detach();
         $product->delete();
