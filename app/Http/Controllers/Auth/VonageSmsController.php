@@ -22,7 +22,7 @@ class VonageSmsController extends Controller
             $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'digits:11', 'unique:users'],
+            'phone' => ['required', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
             
@@ -30,7 +30,7 @@ class VonageSmsController extends Controller
             $code = (string)rand(10000,99999);
             $phone = "+88".$request->phone;
             Cache::add($code, $phone, 120);  //cache for 2 minutes
-
+            // dd($code);
             
             /****  temporarily stop sending sms ******/
 
