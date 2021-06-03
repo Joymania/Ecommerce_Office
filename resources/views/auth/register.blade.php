@@ -46,7 +46,7 @@
                                                 </span>
                                             @enderror
 
-                                            <input name="phone" placeholder="Mobile no." type="number" id="phone" pattern="[0-9]{11}" class=" @error('phobe') is-invalid @enderror" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                                            <input name="phone" placeholder="Mobile no." type="number" id="phone" pattern="[0-9]{11}" class=" @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
