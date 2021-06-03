@@ -276,6 +276,15 @@ Route::prefix('expense')->group(function(){
         Route::get('/{copyright}/destroy','Backend\CopyrightController@delete')->name('copyright.delete');
     });
 
+
+    //Facebook Pixel setup Routing
+    Route::get('/facebook-pixel','Backend\FacebookPixelController@index')->name('facebook.pixel');
+    Route::get('/facebook-pixel/add','Backend\FacebookPixelController@add')->name('pixel.add');
+    Route::post('/facebook-pixel/add','Backend\FacebookPixelController@store')->name('pixel.store');
+    Route::get('/facebook-pixel/{pixel}/edit','Backend\FacebookPixelController@edit')->name('pixel.edit');
+    Route::patch('/facebook-pixel/{pixel}/update','Backend\FacebookPixelController@update')->name('pixel.update');
+    Route::delete('/facebook-pixel/{pixel}/delete','Backend\FacebookPixelController@delete')->name('pixel.delete');
+
      //shipping methods
      Route::prefix('shipping-methods')->group(function (){
         Route::get('/','Backend\ShippingMethodsController@index')->name('shipping.methods.view');
@@ -285,6 +294,7 @@ Route::prefix('expense')->group(function(){
         Route::post('/{shipping}/edit','Backend\ShippingMethodsController@update')->name('shipping.method.update');
         Route::get('/{shipping}/destroy','Backend\ShippingMethodsController@delete')->name('shipping.method.delete');
     });
+
 
 
     //Report page route

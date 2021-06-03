@@ -17,6 +17,7 @@ class ProductSubImages extends Migration
             $table->id();
             $table->integer('product_id')->nullable();
             $table->integer('sub_images_id')->nullable();
+            $table->bigInteger('color_id')->nullable();
             $table->timestamps();
         });
     }
