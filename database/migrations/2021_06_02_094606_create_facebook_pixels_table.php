@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductSubImages extends Migration
+class CreateFacebookPixelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class ProductSubImages extends Migration
      */
     public function up()
     {
-        Schema::create('product_sub_images', function (Blueprint $table) {
+        Schema::create('facebook_pixels', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id')->nullable();
-            $table->integer('sub_images_id')->nullable();
-            $table->bigInteger('color_id')->nullable();
+            $table->string('facebook_name',100);
+            $table->string('pixel_name',100);
+            $table->string('pixel_id',100);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class ProductSubImages extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('facebook_pixels');
     }
 }

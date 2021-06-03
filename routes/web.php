@@ -263,6 +263,14 @@ Route::prefix('expense')->group(function(){
         Route::get('/{copyright}/destroy','Backend\CopyrightController@delete')->name('copyright.delete');
     });
 
+    //Facebook Pixel setup Routing
+    Route::get('/facebook-pixel','Backend\FacebookPixelController@index')->name('facebook.pixel');
+    Route::get('/facebook-pixel/add','Backend\FacebookPixelController@add')->name('pixel.add');
+    Route::post('/facebook-pixel/add','Backend\FacebookPixelController@store')->name('pixel.store');
+    Route::get('/facebook-pixel/{pixel}/edit','Backend\FacebookPixelController@edit')->name('pixel.edit');
+    Route::patch('/facebook-pixel/{pixel}/update','Backend\FacebookPixelController@update')->name('pixel.update');
+    Route::delete('/facebook-pixel/{pixel}/delete','Backend\FacebookPixelController@delete')->name('pixel.delete');
+
 
     //Report page route
     Route::get('/report','Backend\ReportController@index')->name('sales.report');

@@ -79,7 +79,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="billing-info mb-20">
                                                 <label>Last Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="lname"  value="{{ @$users->lname }}">
+                                                <input type="text" name="lname"  value="{{ old('lname',@$users->lname) }}">
 
                                             </div>
                                         </div>
@@ -88,7 +88,7 @@
                                         <div class="col-lg-12">
                                             <div class="billing-info mb-20">
                                                 <label>Street Address <abbr class="required" title="required">*</abbr></label>
-                                                <input class="billing-address"  placeholder="House number and street name" type="text" name="address" value="{{ @$users->address }}">
+                                                <input class="billing-address"  placeholder="House number and street name" type="text" name="address" value="{{ old('address',@$users->address) }}">
                                                 <font color="red">{{ ($errors->has('address'))?($errors->first('address')): '' }}</font>
 
                                             </div>
@@ -96,7 +96,7 @@
                                         <div class="col-lg-12">
                                             <div class="billing-info mb-20">
                                                 <label>Town / City <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="city"  value="{{ @$users->city }}">
+                                                <input type="text" name="city"  value="{{ old('city',@$users->city) }}">
                                                 <font color="red">{{ ($errors->has('city'))?($errors->first('city')): '' }}</font>
                                             </div>
                                         </div>
@@ -105,14 +105,14 @@
                                         <div class="col-lg-12 col-md-12">
                                             <div class="billing-info mb-20">
                                                 <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="phone"  value="{{ @$users->phone }}">
+                                                <input type="text" name="phone"  value="{{ old('phone',@$users->phone) }}">
                                                 <font color="red">{{ ($errors->has('phone'))?($errors->first('phone')): '' }}</font>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12">
                                             <div class="billing-info mb-20">
                                                 <label>Email Address <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="email"  value="{{ @$users->email }}">
+                                                <input type="text" name="email"  value="{{ old('email',@$users->email) }}">
                                                 <font color="red">{{ ($errors->has('email'))?($errors->first('email')): '' }}</font>
                                             </div>
                                         </div>
@@ -203,7 +203,7 @@
                                                     if($show->product->promo_price){
                                                         $subtotal = $show->product->promo_price * $show->qty;
                                                     }
-                                                    else  
+                                                    else
                                                         $subtotal = $show->product->price * $show->qty;
                                                     $subammount+=$subtotal;
                                                 }

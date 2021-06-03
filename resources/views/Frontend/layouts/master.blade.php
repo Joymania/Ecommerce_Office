@@ -7,4 +7,8 @@
     $(".alert").delay(2000).slideUp(200, function () {
         $(this).alert('close');
     });
+
+    <script>
+    fbq('track', 'Purchase', {currency: "USD", value: 30.00});
+</script>
 </script>
