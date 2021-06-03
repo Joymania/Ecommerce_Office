@@ -43,8 +43,8 @@
                                 <td></td>
                                 @endif
                                 <td>
-                                    @if ($order->status==0 || $order->status==1)
-                                    <div class="btn-group dropright">
+
+                                    <div class="btn-group">
                                         <button class="btn btn-info btn-sm dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -59,23 +59,16 @@
 
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            @if ($order->status==0)
+                                            <a class="dropdown-item"
+                                                href="{{ route('order.returnPending',$order->id) }}">Pending</a>
+
                                             <a class="dropdown-item"
                                                 href="{{ route('order.status',$order->id) }}">Accept</a>
-                                            @endif
-                                            @if ($order->status==1)
+
                                             <a class="dropdown-item"
                                                 href="{{ route('order.delivarystatus',$order->id) }}">Delivary</a>
-                                                <a class="dropdown-item" href="{{ route('order.returnPending',$order->id) }}">Pending</a>
-                                            @endif
-
-
                                         </div>
-                                </div>
-                                @elseif($order->status==2)
-                                <span style="color:red">Product Delivered</span>
-                                    @endif
-
+                                    </div>
 
                                 </td>
 
