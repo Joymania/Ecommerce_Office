@@ -1,6 +1,7 @@
 @extends('Frontend.layouts.master')
-
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
             <div class="breadcrumb-area bg-gray">
             <div class="container">
                 <div class="breadcrumb-content text-center">
@@ -11,322 +12,492 @@
                         <li class="active">Checkout </li>
                     </ul>
                 </div>
-            </div>
+
+                @php
+                $contents=Cart::content();
+            @endphp
+
+{{-- orderslide --}}
+<div  class="container overflow-hidden">
+    <div class="multisteps-form  ">
+      <div class="row">
+        <div class="col-8 col-lg-8 mb-4 ml-auto mr-auto">
+          <div class="multisteps-form__progress">
+            <button style="color:#6F50A7" class="multisteps-form__progress-btn js-active" type="button" title="User Info">Address</button>
+            <button style="color:#6F50A7" class="multisteps-form__progress-btn" type="button" title="Address">Order Info</button>
+            <button style="color:#6F50A7" class="multisteps-form__progress-btn" type="button" title="Order Info">Payment</button>
+            
+          </div>
         </div>
-        @php
-            $contents=Cart::content();
-        @endphp
-        <div class="checkout-main-area pt-120 pb-120">
-            <div class="container">
-                <div class="customer-zone mb-20">
-                    <p class="cart-page-title">Have a coupon? <a class="checkout-click3" href="#">Click here to enter your code</a></p>
-                    <div class="checkout-login-info3">
-                        <form action="{{ route('apply.cuppon') }}" method="POST">
-                            @csrf
-                            <input type="text" placeholder="Coupon code" name="cupon">
-                            <input type="submit" value="Apply Coupon">
-                        </form>
-                    </div>
+      </div>
+      <div class="row">
+        <div class="col-8 col-lg-8 mb-4 ml-auto mr-auto">
+          <form class="multisteps-form__form " action="{{ route('checkout.store') }}" method="POST">
+            @csrf
+            <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+              <h3 style="color:#6F50A7" class="multisteps-form__title"><i class="fas fa-user"></i> Personal Information</h3><hr>
+              <div class="multisteps-form__content">
+                <div class="form-row mt-4">
+                  <div class="col-12 col-sm-6">
+                    <input class="multisteps-form__input form-control" id="name" name="name"  type="text" placeholder="First Name" value="{{ @$users->name }}"/>
+                 <strong><span id="ename" style="color:red;"></strong> 
+                  </div>
+                  <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                    <input id="lname" name="lname" class="multisteps-form__input form-control" type="text" placeholder="Last Name"/>
+                  </div>
                 </div>
-                {{-- <div class="customer-zone mb-20">
-                    <p class="cart-page-title">Returning customer? <a class="checkout-click1" href="#">Click here to login</a></p>
-                    <div class="checkout-login-info">
-                        <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing & Shipping section.</p>
-                        <form action="" method="POST">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="sin-checkout-login">
-                                        <label>Username or email address <span>*</span></label>
-                                        <input type="text" name="name">
-                                    </div>
+                <div class="form-row mt-4">
+                  <div class="col-12 col-sm-6">
+                    <input class="multisteps-form__input form-control" type="text" name="email" id="email"  placeholder="Email" value="{{ @$users->email }}"/>
+                  </div>
+                  <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                    <input  class="multisteps-form__input form-control" type="number" id="phn" placeholder="phone no" name="phone"  value="{{ @$users->phone }}"/>
+                    <strong><span id="ephn" style="color:red;"></strong> 
+                  </div><br><br><br>
+                  <h3 style="color:#6F50A7" > <i class="fas fa-shipping-fast"></i> Shipping Details</h3> <hr>
+                </div>
+                <div class="form-row mt-4">
+                  <div class="col-12 col-sm-6">
+                    <input  class="multisteps-form__input form-control"  placeholder="House number and street name" type="text" name="address"  id="add"  />
+                    <strong><span id="eadd" style="color:red;"></strong> 
+                  </div><br>
+                  <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                    <input class="multisteps-form__input form-control" type="number" id="phone" placeholder="receiver phone no"  name="phone"  value="{{ @$users->phone }}"/>
+                    <strong><span id="er" style="color:red;"></strong> <br>
+                  </div><br>
+                  <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                    <input  class="multisteps-form__input form-control" id="city" type="City" name="city"  value="{{ @$users->city }}" placeholder="city" />
+                    <strong><span id="ec" style="color:red;"></strong> <br>
+                  </div>
+                </div>
+                <div class="button-row d-flex mt-4">
+                  <input style="width: 60px;background-color:#FF2F2F; color:white;" class="btn ml-auto js-btn-next" type="button" title="Next" value="Next">
+                </div>
+              </div>
+            </div>
+
+            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+              <h3 style="color:#6F50A7" class="multisteps-form__title">Your order</h3>
+              <div class="multisteps-form__content">
+            
+                    <div class="your-order-area">
+                        <div class="your-order-wrap gray-bg-4">
+                            <div class="your-order-info-wrap">
+                                <div class="your-order-info">
+                                    <ul>
+                                        <li>Product <span>Total</span></li>
+                                    </ul>
                                 </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="sin-checkout-login">
-                                        <label>Passwords <span>*</span></label>
-                                        <input type="password" name="password">
-                                    </div>
+                                @if (Auth::user())
+                                <div class="your-order-middle">
+
+                                    @foreach ($showCart as $show)
+                                    @if ($show['product']['promo_price'])
+                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['promo_price'] }} )</span></li>
+                                    @else
+                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['price'] }} )</span></li>
+                                    @endif
+
+
+                                    @endforeach
                                 </div>
-                            </div>
-                            <div class="button-remember-wrap">
-                                <button class="button" type="submit">Login</button>
-                                <div class="checkout-login-toggle-btn">
-                                    <input type="checkbox">
-                                    <label>Remember me</label>
+                                @php
+                                $subammount=0;
+                                    foreach ($showCart as $show) {
+                                        if($show->product->promo_price){
+                                            $subtotal = $show->product->promo_price * $show->qty;
+                                        }
+                                        else  
+                                            $subtotal = $show->product->price * $show->qty;
+                                        $subammount+=$subtotal;
+                                    }
+                                @endphp
+                                <div class="your-order-info order-subtotal">
+                                    <ul>
+                                        <li>Subtotal <span> {{ $subammount }} tk</span></li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <div class="lost-password">
-                                <a href="#">Lost your password?</a>
-                            </div>
-                        </form>
 
-                    </div>
-                </div> --}}
-                <form action="{{ route('checkout.store') }}" method="POST">
-                    @csrf
-                    <div class="checkout-wrap pt-30">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="billing-info-wrap mr-50">
-                                    <h3>Billing Details</h3>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="billing-info mb-20">
-                                                <label>First Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="name"  value="{{ @$users->name }}">
-                                                <font color="red">{{ ($errors->has('name'))?($errors->first('name')): '' }}</font>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="billing-info mb-20">
-                                                <label>Last Name <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="lname"  value="{{ old('lname',@$users->lname) }}">
+                                <div class="your-order-info order-total">
 
-                                            </div>
-                                        </div>
+                                    @if (Session::has('cartcupon-'.auth()->id()))
+                                    <ul>
+                                        <li>Total <span>{{ ($subammount +20)- Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
+                                    </ul>
+                                    @else
+                                    <ul>
+                                        <li>Total <span>{{ $subammount +20}} tk </span></li>
+                                    </ul>
+                                    @endif
 
-
-                                        <div class="col-lg-12">
-                                            <div class="billing-info mb-20">
-                                                <label>Street Address <abbr class="required" title="required">*</abbr></label>
-                                                <input class="billing-address"  placeholder="House number and street name" type="text" name="address" value="{{ old('address',@$users->address) }}">
-                                                <font color="red">{{ ($errors->has('address'))?($errors->first('address')): '' }}</font>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="billing-info mb-20">
-                                                <label>Town / City <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="city"  value="{{ old('city',@$users->city) }}">
-                                                <font color="red">{{ ($errors->has('city'))?($errors->first('city')): '' }}</font>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="billing-info mb-20">
-                                                <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="phone"  value="{{ old('phone',@$users->phone) }}">
-                                                <font color="red">{{ ($errors->has('phone'))?($errors->first('phone')): '' }}</font>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="billing-info mb-20">
-                                                <label>Email Address <abbr class="required" title="required">*</abbr></label>
-                                                <input type="text" name="email"  value="{{ old('email',@$users->email) }}">
-                                                <font color="red">{{ ($errors->has('email'))?($errors->first('email')): '' }}</font>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    {{--  <div class="checkout-account mt-25">
-                                        <input class="checkout-toggle" type="checkbox">
-                                        <span>Ship to a different address?</span>
-                                    </div>
-                                    <div class="different-address open-toggle mt-30">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="billing-info mb-20">
-                                                    <label>First Name</label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="billing-info mb-20">
-                                                    <label>Last Name</label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-lg-12">
-                                                <div class="billing-info mb-20">
-                                                    <label>Street Address</label>
-                                                    <input class="billing-address" placeholder="House number and street name" type="text">
-
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="billing-info mb-20">
-                                                    <label>Town / City</label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="billing-info mb-20">
-                                                    <label>Phone</label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="billing-info mb-20">
-                                                    <label>Email Address</label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  --}}
-                                    <div class="additional-info-wrap">
-                                        <label>Order notes</label>
-                                        <textarea placeholder="Notes about your order, e.g. special notes for delivery. " name="notes"></textarea>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="your-order-area">
-                                    <h3>Your order</h3>
-                                    <div class="your-order-wrap gray-bg-4">
-                                        <div class="your-order-info-wrap">
-                                            <div class="your-order-info">
-                                                <ul>
-                                                    <li>Product <span>Total</span></li>
-                                                </ul>
-                                            </div>
-                                            @if (Auth::user())
-                                                <div class="your-order-middle">
-
-                                                    @foreach ($showCart as $show)
-                                                    @if ($show['product']['promo_price'])
-                                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['promo_price'] }} )</span></li>
-                                                    @else
-                                                    <li> Product :{{ $show['product']['name'] }} <span> ({{ $show->qty }}x{{ $show['product']['price'] }} )</span></li>
-                                                    @endif
-
-                                                @endforeach
-                                            </div>
-                                            @php
-                                            $subammount=0;
-                                                foreach ($showCart as $show) {
-                                                    if($show->product->promo_price){
-                                                        $subtotal = $show->product->promo_price * $show->qty;
-                                                    }
-                                                    else
-                                                        $subtotal = $show->product->price * $show->qty;
-                                                    $subammount+=$subtotal;
-                                                }
-                                            @endphp
-                                            <div class="your-order-info order-subtotal">
-                                                <ul>
-                                                    <li>Subtotal <span> {{ $subammount }} tk</span></li>
-                                                </ul>
-                                            </div>
-                                                    @endforeach
-                                                </div>
-
-
-
-                                                {{-- dd($showCart['0']->shippingMethod->cost) --}}
-
-
-                                                @php
-                                                $subammount=0;
-                                                    foreach ($showCart as $show) {
-                                                        if($show->product->promo_price){
-                                                            $subtotal = $show->product->promo_price * $show->qty;
-                                                        }
-                                                        else
-                                                            $subtotal = $show->product->price * $show->qty;
-                                                        $subammount+=$subtotal;
-                                                    }
-                                                @endphp
-                                                <div class="your-order-info order-subtotal">
-                                                    <ul>
-                                                        <li>Subtotal <span> {{ $subammount }} tk</span></li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="your-order-info order-total">
-                                                    @if(!empty($showCart['0']->shippingMethod))
-                                                        @if (Session::has('cartcupon-'.auth()->id()))
-                                                            <ul>
-                                                                <li>Total <span>{{ ($subammount + $showCart['0']->shippingMethod->cost) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
-                                                            </ul>
-                                                        @else
-                                                            <ul>
-                                                                <li>Total <span>{{ $subammount + $showCart['0']->shippingMethod->cost}} tk </span></li>
-                                                            </ul>
-                                                        @endif
-                                                    @endif
-                                                    @if (Session::has('cartcupon-'.auth()->id()))
-                                                        <ul>
-                                                            <li>Total <span>{{ ($subammount) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
-                                                        </ul>
-                                                    @else
-                                                        <ul>
-                                                            <li>Total <span>{{ $subammount}} tk </span></li>
-                                                        </ul>
-                                                    @endif
-
-                                                </div>
-                                            @else
-                                            <div class="your-order-middle">
-                                                @foreach ($contents as $content)
-                                                    <li> Product :{{ $content->name }} <span> ({{ $content->qty }}x{{ $content->price }} )</span></li>
-                                                @endforeach
-                                                <div class="your-order-info order-subtotal">
-                                                     <ul>
-                                                        <li>Subtotal <span> {{ Cart::subtotal() }} tk</span></li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="your-order-info order-total">
-                                                    <ul>
-                                                        {{--  @php
-                                                            (float)$sum=Cart::subtotal();
-                                                        @endphp  --}}
-
-                                                        <li>Total <span>{{ Cart::subtotal() }} tk </span></li>
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-                                            @endif
-
-
-                                        </div>
-                                        <div class="payment-method">
-                                            <div class="pay-top sin-payment">
-                                                <input id="payment_method_1" class="input-radio" type="radio" value="Bkash" name="payment">
-                                                <label for="payment_method_1"> Bkash </label>
-                                                <input type="text" placeholder="Bkash Mobile No"  name="bkash_mobile">
-                                                <input type="text" placeholder="Transaction Id"  name="transaction">
-                                                {{--  <div class="payment-box">
-                                                    <input type="text" placeholder="Bkash Mobile No"  name="bkash_mobile">
-                                                    <br>
-                                                 </div>
-                                                 <div class="payment-box ">
-                                                <input type="text" placeholder="Transaction Id"  name="transaction">
-                                                <br><br>
-                                             </div>  --}}
-                                             <br><br><br>
-
-                                            </div>
-
-
-                                            <div class="pay-top sin-payment">
-                                                <input id="payment-method-3" class="input-radio" type="radio" value="Handcash" name="payment">
-                                                <font color="red">{{ ($errors->has('payment'))?($errors->first('payment')): '' }}</font>
-                                                <label for="payment-method-3">Cash on delivery </label>
-                                                <div class="payment-box payment_method_bacs">
-                                                    {{--  <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>  --}}
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                @else
+                                <div class="your-order-middle">
+                                    @foreach ($contents as $content)
+                                        <li> Product :{{ $content->name }} <span> ({{ $content->qty }}x{{ $content->price }} )</span></li>
+                                    @endforeach
+                                    <div class="your-order-info order-subtotal">
+                                         <ul>
+                                            <li>Subtotal <span> {{ Cart::subtotal() }} tk</span></li>
+                                        </ul>
                                     </div>
-                                    <div class="Place-order">
-                                        {{--  <a href="">Place Order</a>  --}}
-                                        <input type="submit" class="btn btn btn-danger" value="Place Order">
+
+                                    <div class="your-order-info order-total">
+                                        <ul>
+                                            {{--  @php
+                                                (float)$sum=Cart::subtotal();
+                                            @endphp  --}}
+
+                                            <li>Total <span>{{ Cart::subtotal() }} tk </span></li>
+                                        </ul>
                                     </div>
+
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                                @endif
 
+
+                            </div>
+                    
+                </div>
+                        
+                 
+            
+                </div>
+                <div class="button-row d-flex mt-4">
+                  <button style="background-color:#FF2F2F; color:white;" class="btn  js-btn-prev" type="button" title="Prev">Prev</button>
+                  <input style="width: 60px;background-color:#FF2F2F; color:white;" size="4" class="btn ml-auto js-btn-next" type="button" title="Next" value="Next">
+                </div>
+              </div>
+            </div>
+
+            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">             
+              <h3 style="color:#6F50A7">Payment Info</h3> <hr>
+              <div class="form-check">
+                <input class="form-check-input cash" id="r" type="radio" name="payment" value="handcash" id="flexRadioDefault1" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                 Cash on delivery
+                
+                </label>
+              </div>
+              <br>
+              <div class="form-check">
+                <input class="form-check-input  radio_bk" id="r" type="radio" name="payment" value="Bkash" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Bkash Payment
+
+                  <div>
+                <input   id="bkash"  name="bkash_mobile" class="form-control mt-2" type="number" placeholder="Enter Bkash Number"/>
+               <br>
+                <input  id="bkashs"  name="transaction" class="form-control" type="text" placeholder="Enter Transaction ID"/>
+                </label>
+              </div>
+
+              </div>
+              <div class="button-row d-flex mt-3 mb-5">
+                <button style="background-color:#FF2F2F; color:white;" class="btn  js-btn-prev" type="button" title="Prev">Prev</button>
+                <input style="width: 60px;background-color:#FF2F2F; color:white;"  class="btn  ml-auto js-btn-next" type="button" title="send" value="Next">
+              </div>                
+            </div>
+
+         
+            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+              <h3 style="color:#6F50A7" class="multisteps-form__title">Additional Message</h3>
+              <div class="multisteps-form__content">
+                <div class="form-row mt-4">
+                  <textarea class="multisteps-form__textarea form-control" placeholder="Notes about your order, e.g. special notes for delivery. " name="notes"></textarea>
+                </div>
+                <div class="button-row d-flex mt-4">
+                  <button style="background-color:#FF2F2F; color:white;" class="btn  js-btn-prev" type="button" title="Prev">Prev</button>
+                  <button style="background-color:#FF2F2F; color:white;"   class="btn  ml-auto" type="submit" title="Send">Confirm Order</button>
+                </div>
+              </div>
             </div>
         </div>
-@endsection
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
+
+
+<script>
+$('#bkash').hide();
+$('#bkashs').hide();
+
+
+$('.radio_bk').on("change", function() {
+$('#bkash').show();
+$('#bkashs').show();
+alert("Please Input carefully your bkash number and TrX Id!! It can not be empty");
+});
+
+$('.cash').on("change", function() {
+$('#bkash').hide();
+$('#bkashs').hide();
+});
+
+
+
+
+const DOMstrings = {
+  
+  stepsBtnClass: 'multisteps-form__progress-btn',
+  stepsBtns: document.querySelectorAll(`.multisteps-form__progress-btn`),
+  stepsBar: document.querySelector('.multisteps-form__progress'),
+  stepsForm: document.querySelector('.multisteps-form__form'),
+  stepsFormTextareas: document.querySelectorAll('.multisteps-form__textarea'),
+  stepFormPanelClass: 'multisteps-form__panel',
+  stepFormPanels: document.querySelectorAll('.multisteps-form__panel'),
+  stepPrevBtnClass: 'js-btn-prev',
+  stepNextBtnClass: 'js-btn-next' };
+
+
+const removeClasses = (elemSet, className) => {
+
+  elemSet.forEach(elem => {
+
+    elem.classList.remove(className);
+
+  });
+
+};
+
+const findParent = (elem, parentClass) => {
+
+  let currentNode = elem;
+
+  while (!currentNode.classList.contains(parentClass)) {
+    currentNode = currentNode.parentNode;
+  }
+
+  return currentNode;
+
+};
+
+const getActiveStep = elem => {
+  return Array.from(DOMstrings.stepsBtns).indexOf(elem);
+};
+
+const setActiveStep = activeStepNum => {
+
+  removeClasses(DOMstrings.stepsBtns, 'js-active');
+
+  DOMstrings.stepsBtns.forEach((elem, index) => {
+
+    if (index <= activeStepNum) {
+      elem.classList.add('js-active');
+    }
+
+  });
+};
+
+const getActivePanel = () => {
+
+  let activePanel;
+
+  DOMstrings.stepFormPanels.forEach(elem => {
+
+    if (elem.classList.contains('js-active')) {
+
+      activePanel = elem;
+
+    }
+
+  });
+
+  return activePanel;
+
+};
+
+const setActivePanel = activePanelNum => {
+
+  removeClasses(DOMstrings.stepFormPanels, 'js-active');
+
+  DOMstrings.stepFormPanels.forEach((elem, index) => {
+    if (index === activePanelNum) {
+
+      elem.classList.add('js-active');
+
+      setFormHeight(elem);
+
+    }
+  });
+
+};
+
+const formHeight = activePanel => {
+
+  const activePanelHeight = activePanel.offsetHeight;
+
+  DOMstrings.stepsForm.style.height = `${activePanelHeight}px`;
+
+};
+
+const setFormHeight = () => {
+  const activePanel = getActivePanel();
+
+  formHeight(activePanel);
+};
+
+DOMstrings.stepsBar.addEventListener('click', e => {
+
+  const eventTarget = e.target;
+
+  if (!eventTarget.classList.contains(`${DOMstrings.stepsBtnClass}`)) {
+    return;
+  }
+  if($('#city').val()=="" ||$('#add').val()==""||$('#phone').val()==""||$('#name').val()==""||$('#phn').val()==""){
+      addCaseValidation();
+}else{
+
+  const activeStep = getActiveStep(eventTarget);
+
+  setActiveStep(activeStep);
+
+  setActivePanel(activeStep);
+}
+});
+
+DOMstrings.stepsForm.addEventListener('click', e => {
+  const eventTarget = e.target;
+
+  if (!(eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`) || eventTarget.classList.contains(`${DOMstrings.stepNextBtnClass}`)))
+  {
+ 
+
+    return;
+
+  }
+
+  const activePanel = findParent(eventTarget, `${DOMstrings.stepFormPanelClass}`);
+
+  let activePanelNum = Array.from(DOMstrings.stepFormPanels).indexOf(activePanel);
+
+  if (eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`)) {
+    activePanelNum--;
+    $('#eadd').hide();
+    $('#ename').hide(); $('#ephn').hide(); $('#er').hide(); $('#ec').hide();
+  } else {
+  
+    if($('#city').val()=="" ||$('#add').val()==""||$('#phone').val()==""||$('#name').val()==""||$('#phn').val()==""){
+      addCaseValidation();
+
+}
+else{ 
+  activePanelNum++;
+
+}
+  }
+
+  setActiveStep(activePanelNum);
+  setActivePanel(activePanelNum);
+
+
+});
+
+window.addEventListener('load', setFormHeight, false);
+
+window.addEventListener('resize', setFormHeight, false);
+
+
+const setAnimationType = newType => {
+  DOMstrings.stepFormPanels.forEach(elem => {
+    elem.dataset.animation = newType;
+  });
+};
+
+//changing animation
+const animationSelect = document.querySelector('.pick-animation__select');
+
+animationSelect.addEventListener('change', () => {
+  const newAnimationType = animationSelect.value;
+
+  setAnimationType(newAnimationType);
+});
+
+function getElement(id){
+    return document.getElementById(id);
+}
+function addCaseValidation(){
+    refreshCase();
+    var hasError=false;
+    var name=getElement("name");
+    var ename=getElement("ename");    
+    var phn=getElement("phn");
+    var ephn=getElement("ephn");    
+    var add=getElement("add");
+    var eadd=getElement("eadd");   
+    var rphn=getElement("phone");
+    var erphn=getElement("er");   
+    var c=getElement("city");
+    var ec=getElement("ec");   
+    
+    
+    if(name.value==""){
+        hasError=true;
+        ename.innerHTML="* name required.";
+        name.focus();
+        ename.border="2px solid red";
+    }
+    if(phn.value==""){
+        hasError=true;
+        ephn.innerHTML="* phone number required.";
+        phn.focus();
+        ephn.border="2px solid red";
+    }
+    if(add.value==""){
+        hasError=true;
+        eadd.innerHTML="* address required.";
+        add.focus();
+        eadd.border="2px solid red";
+    }
+
+    if(rphn.value==""){
+        hasError=true;
+        erphn.innerHTML="* receiver phone required.";
+        rphn.focus();
+        erphn.border="2px solid red";
+    }
+
+    if(c.value==""){
+        hasError=true;
+        ec.innerHTML="* city required.";
+        c.focus();
+        ec.border="2px solid red";
+    }
+   
+    
+    return !hasError;
+}
+function refreshCase(){
+    var name=getElement("name");
+    name.style.border="2px solid #6f50a7";
+    var ename=getElement("ename");
+    ename.innerHTML="";
+
+    var phn=getElement("phn");
+    phn.style.border="2px solid #6f50a7";
+    var ephn=getElement("ephn");
+    ephn.innerHTML="";
+    
+    var add=getElement("add");
+    add.style.border="2px solid #6f50a7";
+    var eadd=getElement("eadd");
+    eadd.innerHTML="";
+
+    var rphn=getElement("phone");
+    rphn.style.border="2px solid #6f50a7";
+    var erphn=getElement("er");
+    erphn.innerHTML="";
+
+    var ci=getElement("city");
+    ci.style.border="2px solid #6f50a7";
+    var eci=getElement("ec");
+    eci.innerHTML="";    
+    
+}
+</script>
+
+@endsection

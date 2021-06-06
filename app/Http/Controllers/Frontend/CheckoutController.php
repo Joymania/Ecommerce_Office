@@ -47,14 +47,7 @@ class CheckoutController extends Controller
 }
 
     public function store(Request $request){
-        $this->validate($request,[
-            'name'=>'required',
-            'address'=>'required',
-            'city'=>'required',
-            'phone'=>'required',
-            'email'=>'required',
-            'payment'=>'required'
-        ]);
+        // dd($request->all());
 
         //  unique order code
         // function generateRandomString($length = 25) {
@@ -124,9 +117,8 @@ class CheckoutController extends Controller
         'shipping_method_id'=> $cartsubtotal['0']->shippingMethod ? $cartsubtotal['0']->shippingMethod->id : null,
         'transaction'=>$request->transaction,
         'bkash_mobile'=>$request->bkash_mobile,
-                   'date'=>$dateToday,
-
-           'order_code' => $order_code
+        'date'=>$dateToday,
+        'order_code' => $order_code
        ]);
        if(Auth::user()){
         $idauth=Auth::id();
