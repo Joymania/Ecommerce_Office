@@ -9,7 +9,6 @@
             margin: auto;
             text-align: center;
         }
-
     </style>
 
     <!-- Offered/flash deal products -->
@@ -125,7 +124,7 @@
                                     </div>
                                     <div class="pro-add-to-cart-2">
                                         <a href="{{route('product.details',['id' => $product->id])}}">
-                                            <button title="Add to Cart">Add To Cart</button>
+                                            <button  class="addToCart" title="Add to Cart">Add To Cart</button>
                                         </a>
                                     </div>
                                 </div>
@@ -198,7 +197,7 @@
                                 <div class="product-slider-active-5">
 
                                     @foreach($cat->product as $product)
-                                    <input type="hidden" name="pro_id" value="{{$product->id}}">
+                                    <input type="hidden" name="pro_id" id="product_id" value="{{$product->id}}">
                                         <div class="product-plr-1">
                                             <div class="single-product-wrap">
                                                 <div class="product-img product-img-zoom mb-15">
@@ -304,7 +303,7 @@
                                                     </div>
                                                     <div class="pro-add-to-cart-2">
                                                         <a href="{{route('product.details',['id' => $product->id])}}">
-                                                            <button title="Add to Cart">Add To Cart</button>
+                                                            <button data-id={{$product->id}} class="addToCart" title="Add to Cart">Add To Cart</button>
                                                         </a>
 
                                                     </div>
@@ -454,7 +453,7 @@
                                 </div>
                                 <div class="pro-details-action-wrap">
                                     <div class="pro-details-add-to-cart">
-                                        <a title="Add to Cart" href="#">Add To Cart </a>
+                                        <a class="addToCart" title="Add to Cart" href="#">Add To Cart </a>
                                     </div>
                                     <div class="pro-details-action">
                                         <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>
@@ -480,14 +479,14 @@
         </div>
     </div>
     <!-- Modal end -->
-
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+</script> --}}
 
     <script>
         $('.input-2').rating({displayOnly: true, step: 0.1});
     </script>
-    <script>
 
-    </script>
 
 @endsection
 
@@ -498,4 +497,48 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script>
+        $(document).ready(function(){
+            toastr.options = {
+            "closeButton": true,
+            "newestOnTop": true,
+            "positionClass": "toast-top-right"
+            };
+
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $(document).on('click', '.addToCart', function(e){
+            //e.preventDefault();
+
+            var url="{{url('add-to-cart')}}";
+            var id =$(this).attr('data-id');
+
+            $.ajax({
+                method:'POST',
+                url:url,
+                data:{id:id},
+               success: function(data){
+                    console.log(data.minicart);
+                    toastr.success(data.success);
+                    $("#minicart").html(data.minicart);
+               },
+               error: function(error){
+                   console.log(error);
+               }
+            })
+            e.preventDefault();
+
+            });
+
+        });
+
+
+    </script>
+
 @endsection
