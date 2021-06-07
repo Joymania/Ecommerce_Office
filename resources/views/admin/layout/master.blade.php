@@ -269,6 +269,7 @@
             </div>
 
         </div>
+        @stack('name')
 
         <!-- Scripts -->
         @stack('before-scripts')
@@ -552,8 +553,8 @@
             <script src="{{ asset('assets/vendor/jvectormap/jquery-jvectormap-uk-mill-en.js') }}"></script>
             <script src="{{ asset('assets/vendor/jvectormap/jquery-jvectormap-au-mill.js') }}"></script>
             <script src="{{ asset('assets/js/pages/maps/jvectormap.js') }}"></script>
-        @endif
 
+        @endif
         <script src="{{ asset('assets/bundles/mainscripts.bundle.js') }}"></script>
 
         @stack('after-scripts')
@@ -563,5 +564,6 @@
                 @yield('page-script')
             </script>
 		@endif
+        
     </body>
 </html>

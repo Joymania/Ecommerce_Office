@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="col-lg-5 col-md-5 col-sm-6 pr-1">
                                             <div class="hm6-hero-slider-img slider-animated-1">
-                                                <img class="animated p-5" src="{{ asset('upload/products_images/'.$slider->image) }}" style="width: 90%" alt="">
+                                                <img class="animated p-5" src="{{ asset('upload/products_images/'.$slider->image) }}" style="width: 100%" alt="">
                                             </div>
                                         </div>
                                     </div>

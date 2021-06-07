@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Model\Admin;
 use App\Model\CartShopping;
+use App\Model\ShippingMethods;
 use App\Model\category;
 use App\Model\contacts;
 use App\Model\logo;
@@ -20,10 +21,15 @@ use Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
 Use Session;
+use Carbon\Carbon;
 
 class CheckoutController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        
+        $cart = CartShopping::where('user_id',Auth::id())->where('status','0')->update(['shipping_method_id' => $request->shipping_method]);
+        // $cart->shipping_method_id = $request->shipping_method;
+        // $cart->save();
 
         $data['users']=Auth::user();
 
@@ -41,15 +47,18 @@ class CheckoutController extends Controller
 }
 
     public function store(Request $request){
-        $this->validate($request,[
-            'name'=>'required',
-            'address'=>'required',
-            'city'=>'required',
-            'phone'=>'required',
-            'email'=>'required',
-            'payment'=>'required'
-        ]);
+        // dd($request->all());
 
+        //  unique order code
+        // function generateRandomString($length = 25) {
+        //     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        //     $charactersLength = strlen($characters);
+        //     $randomString = '';
+        //     for ($i = 0; $i < $length; $i++) {
+        //         $randomString .= $characters[rand(0, $charactersLength - 1)];
+        //     }
+        //     return $randomString;
+        // }
         $count = 0;
         $order_code = uniqid();
 
@@ -85,10 +94,14 @@ class CheckoutController extends Controller
 
                  $subtotal=$subtotal-Session::get($key)[0];
              }
+            //  add shipping cost
+             $subtotal+= $cartsubtotal['0']->shippingMethod ? $cartsubtotal['0']->shippingMethod->cost : 0;
          }
          else{
              $subtotal=Cart::subtotal();
          }
+                 $dateToday = Carbon::today()->toDateString();
+
 
        $order=Order::create([
         'user_id'=>auth()->user()? auth()->user()->id : null,
@@ -101,9 +114,11 @@ class CheckoutController extends Controller
         'biling_notes'=>$request->notes,
         'payment'=>$request->payment,
         'subtotal'=>$subtotal,
+        'shipping_method_id'=> $cartsubtotal['0']->shippingMethod ? $cartsubtotal['0']->shippingMethod->id : null,
         'transaction'=>$request->transaction,
         'bkash_mobile'=>$request->bkash_mobile,
-           'order_code' => $order_code
+        'date'=>$dateToday,
+        'order_code' => $order_code
        ]);
        if(Auth::user()){
         $idauth=Auth::id();
@@ -154,18 +169,6 @@ class CheckoutController extends Controller
     }
 
     public function track(Request $request){
-        // function generateRandomString($length = 25) {
-        //     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        //     $charactersLength = strlen($characters);
-        //     $randomString = '';
-        //     for ($i = 0; $i < $length; $i++) {
-        //         $randomString .= $characters[rand(0, $charactersLength - 1)];
-        //     }
-        //     return $randomString;
-        // }
-
-        //  unique order code
-
         /*$id=Auth::id();
         $data['cartpage']=CartShopping::with('product')->where('user_id',Auth::id())->where('status','0')->get();
         $data['orders']=Order::where('user_id',$id)->where('id',$request->order_id)->where('biling_email',$request->email)->first();

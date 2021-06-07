@@ -56,6 +56,7 @@
                         <h3 style="color:white" class="footer-title">useful links</h3>
                         <div class="footer-info-list">
                             <ul>
+
                                 <li><a style="color:white" href="{{ route('userAccount') }}">My Account</a></li>
                                 <li><a style="color:white" href="{{ route('wishlist.view') }}">My Wishlist</a></li>
                                 <li><a style="color:white" href="#">Terms & Conditions</a></li>
@@ -63,6 +64,8 @@
                                 <li><a style="color:white" href="{{ route('track.show') }}">Track Order</a></li>
                                 <li><a style="color:white" href="{{ route('search.result') }}">Shop</a></li>
                                 <li><a style="color:white" href="{{ route('about_us') }}">About Us</a></li>
+
+                             
                             </ul>
                         </div>
                     </div>
@@ -136,7 +139,34 @@
             </div>
         </div>
     </div>
+
+    {{--Modal Starts here--}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content m-auto" id="modal-content" style="width: 100%">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Track Your Order</h5>
+                </div>
+                <div class="modal-body m-0" style="margin-top: -10% !important;">
+                    <label for="order_code"></label>
+                    <input type="text" class="form-control" name="order_code" id="order_code" placeholder="Give your order code!!" autocomplete="off">
+                    <button type="button" id="tracking-button" class="btn btn-primary mt-2">Track Order</button>
+
+                    <div style="background: #FFF3CD" id="status" hidden>
+                        <h4 class="text-center mt-2" id="status-text" style="padding: 10px 0"></h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--Modal ends here--}}
 </footer>
+
+</div>
+
 
 <!-- All JS is here
 ============================================ -->
@@ -172,7 +202,27 @@
 <script src="{{""}}/js/search.js"></script>
 <script src="{{asset('js/search.js')}}"></script>
 <script src="{{asset('js/order_tracking.js')}}"></script>
+<script src="{{asset('js/home.js')}}"></script>
+<script !src="">
+    $(document).ready(function(){
+        $('#trackYourOrderBtn').on('click',function () {
+            $('#modal-content').css('width','50%');
+        });
 
+        $('#mobileViewOrderTrackingBtn').on('click',function () {
+                $('#modal-content').css('width','100%');
+                document.getElementById('sidebar-close').click();
+        })
+
+        $('#footerOrderTrackingBtn').on('click',function () {
+            if(window.matchMedia("(max-width: 767px)").matches){
+                $('#modal-content').css('width','100%');
+            }else{
+                $('#modal-content').css('width','45%');
+            }
+        });
+    });
+</script>
 @yield('scripts')
 </body>
 

@@ -6,6 +6,14 @@
             <div class="row">
                 <div class="col-lg-7 col-md-12 ml-auto mr-auto">
                     <div class="login-register-wrapper">
+                        @if(session()->has('error_message'))
+                            <div class="alert not_hide alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('error_message') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <div class="login-register-tab-list nav">
                             <h3>Reset Password</h3>
                         </div>
@@ -14,14 +22,14 @@
                                 <div class="login-form-container">
                                     <div class="login-register-form">
 
-                                        <form  method="post" action="{{ route('password.update') }}" >
+                                        <form  method="post" action="{{ route('reset.password') }}" >
                                             @csrf
 
-                                            <input type="hidden" name="token" value="{{ $token }}">
+                                            <input type="hidden" name="token" value="password_reset">
 
-                                            <input name="email" placeholder="Email" type="email" class=" @error('email') is-invalid @enderror" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                            <input name="phone" placeholder="Mobile No." type="number" class=" @error('phone') is-invalid @enderror" value="{{ $phone ?? old('phone') }}" required autocomplete="phone" autofocus>
 
-                                            @error('email')
+                                            @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
