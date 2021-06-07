@@ -14,10 +14,10 @@
 
         </div>
     </div>
-    <div class="product-details-area pt-120 pb-115">
+    <div class="product-details-area pt-40 pb-40">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-5">
+                <div class="col-lg-4 col-md-3">
                     <div class="product-details-tab">
                         <div class="pro-dec-big-img-slider text-center">
                            {{-- <div class="easyzoom-style">
@@ -164,7 +164,7 @@
                             <div class="pro-details-add-to-cart">
                                 {{-- <a href="{{ route('insert.cart') }}">Add To Cart </a> --}}
                                 {{--<input id="submitBtn" type="submit" value="Add To Cart">--}}
-                                <input id="submitBtn" type="submit" value="Add To Cart"></a>
+                                <input class="btn btn-danger" id="submitBtn" type="submit" value="Add To Cart"></a>
                             </div>
 
                             <div class="pro-details-action">

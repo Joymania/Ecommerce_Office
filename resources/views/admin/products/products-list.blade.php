@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="row clearfix">
+    <div class="row clearfix border">
 
         <div class="col-lg-12 col-md-12">
             <div class="card planned_task">
@@ -30,7 +30,7 @@
                                 <div class="body">
                                     <a class=" btn btn-primary m-b-15" href="{{route('products.create')}}"><i class="fa fa-plus-circle"></i> Add Product</a>
                                     <div class="table-responsive">
-                                        <table id="myTable" class="table table-bordered table-hover table-striped js-basic-example dataTable table-custom">
+                                        <table  id="myTable" class="table table-hover js-basic-example dataTable table-custom">
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -85,12 +85,12 @@
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Basic example">
                                                         <a href="{{route('product.edit',$product->id)}}" class="editLink" data-toggle="tooltip" title="Edit Product!">
-                                                            <button class="btn btn-sm btn-icon btn-pure btn-default on-default m-r-5 button-edit editBtn"><i class="icon-pencil" aria-hidden="true"></i></button>
+                                                            <button class="btn btn-success btn-sm btn-icon  on-default m-r-5 button-edit editBtn"><i class="icon-pencil" aria-hidden="true"></i></button>
                                                         </a>
                                                         <form action="{{route('product.destroy',$product->id)}}" class="deleteForm" onsubmit="return confirm('Are you sure want to delete this product?')" method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-sm btn-icon btn-pure btn-default on-default button-remove deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-trash" aria-hidden="true"></i></button>
+                                                            <button class="btn btn-danger btn-sm btn-icon on-default button-remove deleteBtn" type="submit" data-toggle="tooltip" title="Delete product!"><i class="icon-trash" aria-hidden="true"></i></button>
                                                         </form>
                                                         </div>
                                                     </td>
