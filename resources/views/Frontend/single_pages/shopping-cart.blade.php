@@ -174,8 +174,8 @@
                                         @csrf
                                         <div>
 
-                                            <div  class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qty"
+                                            <div data-cartid="{{ $show->id }}"  class="cart-plus-minus">
+                                                <input  class="cart-plus-minus-box qtyauth" type="text" name="qty"
                                                     value="{{ $show->qty }}">
                                             </div>
                                             {{-- //<input type="hidden" name="id" value="{{ $show->id }}"> --}}
@@ -187,14 +187,14 @@
 
 
                                 </td>
-                                {{-- <td class="product-subtotal">{{ $show['subtotal'] }}</td> --}}
-                                <td class="product-subtotal">
+                                <td id="subtotal" class="product-subtotal subtotal-auth">{{ $show['subtotal'] }}</td>
+                                {{-- <td class="product-subtotal">
                                     @if ($show['product']['promo_price'])
                                     <span class="amount">{{ $show['product']['promo_price'] * $show->qty }}</span>
                                     @else
                                     <span class="amount">{{ $show['product']['price'] * $show->qty}}</span>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td class="product-remove">
                                     <a href="{{ route('delete.authcart',$show['id']) }}"><i class="icon_close"></i></a>
 
@@ -391,20 +391,74 @@
         var abc={{Auth::id()}}
         console.log(abc==undefined);
         if(abc != undefined){
+            $(document).on('click', '.inc', function(e){
+
+                var url="{{url('update-cart')}}";
+                var parent=$(this).parent();
+                console.log(parent);
+                var subtotal1 = $(parent).parent().parent().parent().next();
+                console.log(subtotal1);
+                var product_price = $(parent).parent().parent().parent().prev().text();
+                console.log(product_price);
+                var cartid=$(parent).attr('data-cartid');
+                var qty=$(parent).find('.qtyauth').val();
+                $.ajax({
+                method:'post',
+                url:url,
+                data:{qty:qty,id:cartid},
+                success: function(data){
+                //console.log(data);
+                //$('.subtotal-auth').text(data.total);
+                $(subtotal1).text(parseInt(qty) * parseInt(product_price));
+
+                },
+                error: function(error){
+                console.log(error);
+                }
+                })
+
+
+            });
+            $(document).on('click', '.dec', function(e){
+
+            var url="{{url('update-cart')}}";
+            var parent=$(this).parent();
+            console.log(parent);
+            var subtotal1 = $(parent).parent().parent().parent().next();
+            console.log(subtotal1);
+            var product_price = $(parent).parent().parent().parent().prev().text();
+            console.log(product_price);
+            var cartid=$(parent).attr('data-cartid');
+            var qty=$(parent).find('.qtyauth').val();
+            $.ajax({
+            method:'post',
+            url:url,
+            data:{qty:qty,id:cartid},
+            success: function(data){
+            ////console.log(data);
+            //$('.subtotal-auth').text(data.total);
+            $(subtotal1).text(parseInt(qty) * parseInt(product_price));
+
+            },
+            error: function(error){
+            console.log(error);
+            }
+            })
+
+
+            });
 
         }
         else{
             $(document).on('click', '.inc', function(e){
             var url="{{url('update-cart')}}";
-
             var subtotal = $(this).parent();
+            console.log(subtotal)
             var subtotal1 = $(subtotal).parent().next();
+            console.log(subtotal1)
             var rowId = $(subtotal).attr('data-id');
             var product_price = $(subtotal).parent().prev().text();
             var qty=$(subtotal).find('.qtyfield').val();
-
-
-
             $.ajax({
             method:'post',
             url:url,

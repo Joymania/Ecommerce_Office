@@ -258,7 +258,7 @@ class CartController extends Controller
     if($request->rowId){
          Cart::update($request->rowId, $request->qty);
             return response()->json([
-                'total' => Cart::subtotal() ,
+                'total' => Cart::subtotal(),
             ]);
     }
 

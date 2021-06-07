@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use App\User;
+use Illuminate\Support\Facades\Validator;
 use Nexmo\Laravel\Facade\Nexmo;
   
 class VonageSmsController extends Controller
@@ -19,20 +20,27 @@ class VonageSmsController extends Controller
      */
     public function send(Request $request)
     {
-            $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
+        $validator = Validator::make($request->all(), [
+        'name' => ['required', 'string', 'max:255'],
+        'phone' => ['required','digits:11', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        if($validator->fails()){
+            return response([
+                'error' => ['message' => 'Validation error!',
+                            'name' => $validator->errors()->get('name'),
+                            'phone' => $validator->errors()->get('phone'),
+                            'password' => $validator->errors()->get('password')]
+            ], 422);
+        }
             
         try{
             $code = (string)rand(10000,99999);
             $phone = "+88".$request->phone;
             Cache::add($code, $phone, 120);  //cache for 2 minutes
-            // dd($code);
-            
-            /****  temporarily stop sending sms ******/
+
+            /****  temporarily stop sending sms
+            please uncomment below ******/
 
             // $nexmo = app('Nexmo\Client');
 
@@ -48,39 +56,35 @@ class VonageSmsController extends Controller
                 'password' => $request->password,
                 'password_confirmation' => $request->password_confirmation
             ]]);
-            
 
         } catch(Exception $e){
             $message = 'Error sending verification code. Please try again.';
-            return redirect()->back()->with(['message' => $message]);
+            return response()->json([ 'error' => [ 'sending_error' => $message]], 500);
         }
-        // code sent successful
+
         //  get the code without sending sms
+        // please remove the $code below $message
         $message = 'Verification code has been sent to your number. Please verifiy.'. $code;
 
-        return redirect()->route('verify.form')->with(['message' => $message]);
+        return response()->json(['response' => ['code_sent' => $message]], 200);
     }
-
-    public function verifyForm()
-    {
-        return view('auth.verify-otp');
-    }
-
 
     public function verifyOtp(Request $request)
     {
+
         try{
             $phone = Cache::get($request->code);
             if($phone == null){
                 $error_message = "Verification code does not match or expired!";
-                return redirect()->back()->with(['error_message' => $error_message]);
+                return response()->json([ 'error' => [ 'code_invalid' => $error_message,
+                ]], 422);
             }
 
-            $user = Session::get($phone);
-           
+            $user = Session::pull($phone);
+
         } catch(Exception $e){
             $error_message = "Verification code does not match or expired!";
-            return redirect()->back()->with(['error_message' => $error_message]);
+            return response()->json([ 'error' => [ 'code_invalid' => $error_message,]], 422);
         }
 
         try{
@@ -91,10 +95,14 @@ class VonageSmsController extends Controller
             $new_user->password = bcrypt( $user['password'] );
             $new_user->save();
 
-            return redirect()->route('login')->with(['reg_successful' => 'You have successfully registered.Please Login.']);
+            $reg_successful = 'You have successfully registered.Please Login';
+            return response()->json(['response' => ['reg_successful' => $reg_successful]], 200);
 
         } catch(Exception $e){
-            return redirect()->route('register')->with(['reg_error' => 'Registration Error.Please try agian.']);
+            // return redirect()->route('register')->with(['reg_error' => 'Registration Error.Please try agian.']);
+            $reg_error = 'Registration Error.Please try agian.';
+            return response()->json([ 'error' => ['reg_error' => $reg_error]], 500);
+
         }
        
 
@@ -102,16 +110,16 @@ class VonageSmsController extends Controller
 
     // ===========================================================================================
 
-    public function forgotPasswordForm()
-    {
-        return view('auth.passwords.forgot-password');
-    }
-
     public function sendOtpForgotPass(Request $request)
     {
-        $this->validate($request, [ 
-            'phone' => ['required', 'digits:11'],
+        $validator = Validator::make($request->all(), [
+            'phone' => ['required', 'digits:11']
         ]);
+        if($validator->fails()){
+            return response(['error' => ['message' => 'Validation error!',
+                            'phone' => $validator->errors()->get('phone')]
+            ], 422);
+        }
 
         $user = User::where('phone', $request->phone)->first();
 
@@ -121,7 +129,8 @@ class VonageSmsController extends Controller
                 $phone = "+88".$request->phone;
                 Cache::add($code, $phone, 120);  //cache for 2 minutes
 
-                /****  temporarily stop sending sms ******/
+                /****  temporarily stop sending sms
+                please uncomment below ******/
 
                 // $nexmo = app('Nexmo\Client');
 
@@ -135,25 +144,21 @@ class VonageSmsController extends Controller
                 
             } catch(Exception $e){
                 $message = 'Error sending verification code. Please try again.';
-                return redirect()->back()->with(['message' => $message]);
+                return response([ 'error' => ['sending_error' => $message]], 500);
             }
 
-            // code sent successful
             // get the code without sending sms
+            // please remove the $code below $message
             $message = 'Verification code has been sent to your number. Please verifiy.'. $code;
 
-            return redirect()->route('verify.form.forgot.pass')->with(['message' => $message]);
+            return response()->json(['response' => ['code_sent' => $message]], 200);
             
         }
         // if phone num is not found
         else {
             $message = 'Mobile number is not found!';
-            return redirect()->back()->with(['error_message' => $message]);
+            return response( ['error' => ['phone_invalid' => $message]], 422);
         }
-    }
-
-    public function verifyFormForgotPass(){
-        return view('auth.passwords.verify-otp');
     }
 
     public function verifyOtpForgotPass(Request $request)
@@ -162,35 +167,45 @@ class VonageSmsController extends Controller
             $phone = Cache::get($request->code);
             if($phone == null){
                 $error_message = "Verification code does not match or expired!";
-                return redirect()->back()->with(['error_message' => $error_message]);
+                return response()->json([ 'error' => [ 'code_invalid' => $error_message,
+                ]], 422);
             }
 
             $phone = Session::get($phone);
            
         } catch(Exception $e){
             $error_message = "Verification code does not match or expired!";
-            return redirect()->back()->with(['error_message' => $error_message]);
+            return response()->json([ 'error' => [ 'code_invalid' => $error_message,]], 422);
         }
 
-        return view('auth.passwords.reset', compact('phone'));
+        return response()->json(['response' => ['phone' => $phone]], 200);
     }
 
     public function resetPassword(Request $request){
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'phone' => ['required', 'digits:11'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:8', 'confirmed'],
         ]);
         
+        if($validator->fails()){
+            return response(['error' => 
+                ['message' => 'Validation error!',
+                'password' => $validator->errors()->get('password'),
+                'phone' => $validator->errors()->get('phone'),
+                'all' => $request->all()
+            ]], 422);
+        }
+
         $user = User::where('phone', $request->phone)->first();
         
         if($user){
             $user->password = bcrypt($request->password);
             $user->save();
-            return redirect()->route('login')->with(['reset_successful' => 'Your password reset done! Please Login.']);
+            return response()->json([ 'response' => ['reset_successful' => 'Your password reset done! Please Login.']], 201);
 
         } else{
             $message = 'Mobile number is not found!';
-            return redirect()->back()->with(['error_message' => $message]);
+            return response( ['error' => ['phone_invalid' => $message]], 422);
         }
 
     }
