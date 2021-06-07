@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/jquery-ui.css">
     <link rel="stylesheet" href="{{""}}/assets/css/style.css">
     @yield('stylesheet')
-    
+
 
 
 
@@ -380,7 +380,7 @@
         <!-- Header start end-->
 
         <!-- mini cart start -->
-        <div class="sidebar-cart-active">
+        <div id="minicart" class="sidebar-cart-active">
             <div class="sidebar-cart-all">
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
@@ -437,7 +437,7 @@
                                     <a href="#"><img src="{{ asset('upload/products_images/'.$content->options->image) }}" alt=""></a>
                                 </div>
                                 <div class="cart-title">
-                                    <h4><a href="#">{{ $content->name }}</a></h4>
+                                    <h4><a href="{{route('product.details',['id' => $content->id])}}">{{ $content->name }}</a></h4>
                                     <span> {{ $content->qty }} × {{ $content->price }} tk	</span>
                                 </div>
                                 <div class="cart-delete">

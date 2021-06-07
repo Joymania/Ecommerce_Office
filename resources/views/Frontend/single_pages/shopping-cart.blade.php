@@ -46,7 +46,7 @@
                         if($cart->product->promo_price){
                             $subtotal = $cart->product->promo_price * $cart->qty;
                         }
-                        else  
+                        else
                             $subtotal = $cart->product->price * $cart->qty;
                         $total+=$subtotal;
                     @endphp
@@ -70,7 +70,7 @@
 
                         <div class="cart-title">
                             <h4><a href="#">{{ $content->name }}</a></h4>
-                            <span> {{ $content->qty }} × {{ $content->price }} tk </span>                
+                            <span> {{ $content->qty }} × {{ $content->price }} tk </span>
                             <div class="cart-delete">
                                 <a href="{{ route('delete.cart',$content->rowId) }}">×</a>
                             </div>
@@ -150,7 +150,7 @@
                                             src="{{ asset('upload/products_images/'.$show['product']['image']) }}"
                                             width="80px" height="100px" alt=""></a>
                                 </td>
-                                <td class="product-name"><a href="#">{{ $show['product']['name'] }}</a></td>
+                                <td class="product-name"><a href="{{route('product.details',['id' => $show->product_id])}}">{{ $show['product']['name'] }}</a></td>
                                 @if(!empty($show['color']))
                                 <td class="product-color">{{$show['color']['name']}}</td>
                                 @else <td> </td>
@@ -174,14 +174,12 @@
                                         @csrf
                                         <div>
 
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qty"
+                                            <div data-cartid="{{ $show->id }}"  class="cart-plus-minus">
+                                                <input  class="cart-plus-minus-box qtyauth" type="text" name="qty"
                                                     value="{{ $show->qty }}">
                                             </div>
-                                            <input type="hidden" name="id" value="{{ $show->id }}">
-                                            <div class="float-center ">
-                                                <input type="submit" value="Update" class="">
-                                            </div>
+                                            {{-- //<input type="hidden" name="id" value="{{ $show->id }}"> --}}
+
                                         </div>
 
 
@@ -189,14 +187,14 @@
 
 
                                 </td>
-                                {{-- <td class="product-subtotal">{{ $show['subtotal'] }}</td> --}}
-                                <td class="product-subtotal">
+                                <td id="subtotal" class="product-subtotal subtotal-auth">{{ $show['subtotal'] }}</td>
+                                {{-- <td class="product-subtotal">
                                     @if ($show['product']['promo_price'])
                                     <span class="amount">{{ $show['product']['promo_price'] * $show->qty }}</span>
                                     @else
                                     <span class="amount">{{ $show['product']['price'] * $show->qty}}</span>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td class="product-remove">
                                     <a href="{{ route('delete.authcart',$show['id']) }}"><i class="icon_close"></i></a>
 
@@ -238,33 +236,32 @@
                                             src="{{ asset('upload/products_images/'.$content->options->image) }}"
                                             width="80px" height="100px" alt=""></a>
                                 </td>
-                                <td class="product-name"><a href="#">{{ $content->name }}</a></td>
+                                <td class="product-name"><a href="{{route('product.details',['id' => $content->id])}}">{{ $content->name }}</a></td>
                                 <td class="product-color"><a href="#">{{ $content->options->color_name }}</a></td>
                                 <td class="product-size"><a href="#">{{ $content->options->size_name }}</a></td>
                                 <td class="product-price-cart"><span class="amount">{{ $content->price }}</span></td>
                                 <td class="product-quantity pro-details-quality">
 
-                                    <form method="post" action="{{ route('update.cart') }}">
+                                    {{-- <form method="post" action="{{ route('update.cart') }}">
                                         @csrf
-                                        <div>
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qty"
+                                        <div> --}}
+                                            <div data-id="{{ $content->rowId }}" id="qtyUpdate" class="cart-plus-minus">
+                                                <input id="qtyfield" class="cart-plus-minus-box qtyfield" type="text" name="qty"
                                                     value="{{ $content->qty }}">
+                                                    {{-- //<input class='rowId' type="" name="rowId" value="{{ $content->rowId }}"> --}}
                                             </div>
-                                            <input type="hidden" name="rowId" value="{{ $content->rowId }}">
-                                            <div class="float-center">
+
+                                            {{-- <div class="float-center">
                                                 <input type="submit" value="Update" class="cart">
+                                            </div> --}}
+                                        {{-- </div>
 
 
-                                            </div>
-                                        </div>
-
-
-                                    </form>
+                                    </form> --}}
 
 
                                 </td>
-                                <td class="product-subtotal">{{ $content->subtotal }}</td>
+                                <td id="subtotal" class="product-subtotal">{{ $content->subtotal }}</td>
                                 <td class="product-remove">
                                     <a href="{{ route('delete.cart',$content->rowId) }}"><i class="icon_close"></i></a>
 
@@ -336,7 +333,7 @@
                             if($cart->product->promo_price){
                                 $subtotal = $cart->product->promo_price * $cart->qty;
                             }
-                            else  
+                            else
                                 $subtotal = $cart->product->price * $cart->qty;
                             $subammount+=$subtotal;
                         }
@@ -349,7 +346,7 @@
 
 
                 @endif
-                
+
                 <form action="{{route('checkout')}}" method="post" id="form">
                     @csrf
                     <div class="total-shipping">
@@ -363,10 +360,10 @@
                                     </level>
                                 </li>
                             @endforeach
-                            @else   
-                            <li><input type="radio" name="check" checked> Standard Shipping <span>0.00</span></li> 
-                            @endif                   
-                            {{--  <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>  --}}                     
+                            @else
+                            <li><input type="radio" name="check" checked> Standard Shipping <span>0.00</span></li>
+                            @endif
+                            {{--  <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>  --}}
                         </ul>
                     </div>
 
@@ -382,5 +379,128 @@
 </div>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+
+        var abc={{Auth::id()}}
+        console.log(abc==undefined);
+        if(abc != undefined){
+            $(document).on('click', '.inc', function(e){
+
+                var url="{{url('update-cart')}}";
+                var parent=$(this).parent();
+                console.log(parent);
+                var subtotal1 = $(parent).parent().parent().parent().next();
+                console.log(subtotal1);
+                var product_price = $(parent).parent().parent().parent().prev().text();
+                console.log(product_price);
+                var cartid=$(parent).attr('data-cartid');
+                var qty=$(parent).find('.qtyauth').val();
+                $.ajax({
+                method:'post',
+                url:url,
+                data:{qty:qty,id:cartid},
+                success: function(data){
+                //console.log(data);
+                //$('.subtotal-auth').text(data.total);
+                $(subtotal1).text(parseInt(qty) * parseInt(product_price));
+
+                },
+                error: function(error){
+                console.log(error);
+                }
+                })
+
+
+            });
+            $(document).on('click', '.dec', function(e){
+
+            var url="{{url('update-cart')}}";
+            var parent=$(this).parent();
+            console.log(parent);
+            var subtotal1 = $(parent).parent().parent().parent().next();
+            console.log(subtotal1);
+            var product_price = $(parent).parent().parent().parent().prev().text();
+            console.log(product_price);
+            var cartid=$(parent).attr('data-cartid');
+            var qty=$(parent).find('.qtyauth').val();
+            $.ajax({
+            method:'post',
+            url:url,
+            data:{qty:qty,id:cartid},
+            success: function(data){
+            ////console.log(data);
+            //$('.subtotal-auth').text(data.total);
+            $(subtotal1).text(parseInt(qty) * parseInt(product_price));
+
+            },
+            error: function(error){
+            console.log(error);
+            }
+            })
+
+
+            });
+
+        }
+        else{
+            $(document).on('click', '.inc', function(e){
+            var url="{{url('update-cart')}}";
+            var subtotal = $(this).parent();
+            console.log(subtotal)
+            var subtotal1 = $(subtotal).parent().next();
+            console.log(subtotal1)
+            var rowId = $(subtotal).attr('data-id');
+            var product_price = $(subtotal).parent().prev().text();
+            var qty=$(subtotal).find('.qtyfield').val();
+            $.ajax({
+            method:'post',
+            url:url,
+            data:{qty:qty,rowId:rowId},
+            success: function(data){
+                //console.log(data);
+                $(subtotal1).text(parseInt(qty) * parseInt(product_price));
+            },
+            error: function(error){
+            console.log(error);
+            }
+            })
+        });
+        $(document).on('click', '.dec', function(e){
+        var url="{{url('update-cart')}}";
+
+            var subtotal = $(this).parent();
+            var subtotal1 = $(subtotal).parent().next();
+            var rowId = $(subtotal).attr('data-id');
+            var product_price = $(subtotal).parent().prev().text();
+            var qty=$(subtotal).find('.qtyfield').val();
+
+
+
+            $.ajax({
+            method:'post',
+            url:url,
+            data:{qty:qty,rowId:rowId},
+            success: function(data){
+                //console.log(data);
+                $(subtotal1).text(parseInt(qty) * parseInt(product_price));
+            },
+            error: function(error){
+            console.log(error);
+            }
+            })
+        });
+        }
+
+
+    });
+
+</script>
 
 @endsection

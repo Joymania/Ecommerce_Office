@@ -9,7 +9,6 @@
             margin: auto;
             text-align: center;
         }
-
     </style>
 
     <!-- Offered/flash deal products -->
@@ -27,16 +26,26 @@
                         <a href="{{route('offerProducts')}}">All Offered Products</a>
                     </div>
                 </div>
-                <!-- flash deal header  end-->
 
-                <!-- flash deal products start-->
-                <div class="product-slider-active-3 nav-style-3">
-                    @foreach($products as $product)
-                        <div class="product-plr-1">
-                            <div class="single-product-wrap">
-                                <div class="product-img product-img-zoom mb-15">
-                                    <a href="{{route('product.details',$product->id)}}">
-                                        <img class="center adjust-height" src="{{"/upload/products_images/$product->image"}}" alt="Product Image" style=" width:210px; height:210px;">
+                <div class="btn-style-7">
+                    <a href="{{route('offerProducts')}}">All Offered Products</a>
+                </div>
+            </div>
+            <!-- flash deal header  end-->
+
+            <!-- flash deal products start-->
+            <div class="product-slider-active-3 nav-style-3">
+                @foreach($products as $product)
+                    <div class="product-plr-1">
+                        <div class="single-product-wrap shadow mb-4 mt-4 rounded">
+                            <div class="product-img product-img-zoom mb-15">
+                                <a href="{{route('product.details',$product->id)}}">
+                                    <img class="center adjust-height" src="{{"/upload/products_images/$product->image"}}" alt="Product Image" style=" width:210px; height:210px;">
+                                </a>
+                                <span class="pro-badge center left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
+                                <div class="product-action-2 tooltip-style-2">
+                                    <a href="{{ route('wishlist.add', $product->id) }}">
+                                        <button title="Wishlist"><i class="icon-heart"></i></button>
                                     </a>
                                     <span class="pro-badge center left bg-red">-{{ number_format( (($product->price - $product->promo_price)*100)/$product->price, 2, '.' , ',') }}%</span>
                                     <div class="product-action-2 tooltip-style-2">
@@ -84,50 +93,55 @@
                                         <span class="old-price">{{$product->price}} Tk.</span>
                                     </div>
                                 </div>
-                                <div class="product-content-wrap-3 product-content-position-2 center">
-                                    <div class="product-content-categories">
-                                        <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
-                                    </div>
-                                    <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
-                                    <div class="product-rating-wrap-2">
-                                        <div class="product-rating-4 center">
-                                            @if(ceil($product->avg_rating) == 1)
-                                                <i class="icon_star"></i>
-                                            @elseif(ceil($product->avg_rating) == 2)
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                            @elseif(ceil($product->avg_rating) == 3)
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                            @elseif(ceil($product->avg_rating) == 4)
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                            @elseif(ceil($product->avg_rating) == 5)
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                            @endif
 
+                                <div class="product-price-4 mb-4">
+                                    <span class="new-price">{{$product->promo_price}} Tk.</span>
+                                    <span class="old-price">{{$product->price}} Tk.</span>
+                                </div>
+                            </div>
+                            <div class="product-content-wrap-3 product-content-position-2 center">
+                                <div class="product-content-categories">
+                                    <a class="purple" href="{{ route('productByCategory', $product->category->id) }}">{{$product->category->name}}</a>
+                                </div>
+                                <h3><a class="purple" href="{{route('product.details',['id' => $product->id])}}">{{$product->name}}</a></h3>
+                                <div class="product-rating-wrap-2">
+                                    <div class="product-rating-4 center">
+                                        @if(ceil($product->avg_rating) == 1)
+                                            <i class="icon_star"></i>
+                                        @elseif(ceil($product->avg_rating) == 2)
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                        @elseif(ceil($product->avg_rating) == 3)
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                        @elseif(ceil($product->avg_rating) == 4)
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                        @elseif(ceil($product->avg_rating) == 5)
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                        @endif
+                              
                                             @if(count($product->reviews) > 0)
                                                 <span>({{count($product->reviews)}})</span>
                                             @endif
                                         </div>
-
-                                    </div>
-                                    <div class="product-price-4">
-                                        <span class="new-price">{{$product->promo_price}} Tk.  </span>
-                                        <span class="old-price">{{$product->price}} Tk.</span>
-                                    </div>
-                                    <div class="pro-add-to-cart-2">
-                                        <a href="{{route('product.details',['id' => $product->id])}}">
-                                            <button title="Add to Cart">Add To Cart</button>
-                                        </a>
-                                    </div>
+                                </div>
+                                <div class="product-price-4">
+                                    <span class="new-price">{{$product->promo_price}} Tk.  </span>
+                                    <span class="old-price">{{$product->price}} Tk.</span>
+                                </div>
+                                <div class="pro-add-to-cart-2 mb-4">
+                                    <a href="{{route('product.details',['id' => $product->id])}}">
+                                        <button title="Add to Cart">Add To Cart</button>
+                                    </a>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -144,7 +158,9 @@
 
     <!-- Popular categories start -->
 
-    <div class="product-categories-area pb-115">
+  <!-- Popular categories start -->
+
+  <div class="product-categories-area pb-115">
         <div class="container">
             <div class="section-title-btn-wrap border-bottom-3 mb-50 pb-20">
                 <div class="section-title-3">
@@ -159,16 +175,16 @@
             <div class="product-categories-slider-1 nav-style-3">
                 @if($popular_categories->isNotEmpty())
                     @foreach($popular_categories as $cat)
-                        <div class="product-plr-1">
-                            <div class="single-product-wrap">
-                                <div class="product-img product-img-border mb-20">
-                                    <a href="{{ route('productByCategory', $cat->id) }}">
-                                        <img src="{{ (!empty($cat->image)) ? url('upload/categories/'.$cat->image):url('upload/defaultCategory.jpg') }}" alt="{{ $cat->name }}" width="161px" height="161px">
-                                    </a>
-                                </div>
-                                <div class="product-content-categories-2 text-center">
-                                    <h5><a href="{{ route('productByCategory', $cat->id) }}"> {{$cat->name}} </a></h5>
-                                </div>
+                    <div class="product-plr-1">
+                        <div style="border-radius:4%" class="single-product-wrap shadow mb-4 mt-4 p-2 rounded shadow-sm">
+                            <div class="product-img mb-20">
+                                <a  href="{{ route('productByCategory', $cat->id) }}">
+                                    <img  style="border-radius:4%"  src="{{ (!empty($cat->image)) ? url('upload/categories/'.$cat->image):url('upload/defaultCategory.jpg') }}" alt="{{ $cat->name }}" width="161px" height="161px">
+                                </a>
+                            </div>
+                            <div class="product-content-categories-2 text-center">
+                                <h5 class="mb-2"><a href="{{ route('productByCategory', $cat->id) }}"> {{$cat->name}} </a></h5>
+                       
                             </div>
                         </div>
                     @endforeach
@@ -191,16 +207,16 @@
 
                 </div>
                 <div class="row flex-row-reverse">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
 
                         <div class="tab-content tab-hm6-categories-slider tab-content-mrg-top jump">
                             <div id="product-9" class="tab-pane active">
                                 <div class="product-slider-active-5">
 
                                     @foreach($cat->product as $product)
-                                    <input type="hidden" name="pro_id" value="{{$product->id}}">
+                                    <input type="hidden" name="pro_id" id="product_id" value="{{$product->id}}">
                                         <div class="product-plr-1">
-                                            <div class="single-product-wrap">
+                                            <div class="single-product-wrap rounded mt-4 mb-4 shadow p-2">
                                                 <div class="product-img product-img-zoom mb-15">
                                                     <a href="{{route('product.details',$product->id)}}">
                                                         <img class="center" src="{{"/upload/products_images/$product->image"}}" style="height: 178px; width: 178px" alt="Product Image">
@@ -251,7 +267,7 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    <div class="product-price-4">
+                                                    <div class="product-price-4 mb-4">
                                                         @if(empty($product->promo_price))
                                                             <span>{{$product->price}} Tk</span>
                                                         @else
@@ -302,9 +318,9 @@
                                                             <span class="old-price">{{$product->price}} Tk</span>
                                                         @endif
                                                     </div>
-                                                    <div class="pro-add-to-cart-2">
+                                                    <div class="pro-add-to-cart-2 mb-4">
                                                         <a href="{{route('product.details',['id' => $product->id])}}">
-                                                            <button title="Add to Cart">Add To Cart</button>
+                                                            <button title="Add to Cart">Add To Cart</button> 
                                                         </a>
 
                                                     </div>
@@ -318,20 +334,6 @@
 
                         </div>
 
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="product-list-style-wrap">
-                            <div class="product-list-style">
-                                @foreach($cat->sub_category as $subcat)
-                                    <a class="active" href="{{route('productByCat',$subcat->id)}}">{{$subcat->sub_category_name}} </a>
-                                @endforeach
-                            </div>
-                            <div class="btn-style-8">
-                                <!-- show all products related to this category -->
-                                <a href="{{ route('productByCategory', $cat->id) }}">View All </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -454,7 +456,7 @@
                                 </div>
                                 <div class="pro-details-action-wrap">
                                     <div class="pro-details-add-to-cart">
-                                        <a title="Add to Cart" href="#">Add To Cart </a>
+                                        <a class="addToCart" title="Add to Cart" href="#">Add To Cart </a>
                                     </div>
                                     <div class="pro-details-action">
                                         <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>
@@ -480,10 +482,14 @@
         </div>
     </div>
     <!-- Modal end -->
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+</script> --}}
 
     <script>
-
+        $('.input-2').rating({displayOnly: true, step: 0.1});
     </script>
+
 
 @endsection
 
@@ -494,4 +500,48 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script>
+        $(document).ready(function(){
+            toastr.options = {
+            "closeButton": true,
+            "newestOnTop": true,
+            "positionClass": "toast-top-right"
+            };
+
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $(document).on('click', '.addToCart', function(e){
+            //e.preventDefault();
+
+            var url="{{url('add-to-cart')}}";
+            var id =$(this).attr('data-id');
+
+            $.ajax({
+                method:'POST',
+                url:url,
+                data:{id:id},
+               success: function(data){
+                    console.log(data.minicart);
+                    toastr.success(data.success);
+                    $("#minicart").html(data.minicart);
+               },
+               error: function(error){
+                   console.log(error);
+               }
+            })
+            e.preventDefault();
+
+            });
+
+        });
+
+
+    </script>
+
 @endsection
