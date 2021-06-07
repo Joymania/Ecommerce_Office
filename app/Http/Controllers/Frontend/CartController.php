@@ -168,7 +168,7 @@ class CartController extends Controller
             $sizeID=$request->size_id;
             $colorId=$request->color_id;
             $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
-            $cartCount = CartShopping::where('user_id',$idauth)->count();
+
             if($cartCheck==NULL){
                 $cart_add=new CartShopping();
                 $cart_add->user_id=$idauth;
@@ -178,9 +178,14 @@ class CartController extends Controller
                 $cart_add->qty=$request->qty;
                 $cart_add->subtotal=$subtotal;
                 $cart_add->save();
+                $cartCount = CartShopping::where('user_id',$idauth)->count();
             }
             else{
-                return response()->json(['cartCount' => $cartCount], 200);
+                $cartajax = CartShopping::where('user_id', $idauth)->where('product_id', $identity)->first();
+                $cartajax->qty=$cartajax->qty+ (int)$request->qty;
+                $cartajax->save();
+                $cartCount = CartShopping::where('user_id',$idauth)->count();
+                //return response()->json(['cartCount' => $cartCount], 200);
             }
         }
         else{
