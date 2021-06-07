@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
-    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
@@ -310,7 +310,7 @@ Route::prefix('expense')->group(function(){
     Route::fallback(function () {
         return view('admin.authentication.page404');
     });
-});
+}); 
 
 // Super Admin role routes
 Route::prefix('admin')->middleware('auth:admin', 'superAdmin')->group(function () {
@@ -338,9 +338,10 @@ Route::prefix('admin')->group(function () {
 
 
 // export
-
+  
 
 
 
 //Admin Routing Ends
 
+    
