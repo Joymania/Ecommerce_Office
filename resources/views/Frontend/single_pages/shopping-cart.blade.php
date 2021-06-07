@@ -435,7 +435,7 @@
             url:url,
             data:{qty:qty,id:cartid},
             success: function(data){
-            //console.log(data);
+            ////console.log(data);
             //$('.subtotal-auth').text(data.total);
             $(subtotal1).text(parseInt(qty) * parseInt(product_price));
 
