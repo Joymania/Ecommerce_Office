@@ -44,7 +44,8 @@ Route::get('/{id}/products/subCat-priceFilter','Frontend\ProductBySubcatControll
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 Route::get('/{id}/products/cat-priceFilter','Frontend\ProductByCategoryController@priceFilter');
 
-//Shop page routing
+Route::get('/{id}/product-details-Ajax', 'Frontend\ProductDetailsController@index_ajax')->name('product.details.ajax');
+//Shop page routingproduct-details-Ajax'
 Route::get('/shop','Frontend\ShopController@index')->name('products.shop');
 
 //Offer products routing
@@ -67,6 +68,8 @@ Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->
 
  //Shopping-Cart
 Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::post('add-to-cart-ajax','Frontend\CartController@addtoCartAjax');
+
 Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
