@@ -16,6 +16,16 @@
                 @php
                 $contents=Cart::content();
             @endphp
+            <div class="customer-zone mb-20">
+              <p class="cart-page-title">Have a coupon? <a class="checkout-click3" href="#">Click here to enter your code</a></p>
+              <div class="checkout-login-info3">
+                  <form action="{{ route('apply.cuppon') }}" method="POST">
+                      @csrf
+                      <input type="text" placeholder="Coupon code" name="cupon">
+                      <input type="submit" value="Apply Coupon">
+                  </form>
+              </div>
+          </div>
 
 {{-- orderslide --}}
 <div  class="container overflow-hidden">
@@ -173,7 +183,15 @@
             <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">             
               <h3 style="color:#6F50A7">Payment Info</h3> <hr>
               <div class="form-check">
-                <input class="form-check-input cash" id="r" type="radio" name="payment" value="handcash" id="flexRadioDefault1" checked>
+                <input class="form-check-input cash" id="r" type="radio"style="left: 9px;
+                width: 15px;
+                height: 15px;
+                border: solid white;
+                border-width: 0 10px 10px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                " name="payment" value="handcash" id="flexRadioDefault1" checked>
                 <label class="form-check-label" for="flexRadioDefault1">
                  Cash on delivery
                 
@@ -181,7 +199,15 @@
               </div>
               <br>
               <div class="form-check">
-                <input class="form-check-input  radio_bk" id="r" type="radio" name="payment" value="Bkash" id="flexRadioDefault2">
+                <input class="form-check-input  radio_bk" id="r" type="radio" style="left: 9px;
+                width: 15px;
+                height: 15px;
+                border: solid white;
+                border-width: 0 10px 10px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                " name="payment" value="Bkash" id="flexRadioDefault2">
                 <label class="form-check-label" for="flexRadioDefault2">
                   Bkash Payment
 
