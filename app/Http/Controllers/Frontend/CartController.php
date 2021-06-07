@@ -62,7 +62,7 @@ class CartController extends Controller
 
             $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
             $cartajax=CartShopping::where('user_id', $idauth)->where('product_id', $identity)->first();
-            $cartCount = CartShopping::where('user_id', $idauth)->count();
+
             if($cartajax==NULL){
                 $flag = 1;
             $cart_add=new CartShopping();
@@ -89,6 +89,7 @@ class CartController extends Controller
                 $cartajax->qty=$cartajax->qty+1;
                 $cartajax->save();
         }
+            $cartCount = CartShopping::where('user_id', $idauth)->count();
 
         }
         else{
