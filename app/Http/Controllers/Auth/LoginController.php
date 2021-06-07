@@ -141,7 +141,7 @@ class LoginController extends Controller
 
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
         $check = User::where('email', $user->email)->first();
 
         if ($check) {
@@ -167,7 +167,7 @@ class LoginController extends Controller
     }
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->stateless()->user();
         $check = User::where('email', $user->email)->first();
 
         if ($check) {

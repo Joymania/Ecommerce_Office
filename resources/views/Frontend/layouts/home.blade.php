@@ -481,10 +481,6 @@
     </div>
     <!-- Modal end -->
 
-
-    <script>
-        $('.input-2').rating({displayOnly: true, step: 0.1});
-    </script>
     <script>
 
     </script>
