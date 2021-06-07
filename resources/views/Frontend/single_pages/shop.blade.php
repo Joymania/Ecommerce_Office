@@ -36,7 +36,7 @@
                                     @if(count((array)$products) > 0)
                                         @foreach($products as $product)
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
-                                                <div class="single-product-wrap mb-35">
+                                                <div class="single-product-wrap mb-35 shadow mb-4 mt-4 rounded">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
                                                         <a href="{{route('product.details',$product->id)}}">
                                                             <img src="{{"/upload/products_images/$product->image"}}" style="height: 324px; width: 270px" alt="">
@@ -83,7 +83,7 @@
                                                             @endif
                                                         </div>
                                                         <h3><a href="{{route('product.details',$product->id)}}" class="productName">{{$product->name}}</a></h3>
-                                                        <div class="product-price-2">
+                                                        <div class="product-price-2 mb-4">
                                                             @if(empty($product->promo_price))
                                                                 <span class="new-price product-price">{{$product->price}}</span>Tk
                                                             @else
@@ -130,7 +130,7 @@
                                                                 <span class="old-price">{{$product->price}} Tk</span>
                                                             @endif
                                                         </div>
-                                                        <div class="pro-add-to-cart">
+                                                        <div class="pro-add-to-cart mb-4">
                                                             <a href="{{route('product.details',['id' => $product->id])}}">
                                                                 <button title="Add to Cart">Add To Cart</button>
                                                             </a>

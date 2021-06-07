@@ -55,7 +55,7 @@
 
 
         </div>
-        <div class="get-in-touch-wrap">
+        <div class="get-in-touch-wrap ">
             <h3>Get In Touch</h3>
             <div class="contact-from contact-shadow">
                 <form id="contact-form" action="assets/mail-php/mail.php" method="post">
@@ -80,9 +80,7 @@
                 <p class="form-messege"></p>
             </div>
         </div>
-        <div class="contact-map pt-120">
-            <div id="map"></div>
-        </div>
+        
     </div>
 </div>
 

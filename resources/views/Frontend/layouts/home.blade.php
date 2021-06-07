@@ -33,7 +33,7 @@
             <div class="product-slider-active-3 nav-style-3">
                 @foreach($products as $product)
                     <div class="product-plr-1">
-                        <div class="single-product-wrap">
+                        <div class="single-product-wrap shadow mb-4 mt-4 rounded">
                             <div class="product-img product-img-zoom mb-15">
                                 <a href="{{route('product.details',$product->id)}}">
                                     <img class="center adjust-height" src="{{"/upload/products_images/$product->image"}}" alt="Product Image" style=" width:210px; height:210px;">
@@ -79,7 +79,7 @@
                                             @endif
                                     </div>
                                 </div>
-                                <div class="product-price-4">
+                                <div class="product-price-4 mb-4">
                                     <span class="new-price">{{$product->promo_price}} Tk.</span>
                                     <span class="old-price">{{$product->price}} Tk.</span>
                                 </div>
@@ -123,7 +123,7 @@
                                     <span class="new-price">{{$product->promo_price}} Tk.  </span>
                                     <span class="old-price">{{$product->price}} Tk.</span>
                                 </div>
-                                <div class="pro-add-to-cart-2">
+                                <div class="pro-add-to-cart-2 mb-4">
                                     <a href="{{route('product.details',['id' => $product->id])}}">
                                         <button title="Add to Cart">Add To Cart</button>
                                     </a>
@@ -144,7 +144,9 @@
 
     <!-- Popular categories start -->
 
-    <div class="product-categories-area pb-115">
+  <!-- Popular categories start -->
+
+  <div class="product-categories-area pb-115">
         <div class="container">
             <div class="section-title-btn-wrap border-bottom-3 mb-50 pb-20">
                 <div class="section-title-3">
@@ -160,14 +162,14 @@
                 @if($popular_categories->isNotEmpty())
                     @foreach($popular_categories as $cat)
                     <div class="product-plr-1">
-                        <div class="single-product-wrap">
-                            <div class="product-img product-img-border mb-20">
-                                <a href="{{ route('productByCategory', $cat->id) }}">
-                                    <img src="{{ (!empty($cat->image)) ? url('upload/categories/'.$cat->image):url('upload/defaultCategory.jpg') }}" alt="{{ $cat->name }}" width="161px" height="161px">
+                        <div style="border-radius:4%" class="single-product-wrap shadow mb-4 mt-4 p-2 rounded shadow-sm">
+                            <div class="product-img mb-20">
+                                <a  href="{{ route('productByCategory', $cat->id) }}">
+                                    <img  style="border-radius:4%"  src="{{ (!empty($cat->image)) ? url('upload/categories/'.$cat->image):url('upload/defaultCategory.jpg') }}" alt="{{ $cat->name }}" width="161px" height="161px">
                                 </a>
                             </div>
                             <div class="product-content-categories-2 text-center">
-                                <h5><a href="{{ route('productByCategory', $cat->id) }}"> {{$cat->name}} </a></h5>
+                                <h5 class="mb-2"><a href="{{ route('productByCategory', $cat->id) }}"> {{$cat->name}} </a></h5>
                             </div>
                         </div>
                     </div>
@@ -191,7 +193,7 @@
 
                 </div>
                 <div class="row flex-row-reverse">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
 
                         <div class="tab-content tab-hm6-categories-slider tab-content-mrg-top jump">
                             <div id="product-9" class="tab-pane active">
@@ -199,7 +201,7 @@
 
                                     @foreach($cat->product as $product)
                                         <div class="product-plr-1">
-                                            <div class="single-product-wrap">
+                                            <div class="single-product-wrap rounded mt-4 mb-4 shadow p-2">
                                                 <div class="product-img product-img-zoom mb-15">
                                                     <a href="{{route('product.details',$product->id)}}">
                                                         <img class="center" src="{{"/upload/products_images/$product->image"}}" style="height: 178px; width: 178px" alt="Product Image">
@@ -247,7 +249,7 @@
                                                                 @endif
                                                         </div>
                                                     </div>
-                                                    <div class="product-price-4">
+                                                    <div class="product-price-4 mb-4">
                                                         @if(empty($product->promo_price))
                                                             <span>{{$product->price}} Tk</span>
                                                         @else
@@ -298,9 +300,9 @@
                                                             <span class="old-price">{{$product->price}} Tk</span>
                                                         @endif
                                                     </div>
-                                                    <div class="pro-add-to-cart-2">
+                                                    <div class="pro-add-to-cart-2 mb-4">
                                                         <a href="{{route('product.details',['id' => $product->id])}}">
-                                                            <button title="Add to Cart">Add To Cart</button>
+                                                            <button title="Add to Cart">Add To Cart</button> 
                                                         </a>
                                                     </div>
                                                 </div>
@@ -315,19 +317,7 @@
 
                     </div>
 
-                    <div class="col-lg-3">
-                        <div class="product-list-style-wrap">
-                            <div class="product-list-style">
-                                @foreach($cat->sub_category as $subcat)
-                                <a class="active" href="{{route('productByCat',$subcat->id)}}">{{$subcat->sub_category_name}} </a>
-                                @endforeach
-                            </div>
-                            <div class="btn-style-8">
-                                <!-- show all products related to this category -->
-                                <a href="{{ route('productByCategory', $cat->id) }}">View All </a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

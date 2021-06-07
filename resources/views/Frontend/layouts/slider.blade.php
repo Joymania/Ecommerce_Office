@@ -7,7 +7,7 @@
                 </div>
               @endif
                 <div class="row">
-                    <div class="col-sm-11 ml-auto mr-auto">
+                    <div class="col-sm-12 ml-auto mr-auto">
                          <div class="slider-area bg-gray mb-30 ml-auto mr-auto" >
                              <div class="hero-slider-active-3 dot-style-2 dot-style-2-position-4 dot-style-2-active-purple">
                                  @foreach ($sliders as $slider)
