@@ -419,6 +419,34 @@
 
 
             });
+            $(document).on('click', '.dec', function(e){
+
+            var url="{{url('update-cart')}}";
+            var parent=$(this).parent();
+            console.log(parent);
+            var subtotal1 = $(parent).parent().parent().parent().next();
+            console.log(subtotal1);
+            var product_price = $(parent).parent().parent().parent().prev().text();
+            console.log(product_price);
+            var cartid=$(parent).attr('data-cartid');
+            var qty=$(parent).find('.qtyauth').val();
+            $.ajax({
+            method:'post',
+            url:url,
+            data:{qty:qty,id:cartid},
+            success: function(data){
+            //console.log(data);
+            //$('.subtotal-auth').text(data.total);
+            $(subtotal1).text(parseInt(qty) * parseInt(product_price));
+
+            },
+            error: function(error){
+            console.log(error);
+            }
+            })
+
+
+            });
 
         }
         else{
