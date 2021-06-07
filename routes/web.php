@@ -74,7 +74,8 @@ Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')-
 Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
-
+Route::post('cart-to-add', 'Frontend\CartController@cartadd')->name('adding.cart');
+Route::post('cart-update', 'Frontend\CartController@cartupdate')->name('updating.cart');
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');

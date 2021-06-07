@@ -183,6 +183,85 @@ class CartController extends Controller
         //     //  'pro_color'=> $pro_color_name
         // ]);
     }
+    public function cartadd(Request $request){
+        $product = product::where('id', $request->id)->first();
+        $product_size = size::where('id', $request->size_id)->first();
+        $product_color = color::where('id', $request->color_id)->first();
+        if ($product->promo_price) {
+            $subtotal = $request->qty * $product->promo_price;
+        } else {
+            $subtotal = $request->qty * $product->price;
+        }
+
+
+        if (Auth::user()) {
+
+            $idauth = Auth::id();
+            $identity = $request->id;
+            $sizeID = $request->size_id;
+            $colorId = $request->color_id;
+            $cartCheck = CartShopping::where('user_id', $idauth)->where('product_id', $identity)->where('product_size', $sizeID)->where('product_color', $colorId)->first();
+
+            if ($cartCheck == NULL) {
+                $cart_add = new CartShopping();
+                $cart_add->user_id = $idauth;
+                $cart_add->product_id = $product->id;
+                $cart_add->product_size = $request->size_id;
+                $cart_add->product_color = $request->color_id;
+                $cart_add->qty = $request->qty;
+                $cart_add->subtotal = $subtotal;
+                $cart_add->save();
+            } else {
+                return redirect()->route('show.cart');
+            }
+        } else {
+            if (!empty($product->promo_price)) {
+                $price = $product->promo_price;
+            } else {
+                $price = $product->price;
+            }
+
+            $subtotal = $request->qty * $price;
+
+            Cart::add([
+                'id' => $product->id,
+                'qty' => $request->qty,
+                'price' => $price,
+                'subtotal' => $subtotal,
+                'promo_price' => $product->promo_price,
+                'name' => $product->name,
+                'weight' => 550,
+                'options' => [
+                    'size_id' => $request->size_id,
+                    'size_name' => $product_size ? $product_size->name : null,
+                    'color_id' => $request->color_id,
+                    'color_name' => $product_color ? $product_color->name : null,
+                    'image' => $product->image
+                ]
+
+            ]);
+        }
+
+        return redirect()->route('show.cart')->with('success2', 'Product added Successfully.');
+
+    }
+    // public function cartupdate(Request $request)
+    // {
+    //     if ($request->id) {
+    //         $id = $request->id;
+    //         $cart_add = CartShopping::find($id);
+
+    //         $cartprice = $cart_add->subtotal / $cart_add->qty;
+    //         $cart_add->qty = $request->qty;
+    //         $cart_add->subtotal = $request->qty * $cartprice;
+    //         $cart_add->save();
+    //     }
+    //     if ($request->rowId) {
+    //         Cart::update($request->rowId, $request->qty);
+    //     }
+
+    //     return redirect()->route('show.cart');
+    // }
 
     public function deleteCart($rowId){
 

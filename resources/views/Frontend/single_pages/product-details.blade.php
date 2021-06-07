@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <form id="addToCartForm" action="{{ route('insert.cart') }}" method="post">
+                    <form id="addToCartForm" action="{{ route('adding.cart') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $product->id }}">
 
