@@ -7,57 +7,86 @@ use App\Model\CartShopping;
 use App\Model\color;
 use App\Model\cupon;
 use App\Model\product;
+use App\Model\product_color;
+use App\Model\product_size;
 use App\Model\ShippingMethods;
 use App\Model\size;
 use App\Model\wishlist;
 use Illuminate\Http\Request;
 use Cart;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Null_;
 use Session;
-
 
 class CartController extends Controller
 {
-
-
     public function addtoCart(Request $request){
 
-         /*$this->validate($request,[
-             'size_id'=>'required',
-             'color_id'=>'required'
-             ]);*/
+        $cartCount = 0;
         $product=product::where('id',$request->id)->first();
-        $product_size=size::where('id',$request->size_id)->first();
-        $product_color=color::where('id',$request->color_id)->first();
-        if($product->promo_price){
-            $subtotal=$request->qty * $product->promo_price;
+        $pro_size=product_size::where('product_id',$request->id)->first();
+        $pro_color=product_color::where('product_id',$request->id)->first();
+        // $product_size=size::where('id',$request->size_id)->first();
+        // $product_color=color::where('id',$request->color_id)->first();
+        $pro_size_name=0;
+        $pro_color_name=0;
+        if($pro_size!=NULL){
+            $pro_size_name = size::where('id', $pro_size->size_id)->first();
         }
-        else{
-            $subtotal=$request->qty * $product->price;
+        if($pro_color!= NULL){
+            $pro_color_name = color::where('id', $pro_color->color_id)->first();
         }
 
+        if($product->promo_price){
+            $subtotal=1 * $product->promo_price;
+        }
+        else{
+            $subtotal=1 * $product->price;
+        }
 
         if(Auth::user()){
 
             $idauth = Auth::id();
             $identity=$request->id;
             $sizeID=$request->size_id;
+            $ajaxsizeID=0;
+            $ajaxcolorId=0;
+            if($pro_size!=NULL){
+               $ajaxsizeID = $pro_size->size_id;
+            }
             $colorId=$request->color_id;
-            $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+            if($pro_color!=NULL){
+              $ajaxcolorId = $pro_color->color_id;
+            }
 
-            if($cartCheck==NULL){
+            $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+            $cartajax=CartShopping::where('user_id', $idauth)->where('product_id', $identity)->first();
+            $cartCount = CartShopping::where('user_id', $idauth)->count();
+            if($cartajax==NULL){
+                $flag = 1;
             $cart_add=new CartShopping();
             $cart_add->user_id=$idauth;
             $cart_add->product_id=$product->id;
-            $cart_add->product_size=$request->size_id;
-            $cart_add->product_color=$request->color_id;
-            $cart_add->qty=$request->qty;
+                //$cart_add->product_size=$request->size_id;
+                if($pro_size!=NULL){
+                    $cart_add->product_size = $pro_size->size_id;
+                }
+                if($pro_color!=NULL){
+                    $cart_add->product_color = $pro_color->color_id;
+                }
+                //$cart_add->product_color=$request->color_id;
+
+                //$cart_add->qty=$request->qty;
+                $cart_add->qty = 1;
             $cart_add->subtotal=$subtotal;
             $cart_add->save();
-
         }
         else{
-            return redirect()->route('show.cart');
+                // return redirect()->route('show.cart');
+
+                $cartajax = CartShopping::where('user_id', $idauth)->where('product_id', $identity)->first();
+                $cartajax->qty=$cartajax->qty+1;
+                $cartajax->save();
         }
 
         }
@@ -73,29 +102,53 @@ class CartController extends Controller
 
              Cart::add([
             'id'=>$product->id,
-            'qty'=>$request->qty,
+                //'qty'=>$request->qty,
+                'qty' =>1,
             'price'=>$price,
             'subtotal'=>$subtotal,
             'promo_price'=>$product->promo_price,
             'name'=>$product->name,
             'weight'=>550,
             'options'=>[
-                 'size_id' =>$request->size_id,
-                 'size_name' => $product_size ? $product_size->name : null,
-                 'color_id' =>$request->color_id,
-                 'color_name' => $product_color ? $product_color->name :null,
+                    //'size_id' =>$request->size_id,
+                    'size_id' => $pro_size ? $pro_size->size_id :null,
+                 'size_name' => $pro_size_name ? $pro_size_name->name : null,
+                    //  'color_id' =>$request->color_id,
+                    'color_id' => $pro_color ? $pro_color->color_id :null,
+                 'color_name' => $pro_color_name ? $pro_color_name->name :null,
                 'image'=>$product->image
             ]
 
         ]);
+             $cartCount = Cart::content()->count();
 
         }
+        if(Auth::user()){
+            //$id = Auth::id();
+            $data['cartpage'] = CartShopping::with('product')->where('user_id', Auth::id())->where('status', '0')->get();
+            $data['cart_num']=CartShopping::where('user_id', Auth::id())->count();
+            $minicart = view('Frontend.layouts.minicart',$data)->render();
+        }
+        else{
+            $minicart=view('Frontend.layouts.minicart')->render();
+        }
 
-        return redirect()->route('show.cart')->with('success2','Product added Successfully.');
+
+
+
+        //return redirect()->route('show.cart')->with('success2','Product added Successfully.');
+        return response()->json([
+        'success'=>'Cart added Successfully.',
+        'minicart'=>$minicart,
+        'cartCount' => $cartCount,
+        //  'pro_size'=> $pro_size_name,
+        //  'pro_color'=> $pro_color_name
+         ]);
     }
 
     public function addtoCartAjax(Request $request)
     {
+        $cartCount = 0;
         $product=product::where('id',$request->id)->first();
         $product_size=size::where('id',$request->size_id)->first();
         $product_color=color::where('id',$request->color_id)->first();
@@ -113,7 +166,7 @@ class CartController extends Controller
             $sizeID=$request->size_id;
             $colorId=$request->color_id;
             $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
-
+            $cartCount = CartShopping::where('user_id',$idauth)->count();
             if($cartCheck==NULL){
                 $cart_add=new CartShopping();
                 $cart_add->user_id=$idauth;
@@ -125,7 +178,7 @@ class CartController extends Controller
                 $cart_add->save();
             }
             else{
-                return response()->json("This product already is in cart", 200);
+                return response()->json(['cartCount' => $cartCount], 200);
             }
         }
         else{
@@ -137,27 +190,40 @@ class CartController extends Controller
             }
 
             $subtotal=$request->qty * $price;
-            $cart_add = Cart::add([
+            Cart::add([
                 'id'=>$product->id,
-                'qty'=>$request->qty,
+                'qty'=>(int)$request->qty,
                 'price'=>$price,
                 'subtotal'=>$subtotal,
                 'promo_price'=>$product->promo_price,
                 'name'=>$product->name,
                 'weight'=>550,
                 'options'=>[
-                    'size_id' =>$request->size_id,
+                    'size_id' =>$request->size_id ? $request->size_id : null,
                     'size_name' => $product_size ? $product_size->name : null,
-                    'color_id' =>$request->color_id,
+                    'color_id' =>$request->color_id ? $request->color_id : null,
                     'color_name' => $product_color ? $product_color->name :null,
                     'image'=>$product->image
                 ]
 
             ]);
+            $cartCount = Cart::content()->count();
 
         }
+        if(Auth::user()){
+            //$id = Auth::id();
+            $data['cartpage'] = CartShopping::with('product')->where('user_id', Auth::id())->where('status', '0')->get();
+            $data['cart_num']=CartShopping::where('user_id', Auth::id())->count();
+            $minicart = view('Frontend.layouts.minicart',$data)->render();
+        }
+        else{
+            $minicart=view('Frontend.layouts.minicart')->render();
+        }
 
-        return response()->json($cart_add, 200);
+        return response()->json([
+            'minicart'=>$minicart,
+            'cartCount' => $cartCount,
+        ]);
     }
 
     public function showCart(){
@@ -172,9 +238,7 @@ class CartController extends Controller
             $data['showCart']=CartShopping::with('product','color','size')->where(function($querry)use($id) {
                 $querry->where('user_id',$id)->where('status','0');
             })->get();
-
         }
-
         return view('Frontend.single_pages.shopping-cart',$data);
 
     }
@@ -183,18 +247,27 @@ class CartController extends Controller
         if($request->id){
             $id=$request->id;
             $cart_add=CartShopping::find($id);
-
             $cartprice=$cart_add->subtotal/$cart_add->qty;
             $cart_add->qty=$request->qty;
             $cart_add->subtotal=$request->qty * $cartprice;
             $cart_add->save();
-
+            return response()->json([
+                'total' => $cart_add->subtotal,
+            ]);
         }
     if($request->rowId){
          Cart::update($request->rowId, $request->qty);
+            return response()->json([
+                'total' => Cart::subtotal() ,
+            ]);
     }
 
-        return redirect()->route('show.cart');
+        //return redirect()->route('show.cart');
+        // return response()->json([
+        //     'success' => Cart::subtotal(),
+        //     //  'pro_size'=> $pro_size_name,
+        //     //  'pro_color'=> $pro_color_name
+        // ]);
     }
 
     public function deleteCart($rowId){

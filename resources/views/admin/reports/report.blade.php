@@ -12,7 +12,7 @@
                 <button class="btn btn-primary todaybtn">Today</button>
                 <button class="btn btn-primary lastsevenbtn">Last 7 Days</button>
                 <button class="btn btn-primary monthbtn">Last Month</button>
-                <button class="btn btn-primary date">Filter by Date</button>                          
+                <button class="btn btn-primary date">Total Sell</button>                          
            </div>
     </div>
 <div class="row">
@@ -210,7 +210,7 @@
        </div>
       </div>
      </div>
-     <a href="/admin/export" id="e" class="btn btn-success ">Export Excel All</a>    
+     <a href="/admin/export" id="e" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel All</a>    
      <div  class="table mt-1">
         <table id="d" class="table">
 

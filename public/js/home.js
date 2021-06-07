@@ -58,6 +58,7 @@
 
                     if (data.colors.length > 0) {
                         $('#productColorDiv').attr('hidden',false);
+                        $('#productSizeDiv').find('input#colorInput').remove();
                         $('#productColorDiv').append(`
                            <input type="number" id="colorInput" name="color_id" value="" hidden>
                         `);
@@ -81,6 +82,7 @@
 
                     if (data.sizes.length > 0){
                         $('#productSizeDiv').attr('hidden',false);
+                        $('#productSizeDiv').find('input#sizeInput').remove();
                         $('#productSizeDiv').append(`
                             <input type="number" id="sizeInput" name="size_id" value="" hidden>
                         `);

@@ -96,7 +96,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
-    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
+    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');

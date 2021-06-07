@@ -33,6 +33,13 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     $(document).on('submit','#addToCartForm',function (e) {
+
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": true,
+            "positionClass": "toast-top-right"
+        };
+
         let flag = 0;
         let flag1 = 0;
         e.preventDefault();
@@ -76,15 +83,15 @@ $(document).ready(function () {
                     qty: qty
                 },
                 success: function (data) {
-                    console.log(data);
-                    if (typeof(data) != 'string') {
+                    console.log(data.cart);
+                    toastr.success('Cart Added Successfully!');
                         $(document).ready(function () {
                             let count = $('.header-cart a[class="cart-active"]').find('.pro-count.purple')[0];
                             let cartCount = $(count).text();
-                            $(count).text(parseInt(cartCount) + 1);
+                            $(count).text(data.cartCount);
 
                         });
-                    }
+                    $("#minicart").html(data.minicart);
                     $('.close').click();
 
                 },
