@@ -83,8 +83,8 @@ $(document).ready(function () {
                     qty: qty
                 },
                 success: function (data) {
-                    console.log(data.cart);
                     toastr.success('Cart Added Successfully!');
+                    console.log(data.cart);
                         $(document).ready(function () {
                             let count = $('.header-cart a[class="cart-active"]').find('.pro-count.purple')[0];
                             let cartCount = $(count).text();

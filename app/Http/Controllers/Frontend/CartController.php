@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Cart;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Null_;
+use PhpParser\Node\Expr\Cast\Object_;
 use Session;
 
 class CartController extends Controller
@@ -190,25 +191,57 @@ class CartController extends Controller
             }
 
             $subtotal=$request->qty * $price;
-            Cart::add([
-                'id'=>$product->id,
-                'qty'=>(int)$request->qty,
-                'price'=>$price,
-                'subtotal'=>$subtotal,
-                'promo_price'=>$product->promo_price,
-                'name'=>$product->name,
-                'weight'=>550,
-                'options'=>[
-                    'size_id' =>$request->size_id ? $request->size_id : null,
-                    'size_name' => $product_size ? $product_size->name : null,
-                    'color_id' =>$request->color_id ? $request->color_id : null,
-                    'color_name' => $product_color ? $product_color->name :null,
-                    'image'=>$product->image
-                ]
+            $cartItems = Cart::content();
+            $flag = 0;
+            $rowId = '';
+            foreach ($cartItems as $row){
+                if ($row->id == $request->id && $row->options->size_id == $request->size_id && $row->options->color_id == $request->color_id){
+                    $flag = 1;
+                    $rowId = $row->rowId;
+                    break;
+                }
 
-            ]);
+            }
+
+            if ($flag == 0) {
+                Cart::add([
+                    'id' => $product->id,
+                    'qty' => (int)$request->qty,
+                    'price' => $price,
+                    'subtotal' => $subtotal,
+                    'promo_price' => $product->promo_price,
+                    'name' => $product->name,
+                    'weight' => 550,
+                    'options' => [
+                        'size_id' => $request->size_id ? $request->size_id : null,
+                        'size_name' => $product_size ? $product_size->name : null,
+                        'color_id' => $request->color_id ? $request->color_id : null,
+                        'color_name' => $product_color ? $product_color->name : null,
+                        'image' => $product->image
+                    ]
+
+                ]);
+            }else{
+                $pro = Cart::get($rowId);
+                Cart::update($rowId, [
+                    'id' => $product->id,
+                    'qty' => (int)$pro->qty + (int)$request->qty,
+                    'price' => $price,
+                    'subtotal' => $subtotal,
+                    'promo_price' => $product->promo_price,
+                    'name' => $product->name,
+                    'weight' => 550,
+                    'options' => [
+                        'size_id' => $request->size_id ? $request->size_id : null,
+                        'size_name' => $product_size ? $product_size->name : null,
+                        'color_id' => $request->color_id ? $request->color_id : null,
+                        'color_name' => $product_color ? $product_color->name : null,
+                        'image' => $product->image
+                    ]
+                ]);
+            }
+
             $cartCount = Cart::content()->count();
-
         }
         if(Auth::user()){
             //$id = Auth::id();
