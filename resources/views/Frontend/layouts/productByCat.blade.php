@@ -53,9 +53,6 @@
                                                                 <a href="{{ route('wishlist.add', $product->id) }}">
                                                                     <button title="Wishlist"><i class="icon-heart"></i></button>
                                                                 </a>
-                                                                <button class="q_m_btn" id="quickView_modal_btn"
-                                                                        data-id={{ $product->id }} title="Quick"><i
-                                                                        class="icon-size-fullscreen icons"></i></button>
                                                             </div>
                                                         </div>
                                                         <div class="product-content-wrap-2 text-center">
@@ -136,11 +133,8 @@
                                                                 @endif
                                                             </div>
                                                             <div class="pro-add-to-cart">
-{{--                                                                <a href="{{route('product.details',['id' => $product->id])}}">--}}
-{{--                                                                    <button title="Add to Cart">Add To Cart</button>--}}
-{{--                                                                </a>--}}
                                                                 <a href="{{route('product.details',['id' => $product->id])}}">
-                                                                    <button data-id="{{$product->id}}" class="addToCart" title="Add to Cart">Add To Cart</button>
+                                                                    <button title="Add to Cart">Add To Cart</button>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -217,172 +211,9 @@
                 </div>
             </div>
        </div>
-
-     <!-- Modal -->
-     <div class="modal fade" id="quickviewmodal" tabindex="-1" role="dialog">
-         <div class="modal-dialog" role="document">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                             aria-hidden="true">x</span></button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="product-details-area ">
-                         <div class="container">
-                             <div class="row">
-                                 <div class="col-lg-5 col-md-6 col-12 col-sm-12">
-                                     <div class="tab-content quickview-big-img" id="main-image">
-                                         <div id="pro-1" class="tab-pane fade show active">
-
-                                         </div>
-                                     </div>
-                                     <div class="quickview-wrap mt-15 border">
-                                         <div class="quickview-slide-active nav-style-6" id="sub_images">
-
-                                         </div>
-                                     </div>
-                                 </div>
-
-                                 <div class="col-lg-7 col-md-6 col-12 col-sm-12">
-                                     <form id="addToCartForm" action="" method="post">
-                                         <input type="hidden" name="pro_id">
-                                         <div class="
-                                            product-details-content pro-details-content-mrg">
-                                             <h2 id="pro_name"></h2>
-                                             <div class="product-ratting-review-wrap">
-                                                 <div class="product-ratting-digit-wrap">
-                                                     <div class="product-ratting" id="pro_rating_star">
-
-                                                     </div>
-                                                     <div class="product-digit">
-                                                         <span id="pro_rating"></span>
-                                                     </div>
-                                                 </div>
-                                                 <div class="product-review-order">
-                                                     <span id="pro_review_count"></span>
-                                                     <span id="pro_order_count"></span>
-                                                 </div>
-
-                                             </div>
-                                             <p></p>
-                                             <div class="pro-details-price">
-                                                 <span class="new-price" id="pro_new_price"> </span>
-                                                 <span class="old-price" id="pro_old_price"> </span>
-                                             </div>
-
-                                             <div id="productColorDiv">
-                                                 <input type="number" id="colorInput" name="color_id" value="" hidden>
-                                                 <div class="pro-details-color-wrap">
-                                                     <span>Colors:</span>
-                                                     <div class="pro-details-color-content">
-                                                         <ul>
-
-                                                         </ul>
-                                                         <p id="colorPtag" hidden>Color Desc: <span id="color_desc"></span></p>
-                                                     </div>
-                                                 </div>
-                                             </div>
-
-
-                                             <div id="productSizeDiv">
-                                                 <input type="number" id="sizeInput" name="size_id" value="" hidden>
-                                                 <div class="pro-details-size">
-                                                     <span>Sizes:</span>
-                                                     <div class="pro-details-size-content">
-                                                         <ul>
-
-
-                                                         </ul>
-                                                         <p id="sizePtag" hidden>Size Desc: <span id="size_desc"></span></p>
-                                                     </div>
-                                                 </div>
-                                             </div>
-
-                                             <div class="pro-details-quality">
-                                                 <span>Quantity:</span>
-                                                 <div class="cart-plus-minus">
-                                                     <input id="qty" class="cart-plus-minus-box" type="text" name="qty" value="1">
-                                                 </div>
-                                             </div>
-
-                                             <div class="pro-details-add-to-cart" style="width: 50%">
-                                                 <input id="quickViewSubmitBtn" data-id="" type="submit" value="Add To Cart"></a>
-                                             </div>
-                                         </div>
-                                     </form>
-
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
-     <!-- Modal end -->
-
-
 @endsection
 @section('scripts')
-    <script src="{{asset('js/quickView-product-details.js')}}"></script>
-    <script !src="">
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <script>
-        $(document).ready(function(){
-            toastr.options = {
-                "closeButton": true,
-                "newestOnTop": true,
-                "positionClass": "toast-top-right"
-            };
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $(document).on('click', '.addToCart', function(e){
-                //e.preventDefault();
-
-                var url="{{url('add-to-cart')}}";
-                var id =$(this).attr('data-id');
-
-                $.ajax({
-                    method:'POST',
-                    url:url,
-                    data:{id:id},
-                    success: function(data){
-                        //console.log(data.minicart);
-                        console.log(data.cart);
-                        toastr.success(data.success);
-                        //console.log(data.flag);
-                        console.log(data.proSize);
-
-                        $(document).ready(function () {
-                            let count = $('.header-cart a[class="cart-active"]').find('.pro-count.purple')[0];
-                            let cartCount = $(count).text();
-                            $(count).text(data.cartCount);
-                        });
-                        console.log(data.cartCount);
-
-                        $("#minicart").html(data.minicart);
-                    },
-                    error: function(error){
-                        console.log(error);
-                    }
-                });
-                e.preventDefault();
-
-            });
-
-        });
-
-    </script>
+    <script src="{{asset('js/category-products-filter.js')}}"></script>
 @endsection
 @section('stylesheet')
     <link rel="stylesheet" href="{{asset('css/products.css')}}">
