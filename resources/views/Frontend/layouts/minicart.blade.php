@@ -1,5 +1,4 @@
 <!-- mini cart start -->
-
     <div class="sidebar-cart-all">
         <a class="cart-close" href="#"><i class="icon_close"></i></a>
         <div class="cart-content">

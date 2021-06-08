@@ -98,7 +98,9 @@ Route::middleware(['auth'])->group(function () {
 
     //Checkout
     Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
-    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+
+    Route::get('checkout', 'Frontend\CheckoutController@index')->name('checkout');
+
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
@@ -188,6 +190,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::prefix('order')->group(function () {
         Route::get('/view','Backend\OrderController@view')->name('order.view');
         Route::get('/details/{id}','Backend\OrderController@details')->name('order.details');
+        Route::get('/notifi/details/{id}/{n_id}','Backend\OrderController@notifynav')->name('notifynav.details');
         Route::delete('/delete/{id}','Backend\OrderController@delete')->name('order.delete');
         Route::get('approved/{id}','Backend\OrderController@status')->name('order.status');
         Route::get('deliver/{id}','Backend\OrderController@deliveryStatus')->name('order.delivarystatus');
@@ -325,7 +328,7 @@ Route::prefix('expense')->group(function(){
     Route::fallback(function () {
         return view('admin.authentication.page404');
     });
-}); 
+});
 
 // Super Admin role routes
 Route::prefix('admin')->middleware('auth:admin', 'superAdmin')->group(function () {
@@ -353,10 +356,10 @@ Route::prefix('admin')->group(function () {
 
 
 // export
-  
+
 
 
 
 //Admin Routing Ends
 
-    
+

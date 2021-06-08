@@ -26,7 +26,7 @@ use Carbon\Carbon;
 class CheckoutController extends Controller
 {
     public function index(Request $request){
-        
+
         $cart = CartShopping::where('user_id',Auth::id())->where('status','0')->update(['shipping_method_id' => $request->shipping_method]);
         // $cart->shipping_method_id = $request->shipping_method;
         // $cart->save();
@@ -155,9 +155,12 @@ class CheckoutController extends Controller
     }
     $name=$request->name;
     $admin = Admin::all();
+    $notify_order=$order->id;
+    // dd($notify_order);
+    // exti();
 
 
-    Notification::send($admin, new OrderNotification($name));
+     Notification::send($admin, new OrderNotification($name, $notify_order));
 
         return redirect()->route('frontsite')->with('success', 'Your Order has been placed Successfully.');
     }
