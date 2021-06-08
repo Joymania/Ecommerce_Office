@@ -250,7 +250,7 @@
           </div>
 
            
-              <div class="button-row d-flex mt-2 mb-5">
+              <div class="button-row d-flex mt-2">
                 <button style="background-color:#FF2F2F; color:white;" class="btn  js-btn-prev" type="button" title="Prev">Prev</button>
                 <button style="background-color:#FF2F2F; color:white;"   class="btn  ml-auto" type="submit" title="Send">Confirm Order</button>
               </div>                
@@ -278,8 +278,8 @@ $('#rn').hide();
 $('#nagad_num').remove();
 $('#nagadt').remove();
 $('#na').hide();
-$('#a').append(`<input id="b" placeholder="enter bkash number" name="bkash_mobile" type="number" required>
-<input placeholder="enter transaction id" id="t" name="transaction" type="text" required>`)
+$('#a').append(`<input id="b" placeholder="Enter Bkash Number" class="multisteps-form__input form-control" name="bkash_mobile" type="number" required>
+<input placeholder="enter transaction id" id="t" class="mt-2 multisteps-form__input form-control" name="transaction" type="text" required>`)
 });
 
 $('.radio_rk').on("change", function() {
@@ -290,8 +290,8 @@ $('#bn').hide();
 $('#nagad_num').remove();
 $('#nagadt').remove();
 $('#na').hide();
-$('#ro').append(`<input id="br" placeholder="enter rocket number" name="bkash_mobile" type="number" required>
-<input placeholder="enter transaction id" id="tr" name="transaction" type="text" required>`)
+$('#ro').append(`<input id="br" placeholder="enter rocket number" class="multisteps-form__input form-control" name="bkash_mobile" type="number" required>
+<input placeholder="enter transaction id" id="tr" class="mt-2 multisteps-form__input form-control " name="transaction" type="text" required>`)
 });
 
 $('.radio_nk').on("change", function() {
@@ -303,8 +303,8 @@ $('#br').remove();
 $('#tr').remove();
 $('#rn').hide();
 
-$('#n').append(`<input id="nagad_num" placeholder="enter nagad number" name="bkash_mobile" type="number" required>
-<input placeholder="enter transaction id" id="nagadt" name="transaction" type="text" required>`)
+$('#n').append(`<input id="nagad_num" placeholder="enter nagad number" class="multisteps-form__input form-control" name="bkash_mobile" type="number" required>
+<input placeholder="enter transaction id" id="nagadt" class="mt-2 multisteps-form__input form-control " name="transaction" type="text" required>`)
 });
 
 
