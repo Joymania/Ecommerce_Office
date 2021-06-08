@@ -25,7 +25,7 @@
                         cellspacing="0">
                         <thead>
                             <tr>
-                                <th>#Order Id</th>
+                                <th>ID</th>
                                 <th>User</th>
                                 <th>Status</th>
                                 <th>Payment</th>
@@ -36,7 +36,7 @@
                         <tbody>
                             @foreach ($alldata as $key=>$order)
                             <tr class="gradeA">
-                                <td>{{ $order->order_code }}</td>
+                                <td>{{ $order->id }}</td>
                                 @if(!empty($order['user']['name']))
                                 <td>{{ $order['user']['name'] }}</td>
                                 @else
