@@ -21,7 +21,7 @@
 
             // //alert(leaveRequestID);
             $.ajax({
-                url: productID + '/product-details-Ajax',
+                url: '../'+productID + '/product-details-Ajax',
                 method: 'get',
                 dataType: "json",
                 success: function (data) {
@@ -102,7 +102,7 @@
                     // $(".easyzoom").append("<a class='easyzoom-pop-up img-popup' href='/upload/products_images/'" + data.product.image + "'><i class='icon-size-fullscreen'></i class='icon-size-fullscreen' ></a>");
                     $('#main-image').append(`
                          <div id="pro-1" class="tab-pane fade show active">
-                                        <img src="/upload/products_images/${data.product.image}" style="height: 90%" alt='Product Image'>
+                                        <img src="../upload/products_images/${data.product.image}" style="height: 90%" alt='Product Image'>
                                     </div>
                     `)
                     // $('#pro-1').append(`
@@ -118,15 +118,15 @@
                         // `);
                         //Appending Subimages
                         $('#sub_images').append(`
-                             <a class="active" data-toggle="tab" href="#pro-1"><img src="/upload/products_images/${data.product.image}" alt=""></a>
+                             <a class="active" data-toggle="tab" href="#pro-1"><img src="../upload/products_images/${data.product.image}" alt=""></a>
                         `);
                         for (let i = 0; i < data.product.sub_images.length; i++) {
                             $('#sub_images').append(`
-                            <a data-toggle="tab" href="#pro-${i + 2}"><img src="upload/products_images/sub_images/${data.product.sub_images[i].image}" alt=""></a>
+                            <a data-toggle="tab" href="#pro-${i + 2}"><img src="../upload/products_images/sub_images/${data.product.sub_images[i].image}" alt=""></a>
                         `);
                             $('#main-image').append(`
                                      <div id="pro-${i+2}" class="tab-pane fade">
-                                        <img src="upload/products_images/sub_images/${data.product.sub_images[i].image}" alt="">
+                                        <img src="../upload/products_images/sub_images/${data.product.sub_images[i].image}" alt="">
                                      </div>
                                 `)
 
