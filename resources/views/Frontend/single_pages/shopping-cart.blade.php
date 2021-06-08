@@ -92,7 +92,10 @@ $total+=$subtotal;
 </div>
 </div>
 </div> --}}
-
+   
+<form action="{{route('checkout')}}" method="post" id="form">
+    @csrf    
+</form>
 <div class="breadcrumb-area bg-gray">
     <div class="container">
         <div class="breadcrumb-content text-center">
@@ -138,10 +141,7 @@ $total+=$subtotal;
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- dd($showCart) --}}
-                            {{-- @php
-                            dd($showCart);
-                            @endphp --}}
+                           
                             @foreach ($showCart as $show)
 
                             <tr>
@@ -180,7 +180,6 @@ $total+=$subtotal;
                                                 <input class="cart-plus-minus-box qtyauth" type="text" name="qty"
                                                     value="{{ $show->qty }}">
                                             </div>
-                                            {{-- //<input type="hidden" name="id" value="{{ $show->id }}"> --}}
 
                                         </div>
 
@@ -190,22 +189,14 @@ $total+=$subtotal;
 
                                 </td>
                                 <td id="subtotal" class="product-subtotal subtotal-auth">{{ $show['subtotal'] }}</td>
-                                {{-- <td class="product-subtotal">
-                                    @if ($show['product']['promo_price'])
-                                    <span class="amount">{{ $show['product']['promo_price'] * $show->qty }}</span>
-                                @else
-                                <span class="amount">{{ $show['product']['price'] * $show->qty}}</span>
-                                @endif
-                                </td> --}}
+                              
                                 <td class="product-remove">
                                     <a href="{{ route('delete.authcart',$show['id']) }}"><i class="icon_close"></i></a>
 
 
                                 </td>
                             </tr>
-                            {{-- @php
-                                        $total+=$content->subtotal;
-                                    @endphp --}}
+                       
                             @endforeach
 
                         </tbody>
@@ -246,30 +237,17 @@ $total+=$subtotal;
                                 <td class="product-price-cart"><span class="amount">{{ $content->price }}</span></td>
                                 <td class="product-quantity pro-details-quality">
 
-                                    {{-- <form method="post" action="{{ route('update.cart') }}">
-                                    @csrf
-                                    <div> --}}
+                        
                                         <div data-id="{{ $content->rowId }}" id="qtyUpdate" class="cart-plus-minus">
                                             <input id="qtyfield" class="cart-plus-minus-box qtyfield" type="text"
                                                 name="qty" value="{{ $content->qty }}">
-                                            {{-- //<input class='rowId' type="" name="rowId" value="{{ $content->rowId }}">
-                                            --}}
+                                        
                                         </div>
-
-                                        {{-- <div class="float-center">
-                                                <input type="submit" value="Update" class="cart">
-                                            </div> --}}
-                                        {{-- </div>
-
-
-                                    </form> --}}
-
 
                                 </td>
                                 <td id="subtotal" class="product-subtotal">{{ $content->subtotal }}</td>
                                 <td class="product-remove">
                                     <a href="{{ route('delete.cart',$content->rowId) }}"><i class="icon_close"></i></a>
-
 
                                 </td>
                             </tr>
@@ -287,15 +265,14 @@ $total+=$subtotal;
                         <div class="cart-shiping-update-wrapper">
                             <div class="cart-shiping-update">
                                 <a href="/">Continue Shopping</a>
+                                <a  class="ml-5" href="{{ route('destroyauth.cart',Auth::user()) }}">Clear Cart</a>
                             </div>
                             @if (Auth::user())
+                            
                             <div class="cart-clear">
-                                <a href="#" class="btn" onclick="event.preventDefault();
+                                <a href="#" style="background:crimson;" class="text-white" onclick="event.preventDefault();
                                 document.getElementById('form').submit();
             ">Proceed to Checkout</a>
-
-                                <a href="{{ route('destroyauth.cart',Auth::user()) }}">Clear Cart</a>
-
 
                             </div>
                             @else
@@ -306,82 +283,6 @@ $total+=$subtotal;
                         </div>
                     </div>
                 </div>
-                <div class="row">
-
-                    {{--  <div class="col-lg-4 col-md-6">
-                                <div class="discount-code-wrapper">
-                                    <div class="title-wrap">
-                                        <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
-                                    </div>
-
-                                     <div class="discount-code">
-                                        <p>Enter your coupon code if you have one.</p>
-                                        <form method="POST" action="{{ route('apply.cuppon') }}">
-                    @csrf
-                    <input type="text" required name="cupon">
-                    <button class="cart-btn-2" type="submit">Apply Coupon</button>
-                    </form>
-                </div>
-
-            </div>
-        </div> --}}
-        <div class="col-lg-4 col-md-12">
-            <div class="grand-totall">
-                
-                <div class="title-wrap">
-                    <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
-                </div>
-
-                {{--  @if (Session::has('cupon'))
-                                    <h5>Total products <span>{{ Session::get('cupon')['blance']}}</span></h5> --}}
-
-                @if(Auth::user())
-                @php
-                $subammount=0;
-                foreach ($showCart as $cart) {
-                if($cart->product->promo_price){
-                $subtotal = $cart->product->promo_price * $cart->qty;
-                }
-                else
-                $subtotal = $cart->product->price * $cart->qty;
-                $subammount+=$subtotal;
-                }
-                @endphp
-
-                <h5>Total products <span>{{ $subammount }}</span></h5>
-
-                @else
-                <h5>Total products <span>{{ Cart::subtotal() }}</span></h5>
-
-
-                @endif
-
-                <form action="{{route('checkout')}}" method="post" id="form">
-                    @csrf
-                    <div class="total-shipping">
-                        <h5>Select Shipping Method</h5>
-                        <ul>
-                            @if($shipping->isNotEmpty())
-                            @foreach($shipping as $key => $shipping)
-                            <li>
-                                <level class="fancy-radio">
-                                    <input type="radio" name="shipping_method" value="{{ $shipping->id }}"
-                                        {{ $key == 0 ? 'checked':null }}> {{ $shipping->name }}
-                                    <span>{{ $shipping->cost }}</span>
-                                </level>
-                            </li>
-                            @endforeach
-                            @else
-                            <li><input type="radio" name="check" checked> Standard Shipping <span>0.00</span></li>
-                            @endif
-                            {{--  <li><input type="radio" name="check" value="2"> Express <span>30.00</span></li>  --}}
-                        </ul>
-                    </div>
-
-                    {{-- <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4> --}}
-                   
-                </form>
-            </div>
         </div>
     </div>
 </div>
