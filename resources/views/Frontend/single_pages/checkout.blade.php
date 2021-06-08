@@ -193,13 +193,11 @@
                 transform: rotate(45deg);
                 " name="payment" value="handcash" id="flexRadioDefault1" checked>
                 <label class="form-check-label" for="flexRadioDefault1">
-                 Cash on delivery
-                
+                 Cash on delivery                
                 </label>
               </div>
-              <br>
               <div class="form-check">
-                <input class="form-check-input  radio_bk" id="r" type="radio" style="left: 9px;
+                <input class="form-check-input  radio_bk"  type="radio" style="left: 9px;
                 width: 15px;
                 height: 15px;
                 border: solid white;
@@ -210,34 +208,53 @@
                 " name="payment" value="Bkash" id="flexRadioDefault2">
                 <label class="form-check-label" for="flexRadioDefault2">
                   Bkash Payment
-
                   <div>
-                <input   id="bkash"  name="bkash_mobile" class="form-control mt-2" type="number" placeholder="Enter Bkash Number"/>
-               <br>
-                <input  id="bkashs"  name="transaction" class="form-control" type="text" placeholder="Enter Transaction ID"/>
+                <p id="bn">Payment Number<span class="text-danger"> 01546728736</span> Total Amount <strong>{{ Cart::subtotal() }}</strong></p>
+              <div id="a"></div>
                 </label>
-              </div>
 
+                <input class="form-check-input  radio_rk"  type="radio" style="left: 9px;
+                width: 15px;
+                height: 15px;
+                border: solid white;
+                border-width: 0 10px 10px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                " name="payment" value="Rocket" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Rocket Payment
+                  <div>
+                <p id="rn">Payment Number<span class="text-danger"> 01546728736</span> Total Amount <strong>{{ Cart::subtotal() }}</strong></p>
+              <div id="ro"></div>
+                </label>
+
+                <input class="form-check-input  radio_nk"  type="radio" style="left: 9px;
+                width: 15px;
+                height: 15px;
+                border: solid white;
+                border-width: 0 10px 10px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                " name="payment" value="Nagad" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Nagad Payment
+                  <div>
+                <p id="na">Payment Number<span class="text-danger"> 01546728736</span> Total Amount <strong>{{ Cart::subtotal() }}</strong></p>
+              <div id="n"></div>
+                </label>
+ </div>
               </div>
-              <div class="button-row d-flex mt-3 mb-5">
+            </div>
+          </div>
+
+           
+              <div class="button-row d-flex mt-2 mb-5">
                 <button style="background-color:#FF2F2F; color:white;" class="btn  js-btn-prev" type="button" title="Prev">Prev</button>
-                <input style="width: 60px;background-color:#FF2F2F; color:white;"  class="btn  ml-auto js-btn-next" type="button" title="send" value="Next">
+                <button style="background-color:#FF2F2F; color:white;"   class="btn  ml-auto" type="submit" title="Send">Confirm Order</button>
               </div>                
-            </div>
-
-         
-            <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-              <h3 style="color:#6F50A7" class="multisteps-form__title">Additional Message</h3>
-              <div class="multisteps-form__content">
-                <div class="form-row mt-4">
-                  <textarea class="multisteps-form__textarea form-control" placeholder="Notes about your order, e.g. special notes for delivery. " name="notes"></textarea>
-                </div>
-                <div class="button-row d-flex mt-4">
-                  <button style="background-color:#FF2F2F; color:white;" class="btn  js-btn-prev" type="button" title="Prev">Prev</button>
-                  <button style="background-color:#FF2F2F; color:white;"   class="btn  ml-auto" type="submit" title="Send">Confirm Order</button>
-                </div>
-              </div>
-            </div>
+            </div>        
         </div>
       </form>
       </div>
@@ -245,24 +262,65 @@
   </div>
 </div>
 </div>
-
-
-
 <script>
-$('#bkash').hide();
-$('#bkashs').hide();
+
+ $('#bn').hide();
+ $('#rn').hide();
+ $('#na').hide();
+
 
 
 $('.radio_bk').on("change", function() {
-$('#bkash').show();
-$('#bkashs').show();
-alert("Please Input carefully your bkash number and TrX Id!! It can not be empty");
+$('#bn').show();
+$('#br').remove();
+$('#tr').remove();
+$('#rn').hide();
+$('#nagad_num').remove();
+$('#nagadt').remove();
+$('#na').hide();
+$('#a').append(`<input id="b" placeholder="enter bkash number" name="bkash_mobile" type="number" required>
+<input placeholder="enter transaction id" id="t" name="transaction" type="text" required>`)
 });
 
-$('.cash').on("change", function() {
-$('#bkash').hide();
-$('#bkashs').hide();
+$('.radio_rk').on("change", function() {
+$('#rn').show();
+$('#b').remove();
+$('#t').remove();
+$('#bn').hide();
+$('#nagad_num').remove();
+$('#nagadt').remove();
+$('#na').hide();
+$('#ro').append(`<input id="br" placeholder="enter rocket number" name="bkash_mobile" type="number" required>
+<input placeholder="enter transaction id" id="tr" name="transaction" type="text" required>`)
 });
+
+$('.radio_nk').on("change", function() {
+$('#na').show();
+$('#b').remove();
+$('#t').remove();
+$('#bn').hide();
+$('#br').remove();
+$('#tr').remove();
+$('#rn').hide();
+
+$('#n').append(`<input id="nagad_num" placeholder="enter nagad number" name="bkash_mobile" type="number" required>
+<input placeholder="enter transaction id" id="nagadt" name="transaction" type="text" required>`)
+});
+
+
+$('.cash').on("change", function() {
+$('#b').remove();
+$('#t').remove();
+$('#bn').hide();
+$('#br').remove();
+$('#tr').remove();
+$('#rn').hide();
+$('#nagad_num').remove();
+$('#nagadt').remove();
+$('#na').hide();
+});
+
+
 
 
 

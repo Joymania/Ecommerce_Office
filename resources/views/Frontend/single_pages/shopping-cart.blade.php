@@ -290,6 +290,9 @@ $total+=$subtotal;
                             </div>
                             @if (Auth::user())
                             <div class="cart-clear">
+                                <a href="#" class="btn" onclick="event.preventDefault();
+                                document.getElementById('form').submit();
+            ">Proceed to Checkout</a>
 
                                 <a href="{{ route('destroyauth.cart',Auth::user()) }}">Clear Cart</a>
 
@@ -324,6 +327,7 @@ $total+=$subtotal;
         </div> --}}
         <div class="col-lg-4 col-md-12">
             <div class="grand-totall">
+                
                 <div class="title-wrap">
                     <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                 </div>
@@ -375,9 +379,7 @@ $total+=$subtotal;
                     </div>
 
                     {{-- <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4> --}}
-                    <a href="#" onclick="event.preventDefault();
-                                        document.getElementById('form').submit();
-                    ">Proceed to Checkout</a>
+                   
                 </form>
             </div>
         </div>
