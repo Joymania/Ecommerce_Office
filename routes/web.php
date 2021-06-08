@@ -79,7 +79,8 @@ Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')-
 Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
-
+Route::post('cart-to-add', 'Frontend\CartController@cartadd')->name('adding.cart');
+Route::post('cart-update', 'Frontend\CartController@cartupdate')->name('updating.cart');
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
@@ -96,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
+    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
@@ -301,6 +303,15 @@ Route::prefix('expense')->group(function(){
     });
 
 
+    //Useful links
+    Route::prefix('useful-links')->group(function (){
+        Route::get('/','Backend\UsefulLinksController@index')->name('useful.links.view');
+        Route::get('/add','Backend\UsefulLinksController@create')->name('useful.links.add');
+        Route::post('/add','Backend\UsefulLinksController@store')->name('useful.links.store');
+        Route::get('/{useful}/edit','Backend\UsefulLinksController@edit')->name('useful.links.edit');
+        Route::post('/{useful}/edit','Backend\UsefulLinksController@update')->name('useful.links.update');
+        Route::delete('/{useful}/destroy','Backend\UsefulLinksController@delete')->name('useful.links.delete');
+    });
 
     //Report page route
     Route::get('/report','Backend\ReportController@index')->name('sales.report');
@@ -314,7 +325,7 @@ Route::prefix('expense')->group(function(){
     Route::fallback(function () {
         return view('admin.authentication.page404');
     });
-});
+}); 
 
 // Super Admin role routes
 Route::prefix('admin')->middleware('auth:admin', 'superAdmin')->group(function () {
@@ -342,9 +353,10 @@ Route::prefix('admin')->group(function () {
 
 
 // export
-
+  
 
 
 
 //Admin Routing Ends
 
+    

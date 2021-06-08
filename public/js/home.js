@@ -1,6 +1,7 @@
 (function ($) {
     $(document).ready(function () {
         //alert("ffff");quickView_modal_btn
+
         $(document).on('click', '.q_m_btn', function (e) {
 
             $('#colorInput').val('');
@@ -38,6 +39,7 @@
                     $(".pro-details-color-wrap ul").empty();
                     $(".pro-details-size ul").empty();
                     $('#pro-1').html('');
+
                     $('#main-image').html('');
 
                     $('#quickViewSubmitBtn').attr('data-id', data.product.id);
@@ -57,6 +59,7 @@
                     }
 
                     if (data.colors.length > 0) {
+
                         $('#productColorDiv').attr('hidden', false);
                         $('#productSizeDiv').find('input#colorInput').remove();
                         $('#productColorDiv').append(`
@@ -74,6 +77,7 @@
                             }
 
                         }
+
                     } else {
                         $('#colorInput').remove();
                         $('#productColorDiv').attr('hidden', true);
@@ -88,6 +92,13 @@
                         `);
                         for (let index = 0; index < data.sizes.length; index++) {
                             $(".pro-details-size ul").append("<li class='sizeLi' data-desc='" + data.sizes[index].desc + "' data-id=" + data.sizes[index].size_id + " data-toggle='tooltip' title='" + data.sizes[index].desc + "'><strong><a class='productSizeContent' href='#' >" + data.sizes[index].size + "</a></strong></li>");
+
+                        }
+                    }else{
+                        $('#sizeInput').remove();
+                        $('#productSizeDiv').attr('hidden',true);
+                    }
+
 
                         }
                     } else {
@@ -129,7 +140,6 @@
                                         <img src="../upload/products_images/sub_images/${data.product.sub_images[i].image}" alt="">
                                      </div>
                                 `)
-
                         }
                     }
 
@@ -137,6 +147,7 @@
                     //     data.
                     //     <a class="active" data-toggle="tab" href="#pro-1"><img src="{{asset('upload/defaultCategory.jpg')}}" alt=""></a>
                     // `);
+
 
                     $('#quickviewmodal').modal('show');
                     //var status = data.status == '1' ? 'Active' : 'Inactive';
@@ -162,6 +173,5 @@
         });
 
     });
-
 
 })(jQuery);

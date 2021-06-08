@@ -231,7 +231,8 @@
                                                             <button title="Wishlist"><i class="icon-heart"></i></button>
                                                         </a>
                                                         <button class="q_m_btn" id="quickView_modal_btn"
-                                                                data-id={{ $product->id }} title="Quick"><i
+
+                                                                data-id={{ $product->id }} title="Quick View"><i
                                                             class="icon-size-fullscreen icons"></i></button>
                                                     </div>
 
@@ -378,7 +379,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Modal -->
     <div class="modal fade" id="quickviewmodal" tabindex="-1" role="dialog">

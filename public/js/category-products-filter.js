@@ -96,7 +96,7 @@ $(document).ready(function () {
                         }
                         shopArea.append(`
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
-                                                <div class="single-product-wrap mb-35">
+                                                <div class="single-product-wrap  shadow mb-4 mt-4 rounded">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
                                                         <a href="/${data[i].id}/product-details">
                                                             <img src="${base_url}/upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
@@ -246,7 +246,7 @@ $(document).ready(function () {
                         }
                         shopArea.append(`
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
-                                                <div class="single-product-wrap mb-35">
+                                                <div class="single-product-wrap mb-35 shadow mb-4 mt-4 rounded">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
                                                         <a href="/${data[i].id}/product-details">
                                                             <img src="${base_url}/upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">
@@ -386,7 +386,7 @@ $(document).ready(function () {
                         }
                         shopArea.append(`
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 singleProduct">
-                                                <div class="single-product-wrap mb-35">
+                                                <div class="single-product-wrap mb-35 shadow mb-4 mt-4 rounded">
                                                     <div class="product-img product-img-zoom mb-15 text-center">
                                                         <a href="/${data[i].id}/product-details">
                                                             <img src="${base_url}/upload/products_images/${data[i].image}" style="height: 324px; width: 270px" alt="">

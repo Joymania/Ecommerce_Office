@@ -118,13 +118,25 @@
                                             <a class="currency-dropdown-active" href="#">BDT</a>
                                         </div>
                                     </div>
+                                    @if(!empty($contacts))
                                     <div class="social-style-1 social-style-1-mrg">
-                                        <a href="#"><i class="icon-social-twitter"></i></a>
-                                        <a href="#"><i class="icon-social-facebook"></i></a>
-                                        <a href="#"><i class="icon-social-instagram"></i></a>
-                                        <a href="#"><i class="icon-social-youtube"></i></a>
-                                        <a href="#"><i class="icon-social-pinterest"></i></a>
+                                        @if($contacts->twitter)
+                                            <a target="_blank" href="{{$contacts->twitter}}"><i style="color:white" class="icon-social-twitter"></i></a>
+                                        @endif
+                                        @if($contacts->facebook)
+                                            <a target="_blank" href="{{$contacts->facebook}}"><i style="color:white" class="icon-social-facebook"></i></a>
+                                        @endif
+                                        @if($contacts->instagram)
+                                            <a target="_blank" href="{{$contacts->instagram}}"><i style="color:white" class="icon-social-instagram"></i></a>
+                                        @endif
+                                        @if($contacts->youtube)
+                                            <a target="_blank" href="{{$contacts->youtube}}"><i style="color:white" class="icon-social-youtube"></i></a>
+                                        @endif
+                                        @if($contacts->pioneer)
+                                            <a target="_blank" href="{{$contacts->pioneer}}"><i style="color:white" class="icon-social-pinterest"></i></a>
+                                        @endif
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
