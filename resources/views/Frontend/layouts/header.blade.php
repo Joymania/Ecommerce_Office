@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
 
+    @if(isset($pixel))
     <!-- Facebook Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -68,6 +69,7 @@
                    src="https://www.facebook.com/tr?id={{$pixel->pixel_id}}&ev=PageView&noscript=1"
         /></noscript>
     <!-- End Facebook Pixel Code -->
+        @endif
 
 </head>
 
@@ -116,13 +118,25 @@
                                             <a class="currency-dropdown-active" href="#">BDT</a>
                                         </div>
                                     </div>
+                                    @if(!empty($contacts))
                                     <div class="social-style-1 social-style-1-mrg">
-                                        <a href="#"><i class="icon-social-twitter"></i></a>
-                                        <a href="#"><i class="icon-social-facebook"></i></a>
-                                        <a href="#"><i class="icon-social-instagram"></i></a>
-                                        <a href="#"><i class="icon-social-youtube"></i></a>
-                                        <a href="#"><i class="icon-social-pinterest"></i></a>
+                                        @if($contacts->twitter)
+                                            <a target="_blank" href="{{$contacts->twitter}}"><i style="color:white" class="icon-social-twitter"></i></a>
+                                        @endif
+                                        @if($contacts->facebook)
+                                            <a target="_blank" href="{{$contacts->facebook}}"><i style="color:white" class="icon-social-facebook"></i></a>
+                                        @endif
+                                        @if($contacts->instagram)
+                                            <a target="_blank" href="{{$contacts->instagram}}"><i style="color:white" class="icon-social-instagram"></i></a>
+                                        @endif
+                                        @if($contacts->youtube)
+                                            <a target="_blank" href="{{$contacts->youtube}}"><i style="color:white" class="icon-social-youtube"></i></a>
+                                        @endif
+                                        @if($contacts->pioneer)
+                                            <a target="_blank" href="{{$contacts->pioneer}}"><i style="color:white" class="icon-social-pinterest"></i></a>
+                                        @endif
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -186,9 +200,9 @@
                                         <div class="same-style-2 same-style-2-font-inc header-cart">
                                             <a class="cart-active" href=" {{ route('show.cart') }} ">
                                                 @if (Auth::id())
-                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple front"> {{ $cart_num }} </span>
                                                 @else
-                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::content()->count() }} </span>
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple front"> {{ Cart::content()->count() }} </span>
                                                 @endif
                                             </a>
                                         </div>

@@ -13,6 +13,7 @@ use App\Model\category;
 use App\Model\logo;
 use App\Model\Admin;
 use App\Model\contacts;
+use App\Model\UsefulLinks;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -43,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories' , category::with('sub_category')->get());
             $view->with('logos' , logo::orderByDesc('id')->first());
             $view->with('contacts', contacts::orderByDesc('id')->first());
+            $view->with('usefuls' , UsefulLinks::all());
             $view->with('pixel',FacebookPixel::first());
         });
 
@@ -52,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories' , category::with('sub_category')->get());
             $view->with('logos' , logo::orderByDesc('id')->first());
             $view->with('contacts', contacts::orderByDesc('id')->first());
+            $view->with('usefuls' , UsefulLinks::all());
             $view->with('pixel',FacebookPixel::first());
         });
 
