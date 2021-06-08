@@ -44,8 +44,10 @@ Route::get('/{id}/products/subCat-priceFilter','Frontend\ProductBySubcatControll
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 Route::get('/{id}/products/cat-priceFilter','Frontend\ProductByCategoryController@priceFilter');
 
+
+
 Route::get('/{id}/product-details-Ajax', 'Frontend\ProductDetailsController@index_ajax')->name('product.details.ajax');
-//Shop page routingproduct-details-Ajax'
+//Shop page routing
 Route::get('/shop','Frontend\ShopController@index')->name('products.shop');
 
 //Offer products routing

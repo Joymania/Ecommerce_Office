@@ -75,6 +75,9 @@ $(document).ready(function () {
                                                             <a href="/add-to-wishlist/${data[i].id}">
                                                                 <button title="Wishlist"><i class="icon-heart"></i></button>
                                                             </a>
+                                                             <button class="q_m_btn" id="quickView_modal_btn"
+                                                                data-id=${data[i].id} title="Quick"><i
+                                                                class="icon-size-fullscreen icons"></i></button>
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap-2 text-center">
@@ -103,9 +106,9 @@ $(document).ready(function () {
                                                                <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                         <div class="pro-add-to-cart">
-                                                            <a href="/${data[i].id}/product-details">
-                                                                <button title="Add to Cart">Add To Cart</button>
-                                                            </a>
+                                                            <a href="">
+                                                             <button data-id='${data[i].id}' class="addToCart" title="Add to Cart">Add To Cart</button>
+                                                               </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -241,6 +244,9 @@ $(document).ready(function () {
                                                             <a href="/add-to-wishlist/${data[i].id}">
                                                                 <button title="Wishlist"><i class="icon-heart"></i></button>
                                                             </a>
+                                                            <button class="q_m_btn" id="quickView_modal_btn"
+                                                                data-id=${data[i].id} title="Quick"><i
+                                                                class="icon-size-fullscreen icons"></i></button>
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap-2 text-center">
@@ -269,9 +275,9 @@ $(document).ready(function () {
                                                                <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                         <div class="pro-add-to-cart">
-                                                            <a href="/${data[i].id}/product-details">
-                                                                <button title="Add to Cart">Add To Cart</button>
-                                                            </a>
+                                                            <a href="">
+                                                             <button data-id='${data[i].id}' class="addToCart" title="Add to Cart">Add To Cart</button>
+                                                               </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -354,6 +360,9 @@ $(document).ready(function () {
                                                             <a href="/add-to-wishlist/${data[i].id}">
                                                                 <button title="Wishlist"><i class="icon-heart"></i></button>
                                                             </a>
+                                                            <button class="q_m_btn" id="quickView_modal_btn"
+                                                                data-id=${data[i].id} title="Quick"><i
+                                                                class="icon-size-fullscreen icons"></i></button>
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap-2 text-center">
@@ -382,9 +391,9 @@ $(document).ready(function () {
                                                                <span class="old-price">${data[i].price}</span>Tk
                                                         </div>
                                                         <div class="pro-add-to-cart">
-                                                            <a href="/${data[i].id}/product-details">
-                                                                <button title="Add to Cart">Add To Cart</button>
-                                                            </a>
+                                                            <a href="">
+                                                             <button data-id='${data[i].id}' class="addToCart" title="Add to Cart">Add To Cart</button>
+                                                               </a>
                                                         </div>
                                                     </div>
                                                 </div>

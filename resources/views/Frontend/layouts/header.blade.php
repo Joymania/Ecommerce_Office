@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
 
+    @if(isset($pixel))
     <!-- Facebook Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -68,6 +69,7 @@
                    src="https://www.facebook.com/tr?id={{$pixel->pixel_id}}&ev=PageView&noscript=1"
         /></noscript>
     <!-- End Facebook Pixel Code -->
+        @endif
 
 </head>
 
@@ -198,9 +200,9 @@
                                         <div class="same-style-2 same-style-2-font-inc header-cart">
                                             <a class="cart-active" href=" {{ route('show.cart') }} ">
                                                 @if (Auth::id())
-                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple front"> {{ $cart_num }} </span>
                                                 @else
-                                                <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::content()->count() }} </span>
+                                                <i class="icon-basket-loaded"></i><span class="pro-count purple front"> {{ Cart::content()->count() }} </span>
                                                 @endif
                                             </a>
                                         </div>
