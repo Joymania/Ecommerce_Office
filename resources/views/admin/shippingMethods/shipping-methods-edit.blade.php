@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title', 'Edit Shipping Methods')
-@section('pageTitle') <a href="{{route('shipping.method.edit', $shipping->id)}}">Edit Shipping Method</a> @endsection
+@section('pageTitle') <a href="{{route('shipping.method.add')}}">Edit Shipping Method</a> @endsection
 @section('parentPageTitle') <a href="{{route('shipping.methods.view')}}">Shipping Methods</a> @endsection
 
 

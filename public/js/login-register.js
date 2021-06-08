@@ -215,7 +215,7 @@ $(document).ready(function(){
 
         }).success(function (response) {
             console.log(response);
-            $('#reset_uniqid').val(response.response.uniqid);
+            $('#reset_phone').val(response.response.phone);
             $('#otp-modal').modal('hide');
             $('#reset-modal').modal('show');
         }).error(function (error) {

@@ -252,7 +252,8 @@
                     <form id="reset-form" method="post">
                         @csrf
 
-                        <input hidden name="uniqid" id="reset_uniqid">
+                        <input name="phone" id="reset_phone" placeholder="Mobile No." type="number" class="form-control" value="{{ old('phone') }}" required autocomplete="phone" autofocus readonly>
+                        <br>
                         <div class="">
                             <input id="reset_password" class="form-control" type="password" name="password" placeholder="Password (minimum 8 characters)" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
                             <br>
@@ -276,6 +277,54 @@
             </div>
         </div>
     </div>
+
+    {{-- <div class="modal fade" id="reset-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content m-auto" id="" style="width: 50%">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Password Reset</h5>
+                </div>
+                <div class="modal-body m-0">
+                    <!-- alert start-->
+                    <div class="alert-warning">
+                        <span class="text-center mt-2" id="reset_error" style="padding: 10px 0"></span>
+                    </div>
+                    <!-- alert end-->
+
+                    <form  id="reset_form">
+                        @csrf
+
+                        <input type="hidden" name="token" value="password_reset">
+
+                        <input id="reset_phone" name="phone" placeholder="Mobile No." type="number" class="form-control" value="{{ $phone ?? old('phone') }}" required autocomplete="phone" autofocus disabled>
+
+                        <div class="form-group">
+                            <input id="reset_password" class="form-control" type="password" name="password" placeholder="Password (minimum 8 characters)" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
+
+                            <strong><span id="reset_password_error" class="invalid-feedback" role="alert">
+                            </span> </strong>
+                        </div>
+
+                        <input type="password" name="password_confirmation" placeholder="Confirm Password" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
+
+                        <div class="button-box">
+                            <div class="login-toggle-btn">                         
+                                <button type="submit">Reset Password</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+
 
 </div>
 @endsection
