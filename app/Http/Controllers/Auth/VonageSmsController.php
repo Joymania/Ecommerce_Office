@@ -178,10 +178,10 @@ class VonageSmsController extends Controller
             return response()->json([ 'error' => [ 'code_invalid' => $error_message,]], 422);
         }
 
-        // $uniqid = uniqid();
-        // Session::put([$uniqid => $phone]);
+        $uniqid = uniqid();
+        Session::put([$uniqid => $phone]);
 
-        return response()->json(['response' => ['phone' => $phone]], 200);
+        return response()->json(['response' => ['uniqid' => $uniqid]], 200);
     }
 
     public function resetPassword(Request $request){
@@ -196,7 +196,8 @@ class VonageSmsController extends Controller
             ]], 422);
         }
 
-        $user = User::where('phone', $request->phone)->first();
+        $phone = Session::get($request->uniqid);
+        $user = User::where('phone', $phone)->first();
         
         if($user){
             $user->password = bcrypt($request->password);

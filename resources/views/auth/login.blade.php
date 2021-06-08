@@ -252,8 +252,7 @@
                     <form id="reset-form" method="post">
                         @csrf
 
-                        <input hidden name="phone" id="reset_phone" placeholder="Mobile No." type="number" class="form-control" value="{{ old('phone') }}" required autocomplete="phone" autofocus readonly>
-                        <br>
+                        <input hidden name="uniqid" id="reset_uniqid">
                         <div class="">
                             <input id="reset_password" class="form-control" type="password" name="password" placeholder="Password (minimum 8 characters)" value="{{ old('password') }}" required autocomplete="new-password" autofocus>
                             <br>

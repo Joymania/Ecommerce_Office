@@ -104,7 +104,7 @@
                             </ul>
                         </li>
 
-                        <li class="{{ (Request::segment(2) == 'logo' or Request::segment(2) == 'contact' or Request::segment(2) == 'copyright' or Request::segment(2) == 'shipping-methods' or Request::segment(2) == 'facebook-pixel') ? 'active' : null }}">
+                        <li class="{{ (Request::segment(2) == 'logo' or Request::segment(2) == 'contact' or Request::segment(2) == 'copyright' or Request::segment(2) == 'shipping-methods' or Request::segment(2) == 'facebook-pixel'  or Request::segment(2) == 'useful-links') ? 'active' : null }}">
                             <a href="#" class="has-arrow"><i class="icon-settings"></i> <span>Settings</span></a>
                             <ul>
                                 <li class="{{ Request::segment(2) == 'logo' ? 'active' : null }}"><a href="{{route('logo.view')}}">Logo</a></li>
@@ -114,6 +114,8 @@
                                 <li class="{{ Request::segment(2) == 'facebook-pixel' ? 'active' : null }}"><a href="{{route('facebook.pixel')}}">Facebook Pixel</a></li>
 
                                 <li class="{{ Request::segment(2) == 'shipping-methods' ? 'active' : null }}"><a href="{{route('shipping.methods.view')}}">shipping Methods</a></li>
+
+                                <li class="{{ Request::segment(2) == 'useful-links' ? 'active' : null }}"><a href="{{route('useful.links.view')}}">Useful Links</a></li>
 
                             </ul>
                         </li>

@@ -139,15 +139,16 @@
                                                 <li>Total <span>{{ $subammount + $showCart['0']->shippingMethod->cost}} tk </span></li>
                                             </ul>
                                         @endif
-                                    @endif
-                                    @if (Session::has('cartcupon-'.auth()->id()))
-                                        <ul>
-                                            <li>Total <span>{{ ($subammount) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
-                                        </ul>
                                     @else
-                                        <ul>
-                                            <li>Total <span>{{ $subammount}} tk </span></li>
-                                        </ul>
+                                      @if (Session::has('cartcupon-'.auth()->id()))
+                                          <ul>
+                                              <li>Total <span>{{ ($subammount) - Session::get('cartcupon-'.auth()->id())[0]}} tk </span></li>
+                                          </ul>
+                                      @else
+                                          <ul>
+                                              <li>Total <span>{{ $subammount}} tk </span></li>
+                                          </ul>
+                                      @endif
                                     @endif
 
                                 </div>

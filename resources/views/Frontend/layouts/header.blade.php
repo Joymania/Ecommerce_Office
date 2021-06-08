@@ -116,6 +116,7 @@
                                             <a class="currency-dropdown-active" href="#">BDT</a>
                                         </div>
                                     </div>
+                                    @if(!empty($contacts))
                                     <div class="social-style-1 social-style-1-mrg">
                                         @if($contacts->twitter)
                                             <a target="_blank" href="{{$contacts->twitter}}"><i style="color:white" class="icon-social-twitter"></i></a>
@@ -133,6 +134,7 @@
                                             <a target="_blank" href="{{$contacts->pioneer}}"><i style="color:white" class="icon-social-pinterest"></i></a>
                                         @endif
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
