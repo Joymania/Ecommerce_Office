@@ -11,17 +11,15 @@ class OrderNotification extends Notification
 {
     use Queueable;
     public $name;
-    public $notify_order;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($name, $notify_order)
+    public function __construct($name)
     {
         $this->name=$name;
-        $this->notify_order= $notify_order;
 
     }
 
@@ -60,8 +58,7 @@ class OrderNotification extends Notification
     {
         return [
             'name'=>$this->name,
-            'notify_order'=>$this->notify_order,
-            'text'=>'Orderd From Your Site.',
+            'text'=>'Oederd From Your Site.',
         ];
     }
 }
