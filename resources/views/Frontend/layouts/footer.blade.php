@@ -15,8 +15,8 @@
                             <div class="mc-news" aria-hidden="true">
                                 <input type="text" value="" tabindex="-1" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
                             </div>
-                            <div style="color:white" class="clear">
-                                <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="Subscribe">
+                            <div  class="clear">
+                                <a id="mc-embedded-subscribe" class="btn btn-danger" type="submit" name="subscribe" value="Subscribe">Subscribe</a>
                             </div>
                         </div>
                     </form>

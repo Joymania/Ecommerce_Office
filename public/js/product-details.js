@@ -1,5 +1,5 @@
 $(document).ready(function () {
- $('.productSizeContent').on('click',function (e) {
+ $(document).on('click','.productSizeContent',function (e) {
      $('.productSizeContent').css('border-color','white');
      $(this).css({
          'border-color' : 'red'
@@ -9,7 +9,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $(".colorLi").on('click',function () {
+    $(document).on('click','.colorLi',function () {
         const colorId = $(this).attr('data-id');
         $("#colorInput").val($(this).attr("data-id"));
         $("#colorPtag").attr('hidden',false);
@@ -19,7 +19,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $(".sizeLi").on('click',function () {
+    $(document).on('click','.sizeLi',function () {
         let size_desc = $('#size_desc');
         $("#sizeInput").val($(this).attr("data-id"));
         $('#sizePtag').attr('hidden',false);
@@ -28,19 +28,26 @@ $(document).ready(function () {
 
 });
 
+let flag = 0;
+
 $(document).ready(function () {
-    $("#addToCartForm").on('submit',function (e) {
+    $(document).on('submit','#addToCartForm',function (e) {
         if ($('#colorInput').val() === '')
         {
+            flag = 1;
             e.preventDefault();
             alert("You have to select a Color");
+        }else{
+            flag = 0;
         }
         if ($('#sizeInput').val() === ''){
+            flag = 1;
             e.preventDefault();
             alert("You have to select a Size");
+        }else{
+            flag = 0;
         }
     });
-
 });
 
 $(document).ready(function (e) {
@@ -50,3 +57,5 @@ $(document).ready(function (e) {
         $('#rating').val($(this).children().length);
     });
 });
+
+

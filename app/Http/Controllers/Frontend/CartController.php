@@ -20,8 +20,9 @@ use Session;
 
 class CartController extends Controller
 {
-    public function addtoCart(Request $request){
+     public function addtoCart(Request $request){
 
+        $cartCount = 0;
         $product=product::where('id',$request->id)->first();
         $pro_size=product_size::where('product_id',$request->id)->first();
         $pro_color=product_color::where('product_id',$request->id)->first();
@@ -60,7 +61,9 @@ class CartController extends Controller
 
             $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
             $cartajax=CartShopping::where('user_id', $idauth)->where('product_id', $identity)->first();
+
             if($cartajax==NULL){
+                $flag = 1;
             $cart_add=new CartShopping();
             $cart_add->user_id=$idauth;
             $cart_add->product_id=$product->id;
@@ -80,10 +83,12 @@ class CartController extends Controller
         }
         else{
                 // return redirect()->route('show.cart');
+
                 $cartajax = CartShopping::where('user_id', $idauth)->where('product_id', $identity)->first();
                 $cartajax->qty=$cartajax->qty+1;
                 $cartajax->save();
         }
+            $cartCount = CartShopping::where('user_id', $idauth)->count();
 
         }
         else{
@@ -116,6 +121,7 @@ class CartController extends Controller
             ]
 
         ]);
+             $cartCount = Cart::content()->count();
 
         }
         if(Auth::user()){
@@ -134,11 +140,130 @@ class CartController extends Controller
         //return redirect()->route('show.cart')->with('success2','Product added Successfully.');
         return response()->json([
         'success'=>'Cart added Successfully.',
-        'minicart'=>$minicart
+        'minicart'=>$minicart,
+        'cartCount' => $cartCount,
         //  'pro_size'=> $pro_size_name,
         //  'pro_color'=> $pro_color_name
          ]);
     }
+    
+     public function addtoCartAjax(Request $request)
+    {
+        $cartCount = 0;
+        $product=product::where('id',$request->id)->first();
+        $product_size=size::where('id',$request->size_id)->first();
+        $product_color=color::where('id',$request->color_id)->first();
+        if($product->promo_price){
+            $subtotal=$request->qty * $product->promo_price;
+        }
+        else{
+            $subtotal=$request->qty * $product->price;
+        }
+
+
+        if(Auth::user()){
+            $idauth = Auth::id();
+            $identity=$request->id;
+            $sizeID=$request->size_id;
+            $colorId=$request->color_id;
+            $cartCheck=CartShopping::where('user_id',$idauth)->where('product_id',$identity)->where('product_size',$sizeID)->where('product_color',$colorId)->first();
+
+            if($cartCheck==NULL){
+                $cart_add=new CartShopping();
+                $cart_add->user_id=$idauth;
+                $cart_add->product_id=$product->id;
+                $cart_add->product_size=$request->size_id;
+                $cart_add->product_color=$request->color_id;
+                $cart_add->qty=$request->qty;
+                $cart_add->subtotal=$subtotal;
+                $cart_add->save();
+                $cartCount = CartShopping::where('user_id',$idauth)->count();
+            }
+            else{
+                $cartajax = CartShopping::where('user_id', $idauth)->where('product_id', $identity)->first();
+                $cartajax->qty=$cartajax->qty+ (int)$request->qty;
+                $cartajax->save();
+                $cartCount = CartShopping::where('user_id',$idauth)->count();
+                //return response()->json(['cartCount' => $cartCount], 200);
+            }
+        }
+        else{
+            if(!empty($product->promo_price)){
+                $price=$product->promo_price;
+            }
+            else{
+                $price=$product->price;
+            }
+
+            $subtotal=$request->qty * $price;
+            $cartItems = Cart::content();
+            $flag = 0;
+            $rowId = '';
+            foreach ($cartItems as $row){
+                if ($row->id == $request->id && $row->options->size_id == $request->size_id && $row->options->color_id == $request->color_id){
+                    $flag = 1;
+                    $rowId = $row->rowId;
+                    break;
+                }
+
+            }
+
+            if ($flag == 0) {
+                Cart::add([
+                    'id' => $product->id,
+                    'qty' => (int)$request->qty,
+                    'price' => $price,
+                    'subtotal' => $subtotal,
+                    'promo_price' => $product->promo_price,
+                    'name' => $product->name,
+                    'weight' => 550,
+                    'options' => [
+                        'size_id' => $request->size_id ? $request->size_id : null,
+                        'size_name' => $product_size ? $product_size->name : null,
+                        'color_id' => $request->color_id ? $request->color_id : null,
+                        'color_name' => $product_color ? $product_color->name : null,
+                        'image' => $product->image
+                    ]
+
+                ]);
+            }else{
+                $pro = Cart::get($rowId);
+                Cart::update($rowId, [
+                    'id' => $product->id,
+                    'qty' => (int)$pro->qty + (int)$request->qty,
+                    'price' => $price,
+                    'subtotal' => $subtotal,
+                    'promo_price' => $product->promo_price,
+                    'name' => $product->name,
+                    'weight' => 550,
+                    'options' => [
+                        'size_id' => $request->size_id ? $request->size_id : null,
+                        'size_name' => $product_size ? $product_size->name : null,
+                        'color_id' => $request->color_id ? $request->color_id : null,
+                        'color_name' => $product_color ? $product_color->name : null,
+                        'image' => $product->image
+                    ]
+                ]);
+            }
+
+            $cartCount = Cart::content()->count();
+        }
+        if(Auth::user()){
+            //$id = Auth::id();
+            $data['cartpage'] = CartShopping::with('product')->where('user_id', Auth::id())->where('status', '0')->get();
+            $data['cart_num']=CartShopping::where('user_id', Auth::id())->count();
+            $minicart = view('Frontend.layouts.minicart',$data)->render();
+        }
+        else{
+            $minicart=view('Frontend.layouts.minicart')->render();
+        }
+
+        return response()->json([
+            'minicart'=>$minicart,
+            'cartCount' => $cartCount,
+        ]);
+    }
+    
 
     public function showCart(){
 
@@ -183,6 +308,85 @@ class CartController extends Controller
         //     //  'pro_color'=> $pro_color_name
         // ]);
     }
+    public function cartadd(Request $request){
+        $product = product::where('id', $request->id)->first();
+        $product_size = size::where('id', $request->size_id)->first();
+        $product_color = color::where('id', $request->color_id)->first();
+        if ($product->promo_price) {
+            $subtotal = $request->qty * $product->promo_price;
+        } else {
+            $subtotal = $request->qty * $product->price;
+        }
+
+
+        if (Auth::user()) {
+
+            $idauth = Auth::id();
+            $identity = $request->id;
+            $sizeID = $request->size_id;
+            $colorId = $request->color_id;
+            $cartCheck = CartShopping::where('user_id', $idauth)->where('product_id', $identity)->where('product_size', $sizeID)->where('product_color', $colorId)->first();
+
+            if ($cartCheck == NULL) {
+                $cart_add = new CartShopping();
+                $cart_add->user_id = $idauth;
+                $cart_add->product_id = $product->id;
+                $cart_add->product_size = $request->size_id;
+                $cart_add->product_color = $request->color_id;
+                $cart_add->qty = $request->qty;
+                $cart_add->subtotal = $subtotal;
+                $cart_add->save();
+            } else {
+                return redirect()->route('show.cart');
+            }
+        } else {
+            if (!empty($product->promo_price)) {
+                $price = $product->promo_price;
+            } else {
+                $price = $product->price;
+            }
+
+            $subtotal = $request->qty * $price;
+
+            Cart::add([
+                'id' => $product->id,
+                'qty' => $request->qty,
+                'price' => $price,
+                'subtotal' => $subtotal,
+                'promo_price' => $product->promo_price,
+                'name' => $product->name,
+                'weight' => 550,
+                'options' => [
+                    'size_id' => $request->size_id,
+                    'size_name' => $product_size ? $product_size->name : null,
+                    'color_id' => $request->color_id,
+                    'color_name' => $product_color ? $product_color->name : null,
+                    'image' => $product->image
+                ]
+
+            ]);
+        }
+
+        return redirect()->route('show.cart')->with('success2', 'Product added Successfully.');
+
+    }
+    // public function cartupdate(Request $request)
+    // {
+    //     if ($request->id) {
+    //         $id = $request->id;
+    //         $cart_add = CartShopping::find($id);
+
+    //         $cartprice = $cart_add->subtotal / $cart_add->qty;
+    //         $cart_add->qty = $request->qty;
+    //         $cart_add->subtotal = $request->qty * $cartprice;
+    //         $cart_add->save();
+    //     }
+    //     if ($request->rowId) {
+    //         Cart::update($request->rowId, $request->qty);
+    //     }
+
+    //     return redirect()->route('show.cart');
+    // }
 
     public function deleteCart($rowId){
 

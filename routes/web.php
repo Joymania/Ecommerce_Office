@@ -44,7 +44,8 @@ Route::get('/{id}/products/subCat-priceFilter','Frontend\ProductBySubcatControll
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 Route::get('/{id}/products/cat-priceFilter','Frontend\ProductByCategoryController@priceFilter');
 
-//Shop page routing
+Route::get('/{id}/product-details-Ajax', 'Frontend\ProductDetailsController@index_ajax')->name('product.details.ajax');
+//Shop page routingproduct-details-Ajax'
 Route::get('/shop','Frontend\ShopController@index')->name('products.shop');
 
 //Offer products routing
@@ -67,6 +68,8 @@ Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->
 
  //Shopping-Cart
 Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::post('add-to-cart-ajax','Frontend\CartController@addtoCartAjax');
+
 Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
@@ -74,7 +77,8 @@ Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')-
 Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
-
+Route::post('cart-to-add', 'Frontend\CartController@cartadd')->name('adding.cart');
+Route::post('cart-update', 'Frontend\CartController@cartupdate')->name('updating.cart');
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
@@ -91,7 +95,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
-    Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
+    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
     Route::get('/user/{id}/order-details','Frontend\userAccountController@orderDetails')->name('orderDetails');
@@ -309,7 +313,7 @@ Route::prefix('expense')->group(function(){
     Route::fallback(function () {
         return view('admin.authentication.page404');
     });
-});
+}); 
 
 // Super Admin role routes
 Route::prefix('admin')->middleware('auth:admin', 'superAdmin')->group(function () {
@@ -337,9 +341,10 @@ Route::prefix('admin')->group(function () {
 
 
 // export
-
+  
 
 
 
 //Admin Routing Ends
 
+    
