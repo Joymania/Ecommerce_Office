@@ -9,6 +9,8 @@ use App\Model\OrderProduct;
 use App\Model\product;
 use Illuminate\Http\Request;
 
+use Notification;
+
 class OrderController extends Controller
 {
     public function view(){
@@ -25,7 +27,24 @@ class OrderController extends Controller
         $data['product']=OrderProduct::where('order_id',$id)->with('color','size','order_detail','product')->get();
 
         //dd($data['product']) ;
+        // $notification = auth()->user()->notifications()->find($notificationid);
+        // if ($notification) {
+        //     $notification->markAsRead();
+        // }
         return view('admin.Order.order-details',$data);
+    }
+    public function notifynav($id, $n_id)
+    {
+        
+        //return $n_id;
+        $notification = auth()->user()->unreadNotifications()->find($id);
+        if ($notification) {
+            $notification->markAsRead();
+        }
+        $data['order'] = Order::find($n_id);
+        $data['admin'] = Admin::where('role', '0')->first();
+        $data['product'] = OrderProduct::where('order_id', $n_id)->with('color', 'size', 'order_detail', 'product')->get();
+        return view('admin.Order.order-details', $data);
     }
 
     public function delete($id){
