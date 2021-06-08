@@ -46,7 +46,7 @@ class VonageSmsController extends Controller
 
             // $nexmo->message()->send([
             //     'to'   => $phone,
-            //     'from' => '+8801521215287',  
+            //     'from' => '+8801500010000',  
             //     'text' => 'Your verification code is '. $code
             // ]);
 
@@ -136,7 +136,7 @@ class VonageSmsController extends Controller
 
                 // $nexmo->message()->send([
                 //     'to'   => $phone,
-                //     'from' => '+8801521215287',  
+                //     'from' => '+8801500010000',  
                 //     'text' => 'Your verification code is '. $code
                 // ]);
 
@@ -178,21 +178,21 @@ class VonageSmsController extends Controller
             return response()->json([ 'error' => [ 'code_invalid' => $error_message,]], 422);
         }
 
+        // $uniqid = uniqid();
+        // Session::put([$uniqid => $phone]);
+
         return response()->json(['response' => ['phone' => $phone]], 200);
     }
 
     public function resetPassword(Request $request){
         $validator = Validator::make($request->all(), [
-            'phone' => ['required', 'digits:11'],
-            'password' => ['required', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:8', 'confirmed']
         ]);
         
         if($validator->fails()){
             return response(['error' => 
                 ['message' => 'Validation error!',
-                'password' => $validator->errors()->get('password'),
-                'phone' => $validator->errors()->get('phone'),
-                'all' => $request->all()
+                'password' => $validator->errors()->get('password')
             ]], 422);
         }
 
