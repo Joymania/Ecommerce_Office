@@ -106,13 +106,25 @@
                                             <a class="currency-dropdown-active" href="#">BDT</a>
                                         </div>
                                     </div>
+                                    @if(!empty($contacts))
                                     <div class="social-style-1 social-style-1-mrg">
-                                        <a href="#"><i class="icon-social-twitter"></i></a>
-                                        <a href="#"><i class="icon-social-facebook"></i></a>
-                                        <a href="#"><i class="icon-social-instagram"></i></a>
-                                        <a href="#"><i class="icon-social-youtube"></i></a>
-                                        <a href="#"><i class="icon-social-pinterest"></i></a>
+                                        @if($contacts->twitter)
+                                            <a target="_blank" href="{{$contacts->twitter}}"><i style="color:white" class="icon-social-twitter"></i></a>
+                                        @endif
+                                        @if($contacts->facebook)
+                                            <a target="_blank" href="{{$contacts->facebook}}"><i style="color:white" class="icon-social-facebook"></i></a>
+                                        @endif
+                                        @if($contacts->instagram)
+                                            <a target="_blank" href="{{$contacts->instagram}}"><i style="color:white" class="icon-social-instagram"></i></a>
+                                        @endif
+                                        @if($contacts->youtube)
+                                            <a target="_blank" href="{{$contacts->youtube}}"><i style="color:white" class="icon-social-youtube"></i></a>
+                                        @endif
+                                        @if($contacts->pioneer)
+                                            <a target="_blank" href="{{$contacts->pioneer}}"><i style="color:white" class="icon-social-pinterest"></i></a>
+                                        @endif
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -603,22 +615,20 @@
                 @else
                 @endif
 
-                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                    <div class="footer-widget ml-70 mb-40">
-                        <h3 class="footer-title">useful links</h3>
-                        <div class="footer-info-list">
-                            <ul>
-                                <li><a href="{{ route('userAccount') }}">My Account</a></li>
-                                <li><a href="{{ route('wishlist.view') }}">My Wishlist</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a id="trackOrderFooterLink" data-toggle="modal" href="#exampleModal">Track Order</a></li>
-                                <li><a href="{{ route('search.result') }}">Shop</a></li>
-                                <li><a href="{{ route('about_us') }}">About Us</a></li>
-                            </ul>
+                @if($usefuls->isNotEmpty())
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="footer-widget ml-70 mb-40">
+                            <h3 style="color:white" class="footer-title">useful links</h3>
+                            <div class="footer-info-list">
+                                <ul>
+                                    @foreach($usefuls as $useful)
+                                        <li><a style="color:white" href="{{ $useful->link }}">{{ $useful->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
 
                 @if(!empty($contacts))
@@ -653,11 +663,21 @@
                             </div>
                         </div>
                         <div class="social-style-1 social-style-1-font-inc social-style-1-mrg-2">
-                            <a href="{{$contacts->twitter}}"><i class="icon-social-twitter"></i></a>
-                            <a href="{{$contacts->facebook}}"><i class="icon-social-facebook"></i></a>
-                            <a href="{{$contacts->instagram}}"><i class="icon-social-instagram"></i></a>
-                            <a href="{{$contacts->youtube}}"><i class="icon-social-youtube"></i></a>
-                            <a href="{{$contacts->pioneer}}"><i class="icon-social-pinterest"></i></a>
+                        @if($contacts->twitter)
+                                <a target="_blank" href="{{$contacts->twitter}}"><i style="color:white" class="icon-social-twitter"></i></a>
+                            @endif
+                            @if($contacts->facebook)
+                                <a target="_blank" href="{{$contacts->facebook}}"><i style="color:white" class="icon-social-facebook"></i></a>
+                            @endif
+                            @if($contacts->instagram)
+                                <a target="_blank" href="{{$contacts->instagram}}"><i style="color:white" class="icon-social-instagram"></i></a>
+                            @endif
+                            @if($contacts->youtube)
+                                <a target="_blank" href="{{$contacts->youtube}}"><i style="color:white" class="icon-social-youtube"></i></a>
+                            @endif
+                            @if($contacts->pioneer)
+                                <a target="_blank" href="{{$contacts->pioneer}}"><i style="color:white" class="icon-social-pinterest"></i></a>
+                            @endif
                         </div>
                     </div>
                 </div>
