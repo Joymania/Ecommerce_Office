@@ -40,7 +40,7 @@ class ProductDetailsController extends Controller
     public function index_ajax($id)
     {
         $cartpage = CartShopping::with('product')->where('user_id', Auth::id())->where('status', '0')->get();
-        $product = product::find($id);
+        $product = product::with('sub_images')->find($id);
         $reviews = review::where('product_id', $id)->get();
         $reviews1 = review::where('product_id', $id)->limit(3)->get();
         $colors = product_color::where('product_id', $product->id)->get();

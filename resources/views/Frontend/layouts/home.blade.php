@@ -45,6 +45,9 @@
                                         <a href="{{ route('wishlist.add', $product->id) }}">
                                             <button title="Wishlist"><i class="icon-heart"></i></button>
                                         </a>
+                                        <button class="q_m_btn" id="quickView_modal_btn"
+                                                data-id={{ $product->id }} title="Quick"><i
+                                                class="icon-size-fullscreen icons"></i></button>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap-3 center">
@@ -228,7 +231,7 @@
                                                             <button title="Wishlist"><i class="icon-heart"></i></button>
                                                         </a>
                                                         <button class="q_m_btn" id="quickView_modal_btn"
-                                                                data-id={{ $product->id }} title="Quick View"><i
+                                                                data-id={{ $product->id }} title="Quick"><i
                                                             class="icon-size-fullscreen icons"></i></button>
                                                     </div>
 
@@ -389,17 +392,14 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-5 col-md-6 col-12 col-sm-12">
-                                    <div class="tab-content quickview-big-img">
-                                        <div id="pro-1" class="tab-pane fade show active float-left">
+                                    <div class="tab-content quickview-big-img" id="main-image">
+                                        <div id="pro-1" class="tab-pane fade show active">
 
                                         </div>
                                     </div>
-                                    <div class="quickview-wrap mt-15">
-                                        <div class="quickview-slide-active nav-style-6">
-                                            <a class="active" data-toggle="tab" href="#pro-1"><img src="assets/images/product/quickview-s1.jpg" alt=""></a>
-                                            <a data-toggle="tab" href="#pro-2"><img src="assets/images/product/quickview-s2.jpg" alt=""></a>
-                                            <a data-toggle="tab" href="#pro-3"><img src="assets/images/product/quickview-s3.jpg" alt=""></a>
-                                            <a data-toggle="tab" href="#pro-4"><img src="assets/images/product/quickview-s2.jpg" alt=""></a>
+                                    <div class="quickview-wrap mt-15 border">
+                                        <div class="quickview-slide-active nav-style-6" id="sub_images">
+
                                         </div>
                                     </div>
                                 </div>

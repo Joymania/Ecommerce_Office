@@ -37,7 +37,6 @@
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/nice-select.css">
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/easyzoom.css">
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/slick.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/animate.css">
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/magnific-popup.css">
     <link rel="stylesheet" href="{{""}}/assets/css/plugins/jquery-ui.css">

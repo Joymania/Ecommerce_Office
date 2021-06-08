@@ -973,6 +973,7 @@
     /*---------------------------------------
         Product details small image slider
     -----------------------------------------*/
+
     $('.product-dec-slider-small').slick({
         slidesToShow: 4,
         slidesToScroll: 1,
