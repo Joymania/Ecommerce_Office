@@ -36,9 +36,9 @@
                                                         <a href="{{route("product.details",$product->id)}}">
                                                             <img src="{{""}}/upload/products_images/{{$product->image}}" style="width: 266px; height: 320px;" alt="">
                                                         </a>
-                                                        <button class="q_m_btn" id="quickView_modal_btn"
-                                                                data-id={{ $product->id }} title="Quick"><i
-                                                                class="icon-size-fullscreen icons"></i></button>
+                                                        <div class="product-action-2 tooltip-style-2">
+                                                            <button title="Wishlist"><i class="icon-heart"></i></button>
+                                                        </div>
                                                     </div>
                                                     <div class="product-content-wrap-2 text-center">
                                                         <h3><a href="{{route("product.details",$product->id)}}" class="productName">{{$product->name}}</a></h3>

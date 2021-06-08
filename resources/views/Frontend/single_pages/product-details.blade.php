@@ -31,7 +31,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay float-right">
                                     <a href="{{"/upload/products_images/$product->image"}}">
-                                        <img src="{{"/upload/products_images/$product->image"}}" alt="Product Image">
+                                        <img src="{{"/upload/products_images/$product->image"}}" style="" alt="Product Image">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" href="{{"/upload/products_images/$product->image"}}"><i class="icon-size-fullscreen"></i></a>

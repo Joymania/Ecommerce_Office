@@ -1,5 +1,16 @@
 <!-- mini cart start -->
+<div class="same-style-2 same-style-2-font-inc header-cart">
+    <a class="cart-active" href=" {{ route('show.cart') }} ">
+        @if (Auth::id())
+        <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ $cart_num }} </span>
+        <span class="cart-amount"></span>
+        @else
+        <i class="icon-basket-loaded"></i><span class="pro-count purple"> {{ Cart::count() }} </span>
+        <span class="cart-amount"></span>
+        @endif
 
+    </a>
+</div>
     <div class="sidebar-cart-all">
         <a class="cart-close" href="#"><i class="icon_close"></i></a>
         <div class="cart-content">

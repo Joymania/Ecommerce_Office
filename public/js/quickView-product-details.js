@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $(document).on('click','.productSizeContent',function (e) {
         $('.productSizeContent').css('border-color','white');
@@ -49,6 +48,7 @@ $(document).ready(function () {
         const productId = $('#quickViewSubmitBtn').attr('data-id');
         const qty = $('#qty').val();
 
+        console.log('size id '+sizeId+' color id '+colorId);
         // console.log(Object.keys($('.colorLi')).length);
         // if (Object.keys($('.colorLi')).length > 2 )
         if (colorId === '')
@@ -75,7 +75,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: 'post',
-                url: '../add-to-cart-ajax',
+                url: 'add-to-cart-ajax',
                 data: {
                     id: productId,
                     size_id: sizeId,
