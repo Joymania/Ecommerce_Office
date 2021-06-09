@@ -135,8 +135,8 @@
                                         <span class="old-price">{{ $product->price }} Tk.</span>
                                     </div>
                                     <div class="pro-add-to-cart-2">
-                                        <a href="{{ route('product.details', ['id' => $product->id]) }}">
-                                            <button title="Add to Cart">Add To Cart</button>
+                                        <a href="{{route('product.details',['id' => $product->id])}}">
+                                            <button data-id={{$product->id}} class="addToCart" title="Add to Cart">Add To Cart</button>
                                         </a>
                                     </div>
                                 </div>
