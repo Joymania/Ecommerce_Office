@@ -96,8 +96,6 @@
                     }
 
 
-
-
                     //Quick view modal image adding code
                     // $(".easyzoom").append("<a href=/upload/products_images/" + data.product.image + "><img src=/upload/products_images/" + data.product.image + " alt='Product Image'></a>");
 

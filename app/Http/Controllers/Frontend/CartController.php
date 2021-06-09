@@ -146,7 +146,7 @@ class CartController extends Controller
         //  'pro_color'=> $pro_color_name
          ]);
     }
-    
+
      public function addtoCartAjax(Request $request)
     {
         $cartCount = 0;
@@ -263,7 +263,6 @@ class CartController extends Controller
             'cartCount' => $cartCount,
         ]);
     }
-    
 
     public function showCart(){
 
