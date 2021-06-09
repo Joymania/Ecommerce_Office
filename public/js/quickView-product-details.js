@@ -75,7 +75,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: 'post',
-                url: '../add-to-cart-ajax',
+                url: '/add-to-cart-ajax',
                 data: {
                     id: productId,
                     size_id: sizeId,
