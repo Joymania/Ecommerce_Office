@@ -14,10 +14,10 @@
 
         </div>
     </div>
-    <div class="product-details-area pt-120 pb-115">
+    <div class="product-details-area pt-40 pb-40">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-5">
+                <div class="col-lg-4 col-md-3">
                     <div class="product-details-tab">
                         <div class="pro-dec-big-img-slider text-center">
                            {{-- <div class="easyzoom-style">
@@ -38,7 +38,7 @@
                             </div>
                             @if($product->sub_images)
                                 @foreach($product->sub_images as $image)
-                                <div class="easyzoom-style">
+                                <div class="easyzoom-style" data-id="{{$image->color_id}}">
                                     <div class="easyzoom easyzoom--overlay float-right">
                                         <a href="{{"/upload/products_images/sub_images/$image->image"}}">
                                             <img src="{{"/upload/products_images/sub_images/$image->image"}}" style="" alt="Product Image">
@@ -56,7 +56,7 @@
                             </div>
                             @if($product->sub_images)
                             @foreach($product->sub_images as $image)
-                            <div class="product-dec-small active">
+                            <div class="product-dec-small active subImage" data-id="{{$image->color_id}}">
                                 <img src="{{"/upload/products_images/sub_images/$image->image"}}" alt="">
                             </div>
                             @endforeach
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <form id="addToCartForm" action="{{ route('insert.cart') }}" method="post">
+                    <form id="addToCartForm" action="{{ route('adding.cart') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $product->id }}">
 
@@ -164,7 +164,7 @@
                             <div class="pro-details-add-to-cart">
                                 {{-- <a href="{{ route('insert.cart') }}">Add To Cart </a> --}}
                                 {{--<input id="submitBtn" type="submit" value="Add To Cart">--}}
-                                <input id="submitBtn" type="submit" value="Add To Cart"></a>
+                                <input class="btn btn-danger" id="submitBtn" type="submit" value="Add To Cart"></a>
                             </div>
 
                             <div class="pro-details-action">

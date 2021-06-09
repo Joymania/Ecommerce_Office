@@ -23,7 +23,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: 'POST',
-                url: '../tracking',
+                url: '../../tracking',
                 data: {order_code: orderCode},
                 success: function (data) {
 

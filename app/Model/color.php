@@ -12,4 +12,9 @@ class color extends Model
      {
          return $this->belongsToMany(product::class, 'product_colors')->withTimestamps();
      }
+
+     public function subImages()
+     {
+         return $this->hasOne(SubImage::class,'color_id','id');
+     }
 }

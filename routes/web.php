@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Route;
 
 /*Front end routing Starts*/
 Auth::routes();
+// OTP
+Route::middleware('guest')->group(function(){
+    Route::post('send_otp', 'Auth\VonageSmsController@send')->name('send.otp');
+    Route::get('mobile_verification', 'Auth\VonageSmsController@verifyForm')->name('verify.form');
+    Route::post('mobile_verification', 'Auth\VonageSmsController@verifyOtp')->name('verify.otp');
+
+    Route::get('forgot_password', 'Auth\VonageSmsController@forgotPasswordForm')->name('forgot.password');
+    Route::post('forgot_password/send_otp', 'Auth\VonageSmsController@sendOtpForgotPass')->name('send.otp.forgot.pass');
+    Route::get('forgot_password/verify', 'Auth\VonageSmsController@verifyFormForgotPass')->name('verify.form.forgot.pass');
+    Route::post('forgot_password/verify', 'Auth\VonageSmsController@verifyOtpForgotPass')->name('verify.otp.forgot.pass');
+    Route::post('password_reset', 'Auth\VonageSmsController@resetPassword')->name('reset.password');
+
+});
 
 //google login
 Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');
@@ -31,7 +44,8 @@ Route::get('/{id}/products/subCat-priceFilter','Frontend\ProductBySubcatControll
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 Route::get('/{id}/products/cat-priceFilter','Frontend\ProductByCategoryController@priceFilter');
 
-//Shop page routing
+Route::get('/{id}/product-details-Ajax', 'Frontend\ProductDetailsController@index_ajax')->name('product.details.ajax');
+//Shop page routingproduct-details-Ajax'
 Route::get('/shop','Frontend\ShopController@index')->name('products.shop');
 
 //Offer products routing
@@ -54,6 +68,8 @@ Route::get('add-to-wishlist/{id}','Frontend\WishlistController@addtoWishlist')->
 
  //Shopping-Cart
 Route::post('add-to-cart','Frontend\CartController@addtoCart')->name('insert.cart');
+Route::post('add-to-cart-ajax','Frontend\CartController@addtoCartAjax');
+
 Route::get('show-cart','Frontend\CartController@showCart')->name('show.cart');
 Route::post('update-cart','Frontend\CartController@updateCart')->name('update.cart');
 Route::get('delete-cart/{rowId}','Frontend\CartController@deleteCart')->name('delete.cart');
@@ -61,7 +77,8 @@ Route::get('delete-cartshopping/{id}','Frontend\CartController@deleteAuthCart')-
 Route::get('delete-wishlist/{id}','Frontend\CartController@deletewishlist')->name('delete.wishlist');
 Route::get('destroy-cart','Frontend\CartController@destroyCart')->name('destroy.cart');
 Route::get('destroy-cartshopcart/{id}','Frontend\CartController@destroyAauthCart')->name('destroyauth.cart');
-
+Route::post('cart-to-add', 'Frontend\CartController@cartadd')->name('adding.cart');
+Route::post('cart-update', 'Frontend\CartController@cartupdate')->name('updating.cart');
 //Route::get('/{id}','Frontend\ProductBySubcatController@productByCat')->name('product');
 Route::get('/{id}/product-details', 'Frontend\ProductDetailsController@index')->name('product.details');
 Route::get('/search-result','Frontend\SearchController@searchResults')->name('search.result');
@@ -78,6 +95,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/image/{user}/delete', 'Frontend\userAccountController@deleteImage')->name('userAccount.image.delete');
 
     //Checkout
+    Route::post('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::get('checkout','Frontend\CheckoutController@index')->name('checkout');
     Route::post('checkout-store','Frontend\CheckoutController@store')->name('checkout.store');
     Route::post('apply-cuppon','Frontend\CartController@applyCuppon')->name('apply.cuppon');
@@ -264,14 +282,39 @@ Route::prefix('expense')->group(function(){
     });
 
 
+    //Facebook Pixel setup Routing
+    Route::get('/facebook-pixel','Backend\FacebookPixelController@index')->name('facebook.pixel');
+    Route::get('/facebook-pixel/add','Backend\FacebookPixelController@add')->name('pixel.add');
+    Route::post('/facebook-pixel/add','Backend\FacebookPixelController@store')->name('pixel.store');
+    Route::get('/facebook-pixel/{pixel}/edit','Backend\FacebookPixelController@edit')->name('pixel.edit');
+    Route::patch('/facebook-pixel/{pixel}/update','Backend\FacebookPixelController@update')->name('pixel.update');
+    Route::delete('/facebook-pixel/{pixel}/delete','Backend\FacebookPixelController@delete')->name('pixel.delete');
+
+     //shipping methods
+     Route::prefix('shipping-methods')->group(function (){
+        Route::get('/','Backend\ShippingMethodsController@index')->name('shipping.methods.view');
+        Route::get('/add','Backend\ShippingMethodsController@create')->name('shipping.method.add');
+        Route::post('/add','Backend\ShippingMethodsController@store')->name('shipping.method.store');
+        Route::get('/{shipping}/edit','Backend\ShippingMethodsController@edit')->name('shipping.method.edit');
+        Route::post('/{shipping}/edit','Backend\ShippingMethodsController@update')->name('shipping.method.update');
+        Route::get('/{shipping}/destroy','Backend\ShippingMethodsController@delete')->name('shipping.method.delete');
+    });
+
+
+
     //Report page route
     Route::get('/report','Backend\ReportController@index')->name('sales.report');
+    Route::post('/dateby','Backend\ReportController@dateBy');
+    Route::get('/export', 'excelFile@export');
+
+
+
 
     // fallback route
     Route::fallback(function () {
         return view('admin.authentication.page404');
     });
-});
+}); 
 
 // Super Admin role routes
 Route::prefix('admin')->middleware('auth:admin', 'superAdmin')->group(function () {
@@ -294,5 +337,15 @@ Route::prefix('admin')->group(function () {
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
 
+
+
+
+
+// export
+  
+
+
+
 //Admin Routing Ends
 
+    

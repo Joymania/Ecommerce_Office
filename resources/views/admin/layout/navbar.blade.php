@@ -18,6 +18,8 @@
                 <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>
             </form>
 
+            <a href="/" class="btn btn-primary mt-2 ml-5"><i class="fa fa-shopping-bag"></i><span> Visit shop</span></a>
+
             <div id="navbar-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
