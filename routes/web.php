@@ -44,10 +44,8 @@ Route::get('/{id}/products/subCat-priceFilter','Frontend\ProductBySubcatControll
 Route::get('/{id}/category/products','Frontend\ProductByCategoryController@productByCategory')->name('productByCategory');
 Route::get('/{id}/products/cat-priceFilter','Frontend\ProductByCategoryController@priceFilter');
 
-
-
 Route::get('/{id}/product-details-Ajax', 'Frontend\ProductDetailsController@index_ajax')->name('product.details.ajax');
-//Shop page routing
+//Shop page routingproduct-details-Ajax'
 Route::get('/shop','Frontend\ShopController@index')->name('products.shop');
 
 //Offer products routing
@@ -303,15 +301,6 @@ Route::prefix('expense')->group(function(){
     });
 
 
-    //Useful links
-    Route::prefix('useful-links')->group(function (){
-        Route::get('/','Backend\UsefulLinksController@index')->name('useful.links.view');
-        Route::get('/add','Backend\UsefulLinksController@create')->name('useful.links.add');
-        Route::post('/add','Backend\UsefulLinksController@store')->name('useful.links.store');
-        Route::get('/{useful}/edit','Backend\UsefulLinksController@edit')->name('useful.links.edit');
-        Route::post('/{useful}/edit','Backend\UsefulLinksController@update')->name('useful.links.update');
-        Route::delete('/{useful}/destroy','Backend\UsefulLinksController@delete')->name('useful.links.delete');
-    });
 
     //Report page route
     Route::get('/report','Backend\ReportController@index')->name('sales.report');

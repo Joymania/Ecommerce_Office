@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $(document).on('click','.productSizeContent',function (e) {
         $('.productSizeContent').css('border-color','white');

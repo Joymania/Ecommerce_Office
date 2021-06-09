@@ -51,21 +51,26 @@
                 @else
                 @endif
 
-                @if($usefuls->isNotEmpty())
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                        <div class="footer-widget ml-70 mb-40">
-                            <h3 style="color:white" class="footer-title">useful links</h3>
-                            <div class="footer-info-list">
-                                <ul>
-                                    @foreach($usefuls as $useful)
-                                        <li><a style="color:white" href="{{ $useful->link }}">{{ $useful->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="footer-widget ml-70 mb-40">
+                        <h3 style="color:white" class="footer-title">useful links</h3>
+                        <div class="footer-info-list">
+                            <ul>
+
+                                <li><a style="color:white" href="{{ route('userAccount') }}">My Account</a></li>
+                                <li><a style="color:white" href="{{ route('wishlist.view') }}">My Wishlist</a></li>
+                                <li><a style="color:white" href="#">Terms & Conditions</a></li>
+                                <li><a style="color:white" href="#">Privacy Policy</a></li>
+                                <li><a style="color:white" href="{{ route('track.show') }}">Track Order</a></li>
+                                <li><a style="color:white" href="{{ route('search.result') }}">Shop</a></li>
+                                <li><a style="color:white" href="{{ route('about_us') }}">About Us</a></li>
+
+                             
+                            </ul>
                         </div>
                     </div>
-                @endif
-                
+                </div>
+
                 @if(!empty($contacts))
                 <div id="contact" class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="footer-widget mb-40 ">
@@ -98,21 +103,11 @@
                             </div>
                         </div>
                         <div  class="social-style-1 social-style-1-font-inc social-style-1-mrg-2">
-                            @if($contacts->twitter)
-                                <a target="_blank" href="{{$contacts->twitter}}"><i style="color:white" class="icon-social-twitter"></i></a>
-                            @endif
-                            @if($contacts->facebook)
-                                <a target="_blank" href="{{$contacts->facebook}}"><i style="color:white" class="icon-social-facebook"></i></a>
-                            @endif
-                            @if($contacts->instagram)
-                                <a target="_blank" href="{{$contacts->instagram}}"><i style="color:white" class="icon-social-instagram"></i></a>
-                            @endif
-                            @if($contacts->youtube)
-                                <a target="_blank" href="{{$contacts->youtube}}"><i style="color:white" class="icon-social-youtube"></i></a>
-                            @endif
-                            @if($contacts->pioneer)
-                                <a target="_blank" href="{{$contacts->pioneer}}"><i style="color:white" class="icon-social-pinterest"></i></a>
-                            @endif
+                            <a target="_blank" href="{{$contacts->twitter}}"><i style="color:white" class="icon-social-twitter"></i></a>
+                            <a target="_blank" href="{{$contacts->facebook}}"><i style="color:white" class="icon-social-facebook"></i></a>
+                            <a target="_blank" href="{{$contacts->instagram}}"><i style="color:white" class="icon-social-instagram"></i></a>
+                            <a target="_blank" href="{{$contacts->youtube}}"><i style="color:white" class="icon-social-youtube"></i></a>
+                            <a target="_blank" href="{{$contacts->pioneer}}"><i style="color:white" class="icon-social-pinterest"></i></a>
 
                         </div>
                     </div>
@@ -226,10 +221,6 @@
                 $('#modal-content').css('width','45%');
             }
         });
-    });
-
-    $(document).ready(function () {
-
     });
 </script>
 @yield('scripts')
